@@ -46,10 +46,10 @@ url: http://localhost/csc450Capstone/profileView/profiles.php
         <h1 class = "pageName">CSP Student Profile</h1>
         <div class = "wrapButton">
             <ul>
-                <li id = "loginBtn"><a href = "http://localhost/csc450Capstone/LoginPage/LoginPage.php">Landing Page</a></li>
+                <li id = "loginBtn"><a href = "http://localhost/csc450Capstone/LoginPage/LoginPage.php">Login Page</a></li>
                 <li id = "landingBtn"><a href = "http://localhost/csc450Capstone/LandingPage/LandingPage.php">Landing Page</a></li>
-                <li id = "profileBtn"><a href = "http://localhost/csc450Capstone/ProfileView/profiles.php">Landing Page</a></li>
-                <li id = "perMajorBtn"><a href = "http://localhost/csc450Capstone/MajorPage/CSCMajorPage.php">Landing Page</a></li>
+                <li id = "profileBtn"><a href = "http://localhost/csc450Capstone/ProfileView/profiles.php">Profile Page</a></li>
+                <li id = "perMajorBtn"><a href = "http://localhost/csc450Capstone/MajorPage/CSCMajorPage.php">Major Page</a></li>
             </ul>
         </div>
     </div>
