@@ -14,9 +14,9 @@
             <h1>CSP Student Review Login Page</h1> <!--Nav Bar, used an Unorder lists-->
             <nav>
                 <ul class="navigation">
-                    <li><a href=" ">Login Page</a></li><!--List items-->
+                    <li><a href="http://localhost/csc450Capstone/LoginPage/LoginPage.php">Login Page</a></li><!--List items-->
                     <li><a href=" ">Landing Page</a></li>
-                    <li><a href=" ">Profile Page</a></li>
+                    <li><a href="http://localhost/csc450Capstone/profileView/profiles.php">Profile Page</a></li>
                     <li><a href=" ">Page Per Major</a></li>
                 </ul>
             </nav>

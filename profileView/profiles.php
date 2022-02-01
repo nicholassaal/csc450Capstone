@@ -45,10 +45,12 @@ url: http://localhost/csc450Capstone/profileView/profiles.php
     <div class = "stickyHead">
         <h1 class = "pageName">CSP Student Profile</h1>
         <div class = "wrapButton">
-            <input type = "submit" id = "loginBtn" name = "login" value = "Login Page" onclick = "goLogIn();"/> <!-- Setting a button with the onclick function in JS to move between pages -->
-            <input type = "submit" id = "landingBtn" name = "landing" value = "Landing Page"/>
-            <input type = "submit" id = "profileBtn" name = "profile" value = "Profile Page" onclick = "goProfile();"/>
-            <input type = "submit" id = "perMajorBtn" name = "perMajor" value = "Page Per Major"/>
+            <ul>
+                <li id = "loginBtn"><a href = "http://localhost/csc450Capstone/LoginPage/LoginPage.php">Landing Page</a></li>
+                <li id = "landingBtn"><a href = "http://localhost/csc450Capstone/LandingPage/LandingPage.php">Landing Page</a></li>
+                <li id = "profileBtn"><a href = "http://localhost/csc450Capstone/ProfileView/profiles.php">Landing Page</a></li>
+                <li id = "perMajorBtn"><a href = "http://localhost/csc450Capstone/MajorPage/CSCMajorPage.php">Landing Page</a></li>
+            </ul>
         </div>
     </div>
 
@@ -89,13 +91,3 @@ url: http://localhost/csc450Capstone/profileView/profiles.php
     <p>Hi There Gurt</p>
 </body>
 </html>
-<script>
-    // simple functions to allow for movement between pages using javascript
-    function goLogIn() {
-        window.location.href = "http://localhost/csc450Capstone/LoginPage/LoginPage.php";
-    }
-    function goProfile() {
-        window.location.href = "http://localhost/csc450Capstone/profileView/profiles.php";
-    }
-    
-</script>

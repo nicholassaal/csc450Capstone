@@ -16,14 +16,15 @@
     font-family: Georgia, 'Times New Roman', Times, serif; 
 }
 #loginBtn, #profileBtn, #landingBtn , #perMajorBtn {
+    text-align: center;
     width: 150px;
-    height: 70px;
+    height: 50px;
     font-size: 17px;
     color: white;
-    background-color: rgb(50, 50, 51);
     border: 0;
     border-left: rgb(50, 50, 51);
     border-right: rgb(50, 50, 51);
+    display: inline-block;
 }
 .wrapButton {
     position: absolute;
@@ -31,7 +32,6 @@
     top: 5px;
 }
 #loginBtn:hover, #profileBtn:hover, #landingBtn:hover, #perMajorBtn:hover {
-    background-color: rgb(66, 65, 65);
     color: rgb(71, 163, 182);
 }
 .studentInfo {
