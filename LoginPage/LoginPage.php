@@ -15,9 +15,9 @@
             <nav>
                 <ul class="navigation">
                     <li><a href="http://localhost/csc450Capstone/LoginPage/LoginPage.php">Login Page</a></li><!--List items-->
-                    <li><a href="http://localhost/csc450Capstone/LandingPage/LandingPage.php">Landing Page</a></li>
-                    <li><a href="http://localhost/csc450Capstone/profileView/profiles.php">Profile Page</a></li>
-                    <li><a href="http://localhost/csc450Capstone/MajorPage/CSCMajorPage.php">Page Per Major</a></li>
+                    <li><a href="http://localhost/csc450Capstone/LandingPage/LandingPage.php">Home</a></li>
+                    <li><a href="http://localhost/csc450Capstone/profileView/profiles.php">Profile</a></li>
+                    <li><a href="http://localhost/csc450Capstone/MajorPage/CSCMajorPage.php">Majors</a></li>
                 </ul>
             </nav>
         </header>
@@ -27,7 +27,8 @@
 
             <section id = "userInformation"> <!--Container for login user informatoin -->
                 <h1 id="loginHeader">Login</h1>
-                <lable for ="email">Email</lable> <!-- Creating a lable for input type of "text" then giving a name and
+                <p>Login using your college email and password.</p>
+                <lable for ="email">Email or Username</lable> <!-- Creating a lable for input type of "text" then giving a name and
                                                              id to match the lable name-->
                 <input type="text" name="email" id = "email">
 
@@ -36,7 +37,7 @@
                 
                 <!--Two buttons-->
                 <button type = "button">Login</button>
-                <button type = "button">Sign Up</button>
+                <!-- <button type = "button">Sign Up</button> -->
 
             </section>
         </div>
