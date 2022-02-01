@@ -1,0 +1,79 @@
+body {
+  background: rgb(255, 255, 255);
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+header {
+  background: rgb(175, 175, 175);
+  padding: 20px;
+  height: 150px;
+  text-align: left;
+  color: black;
+}
+h1 {
+  font-size: 55px;
+  position: relative;
+  top: -70px;
+}
+header .logo a {
+  background-image: url("image/logo.png");
+  background-size: 100px;
+  background-repeat: no-repeat;
+  display: inline-block;
+  height: 100px;
+  position: relative;
+  text-indent: -9999px;
+  top: -10px;
+  width: 100px;
+}
+.course-container {
+  color: gray;
+  padding: 20px;
+  display: flex;
+  flex-direction: row;
+  height: 500px;
+  width: auto;
+  background-color: white;
+}
+.course-container > div {
+  background-color: rgb(189, 189, 189);
+  color: black;
+  margin: 20px;
+  padding-left: 20px;
+  line-height: 75px;
+}
+
+a {
+  text-decoration: none;
+  font-size: 15px;
+  text-align: center;
+  display: inline-block;
+  position: relative;
+  color: rgb(0, 0, 0);
+}
+a:hover {
+  color: rgb(41, 41, 41);
+  text-decoration: underline;
+}
+
+nav.topNav ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+nav.topNav li {
+  display: inline-block;
+  margin-right: 20px;
+  border-radius: 3px;
+  padding: 2px;
+  margin-left: 10px;
+}
+nav.topNav li:first-child {
+  margin-left: 0;
+}
+footer {
+  background: black;
+  padding: 10px 20px;
+}
