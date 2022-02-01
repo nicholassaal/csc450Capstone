@@ -16,7 +16,7 @@
                 <ul class="navigation">
                     <li><a href="http://localhost/csc450Capstone/LoginPage/LoginPage.php">Login Page</a></li><!--List items-->
                     <li><a href="http://localhost/csc450Capstone/LandingPage/LandingPage.php">Landing Page</a></li>
-                    <li><a href="hhttp://localhost/csc450Capstone/profileView/profiles.php">Profile Page</a></li>
+                    <li><a href="http://localhost/csc450Capstone/profileView/profiles.php">Profile Page</a></li>
                     <li><a href="http://localhost/csc450Capstone/MajorPage/CSCMajorPage.php">Page Per Major</a></li>
                 </ul>
             </nav>
