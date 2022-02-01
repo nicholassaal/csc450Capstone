@@ -18,7 +18,7 @@ h1 {
   top: -70px;
 }
 header .logo a {
-  background-image: url("image/logo.png");
+  background-image: url("Images/logo.png");
   background-size: 100px;
   background-repeat: no-repeat;
   display: inline-block;

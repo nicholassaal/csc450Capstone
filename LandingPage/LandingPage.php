@@ -26,17 +26,16 @@
 <body>
 <nav>
         <ul class="menu">
-            
-            <li class="logo"><a href="#">CSP Review</a></li>
-            <li class="item"><a href="#">Home</a></li>
+            <li class="logo"><a href="http://localhost/csc450Capstone/LandingPage/LandingPage.php">CSP Review</a></li>
+            <li class="item"><a href="http://localhost/csc450Capstone/LandingPage/LandingPage.php">Home</a></li>
             <li class="item"><a href="#">About</a></li>
-            <li class="item"><a href="#">Profile</a></li>
-            <li class="item"><a href="#">Majors</a></li>
+            <li class="item"><a href="http://localhost/csc450Capstone/profileView/profiles.php">Profile</a></li>
+            <li class="item"><a href="http://localhost/csc450Capstone/MajorPage/CSCMajorPage.php">Majors</a></li>
             <li class="item"><a href="#">Connect</a></li>
             <li class="item"><a href="#">Messages</a></li>
           
             </li>
-            <li class="item button"><a href="#">Log In</a></li>
+            <li class="item button"><a href="http://localhost/csc450Capstone/LoginPage/LoginPage.php">Log In</a></li>
             <li class="item button secondary"><a href="#">Sign Up</a></li>
             <li class="toggle"><span class="bars"></span></li>
         </ul>
