@@ -4,8 +4,12 @@ header {display:flex; /*using flex for header menu/nav bar to keep them side by 
     border: black solid 3px;/*Add a solid border to header*/
     padding:5px;/*padding for space around the items*/
     color:white;/*color the text white for a big color contrast with the blue background*/
-    background-color: blue;
+    background-color: rgba(34, 34, 34, 0.9);
     border-radius:5px;/*Curver the header's corners*/
+}
+
+body{
+    background-image: url("image/LandingPageBackgroundIMG.jpg");
 }
 
 .navigation a {font-family: Arial, Helvetica, sans-serif;/*font and color for the menu options*/
@@ -31,16 +35,20 @@ input {display:block; /*Using display:block so the Lables and inputs are on top 
 }
 
 #userInformation {
+    color:white;
+    font-weight: bold;
+    text-shadow: -1px 1px 0 #000;
     margin:0 auto; /*Centering the information*/
     padding-top: 100px; /*Adding padding to top to bring down the login info*/ 
-    background-color: white; 
 }
 
 
 button{
+
     display: block;/*Make button on top of each other*/
     margin-top: 10px;/*add spacing between the buttons*/
     width:100px;
+    height:40px;
     border-radius: 5px;/*Curve the corners of the buttons*/   
 }
 
@@ -50,11 +58,12 @@ button{
 
 #loginHeader{
     text-align: center;/*Center login header and space it out from the bottom*/
+    font-size:50px;
     margin-bottom: 50px;
 }
 
 footer {padding: 5px;
-    background-color: blue;
+    background-color: rgba(34, 34, 34, 0.9);
     border: black solid 3px;
     color:white;
     border-radius: 3px;
