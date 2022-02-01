@@ -36,9 +36,10 @@
             <li class="item"><a href="http://localhost/csc450Capstone/MajorPage/CSCMajorPage.php">Majors</a></li>
        
            
-            <div>
+            <li class="item">    
+             <div>
       <button onclick="darkMode()">Darkmode</button>
-    </div>
+            </div>
     <script>
       function darkMode() {
         var element = document.body;
