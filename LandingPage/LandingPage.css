@@ -36,11 +36,16 @@
   body {
     background-attachment: fixed;
     font-family: sans-serif;
-    background-image: url("LandingPageBackgroundIMG.jpg");
+    background-image: url("Light-Shaded-Background.jpg");
     padding-top: 100px;
     padding-bottom: 100px;
-   
+    color:rgba(34, 34, 34, 34); 
   }
+  .dark-mode {
+    background-image: url("LandingPageBackgroundIMG.jpg");
+    color: white;
+  }
+
   .welcomeText{
     background: rgba(34, 34, 34, 0.7);
   border-radius: 25px;
