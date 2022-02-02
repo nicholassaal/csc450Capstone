@@ -35,9 +35,9 @@ url: http://localhost/csc450Capstone/profileView/profiles.php
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel = "stylesheet" type = "text/css" href = "profile.css">
+    <link rel = "stylesheet" type = "text/css" href = "profiles.css">
     <style>
-        <?php include("profile.css"); ?>
+        <?php include("profiles.css"); ?>
     </style>
     <title>User Profile</title>
 </head>

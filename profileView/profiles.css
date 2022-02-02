@@ -1,10 +1,13 @@
 /************************************************************************
  *******************         Profile Page         **********************
 ************************************************************************/
-
+body {
+    background-attachment: fixed;
+    background-image: url("graphic/LandingPageBackgroundIMG.jpg");
+}
 .stickyHead {
     position: fixed;
-    background-color: rgb(50, 50, 51);
+    background-color: rgba(34, 34, 34, 0.9);
     left: 0;
     top: 0;
     right: 0;
@@ -15,24 +18,27 @@
     margin-left: 25px;
     font-family: Georgia, 'Times New Roman', Times, serif; 
 }
+.wrapButton a {
+    color: white;
+    text-decoration: none;
+}
+
 #loginBtn, #profileBtn, #landingBtn , #perMajorBtn {
     text-align: center;
+    color: white;
     width: 150px;
     height: 50px;
-    font-size: 17px;
-    color: white;
-    border: 0;
-    border-left: rgb(50, 50, 51);
-    border-right: rgb(50, 50, 51);
+    margin-top: 10px;
     display: inline-block;
 }
 .wrapButton {
     position: absolute;
     right:10px;
-    top: 5px;
+    top: 3px;
 }
-#loginBtn:hover, #profileBtn:hover, #landingBtn:hover, #perMajorBtn:hover {
-    color: rgb(71, 163, 182);
+a:hover {
+    color: rgb(200,200,200);
+    text-decoration: underline;
 }
 .studentInfo {
     margin-left: 17%;
@@ -43,7 +49,8 @@
 .infoLegend {
     font-size: 21px;
     font-family: Georgia, 'Times New Roman', Times, serif; 
-    color:rgb(50, 50, 51);
+    color:white;
+    background-color: rgba(34, 34, 34, 0.9);
     border-bottom: 2px groove rgb(50, 50, 51);
     border-top: 2px groove rgb(50, 50, 51);
     border-left: 2px groove rgb(71, 163, 182);
@@ -55,8 +62,9 @@
 }
 .reviewLegend {
     font-size: 21px;
+    background-color: rgba(34, 34, 34, 0.9);
     font-family: Georgia, 'Times New Roman', Times, serif; 
-    color:rgb(50, 50, 51);
+    color:white;
     border-bottom: 2px groove rgb(50, 50, 51);
     border-top: 2px groove rgb(50, 50, 51);
     border-left: 2px groove rgb(71, 163, 182);
@@ -67,8 +75,9 @@
 }
 .otherInfoLegend {
     font-size: 21px;
+    background-color: rgba(34, 34, 34, 0.9);
     font-family: Georgia, 'Times New Roman', Times, serif; 
-    color:rgb(50, 50, 51);
+    color:white;
     border-bottom: 2px groove rgb(50, 50, 51);
     border-top: 2px groove rgb(50, 50, 51);
     border-left: 2px groove rgb(71, 163, 182);
@@ -84,6 +93,8 @@
 }
 .studentField {
     border: 2px groove rgb(71, 163, 182);
+    background-color: rgba(34, 34, 34, 0.9);
+    color: white;
 }
 #examplePicture {
     border: 2px groove rgb(50, 50, 51);
@@ -95,18 +106,25 @@
 }
 .reviewBox {
     float: left;
+    background-color: rgba(34, 34, 34, 0.9);
+    border: 2px groove rgb(71, 163, 182);
+    color: white;
     text-align: center;
-    border: 2px solid black;
+    font-weight: bold;
     margin: 10px;
     width: 12%;
     height: 10%;
 }
 .reviewBox:hover{
     background-color: aliceblue;
+    color:rgb(50, 50, 51);
+    font-weight: bold;
 }
 .reviewField, .otherInfoField {
     margin-top: 30px;
     margin-left: 17%;
     margin-right: 17%;
+    background-color: rgba(34, 34, 34, 0.9);
+    color: white;
     border: 2px groove rgb(71, 163, 182);
 }
