@@ -10,13 +10,11 @@
     <header>
         <nav class="topNav">
             <ul>
-
                 <li class="logo"><a href="http://localhost/csc450Capstone/LandingPage/LandingPage.php">Home</a></li>
                 <li><a href="http://localhost/csc450Capstone/LandingPage/LandingPage.php">Home</a></li>
                 <li><a href="http://localhost/csc450Capstone/profileView/profiles.php">My Profile</a></li>
                 <li><a href="http://localhost/csc450Capstone/MajorPage/CSCMajorPage.php">Majors</a></li>
                 <li><a href="http://localhost/csc450Capstone/LoginPage/LoginPage.php">Sign Out</a></li>
-
             </ul>
         </nav>
         <h1>Computer Science Courses</h1>
