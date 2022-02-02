@@ -6,7 +6,7 @@ body {
   padding: 0;
 }
 header {
-  background: rgb(175, 175, 175);
+  background: rgb(34, 34, 34, 0.9);
   padding: 20px;
   height: 150px;
   text-align: left;
@@ -14,6 +14,7 @@ header {
 }
 h1 {
   font-size: 55px;
+  color: white;
   position: relative;
   top: -70px;
 }
@@ -36,10 +37,12 @@ header .logo a {
   height: 500px;
   width: auto;
   background-color: white;
+  background-attachment: fixed;
+  background-image: url("Images/LandingPageBackgroundIMG.jpg");
 }
 .course-container > div {
-  background-color: rgb(189, 189, 189);
-  color: black;
+  background-color: rgb(34, 34, 34, 0.9);
+  color: white;
   margin: 20px;
   padding-left: 20px;
   line-height: 75px;
@@ -51,10 +54,10 @@ a {
   text-align: center;
   display: inline-block;
   position: relative;
-  color: rgb(0, 0, 0);
+  color: white;
 }
 a:hover {
-  color: rgb(41, 41, 41);
+  color: rgb(200, 200, 200);
   text-decoration: underline;
 }
 
