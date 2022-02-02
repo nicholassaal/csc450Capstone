@@ -24,22 +24,64 @@
     </script>
 </head>
 <body>
-<nav>
+    <div class = "container" >
+
+
+<nav id="navbar">
+    <script>
+        var lastScrollTop; // This Varibale will store the top position
+
+navbar = document.getElementById('navbar'); // Get The NavBar
+
+window.addEventListener('scroll',function(){
+ //on every scroll this funtion will be called
+  
+  var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+  //This line will get the location on scroll
+  
+  if(scrollTop > lastScrollTop){ //if it will be greater than the previous
+    navbar.style.top='-80px';
+    //set the value to the negetive of height of navbar 
+  }
+  
+  else{
+    navbar.style.top='0';
+  }
+  
+  lastScrollTop = scrollTop; //New Position Stored
+});
+    </script>
         <ul class="menu">
-            <li class="logo"><a href="http://localhost/csc450Capstone/LandingPage/LandingPage.php">CSP Review</a></li>
-            <li class="item"><a href="http://localhost/csc450Capstone/LandingPage/LandingPage.php">Home</a></li>
-            <li class="item"><a href="#">About</a></li>
+
+
+
+            
+            <li class="logo"><a href="http://localhost/csc450Capstone/LandingPage/LandingPage.php">Home</a></li>
+            <li class="item"><a href="http://localhost/csc450Capstone/LandingPage/LandingPage.php">Landing Page</a></li>
             <li class="item"><a href="http://localhost/csc450Capstone/profileView/profiles.php">Profile</a></li>
             <li class="item"><a href="http://localhost/csc450Capstone/MajorPage/CSCMajorPage.php">Majors</a></li>
-            <li class="item"><a href="#">Connect</a></li>
-            <li class="item"><a href="#">Messages</a></li>
-          
+       
+
+            <li class="item">    
+             <div>
+      <button onclick="darkMode()">Darkmode</button>
+            </div>
             </li>
+    <script>
+      function darkMode() {
+        var element = document.body;
+        element.classList.toggle("dark-mode");
+      }
+    </script>
+            
+          
+            
             <li class="item button"><a href="http://localhost/csc450Capstone/LoginPage/LoginPage.php">Log In</a></li>
             <li class="item button secondary"><a href="#">Sign Up</a></li>
             <li class="toggle"><span class="bars"></span></li>
         </ul>
     </nav>
+    </div>
   <div class="welcomeText">
    <h1 id="firstboxh">Welcome To The CSP Review</h1>
   <p id="firstboxp"> CSP Review is your one stop shop for the connections and Information guaranteed to put you ahead of those who have come before you  </p>
