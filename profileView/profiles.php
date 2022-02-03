@@ -63,9 +63,9 @@ url: http://localhost/csc450Capstone/profileView/profiles.php
                 <legend class = "infoLegend">Student Information:</legend>
                 <p>Name: Josiah Skorseth</p>
                 <p>University Location: Concordia Saint Paul</p> 
-                <p>IDK SOMETHING GOES HERE??????</p>
-                <p>IDK SOMETHING GOES HERE??????</p>
-                <p>IDK SOMETHING GOES HERE??????</p>
+                <p>SAMPLE INFO</p>
+                <p>SAMPLE INFO</p>
+                <p>SAMPLE INFO</p>
             </fieldset>
         </div>
     </div>
@@ -77,12 +77,12 @@ url: http://localhost/csc450Capstone/profileView/profiles.php
     <div>
         <fieldset class = "otherInfoField">
             <legend class = "otherInfoLegend">Other Info: </legend>
-            <p>IDK SOMETHING GOES HERE??????</p>
-            <p>IDK SOMETHING GOES HERE??????</p>
-            <p>IDK SOMETHING GOES HERE??????</p>
-            <p>IDK SOMETHING GOES HERE??????</p>
-            <p>IDK SOMETHING GOES HERE??????</p>
-            <p>IDK SOMETHING GOES HERE??????</p>
+            <p>SAMPLE INFO</p>
+            <p>SAMPLE INFO</p>
+            <p>SAMPLE INFO</p>
+            <p>SAMPLE INFO</p>
+            <p>SAMPLE INFO</p>
+            <p>SAMPLE INFO</p>
         </fieldset>
     </div>
 
