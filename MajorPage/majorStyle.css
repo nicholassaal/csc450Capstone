@@ -1,82 +1,75 @@
 body {
-  background: rgb(255, 255, 255);
-  color: white;
-  font-family: Arial, Helvetica, sans-serif;
+  background-image: url("Images/LandingPageBackgroundIMG.jpg");
+  background-attachment: fixed;
   margin: 0;
   padding: 0;
-}
-header {
-  background: rgb(34, 34, 34, 0.9);
-  padding: 20px;
-  height: 150px;
-  text-align: left;
-  color: black;
+  font-family: sans-serif;
+  color: white;
 }
 h1 {
-  font-size: 55px;
-  color: white;
-  position: relative;
-  top: -70px;
+  font-size: 40px;
 }
-header .logo a {
-  background-image: url("Images/logo.png");
-  background-size: 100px;
-  background-repeat: no-repeat;
-  display: inline-block;
-  height: 100px;
-  position: relative;
-  text-indent: -9999px;
-  top: -10px;
-  width: 100px;
+h2 {
+  font-size: 20px;
 }
-.course-container {
-  color: gray;
-  padding: 20px;
-  display: flex;
-  flex-direction: row;
-  height: 500px;
-  width: auto;
-  background-color: white;
-  background-attachment: fixed;
-  background-image: url("Images/LandingPageBackgroundIMG.jpg");
-}
-.course-container > div {
+#navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  display: block;
+  transition: top 0.6s;
   background-color: rgb(34, 34, 34, 0.9);
-  color: white;
-  margin: 20px;
-  padding-left: 20px;
-  line-height: 75px;
 }
 
-a {
-  text-decoration: none;
-  font-size: 15px;
-  text-align: center;
-  display: inline-block;
-  position: relative;
-  color: white;
-}
-a:hover {
-  color: rgb(200, 200, 200);
-  text-decoration: underline;
-}
-
-nav.topNav ul {
+ul {
+  list-style-type: none;
   margin: 0;
   padding: 0;
-  list-style-type: none;
+  overflow: hidden;
 }
-nav.topNav li {
-  display: inline-block;
-  margin-right: 20px;
-  border-radius: 3px;
-  padding: 2px;
-  margin-left: 10px;
+
+li {
+  float: left;
 }
-nav.topNav li:first-child {
-  margin-left: 0;
+li a {
+  margin-top: 35px;
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
 }
-footer {
-  background: black;
-  padding: 10px 20px;
+
+li a:hover {
+  background-color: #111;
+}
+
+.flex-container {
+  justify-content: center;
+  height: 50%;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 10% 5% 5% 5%;
+}
+
+.flex-container > div {
+  border-radius: 10px;
+  margin: 10px;
+  max-width: 20%;
+  background-color: rgb(34, 34, 34, 0.9);
+  box-shadow: 5px 5px 5px rgb(34, 34, 34);
+}
+
+.flex-container > div > h1,
+h2 {
+  padding-left: 2%;
+  padding-right: 2%;
+  text-align: center;
+}
+
+img {
+  border-radius: 10px 10px 0px 0px;
+  max-width: 100%;
+  max-height: 100%;
+  display: block;
 }
