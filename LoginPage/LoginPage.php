@@ -27,7 +27,7 @@
 
             <section id = "userInformation"> <!--Container for login user informatoin -->
                 <h1 id="loginHeader">Login</h1>
-                <p>Login using your college email and password.</p>
+                <p>Login using your college user name and password.</p>
                 <lable for ="email">Username</lable> <!-- Creating a lable for input type of "text" then giving a name and
                                                              id to match the lable name-->
                 <input type="text" name="email" id = "email">
