@@ -22,57 +22,138 @@
     </nav>
     <div class="flex-container">
         <div>
-            <img src="Images/courseImage1.jfif" alt="" />
-            <h1>Course Name</h1>
-            <h2>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce auctor mattis mi ac porta. Ut ullamcorper
-                risus augue, at condimentum risus ultrices rutrum. In ultrices eu est ut euismod. Nulla.</h2>
+            <a href="http://localhost/csc450Capstone/CoursePage/CoursePage.php" class="fill-div">
+                <img src="Images/courseImage1.jfif" alt="" />
+                <h1>CSC 101 Intoduction to Computer Science</h1>
+                <h2>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce auctor mattis mi ac porta. Ut
+                    ullamcorper
+                    risus augue, at condimentum risus ultrices rutrum. In ultrices eu est ut euismod. Nulla.</h2>
+            </a>
         </div>
         <div>
-            <img src="Images/courseImage2.jfif" alt="waaaaaaa" />
-            <h1>Course Name 2</h1>
-            <h2>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam feugiat bibendum mauris. Duis in commodo
-                risus. Nullam lacinia nibh at finibus venenatis. Vivamus luctus vel enim et faucibus. Morbi malesuada.
-            </h2>
+            <a href="http://localhost/csc450Capstone/CoursePage/CoursePage.php" class="fill-div">
+                <img src="Images/courseImage2.jfif" alt="waaaaaaa" />
+                <h1>CSC 115 Intoduction to Python</h1>
+                <h2>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam feugiat bibendum mauris. Duis in
+                    commodo
+                    risus. Nullam lacinia nibh at finibus venenatis. Vivamus luctus vel enim et faucibus. Morbi
+                    malesuada.
+                </h2>
+            </a>
         </div>
         <div>
-            <img src="Images/courseImage3.jfif" alt="" />
-            <h1>Course Name 3</h1>
-            <h2>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam pharetra ligula viverra nisi
-                condimentum posuere. In quis turpis eu nisl pretium egestas. Integer laoreet ipsum et dolor venenatis
-                facilisis. Phasellus.</h2>
+            <a href="http://localhost/csc450Capstone/CoursePage/CoursePage.php" class="fill-div">
+                <img src="Images/courseImage3.jfif" alt="" />
+                <h1>CSC 175 Math for Computer Science</h1>
+                <h2>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam pharetra ligula viverra nisi
+                    condimentum posuere. In quis turpis eu nisl pretium egestas. Integer laoreet ipsum et dolor
+                    venenatis
+                    facilisis. Phasellus.</h2>
+            </a>
         </div>
         <div>
-            <img src="Images/courseImage4.jfif" alt="" />
-            <h1>Course Name 4</h1>
-            <h2>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer sit amet commodo ligula. Fusce
-                consectetur lacus at nisi volutpat molestie. Proin in pretium neque. Mauris fringilla nec odio at
-                molestie.</h2>
+            <a href="http://localhost/csc450Capstone/CoursePage/CoursePage.php" class="fill-div">
+                <img src="Images/courseImage4.jfif" alt="" />
+                <h1>CSC 222 Intoduction to Programming with Java</h1>
+                <h2>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer sit amet commodo ligula. Fusce
+                    consectetur lacus at nisi volutpat molestie. Proin in pretium neque. Mauris fringilla nec odio at
+                    molestie.</h2>
+            </a>
         </div>
         <div>
-            <img src="Images/courseImage5.jfif" alt="" />
-            <h1>Course Name 5</h1>
-            <h2>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque eu sapien vel sollicitudin.
-                Suspendisse ac scelerisque erat. Fusce sed blandit diam. Integer nec ornare lorem. Sed at mattis lectus.
-            </h2>
+            <a href="http://localhost/csc450Capstone/CoursePage/CoursePage.php" class="fill-div">
+                <img src="Images/courseImage5.jfif" alt="" />
+                <h1>CSC 135 Client-Side Wed Development</h1>
+                <h2>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque eu sapien vel
+                    sollicitudin.
+                    Suspendisse ac scelerisque erat. Fusce sed blandit diam. Integer nec ornare lorem. Sed at mattis
+                    lectus.
+                </h2>
+            </a>
         </div>
         <div>
-            <img src="Images/courseImage6.jfif" alt="" />
-            <h1>Course Name 6</h1>
-            <h2>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque mollis et erat a feugiat.
-                Curabitur sit amet sapien a sem elementum hendrerit quis id ante. Aenean tristique condimentum massa,
-                ac.</h2>
+            <a href="http://localhost/csc450Capstone/CoursePage/CoursePage.php" class="fill-div">
+                <img src="Images/courseImage6.jfif" alt="" />
+                <h1>MAT 220 Discrete Mathematics</h1>
+                <h2>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque mollis et erat a feugiat.
+                    Curabitur sit amet sapien a sem elementum hendrerit quis id ante. Aenean tristique condimentum
+                    massa,
+                    ac.</h2>
+            </a>
         </div>
         <div>
-            <img src="Images/courseImage7.jfif" alt="" />
-            <h1>Course Name 7</h1>
-            <h2>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eget enim ut dolor malesuada condimentum ac
-                sed mi. Maecenas ornare diam sed magna accumsan volutpat. Nunc placerat dolor consectetur justo.</h2>
+            <a href="http://localhost/csc450Capstone/CoursePage/CoursePage.php" class="fill-div">
+                <img src="Images/courseImage7.jfif" alt="" />
+                <h1>CSC 230 Database Design</h1>
+                <h2>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eget enim ut dolor malesuada
+                    condimentum ac
+                    sed mi. Maecenas ornare diam sed magna accumsan volutpat. Nunc placerat dolor consectetur justo.
+                </h2>
+            </a>
         </div>
         <div>
-            <img src="Images/courseImage8.jfif" alt="" />
-            <h1>Course Name 8</h1>
-            <h2>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque ut leo at est aliquam lacinia nec id
-                justo. Mauris nec est tincidunt odio efficitur tempus venenatis eleifend tellus. Donec bibendum.</h2>
+            <a href="http://localhost/csc450Capstone/CoursePage/CoursePage.php" class="fill-div">
+                <img src="Images/courseImage8.jfif" alt="" />
+                <h1>CSC 322 Object Oriented Programming in Java</h1>
+                <h2>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque ut leo at est aliquam lacinia nec
+                    id
+                    justo. Mauris nec est tincidunt odio efficitur tempus venenatis eleifend tellus. Donec bibendum.
+                </h2>
+            </a>
+        </div>
+        <div>
+            <a href="http://localhost/csc450Capstone/CoursePage/CoursePage.php" class="fill-div">
+                <img src="Images/courseImage1.jfif" alt="" />
+                <h1>CSC 235 Server-Side Development</h1>
+                <h2>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce auctor mattis mi ac porta. Ut
+                    ullamcorper
+                    risus augue, at condimentum risus ultrices rutrum. In ultrices eu est ut euismod. Nulla.</h2>
+            </a>
+        </div>
+        <div>
+            <a href="http://localhost/csc450Capstone/CoursePage/CoursePage.php" class="fill-div">
+                <img src="Images/courseImage1.jfif" alt="" />
+                <h1>CSC 310 Computer Architecture and Operating Systems</h1>
+                <h2>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce auctor mattis mi ac porta. Ut
+                    ullamcorper
+                    risus augue, at condimentum risus ultrices rutrum. In ultrices eu est ut euismod. Nulla.</h2>
+            </a>
+        </div>
+        <div>
+            <a href="http://localhost/csc450Capstone/CoursePage/CoursePage.php" class="fill-div">
+                <img src="Images/courseImage1.jfif" alt="" />
+                <h1>CSC 330 Language Design and Implementation</h1>
+                <h2>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce auctor mattis mi ac porta. Ut
+                    ullamcorper
+                    risus augue, at condimentum risus ultrices rutrum. In ultrices eu est ut euismod. Nulla.</h2>
+            </a>
+        </div>
+        <div>
+            <a href="http://localhost/csc450Capstone/CoursePage/CoursePage.php" class="fill-div">
+                <img src="Images/courseImage1.jfif" alt="" />
+                <h1>CSC 422 Software Engineering</h1>
+                <h2>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce auctor mattis mi ac porta. Ut
+                    ullamcorper
+                    risus augue, at condimentum risus ultrices rutrum. In ultrices eu est ut euismod. Nulla.</h2>
+            </a>
+        </div>
+        <div>
+            <a href="http://localhost/csc450Capstone/CoursePage/CoursePage.php" class="fill-div">
+                <img src="Images/courseImage1.jfif" alt="" />
+                <h1>CSC 420 Data Structures and Algorithms</h1>
+                <h2>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce auctor mattis mi ac porta. Ut
+                    ullamcorper
+                    risus augue, at condimentum risus ultrices rutrum. In ultrices eu est ut euismod. Nulla.</h2>
+            </a>
+        </div>
+        <div>
+            <a href="http://localhost/csc450Capstone/CoursePage/CoursePage.php" class="fill-div">
+                <img src="Images/courseImage1.jfif" alt="" />
+                <h1>CSC 450 Computer Science Capstone</h1>
+                <h2>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce auctor mattis mi ac porta. Ut
+                    ullamcorper
+                    risus augue, at condimentum risus ultrices rutrum. In ultrices eu est ut euismod. Nulla.</h2>
+            </a>
         </div>
     </div>
     <script>
