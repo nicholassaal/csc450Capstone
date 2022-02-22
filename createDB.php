@@ -8,7 +8,7 @@ function displayMessage($msg, $color) {
 
  $SERVER_NAME    = "localhost";   //Server name 
  $DBF_USER       = "root";        //UserName for the localhost database
- $DBF_PASSWORD   = "mysql";       //Password for the localhost database/ When using XAMPPS, make this value emtpy. Use: $DBF_PASSWORD   = "";
+ $DBF_PASSWORD   = "";       //Password for the localhost database/ When using XAMPPS, make this value emtpy. Use: $DBF_PASSWORD   = "";
  $DBF_NAME       = "CSPCourseReview";    //DB name for the localhost database
  $connect = mysqli_connect($SERVER_NAME, $DBF_USER, $DBF_PASSWORD);
  
@@ -53,13 +53,14 @@ $sqlUserLoginInfo = "CREATE TABLE IF NOT EXISTS userLoginInfo(
     user_name VARCHAR(25) NOT NULL,
     user_password VARCHAR(20) NOT NULL,
     Is_admin BOOLEAN,
-    student_id INT NOT NULL
+    student_id INT
     )";
 
 $sqlStudentInfo = "CREATE TABLE IF NOT EXISTS studentInfo(
     student_id INT AUTO_INCREMENT PRIMARY KEY, 
     student_fName     VARCHAR(20) NOT NULL,
-    student_lName     VARCHAR(20) NOT NULL
+    student_lName     VARCHAR(20) NOT NULL,
+    about_student     VARCHAR(450)
     )";
 
 $sqlStudentCourse = "CREATE TABLE IF NOT EXISTS studentCourse(
@@ -69,8 +70,8 @@ $sqlStudentCourse = "CREATE TABLE IF NOT EXISTS studentCourse(
   )";
 
 $sqlStudentMajor = "CREATE TABLE IF NOT EXISTS studentMajor(
-   student_id INT,
-   major_id INT,
+   student_id INT NOT NULL,
+   major_id INT NOT NULL,
    enrollment_status BOOLEAN
 )";
 
@@ -87,21 +88,26 @@ $sqlCourse = "CREATE TABLE IF NOT EXISTS course(
 )";
 
 $sqlProfessorCourse = "CREATE TABLE IF NOT EXISTS professorCourse(
-   prof_id INT,
-   course_code INT,
+   prof_id INT NOT NULL,
+   course_code INT NOT NULL,
    year_taught VARCHAR(20) NOT NULL
 )";
 
 $sqlProfessor = "CREATE TABLE IF NOT EXISTS professor(
-   pro_id INT AUTO_INCREMENT PRIMARY KEY,
+   prof_id INT AUTO_INCREMENT PRIMARY KEY,
    prof_fName VARCHAR(25) NOT NULL,
    prof_lName VARCHAR(25) NOT NULL
 )";
 
 //'$tableCreate1 =' Assigns queries for each connection type for each table creation... This cleans it up with using AND statements
-$tableCreate = mysqli_query($connectTable, $sqlStudentInfo) AND mysqli_query($connectTable, $sqlUserLoginInfo) AND mysqli_query($connectTable, $sqlStudentCourse)
-                AND mysqli_query($connectTable, $sqlStudentMajor) AND mysqli_query($connectTable, $sqlMajor) AND mysqli_query($connectTable, $sqlCourse)
-                AND mysqli_query($connectTable, $sqlProfessorCourse) AND mysqli_query($connectTable, $sqlProfessor);
+$tableCreate = mysqli_query($connectTable, $sqlStudentInfo) 
+    AND mysqli_query($connectTable, $sqlUserLoginInfo) 
+    AND mysqli_query($connectTable, $sqlStudentCourse)
+    AND mysqli_query($connectTable, $sqlStudentMajor) 
+    AND mysqli_query($connectTable, $sqlMajor) 
+    AND mysqli_query($connectTable, $sqlCourse)
+    AND mysqli_query($connectTable, $sqlProfessorCourse) 
+    AND mysqli_query($connectTable, $sqlProfessor);
 
 
 
@@ -118,37 +124,38 @@ if ($tableCreate) {
 //Insert into userLoginInfo table
 $insertUserLogin = "INSERT INTO userLoginInfo (user_name, user_password, is_admin, student_id)
     VALUES  ('MillerJ26', 'passwordEx', '0', '1'),
-            ('GrantM65', 'exPassword', '1', '2')";
+            ('GrantM65', 'exPassword', '0', '2'),
+            ('SampleAdmin14', 'adminPassword', '1', NULL)";
 
 //Insert into studentInfo table
-$insertStudentInfo = "INSERT INTO studentInfo (student_fName, student_lName)
-    VALUES  ('ADMIN', 'ADMINACC'),
-            ('Mark', 'Grant')";
+$insertStudentInfo = "INSERT INTO studentInfo (student_fName, student_lName, about_student)
+    VALUES  ('Jake', 'Miller', 'Enjoys programming and working on side projects. Some hobbies are fishing and hunting.'),
+            ('Mark', 'Grant', 'Loves fishing.')";
 
 //Insert into student course composite/join table
 $insertStudentCourse = "INSERT INTO studentCourse (student_id, course_code, review_message)
-    VALUES  ('2', '1', 'Great course, highly recommended if you are interesting in web designed.'),
-            ('1', '2', 'Admin user')";
+    VALUES  ('1', '1', 'Great course, highly recommended if you are interesting in web designed.'),
+            ('2', '2', 'Challenging course, but at the same time enjoyable to learn.')";
 
 //Insert into student major composite/join table
 $insertStudentMajor = "INSERT INTO studentMajor (student_id, major_id, enrollment_status)
-    VALUES  ('1', '0', '1'),
-            ('0', '0', '0')";
+    VALUES  ('1', '1', '1'),
+            ('2', '1', '1')";
 
 //Insert into course table
 $insertCourse = "INSERT INTO course (course_description, major_id)
     VALUES  ('CSC 450 Capstone', '1'),
-            ('Admin - Course Review', '1')";
+            ('CSC 420 Data Structures And Algorithms', '1')";
 
 //Insert into major table 
 $insertMajor = "INSERT INTO major (major_name, major_description)
-    VALUES  ('Computer Science', 'You learn about computers and problems solving.'),
+    VALUES  ('Computer Science', 'Focuses on problem solving, computer theory, and design of computing systems.'),
             ('Communications', 'Learn about effective communication skills and using the different skills in real life.')";
 
 //Insert into professorCourse composite/join table
 $insertProfessorCourse = "INSERT INTO professorCourse (prof_id, course_code, year_taught)
     VALUES  ('1', '1', '2019'),
-            ('2', '2', '2020')";
+            ('1', '2', '2020')";
 
 //Insert into professor table
 $insertProfessor = "INSERT INTO professor (prof_fName, prof_lName)
@@ -156,9 +163,14 @@ $insertProfessor = "INSERT INTO professor (prof_fName, prof_lName)
             ('Susan', 'Furtney')";
 
 //'$insert =' Assigns queries for each connection type for each insert (into) tables... This cleans it up with using AND statements
-$insert = mysqli_query($connectTable, $insertUserLogin) AND mysqli_query($connectTable, $insertStudentInfo) AND mysqli_query($connectTable, $insertStudentCourse)
-        AND mysqli_query($connectTable, $insertStudentMajor) AND mysqli_query($connectTable, $insertCourse) AND mysqli_query($connectTable, $insertMajor) AND
-        mysqli_query($connectTable, $insertProfessorCourse) AND mysqli_query($connectTable, $insertProfessor);
+$insert = mysqli_query($connectTable, $insertUserLogin) 
+    AND mysqli_query($connectTable, $insertStudentInfo) 
+    AND mysqli_query($connectTable, $insertStudentCourse)
+    AND mysqli_query($connectTable, $insertStudentMajor) 
+    AND mysqli_query($connectTable, $insertCourse) 
+    AND mysqli_query($connectTable, $insertMajor) 
+    AND mysqli_query($connectTable, $insertProfessorCourse) 
+    AND mysqli_query($connectTable, $insertProfessor);
 
 //Runs the query of inserting into tables and then display if inserting was successful or not. 
 if ($insert) {
@@ -168,23 +180,33 @@ if ($insert) {
 }
 
 /*************************************
-    Creating Foreign Keys Attempt(1)
+    Creating Foreign Keys, Composite Keys. 
 *************************************/
 $sqlAlterUserLoginInfo = "ALTER TABLE `userlogininfo` ADD CONSTRAINT `fk_student_id` FOREIGN KEY (`student_id`) REFERENCES `studentInfo`(`student_id`) ON DELETE RESTRICT ON UPDATE RESTRICT";
 
 $sqlAlterCourseTable = "ALTER TABLE `course` ADD CONSTRAINT `fk_Major_id` FOREIGN KEY (`major_id`) REFERENCES `major`(`major_id`) ON DELETE RESTRICT ON UPDATE RESTRICT";
 
-$sqlAlterStudentCourse1 = "ALTER TABLE `studentcourse` ADD CONSTRAINT `uk_student_id` FOREIGN KEY (`student_id`) REFERENCES `studentinfo`(`student_id`) ON DELETE RESTRICT ON UPDATE RESTRICT";
-$sqlAlterStudentCourse2 = "ALTER TABLE `studentcourse` ADD CONSTRAINT `uk_course_code` FOREIGN KEY (`course_code`) REFERENCES `course`(`course_code`) ON DELETE RESTRICT ON UPDATE RESTRICT";
+$sqlAlterStudentCourse1 = "ALTER TABLE `studentCourse` ADD CONSTRAINT `uk_student_id` FOREIGN KEY (`student_id`) REFERENCES `studentinfo`(`student_id`) ON DELETE RESTRICT ON UPDATE RESTRICT";
+$sqlAlterStudentCourse2 = "ALTER TABLE `studentCourse` ADD CONSTRAINT `uk_course_code` FOREIGN KEY (`course_code`) REFERENCES `course`(`course_code`) ON DELETE RESTRICT ON UPDATE RESTRICT";
 
-$alterTablesFK1 = mysqli_query($connectTable, $sqlAlterUserLoginInfo);
-$alterTablesFK2 = mysqli_query($connectTable, $sqlAlterCourseTable);
-$alterTablesFK3 = mysqli_query($connectTable, $sqlAlterStudentCourse1);
-$alterTablesFK4 = mysqli_query($connectTable, $sqlAlterStudentCourse2);
+$sqlAlterStudentMajor1 = "ALTER TABLE `studentMajor` ADD CONSTRAINT `uk_studentMajor_id` FOREIGN KEY (`student_id`) REFERENCES `studentinfo`(`student_id`) ON DELETE RESTRICT ON UPDATE RESTRICT";
+$sqlAlterStudentMajor2 = "ALTER TABLE `studentMajor` ADD CONSTRAINT `uk_major_id` FOREIGN KEY (`major_id`) REFERENCES `major`(`major_id`) ON DELETE RESTRICT ON UPDATE RESTRICT";
 
+$sqlAlterProfCourse1 = "ALTER TABLE `professorCourse` ADD CONSTRAINT `uk_prof_id` FOREIGN KEY (`prof_id`) REFERENCES `professor`(`prof_id`) ON DELETE RESTRICT ON UPDATE RESTRICT";
+$sqlAlterProfCourse2 = "ALTER TABLE `professorCourse` ADD CONSTRAINT `uk_profCourse_code` FOREIGN KEY (`course_code`) REFERENCES `course`(`course_code`) ON DELETE RESTRICT ON UPDATE RESTRICT";
 
+//Running the queries, assigning runs to a variable to check if successful or not. 
+$alterTablesPKFK = mysqli_query($connectTable, $sqlAlterUserLoginInfo) 
+    AND mysqli_query($connectTable, $sqlAlterCourseTable)
+    AND mysqli_query($connectTable, $sqlAlterStudentCourse1)
+    AND mysqli_query($connectTable, $sqlAlterStudentCourse2)
+    AND mysqli_query($connectTable, $sqlAlterStudentMajor1)
+    AND mysqli_query($connectTable, $sqlAlterStudentMajor2)
+    AND mysqli_query($connectTable, $sqlAlterProfCourse1)
+    AND mysqli_query($connectTable, $sqlAlterProfCourse2);
 
-if ($alterTablesFK1 AND $alterTablesFK2 AND $alterTablesFK3 AND $alterTablesFK4) {
+//Checking if successful or not when running the queries. 
+if ($alterTablesPKFK) {
     displayMessage("You have successfully altered userLoginInfo!", "green"); //green = good
 } else {
     displayMessage("<b>ERROR:</b> " . mysqli_error($connectTable), "red"); //red = bad
