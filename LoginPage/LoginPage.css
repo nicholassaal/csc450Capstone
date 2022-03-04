@@ -37,15 +37,13 @@ input {display:block; /*Using display:block so the Lables and inputs are on top 
 #userInformation {
     color:white;
     font-weight: bold;
-    text-shadow: -1px 1px 0 #000;
+    ;
     margin:0 auto; /*Centering the information*/
     padding-top: 100px; /*Adding padding to top to bring down the login info*/ 
 }
 
 
-button{
-
-    display: block;/*Make button on top of each other*/
+#userInformation input[type="submit"]{
     margin-top: 10px;/*add spacing between the buttons*/
     width:100px;
     height:40px;
@@ -67,4 +65,11 @@ footer {padding: 5px;
     border: black solid 3px;
     color:white;
     border-radius: 3px;
+}
+
+.checkLogin{ /*Styling the check login errors container */
+    color:red;
+    background-color:pink;
+    padding: 5px;
+    border-radius: 5px;
 }
