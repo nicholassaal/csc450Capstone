@@ -31,16 +31,28 @@
                 echo "<p>Please enter in a password</p>";
             }
             else{//Check is user's login info is correct using the userLoginInfo from the database 
-                $sqlStudentCourse = "SELECT * FROM userLoginInfo WHERE user_name = '$userName' AND user_password = '$password' "; 
+                $sqlLogin = "SELECT * FROM userLoginInfo WHERE user_name = '$userName' AND user_password = '$password' "; 
 
                 //Run and assign query to $login
-                $login = mysqli_query($connectToDB, $sqlStudentCourse);
+                $login = mysqli_query($connectToDB, $sqlLogin);
 
                 //if the login query returns a row in the databast userLoginInfo table
                 //user's inputs is an existing record and will successfully sign in 
                 if(mysqli_num_rows($login) == 1){
                     //Go to the landing/home page is successfully logged in. 
-                    header("Location: http://localhost/csc450Capstone/LandingPage/LandingPage.php");
+
+                    //This checks to see with userLogin for admin position (if Is_admin = 1, then they will be logged into as an admin)
+                    $sqlLoginAdmin = "SELECT * FROM userLoginInfo WHERE Is_admin = '1'";
+                    $loginAdmin = mysqli_query($connectToDB, $sqlLoginAdmin);
+
+                    if (mysqli_num_rows($loginAdmin) == 1) {
+                        header("Location: http://localhost/csc450Capstone/profileView/profiles.php");
+                    } else {
+
+                        header("Location: http://localhost/csc450Capstone/LandingPage/LandingPage.php");
+                    }
+
+                    
                 }
                 //if login query does not return an existing record...........
                 else{
