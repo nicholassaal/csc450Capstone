@@ -1,4 +1,6 @@
 <?php
+    //This starts the session for this php page to handle and assign variables
+    session_start();
     $SERVER_NAME    = "localhost";   //Server name 
     $DBF_USER       = "root";        //UserName for the localhost database
     $DBF_PASSWORD   = "";       //Password for the localhost database/ When using XAMPPS, make this value emtpy. Use: $DBF_PASSWORD   = "";
@@ -32,23 +34,31 @@
             }
             else{//Check is user's login info is correct using the userLoginInfo from the database 
                 $sqlLogin = "SELECT * FROM userLoginInfo WHERE user_name = '$userName' AND user_password = '$password' "; 
+                
 
                 //Run and assign query to $login
                 $login = mysqli_query($connectToDB, $sqlLogin);
+                //retrieve the person's Id of the signed in user to be used for future pages (their primary key)
+                
 
                 //if the login query returns a row in the databast userLoginInfo table
                 //user's inputs is an existing record and will successfully sign in 
                 if(mysqli_num_rows($login) == 1){
-                    //Go to the landing/home page is successfully logged in. 
+                    //retrieve the current users primary key (user_id) when successfully types in their user_name and password (along with grabbing Is_admin field)
+                    $sqlLoginId = "SELECT user_id, Is_admin FROM userLoginInfo WHERE user_name = '$userName' AND user_password = '$password'";
+                    //query the username and password to the database (while searching for the user_id)
+                    $grabUserId = mysqli_query($connectToDB, $sqlLoginId);
+                    //fetching the association of that row (the matching username and password row)
+                    $userRow = mysqli_fetch_assoc($grabUserId);
+                    //storing the actual data type 'user_id' from that row to the $_SESSION variable called 'currentUserLoginId'
+                    $_SESSION["currentUserLoginId"] = $userRow['user_id'];
 
-                    //This checks to see with userLogin for admin position (if Is_admin = 1, then they will be logged into as an admin)
-                    $sqlLoginAdmin = "SELECT * FROM userLoginInfo WHERE Is_admin = '1'";
-                    $loginAdmin = mysqli_query($connectToDB, $sqlLoginAdmin);
-
-                    if (mysqli_num_rows($loginAdmin) == 1) {
+                    //if (checks to see if the user logging in is an admin or not an admin)
+                    if ($userRow['Is_admin'] == 1) {
+                        //Go to the admin view page when the admin is logged in.
                         header("Location: http://localhost/csc450Capstone/profileView/profiles.php");
                     } else {
-
+                        //Go to the landing page if the login was successful (if their account is of student status)
                         header("Location: http://localhost/csc450Capstone/LandingPage/LandingPage.php");
                     }
 

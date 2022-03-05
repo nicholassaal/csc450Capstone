@@ -12,6 +12,7 @@ url: http://localhost/csc450Capstone/profileView/profiles.php
 ============================================================================
 -->
 <?php 
+    session_start();
     $SERVER_NAME    = "localhost";   //Server name 
     $DBF_USER       = "root";        //UserName for the localhost database
     $DBF_PASSWORD   = "";       //Password for the localhost database/ When using XAMPPS, make this value emtpy. Use: $DBF_PASSWORD   = "";
@@ -20,6 +21,7 @@ url: http://localhost/csc450Capstone/profileView/profiles.php
     $connectToDB = mysqli_connect($SERVER_NAME, $DBF_USER, $DBF_PASSWORD, $DBF_NAME);
 
     echo "<br><br><br><br><br>";
+    //                                             echo $_SESSION["currentUserLoginId"];
     function displayReviewCourse() {
         global $connectToDB;
         $sqlStudentCourse = "SELECT * FROM studentCourse"; //selecting a specific table from the already connected to database
@@ -34,7 +36,7 @@ url: http://localhost/csc450Capstone/profileView/profiles.php
         //Nested while loop to iterate through rows in a particular table. 
         while($rows = mysqli_fetch_array($data)) { //Outter is iterating through all rows in studentCourse table
             $studentId = $rows['student_id'];//Retrieve the student_id PK 
-            if ($studentId == 1) {//Check if student_id matches the account in the profile view page
+            if ($studentId == $_SESSION["currentUserLoginId"]) {//Check if student_id matches the account in the profile view page
                 $courseCode = $rows['course_code'];//Retrieve the course_code 
                 //Create the query for course table selection, where course_code matches the student's course_code in studentCourse table
                 $sqlStudentCourse = "SELECT * FROM course WHERE course_code = $courseCode";
@@ -69,7 +71,7 @@ url: http://localhost/csc450Capstone/profileView/profiles.php
         while($rows = mysqli_fetch_array($data)) { 
             $studentId = $rows['student_id'];
             $studentName = $rows['fullName'];
-            if ($studentId == 1) {
+            if ($studentId == $_SESSION["currentUserLoginId"]) {
                 $studentinfoId = $rows['student_id'];
                 //Retrieve data from studentMajor table 
                 $sqlStudentMajor = "SELECT * FROM studentMajor WHERE student_id = $studentinfoId";
@@ -116,7 +118,7 @@ url: http://localhost/csc450Capstone/profileView/profiles.php
         //While loop to retrieve data from studentInfo table. 
         while($rows = mysqli_fetch_array($data)) { 
             $studentId = $rows['student_id'];
-            if ($studentId == 1) {
+            if ($studentId == $_SESSION["currentUserLoginId"]) {
                 $about_student = $rows['about_student'];
                 echo "<p>".$about_student."</p>";
             }
