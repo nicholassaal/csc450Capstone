@@ -83,7 +83,8 @@ $sqlMajor = "CREATE TABLE IF NOT EXISTS major(
 
 $sqlCourse = "CREATE TABLE IF NOT EXISTS course(
    course_code INT AUTO_INCREMENT PRIMARY KEY,
-   course_description VARCHAR(150) NOT NULL,
+   course_name VARCHAR(50) NOT NULL,
+   course_description VARCHAR(1000), 
    major_id INT NOT NULL
 )";
 
@@ -143,9 +144,9 @@ $insertStudentMajor = "INSERT INTO studentMajor (student_id, major_id, enrollmen
             ('2', '1', '1')";
 
 //Insert into course table
-$insertCourse = "INSERT INTO course (course_description, major_id)
-    VALUES  ('CSC 450 Capstone', '1'),
-            ('CSC 420 Data Structures And Algorithms', '1')";
+$insertCourse = "INSERT INTO course (course_name, course_description, major_id)
+    VALUES  ('CSC 450 Capstone', 'Provide students realistic hands-on software development experience. Students will work in teams to build a realistic hands-on software development experience.', '1'),
+            ('CSC 420 Data Structures And Algorithms', 'Covers both theory and application of data structures such as lists, stacks, queues, sets, maps, binary search trees, and graphs.', '1')";
 
 //Insert into major table 
 $insertMajor = "INSERT INTO major (major_name, major_description)

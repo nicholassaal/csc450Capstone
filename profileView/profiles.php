@@ -45,7 +45,7 @@ url: http://localhost/csc450Capstone/profileView/profiles.php
                 //Inner while loop iterate through course table, and retrieve the course_description, where studentCourse course_code FK matches a course_code in course table
                 while($courseRows = mysqli_fetch_array($courseData)) { 
                     //Retrieve that particular row and display on screen using echo
-                    $studentReview = $courseRows['course_description']; 
+                    $studentReview = $courseRows['course_name']; 
                         echo "<div class = reviewBox>";
                             echo "<p>".$studentReview."</p>";
                         echo "</div>";
