@@ -3,7 +3,7 @@
 
     $SERVER_NAME    = "localhost";   //Server name 
     $DBF_USER       = "root";        //UserName for the localhost database
-    $DBF_PASSWORD   = "";       //Password for the localhost database/ When using XAMPPS, make this value emtpy. Use: $DBF_PASSWORD   = "";
+    $DBF_PASSWORD   = "mysql";       //Password for the localhost database/ When using XAMPPS, make this value emtpy. Use: $DBF_PASSWORD   = "";
     $DBF_NAME       = "CSPCourseReview";    //DB name for the localhost database
     //$connect = mysqli_connect($SERVER_NAME, $DBF_USER, $DBF_PASSWORD);
     $connectToDB = mysqli_connect($SERVER_NAME, $DBF_USER, $DBF_PASSWORD, $DBF_NAME);
@@ -14,8 +14,12 @@
         die("Connection failed: " . $conn->connect_error); //die( ) will kill the current program after displaying the message in the String parameter.
     }
 
+
+
+    $i = 1;
     function displayCourses() {
         global $connectToDB;
+        global $i;
         $sqlStudentCourse = "SELECT * FROM course"; //selecting a specific table from the already connected to database
 
         //Run and assign query 
@@ -24,7 +28,7 @@
         //div class for css
         echo "<div class='flex-container'>";
 
-        //$i = 0; 
+         
         //$courseArray = array();
 
         //While loop to populate each div container on the major page 
@@ -36,21 +40,32 @@
             //$courseArray = array($i, $courseId); 
 
             //Populate the div containers using data from the course table in the database
-            echo"<div>";
-                echo"<a href='http://localhost/csc450Capstone/CoursePage/CoursePage.php' class='fill-div'>";
+            echo"<div id = $i onclick = goPage();>";
+                //echo"<a href='http://localhost/csc450Capstone/CoursePage/CoursePage.php' class='fill-div'>";
                     echo"<img src='Images/courseImage2.jfif' alt='waaaaaaa' />";
                     echo"<h1>".$courseName."</h1>";
                     echo"<h2>".$courseDes."</h1>";
-                echo"</a>";
+                //echo"</a>";
             echo"</div>";
-
-            //$i++;
+            echo $i;
+            if ( $i < mysqli_num_rows($data)) {
+               $i++; 
+            } else {
+                break;
+            }
+            
+            
+            
         }
+
+        
 
         //$_SESSION['globalCourseArray'] = $courseArray; 
 
         echo"</div>";
     }//end of displayCourses()
+
+    $randomNum = 1;
 
 ?>
 
@@ -227,6 +242,44 @@
         }
         prevScrollpos = currentScrollPos;
     }
+
+
+
+    let arrayLinks = [];
+    let courseCode = 0;    
+    var j = 0;
+    while (courseCode < <?php echo $i ?>) { //Why the fuck does it not work, we created two functions
+        courseCode++;
+        
+
+
+        arrayLinks[j] = document.getElementById(courseCode).onclick = function() {
+            //window.alert(courseCode);
+            window.location.href = "http://localhost/csc450Capstone/CoursePage/CoursePage.php?id=" + courseCode;
+        
+            
+            
+           
+        };
+
+        j++;
+        
+        
+        
+    }
+
+    //
+
+    function goPage() {
+        window.location.href = "http://localhost/csc450Capstone/CoursePage/CoursePage.php?id=1";
+    }
+
+    console.log(courseCode);
+    
+    
+
+
+
     </script>
 </body>
 
