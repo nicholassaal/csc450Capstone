@@ -3,7 +3,7 @@
 
     $SERVER_NAME    = "localhost";   //Server name 
     $DBF_USER       = "root";        //UserName for the localhost database
-    $DBF_PASSWORD   = "mysql";       //Password for the localhost database/ When using XAMPPS, make this value emtpy. Use: $DBF_PASSWORD   = "";
+    $DBF_PASSWORD   = "";       //Password for the localhost database/ When using XAMPPS, make this value emtpy. Use: $DBF_PASSWORD   = "";
     $DBF_NAME       = "CSPCourseReview";    //DB name for the localhost database
     //$connect = mysqli_connect($SERVER_NAME, $DBF_USER, $DBF_PASSWORD);
     $connectToDB = mysqli_connect($SERVER_NAME, $DBF_USER, $DBF_PASSWORD, $DBF_NAME);
@@ -14,13 +14,15 @@
         die("Connection failed: " . $conn->connect_error); //die( ) will kill the current program after displaying the message in the String parameter.
     }
 
+
     function displayCourseTitle() {
         global $connectToDB;
-        $sqlStudentCourse = "SELECT * FROM course"; //selecting a specific table from the already connected to database
+        $courseCode = $_GET["id"]; //Retrieve the course_code that was sent over from the Major Page
+
+        $sqlStudentCourse = "SELECT * FROM course WHERE course_code =  $courseCode"; //Retrieve the course info using the course_code that was sent from what the user Clicked on in MajorPage
 
         //Run and assign query 
         $data = mysqli_query($connectToDB, $sqlStudentCourse);
-
 
 
         while($rows = mysqli_fetch_array($data)) {
@@ -29,46 +31,49 @@
 
         }
 
+        //Display course info (course_name, course_description)
         echo"<h1>".$courseName."</h1>";
         echo"<h2>".$courseDes."</h1>";
 
 
     }//end of displayCourseTitle()
 
-    function displayCourseReviewMessageaSADjASDJaSDASDASDKnaELDENRINGaiojASdkaasdadasdLSD() {
+    function displayCourseReviewMessage() {
         global $connectToDB;
-        //Retrieve the student id and full name using CONCAT()
-        $sqlStudentInfo = "SELECT student_id, CONCAT(student_fname,' ',student_lname) AS 'fullName' FROM studentInfo "; 
+        $courseCode = $_GET["id"]; //Retrieve the course_code that was sent over from the Major Page
 
+        //Retrieve the review message in studentCourse table
+        $sqlStudentCourse = "SELECT * FROM studentcourse WHERE course_code = $courseCode";
+
+        
         //Run and assign query 
-        $data = mysqli_query($connectToDB, $sqlStudentInfo);
+        $data = mysqli_query($connectToDB, $sqlStudentCourse);
 
         while($rows = mysqli_fetch_array($data)) {
-            $retrievedStudentId = $rows['student_id'];//Retrieve student_id
-            $retrievedStudentName = $rows['fullName'];//Retrieve student's full name
+            $courseReviewMessage = $rows['review_message']; //Retrieve the review_message
+            $studentID = $rows['student_id']; //Retrieve the student_id in studentCourse Table
 
-            $sqlStudentMajor = "SELECT * FROM studentcourse WHERE student_id = $retrievedStudentId";
+
+            //Retrieve the student id and full name using CONCAT()
+            $sqlStudentInfo = "SELECT CONCAT(student_fname,' ',student_lname) AS 'fullName' FROM studentInfo
+            WHERE student_id = $studentID"; 
 
             //Run query 
-            $sqlStudentCourseData = mysqli_query($connectToDB, $sqlStudentMajor);
-            $studentCourseRows = mysqli_fetch_array($sqlStudentCourseData);
+            $sqlStudentTable = mysqli_query($connectToDB, $sqlStudentInfo);
+            $retrieveStudentName = mysqli_fetch_assoc($sqlStudentTable);
 
-            $retrievedCourseMessage = $studentCourseRows['review_message'];
+            //Assign the fullname to a variable once retrieved above 
+            $studentName = $retrieveStudentName['fullName'];
 
-            
+            //Display reviews 
             echo "<div>";
-                echo"<h1>".$retrievedStudentName."</h1>";
-                echo"<h2>".$retrievedCourseMessage."</h1>";
+                echo"<h1>".$studentName."</h1>";
+                echo"<h2>".$courseReviewMessage."</h1>";
             echo"</div>";
 
         }//end of while loop 
-    }//end of displayCourseReviewMessageaSADjASDJaSDASDASDKnaELDENRINGaiojASdkaasdadasdLSD()
+    }//end of displayCourseReviewMessage()
 
-
-    $courseCode = $_GET["id"]; //retrieved 
-    echo "<br><br><br><br><br><br><br>";
-    echo $courseCode;
-    echo "<br><br><br><br><br><br><br>";
 
 ?>
 
@@ -140,7 +145,7 @@
     <h3>All Reviews</h3>
     <div class="review-flex-container">
         <!--Called php function to the review message for that specific course -->
-        <?php displayCourseReviewMessageaSADjASDJaSDASDASDKnaELDENRINGaiojASdkaasdadasdLSD(); ?>
+        <?php displayCourseReviewMessage(); ?>
         
         <!-- <div>
             <h2>Username</h2>

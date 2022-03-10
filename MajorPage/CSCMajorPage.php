@@ -3,7 +3,7 @@
 
     $SERVER_NAME    = "localhost";   //Server name 
     $DBF_USER       = "root";        //UserName for the localhost database
-    $DBF_PASSWORD   = "mysql";       //Password for the localhost database/ When using XAMPPS, make this value emtpy. Use: $DBF_PASSWORD   = "";
+    $DBF_PASSWORD   = "";       //Password for the localhost database/ When using XAMPPS, make this value emtpy. Use: $DBF_PASSWORD   = "";
     $DBF_NAME       = "CSPCourseReview";    //DB name for the localhost database
     //$connect = mysqli_connect($SERVER_NAME, $DBF_USER, $DBF_PASSWORD);
     $connectToDB = mysqli_connect($SERVER_NAME, $DBF_USER, $DBF_PASSWORD, $DBF_NAME);
@@ -39,15 +39,17 @@
 
             //$courseArray = array($i, $courseId); 
 
+            ////////////echo $i; //Testing to see the div's numeric ID value 
+
             //Populate the div containers using data from the course table in the database
-            echo"<div id = $i onclick = goPage();>";
+            echo"<div id = $i >";
                 //echo"<a href='http://localhost/csc450Capstone/CoursePage/CoursePage.php' class='fill-div'>";
                     echo"<img src='Images/courseImage2.jfif' alt='waaaaaaa' />";
                     echo"<h1>".$courseName."</h1>";
                     echo"<h2>".$courseDes."</h1>";
                 //echo"</a>";
             echo"</div>";
-            echo $i;
+            //echo $i;
             if ( $i < mysqli_num_rows($data)) {
                $i++; 
             } else {
@@ -243,42 +245,47 @@
         prevScrollpos = currentScrollPos;
     }
 
+    //If student clicks on <div id = 1>, send over course_code 1
+    document.getElementById(1).onclick = function() {
+                window.location.href = "http://localhost/csc450Capstone/CoursePage/CoursePage.php?id=" + 1;
+    };
+
+    //If student clicks on <div id = 2>, send over course_code 2
+    document.getElementById(2).onclick = function() {
+                window.location.href = "http://localhost/csc450Capstone/CoursePage/CoursePage.php?id=" + 2;
+    };
 
 
+    /*--------------------------------------------------------------------------
+    Testing for auto creating onclick function using a loop on some sort. 
     let arrayLinks = [];
-    let courseCode = 0;    
+    let courseCode = 0;
     var j = 0;
+    console.log("PHP num is: " + <?php echo $i ?>);
+
     while (courseCode < <?php echo $i ?>) { //Why the fuck does it not work, we created two functions
         courseCode++;
+        console.log("Course Code is: " + courseCode);
+
+        arrayLinks.push(document.getElementById(courseCode).onclick = function() {
+                window.location.href = "http://localhost/csc450Capstone/CoursePage/CoursePage.php?id=" + courseCode;
+        });
         
-
-
-        arrayLinks[j] = document.getElementById(courseCode).onclick = function() {
-            //window.alert(courseCode);
-            window.location.href = "http://localhost/csc450Capstone/CoursePage/CoursePage.php?id=" + courseCode;
-        
-            
-            
-           
-        };
-
         j++;
-        
-        
         
     }
 
     //
 
     function goPage() {
-        window.location.href = "http://localhost/csc450Capstone/CoursePage/CoursePage.php?id=1";
+        document.getElementById(courseCode).onclick = function() {
+            window.location.href = "http://localhost/csc450Capstone/CoursePage/CoursePage.php?id=" + courseCode;
+        };
+        //window.location.href = "http://localhost/csc450Capstone/CoursePage/CoursePage.php?id=1";
     }
 
     console.log(courseCode);
-    
-    
-
-
+    */
 
     </script>
 </body>
