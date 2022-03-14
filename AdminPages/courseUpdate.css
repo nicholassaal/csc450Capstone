@@ -1,0 +1,121 @@
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+  }
+  
+  li {
+    float: left;
+  }
+  
+  li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+  
+  li a:hover {
+    background-color: #111;
+  }
+  h2{
+      text-align: center;
+  }
+  .flex-container {
+      margin-top: 10%;
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 25%;
+    margin-right: 25%;
+  
+    
+  
+  }
+  
+  .flex-container > a {
+    background-color: #333;
+    color: white;
+  text-decoration: none;
+    padding: 15px;
+    width: 150;
+    height:100;
+    margin: 10px;
+    text-align: center;
+    line-height: 75px;
+    font-size: 30px;
+  }
+  a:hover {
+    background-color: #111;
+  }
+  *{
+      box-sizing: border-box;
+  }
+  h2{
+    text-align: center;
+    color :blue;
+    margin-bottom: 0;
+  }
+  .wrapper{
+      width: 800px;
+      margin: 5% auto;
+  }
+  .form-area{
+      display: flex;
+      background: rgba(0,0,0,0.8);
+      border-radius: 25px;
+      padding: 1.9em;
+  }
+  .msg-area{
+      display: flex;
+      flex-direction: column;
+      order: 2;
+  }
+  .msg-area > textarea{
+  flex:1;
+  min-width: 18em;
+  background:transparent;
+  color:#fff;
+  padding: 15px;
+  
+  }
+  .details-area{
+      flex: 1;
+      order: 1;
+      margin-right: 2em;
+  }
+  .details-area input{
+      width:100%;
+      background: transparent;
+      color:#fff;
+      border-radius: 40px;
+  }
+  .details-area input,
+  .details-area button{
+      padding: 1em;
+      margin-bottom: 1em;
+  
+  }
+  .details-area button{
+      background: tomato;
+      color:#fff;
+      border: 0;
+      padding: 15px 50px;
+      border-radius: 40px;
+      font-family: poppins;
+      font-size: 15px;
+      text-transform: uppercase;
+  }
+  label{
+      color:#fff;
+      text-transform: uppercase;
+      line-height: 40px;
+      font-family: AudioWide;
+  }
+  body{
+    background-image: url("Images/LandingPageBackgroundIMG.jpg");
+  }

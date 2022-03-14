@@ -1,0 +1,57 @@
+body{
+    background-image: url("Images/LandingPageBackgroundIMG.jpg");
+}
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+  }
+  
+  li {
+    float: left;
+  }
+  
+  li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+  
+  li a:hover {
+    background-color: #111;
+  }
+  h2{
+      text-align: center;
+  }
+  .flex-container {
+      margin-top: 10%;
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 25%;
+    margin-right: 25%;
+
+    
+ 
+  }
+  
+  .flex-container > a {
+    background-color: #333;
+    color: white;
+text-decoration: none;
+    padding: 15px;
+    width: 150;
+    height:100;
+    margin: 10px;
+    text-align: center;
+    line-height: 75px;
+    font-size: 30px;
+  }
+  a:hover {
+    background-color: #111;
+  }

@@ -3,7 +3,7 @@
 
     $SERVER_NAME    = "localhost";   //Server name 
     $DBF_USER       = "root";        //UserName for the localhost database
-    $DBF_PASSWORD   = "mysql";       //Password for the localhost database/ When using XAMPPS, make this value emtpy. Use: $DBF_PASSWORD   = "";
+    $DBF_PASSWORD   = "";       //Password for the localhost database/ When using XAMPPS, make this value emtpy. Use: $DBF_PASSWORD   = "";
     $DBF_NAME       = "CSPCourseReview";    //DB name for the localhost database
     //$connect = mysqli_connect($SERVER_NAME, $DBF_USER, $DBF_PASSWORD);
     $connectToDB = mysqli_connect($SERVER_NAME, $DBF_USER, $DBF_PASSWORD, $DBF_NAME);
