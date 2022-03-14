@@ -125,6 +125,14 @@ body {
     height: 25px;
   }
 
+  .studentLegend, .staffLegend {
+    border: solid 3px white;
+    color: rgb(158, 249, 255);
+    border-radius: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
   
 
   
