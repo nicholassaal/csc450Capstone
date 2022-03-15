@@ -85,7 +85,7 @@ $sqlCourse = "CREATE TABLE IF NOT EXISTS course(
    course_code INT AUTO_INCREMENT PRIMARY KEY,
    course_name VARCHAR(50) NOT NULL,
    course_description VARCHAR(1000), 
-   major_id INT NOT NULL
+   major_id INT
 )";
 
 $sqlProfessorCourse = "CREATE TABLE IF NOT EXISTS professorCourse(

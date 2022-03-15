@@ -119,3 +119,7 @@ ul {
   body{
     background-image: url("Images/LandingPageBackgroundIMG.jpg");
   }
+
+  .formHeaders{
+    color: white;
+  }
