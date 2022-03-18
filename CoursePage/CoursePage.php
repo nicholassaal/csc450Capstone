@@ -68,7 +68,7 @@
             $studentName = $retrieveStudentName['fullName'];
 
             //Display reviews 
-            echo "<div>";
+            echo "<div id = $studentName>";
                 echo"<h1>".$studentName."</h1>";
                 echo"<h2>".$courseReviewMessage."</h1>";
             echo"</div>";

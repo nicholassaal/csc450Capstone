@@ -114,11 +114,13 @@ a:hover {
     margin: 10px;
     width: 12%;
     height: 10%;
+    text-decoration: none;
 }
 .reviewBox:hover{
     background-color: aliceblue;
     color:rgb(50, 50, 51);
     font-weight: bold;
+    text-decoration: none;
 }
 .reviewField, .otherInfoField {
     margin-top: 30px;

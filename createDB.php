@@ -136,7 +136,9 @@ $insertStudentInfo = "INSERT INTO studentInfo (student_fName, student_lName, abo
 //Insert into student course composite/join table
 $insertStudentCourse = "INSERT INTO studentCourse (student_id, course_code, review_message)
     VALUES  ('1', '1', 'Great course, highly recommended if you are interesting in web designed.'),
-            ('2', '2', 'Challenging course, but at the same time enjoyable to learn.')";
+            ('1', '2', 'Challenging course, but at the same time enjoyable to learn.'),
+            ('1', '2', 'Super Epic Man nice.'),
+            ('1', '1', 'Great course, highly recommended if you are interesting in web designed.')"; //added additional reviews for one person to test my idea in profiles.php
 
 //Insert into student major composite/join table
 $insertStudentMajor = "INSERT INTO studentMajor (student_id, major_id, enrollment_status)

@@ -24,7 +24,9 @@ url: http://localhost/csc450Capstone/profileView/profiles.php
     //                                             echo $_SESSION["currentUserLoginId"];
     function displayReviewCourse() {
         global $connectToDB;
+        
         $sqlStudentCourse = "SELECT * FROM studentCourse"; //selecting a specific table from the already connected to database
+        $i = 0; //variable outside of loop to access the array
 
         //Run and assign query 
         $data = mysqli_query($connectToDB, $sqlStudentCourse);
@@ -39,6 +41,10 @@ url: http://localhost/csc450Capstone/profileView/profiles.php
             if ($studentId == $_SESSION["currentUserLoginId"]) {//Check if student_id matches the account in the profile view page
                 $courseCode = $rows['course_code'];//Retrieve the course_code 
                 //Create the query for course table selection, where course_code matches the student's course_code in studentCourse table
+
+                $courseCodeArray[] = $courseCode; //storing the $courseCodes into an array to access for the ?id=Course_code(s)
+                //print_r($courseCodeArray); //simple print to show array being created
+
                 $sqlStudentCourse = "SELECT * FROM course WHERE course_code = $courseCode";
                 //Run query 
                 $courseData = mysqli_query($connectToDB, $sqlStudentCourse);
@@ -46,12 +52,15 @@ url: http://localhost/csc450Capstone/profileView/profiles.php
                 while($courseRows = mysqli_fetch_array($courseData)) { 
                     //Retrieve that particular row and display on screen using echo
                     $studentReview = $courseRows['course_name']; 
-                        echo "<div class = reviewBox>";
+                        echo "<a href = http://localhost/csc450Capstone/CoursePage/CoursePage.php?id=$courseCodeArray[$i] class = reviewBox>";
                             echo "<p>".$studentReview."</p>";
-                        echo "</div>";
+                        echo "</a>";
+                    $i++; //adds 1 to $i
                 }// end innerWhile()
             }// end if()
         } //end while()
+        
+
 
         
         echo "</fieldset>"; 
@@ -100,8 +109,8 @@ url: http://localhost/csc450Capstone/profileView/profiles.php
                     else{
                         echo "<p>Enrollment Status: Not Enrolled</p>";
                     }
-                }// end if()
-            } //end while()
+            }// end if()
+        } //end while()
     }//end of displayStudentInfo 
 
     function displayAboutStudent() {
@@ -169,15 +178,7 @@ url: http://localhost/csc450Capstone/profileView/profiles.php
 
     <div>
         <?php displayAboutStudent(); ?>
-        <!-- <fieldset class = "otherInfoField">
-            <legend class = "otherInfoLegend">Other Info: </legend>
-            <p>SAMPLE INFO</p>
-            <p>SAMPLE INFO</p>
-            <p>SAMPLE INFO</p>
-            <p>SAMPLE INFO</p>
-            <p>SAMPLE INFO</p>
-            <p>SAMPLE INFO</p>
-        </fieldset> -->
+        
     </div>
 
     <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
@@ -185,3 +186,20 @@ url: http://localhost/csc450Capstone/profileView/profiles.php
     <p>Hi There Gurt</p>
 </body>
 </html>
+
+<script>
+
+
+// var savedVar;
+// for (var t = 0; t < 50; t++){
+//     savedVar = document.getElementById(t);
+//     if (typeof window.addEventListener === 'function'){
+//         (function (savedVar) {
+//             savedVar.addEventListener('click', function(){
+//                 console.log(savedVar);
+                
+//             });
+//         })(savedVar);
+//     }
+// }
+</script>
