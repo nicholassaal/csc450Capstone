@@ -44,6 +44,7 @@
         global $connectToDB;
         $courseCode = $_GET["id"]; //Retrieve the course_code that was sent over from the Major Page
 
+        $j = 0;
         //Retrieve the review message in studentCourse table
         $sqlStudentCourse = "SELECT * FROM studentcourse WHERE course_code = $courseCode";
 
@@ -55,6 +56,7 @@
             $courseReviewMessage = $rows['review_message']; //Retrieve the review_message
             $studentID = $rows['student_id']; //Retrieve the student_id in studentCourse Table
 
+            $studentIdArray[] = $studentID;
 
             //Retrieve the student id and full name using CONCAT()
             $sqlStudentInfo = "SELECT CONCAT(student_fname,' ',student_lname) AS 'fullName' FROM studentInfo
@@ -70,8 +72,12 @@
             //Display reviews 
             echo "<div id = $studentName>";
                 echo"<h1>".$studentName."</h1>";
+                echo "<button type = button name = submit class = btn id = btn>  
+                        <a href = http://localhost/csc450Capstone/profileView/otherProfile.php?uid=$studentIdArray[$j]>View Profile</a> 
+                      </button>";
                 echo"<h2>".$courseReviewMessage."</h1>";
             echo"</div>";
+            $j++;
 
         }//end of while loop 
     }//end of displayCourseReviewMessage()
@@ -144,6 +150,7 @@
         </div>
     </div>
 
+    <form method = "POST">
     <h3>All Reviews</h3>
     <div class="review-flex-container">
         <!--Called php function to the review message for that specific course -->
@@ -186,6 +193,7 @@
                 laudantium ipsum velit quisquam reiciendis?</h2>
         </div> -->
     </div>
+    </form>
     <script>
     var prevScrollpos = window.pageYOffset;
     window.onscroll = function() {
