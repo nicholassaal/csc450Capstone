@@ -136,6 +136,69 @@ url: http://localhost/csc450Capstone/profileView/profiles.php
         echo "</fieldset>";
     }//end of displayAboutStudent()
 
+    //Validate if old password first()
+    function checkOldPassword(){
+        global $connectToDB;
+
+        //Student's inputted old password
+        $inputtedOldPassword = $_POST['oldPassword'];
+        //Current student id using Sessions
+        $studentId = $_SESSION["currentUserLoginId"];
+        
+        $sqlStudentInfo = "SELECT user_password FROM userLoginInfo WHERE student_id = '$studentId'";
+
+        $queryPassword = mysqli_query($connectToDB, $sqlStudentInfo);
+        $fetchStudentPassword = mysqli_fetch_assoc($queryPassword); //fetching associated record in the database 
+        $oldPassword = $fetchStudentPassword['user_password'];//retrieve the user_password value 
+
+        if($inputtedOldPassword != $oldPassword){
+            return false;
+        }
+        else{
+            return true;
+        }
+
+    }//end of checkOldPassword()
+
+    //Confirm the new password inputted by the student 
+    function confirmNewPassword(){
+        $newPassword = $_POST['newPassword'];
+        $confirmedNewPassword = $_POST['confirmPassword'];
+
+        if($newPassword != $confirmedNewPassword){
+            return false; 
+        }
+        else{
+            return true;
+        }
+    }//end of confirmNewPassword
+
+    function updateOldPassword(){
+        global $connectToDB;
+
+        //Student's inputted new password
+        $inputtedOldPassword = $_POST['newPassword'];
+        $studentId = $_SESSION["currentUserLoginId"];
+        
+        $sqlUpdatePassword = "UPDATE userLoginInfo SET user_password = '$inputtedOldPassword' WHERE student_id = '$studentId'";
+        $queryPasswordUpdate = mysqli_query($connectToDB, $sqlUpdatePassword);
+
+        if($queryPasswordUpdate){
+            echo"<script>window.alert('YOU UPDATED THE PASSWORD CORRECTLY GREAT JOB!')</script>";
+        }
+        else{
+            print_r($queryPasswordUpdate);
+        }
+    }//end of updateOldPassword()
+
+    if (isset($_POST['submitButton'])) {
+        if(checkOldPassword() && confirmNewPassword()){
+            updateOldPassword();
+        }
+        else{
+            echo"<script>window.alert('Incorrect password confirmations!')</script>";
+        }
+    }//end of isset if statement
 
 ?>
 <!DOCTYPE html>
@@ -163,10 +226,34 @@ url: http://localhost/csc450Capstone/profileView/profiles.php
         </div>
     </div>
 
+    <!--FORM to update/edit the user's profile information (Passwords, and About me sections) -->
+    <form class = "editProfileform" id="editProfileform" method = "POST">
+            <h1 id="formHeader">Edit Profile Information</h1>
+
+            <lable for ="oldPassword">Type in old password</lable> <!-- Creating a lable for input type of "text" then giving a name and id to match the lable name-->
+            <input type="password" name="oldPassword" id = "oldPassword">
+
+            <lable for ="newPassword">Type in new password</lable> <!-- Repeat above, but just change label to newPassword-->
+            <input type="password" name="newPassword" id = "newPassword">
+
+            <lable for ="confirmPassword">Confirm the new password</lable> <!-- Repeat above, but just change label to confirmPassword-->
+            <input type="password" name="confirmPassword" id = "confirmPassword">
+
+            <input type="checkbox" onclick="showPassword()"> Show password <!--Reveal the passwords if user wants to using JavaScript-->
+
+            <button type = "button" onclick="turnOFFoverlayForm()">Cancel</button> <!--Turn off overlay form-->
+            <button type = "submit" name="submitButton" id="submitButton">Submit</button> 
+
+            <!-- Using Textarea for the user to type in a box -->
+    </form>
+
     <div class = "studentInfo">
         <div class = "studentDescript1">
             <a href = "graphic/cool_guy.png"><img src = "graphic/cool_guy.png" id = "examplePicture"></a>
+            <!-- Created button for editing account information-->
+            <button type = "button" id="editProfileButton" onclick="turnONoverlayForm()">Edit Account</button>
         </div>
+
         <div class = "studentDescript2">
             <?php displayStudentInfo(); ?>
         </div>
@@ -181,14 +268,41 @@ url: http://localhost/csc450Capstone/profileView/profiles.php
         
     </div>
 
-    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-    <p>Hi There Gurt</p>
 </body>
 </html>
 
 <script>
+    document.getElementById("editProfileform").style.display = "none";
 
+    //function to turn off the overlay form 
+    function turnOFFoverlayForm(){
+        document.getElementById("editProfileform").style.display = "none";
+    }
+
+    //Function to display the overlay form for editing/updating user profile 
+    function turnONoverlayForm(){
+        document.getElementById("editProfileform").style.display = "block";
+    }//end of overlayForm()
+
+    //Create the functions to show password for the users if they check the check box 
+    function showPassword(){
+        //retrieve the two passwords
+        var oldPassword = document.getElementById("oldPassword");
+        var newPassword = document.getElementById("newPassword");
+        var confirmedPassword = document.getElementById("confirmPassword");
+
+        //if the two types for each passwords are type="password", change the type to a text  
+        if(oldPassword.type === "password" && newPassword.type === "password" && confirmedPassword.type === "password"){
+            oldPassword.type = "text";
+            newPassword.type = "text";
+            confirmedPassword.type = "text";
+        }
+        else{//otherwise change types back to password to hide passwords again. 
+            oldPassword.type = "password";
+            newPassword.type = "password";
+            confirmedPassword.type = "password";
+        }
+}//end of showPassword function 
 
 // var savedVar;
 // for (var t = 0; t < 50; t++){

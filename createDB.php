@@ -125,29 +125,34 @@ if ($tableCreate) {
 //Insert into userLoginInfo table
 $insertUserLogin = "INSERT INTO userLoginInfo (user_name, user_password, is_admin, student_id)
     VALUES  ('MillerJ26', 'passwordEx', '0', '1'),
-            ('GrantM65', 'exPassword', '0', '2'),
+            ('PaulS19', 'password', '0', '2'),
+            ('GrantM65', 'exPassword', '0', '3'),
             ('SampleAdmin14', 'adminPassword', '1', NULL)";
 
 //Insert into studentInfo table
 $insertStudentInfo = "INSERT INTO studentInfo (student_fName, student_lName, about_student)
     VALUES  ('Jake', 'Miller', 'Enjoys programming and working on side projects. Some hobbies are fishing and hunting.'),
+            ('Steve', 'Paul', 'Hobbies are playing guitar, running, and build computers.'),
             ('Mark', 'Grant', 'Loves fishing.')";
 
 //Insert into student course composite/join table
 $insertStudentCourse = "INSERT INTO studentCourse (student_id, course_code, review_message)
     VALUES  ('1', '1', 'Great course, highly recommended if you are interesting in web designed.'),
-            ('1', '2', 'Challenging course, but at the same time enjoyable to learn.'),
-            ('1', '2', 'Super Epic Man nice.'),
-            ('1', '1', 'Great course, highly recommended if you are interesting in web designed.')"; //added additional reviews for one person to test my idea in profiles.php
+            ('2', '2', 'Greate course to start learning about the software development process. Also, really enjoyed working with the team.'),
+            ('3', '3', 'Super interesting course. Loved learning how the code we write actually works.'),
+            ('3', '4', 'Challenging course, but at the same time enjoyable to learn.')"; //added additional reviews for one person to test my idea in profiles.php
 
 //Insert into student major composite/join table
 $insertStudentMajor = "INSERT INTO studentMajor (student_id, major_id, enrollment_status)
     VALUES  ('1', '1', '1'),
-            ('2', '1', '1')";
+            ('2', '1', '1'),
+            ('3', '1', '1')";
 
 //Insert into course table
 $insertCourse = "INSERT INTO course (course_name, course_description, major_id)
     VALUES  ('CSC 450 Capstone', 'Provide students realistic hands-on software development experience. Students will work in teams to build a realistic hands-on software development experience.', '1'),
+            ('CSC 422 Software Engineering', 'Introduces students to concepts and tools in software engineering. The topics include software life-cycle, the phases of software development, design pattern, software architecture, and Agile software development.', '1'),
+            ('CSC 422 Language Design and Implementation', 'Course provides a comparative survey of programming language paradigms. It include an overview of the properties, applications, syntax, and semantics of selected object-oriented.', '1'),
             ('CSC 420 Data Structures And Algorithms', 'Covers both theory and application of data structures such as lists, stacks, queues, sets, maps, binary search trees, and graphs.', '1')";
 
 //Insert into major table 

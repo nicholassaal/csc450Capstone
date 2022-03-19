@@ -90,6 +90,7 @@ a:hover {
     float: left;
     margin-left: 30px;
     margin-right: 30px;
+    text-align: center;
 }
 .studentField {
     border: 2px groove rgb(71, 163, 182);
@@ -130,3 +131,35 @@ a:hover {
     color: white;
     border: 2px groove rgb(71, 163, 182);
 }
+
+/*Styling the edit Profile button under the Profile picture */
+#editProfileButton{
+    display: block; /*Put the button under the image, NOTE: same container*/
+    margin-top: 5%;
+    margin-left: 10%;
+    border-radius: 10px;/*Curve the corners of the buttons*/   
+    font-size:large;
+    padding:5px;
+    background-color:rgb(233, 225, 225);
+}
+
+/* Styling the overlay edit Profile form \*/
+.editProfileForm{
+    float:left; /*Move form to the left*/
+    padding: 10px;
+    background-color: white;
+    position: fixed; /*Keep form on the page for user to see if they scroll*/
+    width:14%;
+    height:80%;
+}
+
+/* Styling the inputs and buttons inside the editing profile form */
+input, button{
+    display: block; /*Put elements on top of each other*/
+}
+
+input[type="checkbox"]{
+    display:inline; /*Put the name of the check box next to the actual check box*/
+}
+
+
