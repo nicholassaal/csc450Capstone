@@ -86,10 +86,10 @@
     function courseUpdate() { 
         global $connectToDB; //global variable for the connection to the DB
 
-        $courseName = $_POST["courseName"]; //getting the user's input via POST method to send to the DB
-        $courseId = $_POST["courseId"];
-        $majorName = $_POST["majors"];
-        $msg = $_POST["msg"];
+        $courseName     = $_POST["courseName"]; //getting the user's input via POST method to send to the DB
+        $courseId       = $_POST["courseId"];
+        $majorName      = $_POST["majors"];
+        $msg            = $_POST["msg"];
         
         $sqlRetrieveMajorId = "SELECT major_id FROM major WHERE major_name ='$majorName'";
         $queryMajorId = mysqli_query($connectToDB, $sqlRetrieveMajorId);
@@ -107,11 +107,44 @@
         }
     }//end of courseUpdate()
 
+
+    function courseDelete() {
+        global $connectToDB;
+
+        $courseId = $_POST["courseIdDel"];
+        $courseName = $_POST["courseNameDel"];
+
+        $sqlDeleteCourse = "DELETE FROM course WHERE course_code = '$courseId' AND course_name = '$courseName'";
+        $sqlDeleteStudentCourse = "DELETE FROM studentcourse WHERE course_code = '$courseId'";
+        $sqlDeleteProfCourse = "DELETE FROM professorcourse WHERE course_code = '$courseId'";
+
+        $queryChildDelete = mysqli_query($connectToDB, $sqlDeleteStudentCourse)
+                        AND mysqli_query($connectToDB, $sqlDeleteProfCourse);
+
+        $queryDelete = mysqli_query($connectToDB, $sqlDeleteCourse);
+            
+        if ($queryChildDelete AND $queryDelete) {
+            echo "Course - ".$courseName." - was deleted!";
+        } else {
+            print_r($connectToDB);
+            echo "ERROR: <br>";
+            mysqli_error($connectToDB); 
+            echo "<br>";
+        }
+
+
+    }
+
+
+
     if(isset($_POST['updateCourse'])) { //isset is looking for the action of the button being pressed named ['updateCourse']
         courseUpdate(); //when the button is pressed, it will execute the function studentAdding();
     }
     if(isset($_POST['addCourse'])) { //isset is looking for the action of the button being pressed named ['updateCourse']
         addACourse(); //when the button is pressed, it will execute the function studentAdding();
+    }
+    if(isset($_POST['deleteCourse'])) {
+        courseDelete();
     }
     
 ?>
@@ -140,10 +173,12 @@
       </ul>
    
     <div class="wrapper">
+
+    
         
         <!--************************************************************************
-        *******************       ADD A COURSE       ***********************
-        ************************************************************************-->
+            *******************         ADD A COURSE         ***********************
+            ************************************************************************-->
         <h1 class = "formHeaders">Add a course</h1>
                 <form action="" method= "POST" class="form-area">
                     <div class="msg-area">
@@ -169,8 +204,8 @@
                 </form>
 
         <!--************************************************************************
-        *******************       UPDATE A COURSE       ***********************
-        ************************************************************************-->
+            *******************        UPDATE A COURSE       ***********************
+            ************************************************************************-->
             <h1 class = "formHeaders">Update a course</h1>
                 <form action="" method= "POST" class="form-area">
                     <div class="msg-area">
@@ -190,7 +225,24 @@
 
                         <button type="submit"  value="Submit" name = "updateCourse" id = "updateCourse">Submit</button>
                     </div>
-            </form>
+                </form>
+
+            
+        <!--************************************************************************
+            *******************        DELETE A COURSE       ***********************
+            ************************************************************************-->
+            <h1 class = "formHeaders">Delete a course</h1>
+                <form action="" method= "POST" class="form-area">
+                    <div class="details-area">
+                        <label for="courseId">Course Id</label>
+                        <input type="text" name="courseIdDel" id="courseIdDel">
+
+                        <label for="courseName">Course Name</label>
+                        <input type="text" name="courseNameDel" id="courseNameDel">
+
+                        <button type="submit"  value="Submit" name = "deleteCourse" id = "deleteCourse">Submit</button>
+                    </div>
+                </form>
 
     </div>
     

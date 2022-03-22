@@ -83,7 +83,7 @@
         if ($queryDeleteUser) {
 
         } else {
-            echo "WRONG ERROR ERROR REEEEEEE";
+            print_r($queryDeleteUser);
         }
     } //end of deleteExistingUser();
 
@@ -100,7 +100,7 @@
 
         if ($queryAddStaff) {
             echo"<br><br><br><br><br>";
-            echo"Successfull Added new Staff $staffFName";
+            echo"Successfull Added new Staff - ".$staffFName."!";
         } else {
             print_r($queryAddStaff);
         }

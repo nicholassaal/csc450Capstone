@@ -229,7 +229,7 @@ url: http://localhost/csc450Capstone/profileView/profiles.php
             echo"<script>window.alert('Update has been made!')</script>";
         }
         else{
-            print_r($queryPasswordUpdate);
+            print_r($queryUpdateStudentInfo);
         }
     }//end of updateAboutMe()
 
