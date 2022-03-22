@@ -115,24 +115,36 @@ url: http://localhost/csc450Capstone/profileView/profiles.php
 
     function displayAboutStudent() {
         global $connectToDB;
-        $sqlStudentInfo = "SELECT student_id, about_student FROM studentInfo";
+        $sqlStudentInfo = "SELECT * FROM studentInfo";
 
         //Run and assign query 
         $data = mysqli_query($connectToDB, $sqlStudentInfo);
 
         //Headers 
         echo "<fieldset class = otherInfoField>";
-        echo "<legend class = otherInfoLegend>About Me: </legend>";
+        echo "<legend class = otherInfoLegend>Additional Information: </legend>";
 
         //While loop to retrieve data from studentInfo table. 
         while($rows = mysqli_fetch_array($data)) { 
             $studentId = $rows['student_id'];
             if ($studentId == $_SESSION["currentUserLoginId"]) {
+                $student_social = $rows['student_social'];
+                $student_birthday = $rows['student_birthday'];
+                $student_phoneNumber = $rows['student_phoneNumber'];
+                $student_year = $rows['student_year'];
                 $about_student = $rows['about_student'];
+                echo "<h3>Socials: </h3>";
+                echo "<p>".$student_social."</p>";
+                echo "<h3>Birthday: </h3>";
+                echo "<p>".$student_birthday."</p>";
+                echo "<h3>Phone Number: </h3>";
+                echo "<p>".$student_phoneNumber."</p>";
+                echo "<h3>Year of study: </h3>";
+                echo "<p>".$student_year."</p>";
+                echo "<h3>About me: </h3>";
                 echo "<p>".$about_student."</p>";
             }
         }
-
         echo "</fieldset>";
     }//end of displayAboutStudent()
 
@@ -191,6 +203,36 @@ url: http://localhost/csc450Capstone/profileView/profiles.php
         }
     }//end of updateOldPassword()
 
+    function updateAboutMe(){
+        global $connectToDB;
+
+        //Student's inputted About me Section
+        $social = $_POST['social'];
+        $phoneNumber = $_POST['phoneNumber'];
+        $birthday = $_POST['birthday'];
+        $schoolYear = $_POST['schoolYear'];
+        $additionalInfo = $_POST['additionalInfo'];
+
+        $studentId = $_SESSION["currentUserLoginId"];
+
+        $sqlstudentInfoUpdate = "UPDATE studentinfo 
+        SET student_social = '$social', 
+        student_phoneNumber = '$phoneNumber', 
+        student_birthday = '$birthday',
+        student_year = '$schoolYear',
+        about_student = '$additionalInfo'
+        WHERE student_id = '$studentId'";
+
+        $queryUpdateStudentInfo = mysqli_query($connectToDB, $sqlstudentInfoUpdate);
+
+        if($queryUpdateStudentInfo){
+            echo"<script>window.alert('Update has been made!')</script>";
+        }
+        else{
+            print_r($queryPasswordUpdate);
+        }
+    }//end of updateAboutMe()
+
     if (isset($_POST['submitButton'])) {
         if(checkOldPassword() && confirmNewPassword()){
             updateOldPassword();
@@ -198,7 +240,7 @@ url: http://localhost/csc450Capstone/profileView/profiles.php
         else{
             echo"<script>window.alert('Incorrect password confirmations!')</script>";
         }
-    }//end of isset if statement
+    }//end of isset if statement for submit button. 
 
 ?>
 <!DOCTYPE html>
@@ -230,6 +272,8 @@ url: http://localhost/csc450Capstone/profileView/profiles.php
     <form class = "editProfileform" id="editProfileform" method = "POST">
             <h1 id="formHeader">Edit Profile Information</h1>
 
+            <h3 id="passwordHeader">Change Password</h3>
+
             <lable for ="oldPassword">Type in old password</lable> <!-- Creating a lable for input type of "text" then giving a name and id to match the lable name-->
             <input type="password" name="oldPassword" id = "oldPassword">
 
@@ -240,6 +284,28 @@ url: http://localhost/csc450Capstone/profileView/profiles.php
             <input type="password" name="confirmPassword" id = "confirmPassword">
 
             <input type="checkbox" onclick="showPassword()"> Show password <!--Reveal the passwords if user wants to using JavaScript-->
+          
+            <h3 id="changeAboutMe">Edit About Me Section</h3>
+            <!-- Allow users to update their ABOUT ME section on the their profile pages. -->
+            <lable for ="social">Socials</lable> <!-- type=text for socials -->
+            <input type="text" name="social" id = "social">
+
+            <lable for ="phoneNumber">Phone number</lable> <!-- type=tel for telephone number -->
+            <input type="tel" name="phoneNumber" id = "phoneNumber" placeholder="1234321785" pattern="[0-9]{3}[0-9]{3}[0-9]{4}">
+
+            <lable for ="birthday">Birth Date</lable> <!-- Again, Repeat but change the input type -->
+            <input type="date" name="birthday" id = "birthday">
+
+            <lable for ="schoolYear">Year of study</lable> <!-- select dropdown list for school year EX:senior -->
+            <select name="schoolYear" id = "schoolYear">
+                <option value = "Freshman">Freshman</option>
+                <option value = "Sophomore">sophomore</option>
+                <option value = "Junior">Junior</option>
+                <option value = "Senior">Senior</option>
+            </select>
+
+            <label for="additionalInfo">Add any additional information.</label>
+            <textarea name ="additionalInfo" id = "additionalInfo" cols="25" rows="5"></textarea> <!-- textarea for any additional Info-->
 
             <button type = "button" onclick="turnOFFoverlayForm()">Cancel</button> <!--Turn off overlay form-->
             <button type = "submit" name="submitButton" id="submitButton">Submit</button> 

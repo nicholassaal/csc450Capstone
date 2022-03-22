@@ -153,6 +153,10 @@ a:hover {
     height:80%;
 }
 
+label{
+    margin-top:500%;
+}
+
 /* Styling the inputs and buttons inside the editing profile form */
 input, button{
     display: block; /*Put elements on top of each other*/

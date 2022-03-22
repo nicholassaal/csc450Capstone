@@ -58,9 +58,13 @@ $sqlUserLoginInfo = "CREATE TABLE IF NOT EXISTS userLoginInfo(
 
 $sqlStudentInfo = "CREATE TABLE IF NOT EXISTS studentInfo(
     student_id INT AUTO_INCREMENT PRIMARY KEY, 
-    student_fName     VARCHAR(20) NOT NULL,
-    student_lName     VARCHAR(20) NOT NULL,
-    about_student     VARCHAR(450)
+    student_fName VARCHAR(20) NOT NULL,
+    student_lName VARCHAR(20) NOT NULL,
+    student_social VARCHAR(50),
+    student_birthday DATE,
+    student_phoneNumber INT,
+    student_year VARCHAR(50),
+    about_student VARCHAR(450)
     )";
 
 $sqlStudentCourse = "CREATE TABLE IF NOT EXISTS studentCourse(
@@ -130,10 +134,10 @@ $insertUserLogin = "INSERT INTO userLoginInfo (user_name, user_password, is_admi
             ('SampleAdmin14', 'adminPassword', '1', NULL)";
 
 //Insert into studentInfo table
-$insertStudentInfo = "INSERT INTO studentInfo (student_fName, student_lName, about_student)
-    VALUES  ('Jake', 'Miller', 'Enjoys programming and working on side projects. Some hobbies are fishing and hunting.'),
-            ('Steve', 'Paul', 'Hobbies are playing guitar, running, and build computers.'),
-            ('Mark', 'Grant', 'Loves fishing.')";
+$insertStudentInfo = "INSERT INTO studentInfo (student_fName, student_lName, student_social, student_birthday, student_phoneNumber, student_year, about_student)
+    VALUES  ('Jake', 'Miller', 'jakeMiller@csp.edu', '2001-01-01', '6516516511', 'Senior', 'Enjoys programming and working on side projects. Some hobbies are fishing and hunting.'),
+            ('Steve', 'Paul', '', '' , '' , '' , 'Hobbies are playing guitar, running, and build computers.'),
+            ('Mark', 'Grant', '', '' , '' , '' , 'Loves fishing.')";
 
 //Insert into student course composite/join table
 $insertStudentCourse = "INSERT INTO studentCourse (student_id, course_code, review_message)
