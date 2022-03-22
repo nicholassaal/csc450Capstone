@@ -19,9 +19,8 @@ url: http://localhost/csc450Capstone/profileView/profiles.php
     $DBF_NAME       = "CSPCourseReview";    //DB name for the localhost database
     //$connect = mysqli_connect($SERVER_NAME, $DBF_USER, $DBF_PASSWORD);
     $connectToDB = mysqli_connect($SERVER_NAME, $DBF_USER, $DBF_PASSWORD, $DBF_NAME);
-
     echo "<br><br><br><br><br>";
-    //                                             echo $_SESSION["currentUserLoginId"];
+
     function displayReviewCourse() {
         global $connectToDB;
         
@@ -196,10 +195,7 @@ url: http://localhost/csc450Capstone/profileView/profiles.php
         $queryPasswordUpdate = mysqli_query($connectToDB, $sqlUpdatePassword);
 
         if($queryPasswordUpdate){
-            echo"<script>window.alert('YOU UPDATED THE PASSWORD CORRECTLY GREAT JOB!')</script>";
-        }
-        else{
-            print_r($queryPasswordUpdate);
+            echo"<script>window.alert('YOU SUCCESSFULLY UPDATED YOUR PASSWORD, GREAT JOB!')</script>";
         }
     }//end of updateOldPassword()
 
@@ -240,12 +236,6 @@ url: http://localhost/csc450Capstone/profileView/profiles.php
 
         $queryUpdateStudentInfo = mysqli_query($connectToDB, $sqlstudentInfoUpdate);
 
-        if($queryUpdateStudentInfo){
-            echo"<script>window.alert('Update has been made!')</script>";
-        }
-        else{
-            print_r($queryUpdateStudentInfo);
-        }
     }//end of updateAboutMe()
 
     if (isset($_POST['submitButton'])) {
@@ -254,9 +244,7 @@ url: http://localhost/csc450Capstone/profileView/profiles.php
         if(checkOldPassword() && confirmNewPassword()){
             updateOldPassword();
         }
-        else{
-            echo"<script>window.alert('Incorrect password confirmations!')</script>";
-        }
+
     }//end of isset if statement for submit button. 
 
 ?>
@@ -288,7 +276,6 @@ url: http://localhost/csc450Capstone/profileView/profiles.php
     <!--FORM to update/edit the user's profile information (Passwords, and About me sections) -->
     <form class = "editProfileform" id="editProfileform" method = "POST">
             <h1 id="formHeader">Edit Profile Information</h1>
-
             <h3 id="passwordHeader">Change Password</h3>
 
             <lable for ="oldPassword">Type in old password</lable> <!-- Creating a lable for input type of "text" then giving a name and id to match the lable name-->
@@ -315,6 +302,7 @@ url: http://localhost/csc450Capstone/profileView/profiles.php
 
             <lable for ="schoolYear">Year of study</lable> <!-- select dropdown list for school year EX:senior -->
             <select name="schoolYear" id = "schoolYear">
+                <option value = ""></option>
                 <option value = "Freshman">Freshman</option>
                 <option value = "Sophomore">sophomore</option>
                 <option value = "Junior">Junior</option>
@@ -326,9 +314,7 @@ url: http://localhost/csc450Capstone/profileView/profiles.php
 
             <button type = "button" onclick="turnOFFoverlayForm()">Cancel</button> <!--Turn off overlay form-->
             <button type = "submit" name="submitButton" id="submitButton">Submit</button> 
-
-            <!-- Using Textarea for the user to type in a box -->
-    </form>
+    </form> <!--End of form-->
 
     <div class = "studentInfo">
         <div class = "studentDescript1">
@@ -355,6 +341,13 @@ url: http://localhost/csc450Capstone/profileView/profiles.php
 </html>
 
 <script>
+
+    // $(document).ready(function() {
+    //     $('form').submit(function(e){
+    //         e.preventDefault();
+    //     });
+    // });
+
     document.getElementById("editProfileform").style.display = "none";
 
     //function to turn off the overlay form 
