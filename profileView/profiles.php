@@ -215,13 +215,28 @@ url: http://localhost/csc450Capstone/profileView/profiles.php
 
         $studentId = $_SESSION["currentUserLoginId"];
 
-        $sqlstudentInfoUpdate = "UPDATE studentinfo 
-        SET student_social = '$social', 
-        student_phoneNumber = '$phoneNumber', 
-        student_birthday = '$birthday',
-        student_year = '$schoolYear',
-        about_student = '$additionalInfo'
-        WHERE student_id = '$studentId'";
+        $sqlstudentInfoUpdate = "UPDATE studentinfo
+        SET student_social= CASE
+                                WHEN '$social' = '' THEN student_social
+                                ELSE '$social'
+                            END,
+        student_phoneNumber=CASE
+                                WHEN '$phoneNumber' = '' THEN student_phoneNumber
+                                ELSE '$phoneNumber'
+                            END, 
+        student_birthday =  CASE
+                                WHEN '$birthday' = '' THEN student_birthday
+                                ELSE '$birthday'
+                            END, 
+        student_year =      CASE
+                                WHEN '$schoolYear' = '' THEN student_year
+                                ELSE '$schoolYear'
+                            END, 
+        about_student =     CASE
+                                WHEN '$additionalInfo' = '' THEN about_student
+                                ELSE '$additionalInfo'
+                            END 
+        WHERE student_id = $studentId";
 
         $queryUpdateStudentInfo = mysqli_query($connectToDB, $sqlstudentInfoUpdate);
 
@@ -234,6 +249,8 @@ url: http://localhost/csc450Capstone/profileView/profiles.php
     }//end of updateAboutMe()
 
     if (isset($_POST['submitButton'])) {
+        updateAboutMe();
+
         if(checkOldPassword() && confirmNewPassword()){
             updateOldPassword();
         }
