@@ -8,7 +8,7 @@ function displayMessage($msg, $color) {
 
  $SERVER_NAME    = "localhost";   //Server name 
  $DBF_USER       = "root";        //UserName for the localhost database
- $DBF_PASSWORD   = "";       //Password for the localhost database/ When using XAMPPS, make this value emtpy. Use: $DBF_PASSWORD   = "";
+ $DBF_PASSWORD   = "";            //Password for the localhost database/ When using XAMPPS, make this value emtpy. Use: $DBF_PASSWORD   = "";
  $DBF_NAME       = "CSPCourseReview";    //DB name for the localhost database
  $connect = mysqli_connect($SERVER_NAME, $DBF_USER, $DBF_PASSWORD);
  
@@ -62,7 +62,7 @@ $sqlStudentInfo = "CREATE TABLE IF NOT EXISTS studentInfo(
     student_lName VARCHAR(20) NOT NULL,
     student_social VARCHAR(50),
     student_birthday DATE,
-    student_phoneNumber INT,
+    student_phoneNumber INT(20),
     student_year VARCHAR(50),
     about_student VARCHAR(450)
     )";
@@ -135,9 +135,9 @@ $insertUserLogin = "INSERT INTO userLoginInfo (user_name, user_password, is_admi
 
 //Insert into studentInfo table
 $insertStudentInfo = "INSERT INTO studentInfo (student_fName, student_lName, student_social, student_birthday, student_phoneNumber, student_year, about_student)
-    VALUES  ('Jake', 'Miller', 'jakeMiller@csp.edu', '2001-01-01', '6516516511', 'Senior', 'Enjoys programming and working on side projects. Some hobbies are fishing and hunting.'),
-            ('Steve', 'Paul', '', '' , '' , '' , 'Hobbies are playing guitar, running, and build computers.'),
-            ('Mark', 'Grant', '', '' , '' , '' , 'Loves fishing.')";
+    VALUES  ('Jake', 'Miller', 'jakeMiller@csp.edu', '2001-01-01', '651651651', 'Senior', 'Enjoys programming and working on side projects. Some hobbies are fishing and hunting.'),
+            ('Steve', 'Paul', '', '2002-02-02' , '1223123123' , '' , 'Hobbies are playing guitar, running, and build computers.'),
+            ('Mark', 'Grant', '', '2003-03-03' , '1111111111' , '' , 'Loves fishing.')";
 
 //Insert into student course composite/join table
 $insertStudentCourse = "INSERT INTO studentCourse (student_id, course_code, review_message)
@@ -175,7 +175,7 @@ $insertProfessor = "INSERT INTO professor (prof_fName, prof_lName)
             ('Susan', 'Furtney')";
 
 //'$insert =' Assigns queries for each connection type for each insert (into) tables... This cleans it up with using AND statements
-$insert = mysqli_query($connectTable, $insertUserLogin) 
+$insert = mysqli_query($connectTable, $insertUserLogin)
     AND mysqli_query($connectTable, $insertStudentInfo) 
     AND mysqli_query($connectTable, $insertStudentCourse)
     AND mysqli_query($connectTable, $insertStudentMajor) 
