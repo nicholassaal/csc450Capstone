@@ -170,12 +170,10 @@
             <li>
                 <h1>Update Student/Staff Info</h1>
             </li>
-            <li style="float: right"><a href="http://localhost/csc450Capstone/LoginPage/LoginPage.php">Sign Out</a></li>
-            <li style="float: right"><a href="http://localhost/csc450Capstone/MajorPage/CSCMajorPage.php">Majors</a>
-            </li>
-            <li style="float: right"><a href="http://localhost/csc450Capstone/profileView/profiles.php">My Profile</a>
-            </li>
+            <li><a class="active" href="adminPage.html">Admin Home</a></li>
             <li style="float: right"><a href="http://localhost/csc450Capstone/LandingPage/LandingPage.php">Home</a></li>
+            <li style="float: right"><a href="http://localhost/csc450Capstone/MajorPage/CSCMajorPage.php">Majors</a></li>
+            <li style="float: right"><a href="http://localhost/csc450Capstone/LoginPage/logOut.php">Sign Out</a></li>
         </ul>
         
     </nav>

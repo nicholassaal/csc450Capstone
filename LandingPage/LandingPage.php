@@ -83,7 +83,7 @@ window.addEventListener('scroll',function(){
             
           
             
-            <li class="item button"><a href="http://localhost/csc450Capstone/LoginPage/LoginPage.php">Sign Out</a></li>
+            <li class="item button"><a href="http://localhost/csc450Capstone/LoginPage/logOut.php">Sign Out</a></li>
             <!-- <li class="item button secondary"><a href="#">Sign Up</a></li> -->
             <li class="toggle"><span class="bars"></span></li>
         </ul>

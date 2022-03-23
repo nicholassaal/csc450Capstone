@@ -116,7 +116,7 @@
                     
                     <!--Submit button-->
                     <input type="submit" name="btnSubmit" value="Login"  />
-
+                    
                     <!-- Called php loginFunction() for login functionalities  -->
                     <?php loginFunction(); ?>
                 </form>

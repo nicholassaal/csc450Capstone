@@ -193,10 +193,6 @@ url: http://localhost/csc450Capstone/profileView/profiles.php
         
         $sqlUpdatePassword = "UPDATE userLoginInfo SET user_password = '$inputtedOldPassword' WHERE student_id = '$studentId'";
         $queryPasswordUpdate = mysqli_query($connectToDB, $sqlUpdatePassword);
-
-        if($queryPasswordUpdate){
-            echo"<script>window.alert('YOU SUCCESSFULLY UPDATED YOUR PASSWORD, GREAT JOB!')</script>";
-        }
     }//end of updateOldPassword()
 
     function updateAboutMe(){
@@ -238,11 +234,30 @@ url: http://localhost/csc450Capstone/profileView/profiles.php
 
     }//end of updateAboutMe()
 
+    function showMessage($message){
+        echo"<script>";
+        echo"alert('$message');";
+        echo"window.location.href = 'http://localhost/csc450Capstone/ProfileView/profiles.php';";    
+        echo"</script>";
+    }
+
+
     if (isset($_POST['submitButton'])) {
         updateAboutMe();
 
-        if(checkOldPassword() && confirmNewPassword()){
-            updateOldPassword();
+        if(!empty($_POST['oldPassword']) && !empty($_POST['newPassword']) && !empty($_POST['confirmPassword'])){
+            if(!checkOldPassword() && !confirmNewPassword()){
+                showMessage("Your confirmation for the both the old password and new password was incorrect. Please re-try both passwords again.");
+            }
+            if(!checkOldPassword()){
+                showMessage("Your confirmation for the old password was incorrect. Please try again.");
+            }
+            if(!confirmNewPassword()){
+                showMessage("Your confirmation for the new password was incorrect. Please try again.");
+            }
+            if(checkOldPassword() && confirmNewPassword()){
+                showMessage("Password has successfully been updated!");
+            }
         }
 
     }//end of isset if statement for submit button. 
@@ -268,7 +283,7 @@ url: http://localhost/csc450Capstone/profileView/profiles.php
                 <li id = "landingBtn"><a href = "http://localhost/csc450Capstone/LandingPage/LandingPage.php">Home</a></li>
                 <li id = "profileBtn"><a href = "http://localhost/csc450Capstone/ProfileView/profiles.php">Profile</a></li>
                 <li id = "perMajorBtn"><a href = "http://localhost/csc450Capstone/MajorPage/CSCMajorPage.php">Majors</a></li>
-                <li id = "loginBtn"><a href = "http://localhost/csc450Capstone/LoginPage/LoginPage.php">Sign Out</a></li>
+                <li id = "loginBtn"><a href = "http://localhost/csc450Capstone/LoginPage/logOut.php">Sign Out</a></li>
             </ul>
         </div>
     </div>
@@ -378,7 +393,8 @@ url: http://localhost/csc450Capstone/profileView/profiles.php
             newPassword.type = "password";
             confirmedPassword.type = "password";
         }
-}//end of showPassword function 
+    }//end of showPassword function 
+
 
 // var savedVar;
 // for (var t = 0; t < 50; t++){
