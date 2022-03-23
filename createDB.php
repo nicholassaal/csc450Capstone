@@ -62,7 +62,7 @@ $sqlStudentInfo = "CREATE TABLE IF NOT EXISTS studentInfo(
     student_lName VARCHAR(20) NOT NULL,
     student_social VARCHAR(50),
     student_birthday DATE,
-    student_phoneNumber INT(20),
+    student_phoneNumber VARCHAR(20),
     student_year VARCHAR(50),
     about_student VARCHAR(450)
     )";
@@ -135,7 +135,7 @@ $insertUserLogin = "INSERT INTO userLoginInfo (user_name, user_password, is_admi
 
 //Insert into studentInfo table
 $insertStudentInfo = "INSERT INTO studentInfo (student_fName, student_lName, student_social, student_birthday, student_phoneNumber, student_year, about_student)
-    VALUES  ('Jake', 'Miller', 'jakeMiller@csp.edu', '2001-01-01', '651651651', 'Senior', 'Enjoys programming and working on side projects. Some hobbies are fishing and hunting.'),
+    VALUES  ('Jake', 'Miller', 'jakeMiller@csp.edu', '2001-01-01', '6516516511', 'Senior', 'Enjoys programming and working on side projects. Some hobbies are fishing and hunting.'),
             ('Steve', 'Paul', '', '2002-02-02' , '1223123123' , '' , 'Hobbies are playing guitar, running, and build computers.'),
             ('Mark', 'Grant', '', '2003-03-03' , '1111111111' , '' , 'Loves fishing.')";
 

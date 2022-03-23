@@ -41,7 +41,7 @@
                 while($courseRows = mysqli_fetch_array($courseData)) { 
                     //Retrieve that particular row and display on screen using echo
                     $studentReview = $courseRows['course_name']; 
-                        echo "<a href = http://localhost/csc450Capstone/CoursePage/CoursePage.php?id=$courseCodeArray[$i] class = reviewBox id = reviewBox>";
+                        echo "<a href = http://localhost/csc450Capstone/CoursePage/CoursePage.php?id=$courseCodeArray[$i]#$studentId class = reviewBox id = reviewBox>";
                             echo "<p>".$studentReview."</p>";
                         echo "</a>";
                     $i++; //adds 1 to $i

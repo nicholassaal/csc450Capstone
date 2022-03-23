@@ -70,13 +70,13 @@
             $studentName = $retrieveStudentName['fullName'];
 
             //Display reviews 
-            echo "<div id = $studentName>";
+            echo "<div> <a name = $studentID>";
                 echo"<h1>".$studentName."</h1>";
                 echo "<button type = button name = submit class = btn id = btn>  
                         <a href = http://localhost/csc450Capstone/profileView/otherProfile.php?uid=$studentIdArray[$j]>View Profile</a> 
                       </button>";
                 echo"<h2>".$courseReviewMessage."</h1>";
-            echo"</div>";
+            echo"</a> </div>";
             $j++;
 
         }//end of while loop 
