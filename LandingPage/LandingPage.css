@@ -57,15 +57,15 @@ For scroll bar
   body {
     background-attachment: fixed;
     font-family: sans-serif;
-    background-image: url("Light-Shaded-Background.jpg");
+    background-image: url("LandingPageBackgroundIMG.jpg");
     padding-top: 25px;
     padding-bottom: 100px;
     color:rgba(34, 34, 34, 34); 
   }
-  .dark-mode {
+  /* .dark-mode {
     background-image: url("LandingPageBackgroundIMG.jpg");
     color: white;
-  }
+  } */
 
   .welcomeText{
     background: rgba(34, 34, 34, 0.7);

@@ -67,19 +67,7 @@ window.addEventListener('scroll',function(){
             <li class="item"><a href="http://localhost/csc450Capstone/LandingPage/LandingPage.php">Landing Page</a></li>
             <li class="item"><a href="http://localhost/csc450Capstone/profileView/profiles.php">Profile</a></li>
             <li class="item"><a href="http://localhost/csc450Capstone/MajorPage/CSCMajorPage.php">Majors</a></li>
-       
 
-            <li class="item">    
-             <div>
-      <button onclick="darkMode()">Darkmode</button>
-            </div>
-            </li>
-    <script>
-      function darkMode() {
-        var element = document.body;
-        element.classList.toggle("dark-mode");
-      }
-    </script>
             
           
             
