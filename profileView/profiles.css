@@ -150,12 +150,14 @@ CSS STYLING FOR THE OVERLAY EDIT PROFILE FORM
 /* Styling the overlay edit Profile form \*/
 .editProfileForm{
     float:left; /*Move form to the left*/
-    padding: 10px;
-    background-color: white;
+    padding: 20px;
+    background-color:rgba(34, 34, 34, 0.9);
+    color: white;
     position: fixed; /*Keep form on the page for user to see if they scroll*/
     width:14%;
-    height:90%;
+    height:84%;
     z-index: 0;
+    border: 2px groove rgb(71, 163, 182);
 }
 
 /* Styling the inputs and buttons inside the editing profile form */
@@ -194,3 +196,33 @@ input[type="checkbox"]{
     content: "/2713";
 }
 
+.editProfileForm > div > input { /* Edits the password, social, phone, etc. inputs.  */
+    width: 70%;
+    margin-bottom: 20px;
+}
+
+.editProfileForm > div > label { /* Edits all labels in the edit pop up */
+    font-size: 20px;
+    margin-bottom: 5px;
+}
+
+.editProfileForm > h1 { /* Edits the heading of the pop up */
+    margin-top: 0;
+}
+
+.editProfileForm > h3 { /* Edits the headings of the edit sections (Change Password / Edit About Me Section) */
+    margin-top: 40px;
+    margin-bottom: 5px;
+    font-size: 25px;
+}
+
+.editProfileForm > div > button { /* Edits the submit and cancel buttons at the bottom of the pop up */
+    margin-top: 5px;
+    display: inline;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.editProfileForm > div > textarea { /* Setting the additional information textarea to be the full size of the pop up for ascetics */
+    width: 100%;
+}
