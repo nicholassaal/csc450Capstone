@@ -70,7 +70,10 @@ $sqlStudentInfo = "CREATE TABLE IF NOT EXISTS studentInfo(
 $sqlStudentCourse = "CREATE TABLE IF NOT EXISTS studentCourse(
    student_id INT NOT NULL,
    course_code INT NOT NULL,
-   review_message VARCHAR(450)
+   review_message VARCHAR(450),
+   difficulty_review_rating INT,
+   enjoyability_review_rating INT, 
+   overall_review_rating INT
   )";
 
 $sqlStudentMajor = "CREATE TABLE IF NOT EXISTS studentMajor(
@@ -140,11 +143,13 @@ $insertStudentInfo = "INSERT INTO studentInfo (student_fName, student_lName, stu
             ('Mark', 'Grant', '', '2003-03-03' , '1111111111' , '' , 'Loves fishing.')";
 
 //Insert into student course composite/join table
-$insertStudentCourse = "INSERT INTO studentCourse (student_id, course_code, review_message)
-    VALUES  ('1', '1', 'Great course, highly recommended if you are interesting in web designed.'),
-            ('2', '2', 'Greate course to start learning about the software development process. Also, really enjoyed working with the team.'),
-            ('3', '3', 'Super interesting course. Loved learning how the code we write actually works.'),
-            ('3', '4', 'Challenging course, but at the same time enjoyable to learn.')"; //added additional reviews for one person to test my idea in profiles.php
+$insertStudentCourse = "INSERT INTO studentCourse (student_id, course_code, review_message, difficulty_review_rating, enjoyability_review_rating, overall_review_rating)
+    VALUES  ('1', '1', 'Great course, highly recommended if you are interesting in web designed.', '2', '5','15'),
+            ('2', '1', 'I see this course as an internship kind of. I was able to work with a team and learn new skills in HTML, CSS, PHP, and JavaScript.', '3', '5', '18'),
+            ('3', '1', 'I thought the course was great. Loved working with the team I was assigned to.', '3', '5', '7'),
+            ('2', '2', 'Greate course to start learning about the software development process. Also, really enjoyed working with the team.', '3', '4', '12'),
+            ('3', '3', 'Super interesting course. Loved learning how the code we write actually works.', '3', '4', '7'),
+            ('3', '4', 'Challenging course, but at the same time enjoyable to learn.', '5', '5', '1')"; //added additional reviews for one person to test my idea in profiles.php
 
 //Insert into student major composite/join table
 $insertStudentMajor = "INSERT INTO studentMajor (student_id, major_id, enrollment_status)

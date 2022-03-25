@@ -114,7 +114,7 @@
     function displayAboutStudent() {
         global $connectToDB;
         $clickedUserId = $_GET["uid"];
-        $sqlStudentInfo = "SELECT student_id, about_student FROM studentInfo";
+        $sqlStudentInfo = "SELECT * FROM studentInfo";
 
         //Run and assign query 
         $data = mysqli_query($connectToDB, $sqlStudentInfo);
@@ -127,8 +127,22 @@
         while($rows = mysqli_fetch_array($data)) { 
             $studentId = $rows['student_id'];
             if ($studentId == $clickedUserId) { //checks to see if the $studentId found in DB matches the sent over uid to populate the reviews
+                //Added the rest of the About me sections information in the database. 
+                $student_social = $rows['student_social'];
+                $student_birthday = $rows['student_birthday'];
+                $student_phoneNumber = $rows['student_phoneNumber'];
+                $student_year = $rows['student_year'];
                 $about_student = $rows['about_student'];
-                echo "<p>".$about_student."</p>";
+                echo "<h3>Socials: </h3>";
+                echo "<p>" . $student_social . "</p>";
+                echo "<h3>Birthday: </h3>";
+                echo "<p>" . $student_birthday . "</p>";
+                echo "<h3>Phone Number: </h3>";
+                echo "<p>" . $student_phoneNumber . "</p>";
+                echo "<h3>Year of study: </h3>";
+                echo "<p>" . $student_year . "</p>";
+                echo "<h3>About me: </h3>";
+                echo "<p>" . $about_student . "</p>";
             }
         }
 
