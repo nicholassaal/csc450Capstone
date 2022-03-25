@@ -338,9 +338,9 @@ if (isset($_POST['submitButton'])) {
 
 
             <!--Turn off overlay form-->
-            <button type="submit" name="submitButton" id="submitButton" class="submitButton">Submit</button>
-
             <button type="button" onclick="turnOFFoverlayForm()">Cancel</button>
+
+            <button type="submit" name="submitButton" id="submitButton" class="submitButton">Submit</button>
         </div>
     </form>
     <!--End of form-->

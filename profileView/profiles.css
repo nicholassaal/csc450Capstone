@@ -12,6 +12,7 @@ body {
     top: 0;
     right: 0;
     display: inline;
+    z-index: 10;
 }
 .pageName {
     color: white;
@@ -153,9 +154,9 @@ CSS STYLING FOR THE OVERLAY EDIT PROFILE FORM
     padding: 20px;
     background-color:rgba(34, 34, 34, 0.9);
     color: white;
-    position: fixed; /*Keep form on the page for user to see if they scroll*/
-    width:14%;
-    height:84%;
+    position: absolute; /*Keep form on the page for user to see if they scroll*/
+    width:13%;
+    height:115%;
     z-index: 0;
     border: 2px groove rgb(71, 163, 182);
 }
@@ -167,33 +168,6 @@ input, button{
 
 input[type="checkbox"]{
     display:inline; /*Put the name of the check box next to the actual check box*/
-}
-
-.exceptionContainer{
-    margin:auto;
-}
-
-.errorMessages{
-    color:red;
-    background-color:pink;
-    padding: 5px;
-    width:30%;
-    margin:auto;
-    font-size: larger;
-    text-align: center;
-    border-radius: 5px;
-}
-
-.successfulUpdateMessage{
-    color:green;
-    background-color:lightgreen;
-    padding: 5px;
-    width:30%;
-    margin:auto;
-    font-size: larger;
-    text-align: center;
-    border-radius: 5px;
-    content: "/2713";
 }
 
 .editProfileForm > div > input { /* Edits the password, social, phone, etc. inputs.  */
@@ -214,6 +188,7 @@ input[type="checkbox"]{
     margin-top: 40px;
     margin-bottom: 5px;
     font-size: 25px;
+    text-decoration: underline;
 }
 
 .editProfileForm > div > button { /* Edits the submit and cancel buttons at the bottom of the pop up */
