@@ -143,3 +143,43 @@ h3 {
   background: lightgray;
   color: black;
 }
+
+
+/* 
+--------------------------------------------------
+--------- LEAVE REVIEW OVERLAY CSS BELOW ---------
+--------------------------------------------------
+*/ 
+
+/* Below code is work in progress */
+
+.leaveReviewForm { /* this is the container for holding review elements */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+  height: 50%;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: rgb(34, 34, 34, 0.9);
+}
+
+.leaveReviewForm > div { /* review questions  */
+  padding: 1%;
+  margin: 1%;
+  width: auto;
+  text-align: center;
+}
+
+.leaveReviewForm > textarea { /* review text boxes */
+  resize: none;
+}
+
+.leaveReviewForm > button { /* */
+  margin-left: 1%;
+  margin-top: 1%;
+  margin-bottom: 1%;
+  padding: 1%;
+}
