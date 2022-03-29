@@ -273,8 +273,10 @@ if (isset($_POST['submitButton'])) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="profiles.css">
+    <link rel="stylesheet" type="text/css" href="../globalStyle/navBarStyling.css">
     <style>
         <?php include("profiles.css"); ?>
+        
     </style>
 
     <title>User Profile</title>
@@ -307,7 +309,7 @@ window.addEventListener('scroll',function(){
 });
     </script>
         <ul class="menu">
-            <li class="logo">CSP student Profile</li>
+            <li class="logo" id="logo">CSP Student Profile</li>
             <li class="item"><a href="http://localhost/csc450Capstone/LandingPage/LandingPage.php">Home</a></li>
             <li class="item"><a href="http://localhost/csc450Capstone/profileView/profiles.php">Profile</a></li>
             <li class="item"><a href="http://localhost/csc450Capstone/MajorPage/CSCMajorPage.php">Majors</a></li>

@@ -163,15 +163,14 @@
 </head>
 <body>
  
-    
+<nav id="navbar">
     <ul>
-        
-        <li><a class="active" href="http://localhost/csc450Capstone/AdminPages/adminHome.php">Admin Home</a></li>
-        <li ><a href="http://localhost/csc450Capstone/LandingPage/LandingPage.php">Home</a></li>
-        <li ><a href="http://localhost/csc450Capstone/MajorPage/CSCMajorPage.php">Majors</a></li>
-        <li style="float: right"><a href="http://localhost/csc450Capstone/LoginPage/logOut.php">Sign Out</a></li>
+        <li><a class="adminHome" href="http://localhost/csc450Capstone/AdminPages/adminHome.php">Admin Home</a></li>
+        <li><a href="http://localhost/csc450Capstone/LoginPage/logOut.php">Sign Out</a></li>
+        <li><a href="http://localhost/csc450Capstone/MajorPage/CSCMajorPage.php">Majors</a></li>
+        <li><a href="http://localhost/csc450Capstone/LandingPage/LandingPage.php">Users Home</a></li>
       </ul>
-   
+</nav>
     <div class="wrapper">
 
     
@@ -248,3 +247,16 @@
     
 </body>
 </html>
+
+<script>
+    var prevScrollpos = window.pageYOffset;
+    window.onscroll = function() {
+        var currentScrollPos = window.pageYOffset;
+        if (prevScrollpos > currentScrollPos) {
+            document.getElementById("navbar").style.top = "0";
+        } else {
+            document.getElementById("navbar").style.top = "-150px";
+        }
+        prevScrollpos = currentScrollPos;
+    }
+</script>

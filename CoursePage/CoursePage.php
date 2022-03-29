@@ -105,20 +105,42 @@ function correctTitle() {
 <head>
     <title><?php correctTitle(); ?></title>
     <link rel="stylesheet" type="text/css" href="CoursePage.css">
+    <link rel="stylesheet" type="text/css" href="../globalStyle/navBarStyling.css">
 </head>
 
 <body>
     <nav id="navbar">
-        <ul>
-            <li>
-                <h1>Computer Science Courses</h1>
-            </li>
-            <li style="float: right"><a href="http://localhost/csc450Capstone/LoginPage/logOut.php">Sign Out</a></li>
-            <li style="float: right"><a href="http://localhost/csc450Capstone/MajorPage/CSCMajorPage.php">Majors</a>
-            </li>
-            <li style="float: right"><a href="http://localhost/csc450Capstone/profileView/profiles.php">Profile</a>
-            </li>
-            <li style="float: right"><a href="http://localhost/csc450Capstone/LandingPage/LandingPage.php">Home</a></li>
+    <script>
+        var lastScrollTop; // This Varibale will store the top position
+
+navbar = document.getElementById('navbar'); // Get The NavBar
+
+window.addEventListener('scroll',function(){
+ //on every scroll this funtion will be called
+  
+  var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+  //This line will get the location on scroll
+  
+  if(scrollTop > lastScrollTop){ //if it will be greater than the previous
+    navbar.style.top='-80px';
+    //set the value to the negetive of height of navbar 
+  }
+  
+  else{
+    navbar.style.top='0';
+  }
+  
+  lastScrollTop = scrollTop; //New Position Stored
+});
+    </script>
+        <ul class="menu">
+            <li class="logo" id="logo">CSP Course Page</li>
+            <li class="item"><a href="http://localhost/csc450Capstone/LandingPage/LandingPage.php">Home</a></li>
+            <li class="item"><a href="http://localhost/csc450Capstone/profileView/profiles.php">Profile</a></li>
+            <li class="item"><a href="http://localhost/csc450Capstone/MajorPage/CSCMajorPage.php">Majors</a></li>
+            <li class="item button"><a href="http://localhost/csc450Capstone/LoginPage/logOut.php">Sign Out</a></li>
+    
+            <li class="toggle"><span class="bars"></span></li>
         </ul>
     </nav>
 
@@ -189,43 +211,6 @@ function correctTitle() {
         <div class="review-flex-container">
             <!--Called php function to the review message for that specific course -->
             <?php displayCourseReviewMessage(); ?>
-
-            <!-- <div>
-            <h2>Username</h2>
-            <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae a, impedit dicta suscipit
-                excepturi, neque culpa ducimus porro nostrum laboriosam doloribus debitis libero molestiae enim, tenetur
-                laudantium incidunt. Laborum, ipsum.</h2>
-        </div>
-        <div>
-            <h2>Username</h2>
-            <h2>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum optio consequatur ipsa nam quibusdam
-                dolorem enim illo facilis, iure perspiciatis magnam dolores nisi rerum soluta laborum, amet earum, quo
-                corporis?</h2>
-        </div>
-        <div>
-            <h2>Username</h2>
-            <h2>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quae maxime molestiae nam mollitia voluptatem?
-                Quo, corporis. Perferendis nam, odit cum vero quisquam neque rem sit modi fugit, mollitia consectetur!
-                Aspernatur.</h2>
-        </div>
-        <div>
-            <h2>Username</h2>
-            <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat veritatis ullam atque, sunt rem eum,
-                quasi nulla recusandae nam distinctio vitae doloribus nostrum ut debitis, adipisci aperiam
-                exercitationem. Voluptates, sed.</h2>
-        </div>
-        <div>
-            <h2>Username</h2>
-            <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam fuga dicta eos assumenda veniam id
-                deserunt odit nemo voluptate, aliquid quaerat sunt. Illum omnis fugiat excepturi pariatur nobis
-                similique facere!</h2>
-        </div>
-        <div>
-            <h2>Username</h2>
-            <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita rerum quibusdam ab ullam similique
-                aspernatur? Suscipit tempora dolores explicabo vel, ratione corrupti obcaecati quidem doloremque,
-                laudantium ipsum velit quisquam reiciendis?</h2>
-        </div> -->
         </div>
     </form>
     <script>

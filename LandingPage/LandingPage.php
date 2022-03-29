@@ -12,6 +12,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="LandingPage.css">
+    <link rel="stylesheet" type="text/css" href="../globalStyle/navBarStyling.css">
    
     <title>Landing Page</title>
    
@@ -45,7 +46,7 @@ window.addEventListener('scroll',function(){
 });
     </script>
         <ul class="menu">
-            <li class="logo">CSP Home Page</li>
+            <li class="logo" id="logo">CSP Home Page</li>
             <li class="item"><a href="http://localhost/csc450Capstone/LandingPage/LandingPage.php">Home</a></li>
             <li class="item"><a href="http://localhost/csc450Capstone/profileView/profiles.php">Profile</a></li>
             <li class="item"><a href="http://localhost/csc450Capstone/MajorPage/CSCMajorPage.php">Majors</a></li>

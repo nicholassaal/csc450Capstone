@@ -149,6 +149,19 @@
         echo "</fieldset>";
     }//end of displayAboutStudent()
 
+    function getClickedUserName(){
+        global $connectToDB;
+        $clickedUserId = $_GET["uid"];
+
+        $sqlGetName = "SELECT student_fname FROM studentInfo WHERE $clickedUserId = student_id";
+
+        $queryGetName = mysqli_query($connectToDB, $sqlGetName);
+        $fetchNameField = mysqli_fetch_assoc($queryGetName);
+
+        $student_name = $fetchNameField['student_fname'];
+
+        echo "".$student_name."'s Profile";
+    }//end of getClickUserName()
 
 ?>
 
@@ -160,6 +173,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel = "stylesheet" type = "text/css" href = "profiles.css">
+    <link rel="stylesheet" type="text/css" href="../globalStyle/navBarStyling.css">
     <style>
         <?php include("profiles.css"); ?>
     </style>
@@ -192,8 +206,8 @@ window.addEventListener('scroll',function(){
 });
     </script>
         <ul class="menu">
-
-            <li class="logo"><a href="http://localhost/csc450Capstone/LandingPage/LandingPage.php">Home</a></li>
+            <li class="logo" id="logo"><?php getClickedUserName(); ?></li>
+            <li class="item"><a href="http://localhost/csc450Capstone/LandingPage/LandingPage.php">Home</a></li>
             <li class="item"><a href="http://localhost/csc450Capstone/profileView/profiles.php">Profile</a></li>
             <li class="item"><a href="http://localhost/csc450Capstone/MajorPage/CSCMajorPage.php">Majors</a></li>
             <li class="item button"><a href="http://localhost/csc450Capstone/LoginPage/logOut.php">Sign Out</a></li>
