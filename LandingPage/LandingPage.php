@@ -12,26 +12,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="LandingPage.css">
-    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css'rel='stylesheet'>
+   
     <title>Landing Page</title>
-    <script
-    src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-    integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8="
-    crossorigin="anonymous"></script>
-    <script>
-    $(function() {
-    $(".toggle").on("click", function() {
-        if ($(".item").hasClass("active")) {
-            $(".item").removeClass("active");
-        } else {
-            $(".item").addClass("active");
-        }
-    });
-});
-    </script>
+   
 </head>
 <body>
-    <div class = "container" >
+    
 
 
 <nav id="navbar">
@@ -64,7 +50,6 @@ window.addEventListener('scroll',function(){
 
             
             <li class="logo"><a href="http://localhost/csc450Capstone/LandingPage/LandingPage.php">Home</a></li>
-            <li class="item"><a href="http://localhost/csc450Capstone/LandingPage/LandingPage.php">Landing Page</a></li>
             <li class="item"><a href="http://localhost/csc450Capstone/profileView/profiles.php">Profile</a></li>
             <li class="item"><a href="http://localhost/csc450Capstone/MajorPage/CSCMajorPage.php">Majors</a></li>
 
@@ -76,8 +61,9 @@ window.addEventListener('scroll',function(){
             <li class="toggle"><span class="bars"></span></li>
         </ul>
     </nav>
-    </div>
+
   <div class="welcomeText">
+     
    <h1 id="firstboxh">Welcome To The CSP Review</h1>
   <p id="firstboxp"> CSP Review is your one stop shop for the connections and Information guaranteed to put you ahead of those who have come before you  </p>
   </div>

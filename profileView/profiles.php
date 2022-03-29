@@ -143,7 +143,7 @@ function displayAboutStudent()
             echo "<h3>Year of study: </h3>";
             echo "<p>" . $student_year . "</p>";
             echo "<h3>About me: </h3>";
-            echo "<p>" . $about_student . "</p>";
+            echo "<p>" . $about_student . "</p>";  
         }
     }
     echo "</fieldset>";
@@ -276,11 +276,48 @@ if (isset($_POST['submitButton'])) {
     <style>
         <?php include("profiles.css"); ?>
     </style>
+
     <title>User Profile</title>
 </head>
 
 <body>
-    <div class="stickyHead">
+        <!-- Start of Nav Script -->
+<nav id="navbar">
+    <script>
+        var lastScrollTop; // This Varibale will store the top position
+
+navbar = document.getElementById('navbar'); // Get The NavBar
+
+window.addEventListener('scroll',function(){
+ //on every scroll this funtion will be called
+  
+  var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+  //This line will get the location on scroll
+  
+  if(scrollTop > lastScrollTop){ //if it will be greater than the previous
+    navbar.style.top='-80px';
+    //set the value to the negetive of height of navbar 
+  }
+  
+  else{
+    navbar.style.top='0';
+  }
+  
+  lastScrollTop = scrollTop; //New Position Stored
+});
+    </script>
+        <ul class="menu">
+
+            <li class="logo"><a href="http://localhost/csc450Capstone/LandingPage/LandingPage.php">Home</a></li>
+            <li class="item"><a href="http://localhost/csc450Capstone/profileView/profiles.php">Profile</a></li>
+            <li class="item"><a href="http://localhost/csc450Capstone/MajorPage/CSCMajorPage.php">Majors</a></li>
+            <li class="item button"><a href="http://localhost/csc450Capstone/LoginPage/logOut.php">Sign Out</a></li>
+    
+            <li class="toggle"><span class="bars"></span></li>
+        </ul>
+    </nav>
+<!-- End of Nav Script -->
+    <!-- <div class="stickyHead">
         <h1 class="pageName">CSP Student Profile</h1>
         <div class="wrapButton">
             <ul>
@@ -290,14 +327,65 @@ if (isset($_POST['submitButton'])) {
                 <li id="loginBtn"><a href="http://localhost/csc450Capstone/LoginPage/logOut.php">Sign Out</a></li>
             </ul>
         </div>
-    </div>
+    </div> -->
+
+<!-- code for updating profile picture -->
+      <form id="editProfilePictureform" method="POST" action="" enctype="multipart/form-data">
+      <button id ="closeButton" type="button" onclick="toggleEditProfilePicture()">X</button>
+      <input type="file" id="uploadfile" name="uploadfile" value="Change"/>
+        
+      <div>
+          <button type="submit" name="upload">UPLOAD</button>
+        </div>
+  </form>
+
+    <!-- End of profile picture update code -->
+      <?php
+  
+  // If upload button is clicked ...
+  $msg = "";
+  if (isset($_POST['upload'])) {
+  
+    $filename = $_FILES["uploadfile"]["name"];
+    $tempname = $_FILES["uploadfile"]["tmp_name"];    
+    $folder = "upload/".$filename;
+    $folde = "upload/".$filename;
+    $studentId = $_SESSION["currentUserLoginId"];
+        // Get all the submitted data from the form
+        
+        global $connectToDB;
+        $sqlStudentInfo = "SELECT * FROM studentInfo";
+        $data = mysqli_query($connectToDB, $sqlStudentInfo);
+
+     
+
+        // Execute query
+        $sql = "UPDATE studentinfo SET user_image = '$filename' WHERE student_id = '$studentId'";
+       
+        // this lets us move the uploaded image into the folder: upload
+        if (move_uploaded_file($tempname, $folder))  {
+            $msg = "Image uploaded successfully";
+          
+        }else{
+            $msg = "Failed to upload image";
+      }
+     $result = mysqli_query($connectToDB,$sql);
+  }
+
+?>
+<!-- End of profile picture update code -->
+
 
     <!--FORM to update/edit the user's profile information (Passwords, and About me sections) -->
     <form class="editProfileform" id="editProfileform" method="POST">
+        <!-- button to close out of the form -->
+        <button id ="closeButton" type="button" onclick="toggleEditProfile()">X</button>
+
+
         <h1 id="formHeader">Edit Profile Information</h1>
         <h3 id="passwordHeader">Change Password</h3>
+       
         <div>
-            
 
             <label for="oldPassword">Enter old password</label> <!-- Creating a label for input type of "text" then giving a name and id to match the lable name-->
             <input type="password" name="oldPassword" id="oldPassword">
@@ -338,7 +426,7 @@ if (isset($_POST['submitButton'])) {
 
 
             <!--Turn off overlay form-->
-            <button type="button" onclick="turnOFFoverlayForm()">Cancel</button>
+            <!-- <button type="button" onclick="turnOFFoverlayForm()">Cancel</button> -->
 
             <button type="submit" name="submitButton" id="submitButton" class="submitButton">Submit</button>
         </div>
@@ -347,9 +435,19 @@ if (isset($_POST['submitButton'])) {
 
     <div class="studentInfo">
         <div class="studentDescript1">
-            <a href="graphic/cool_guy.png"><img src="graphic/cool_guy.png" id="examplePicture"></a>
+            <!-- Code for updating users profile picture -->
+    
+            
+            <!-- End of updating users profile picture -->
+            <a href="<?php echo $folder ?>"><img src="<?php echo $folder ?>" id="examplePicture"></a>
             <!-- Created button for editing account information-->
-            <button type="button" id="editProfileButton" onclick="turnONoverlayForm()">Edit Account</button>
+
+            <!-- OG button for opening the profile editor form -->
+            <!-- <button type="button" id="editProfileButton" onclick="turnONoverlayForm()">Edit Account</button> -->
+
+            <!-- new button that will use the toggle function to turn show or not show the profile editor -->
+            <button type="button" id="editProfileButton" onclick="toggleEditProfile()">Edit Account</button>
+            <button type="button" id="editProfileButton" onclick="toggleEditProfilePicture()">Update Picture</button>
         </div>
 
         <div class="studentDescript2">
@@ -371,23 +469,43 @@ if (isset($_POST['submitButton'])) {
 </html>
 
 <script>
+ // toggle function that will allow the user to exit the form by hitting the Edit Account and X button for better UX
+ function toggleEditProfile() {
+    var nav = document.getElementById('editProfileform');
+  if (nav.offsetWidth == 0 && nav.offsetHeight == 0 ) {
+    nav.style.display = 'block';
+  } else {
+    nav.style.display = 'none';
+  }
+}//end of toggleEditProfile button function
+
+function toggleEditProfilePicture() {
+    var nav = document.getElementById('editProfilePictureform');
+  if (nav.offsetWidth == 0 && nav.offsetHeight == 0 ) {
+    nav.style.display = 'block';
+  } else {
+    nav.style.display = 'none';
+  }
+}//end of toggleEditProfilePicture button function
+
+
     // $(document).ready(function() {
     //     $('form').submit(function(e){
     //         e.preventDefault();
     //     });
     // });
 
-    document.getElementById("editProfileform").style.display = "none";
+    
+    // document.getElementById("editProfileform").style.display = "";
+    // //function to turn off the overlay form 
+    // function turnOFFoverlayForm() {
+    //     document.getElementById("editProfileform").style.display = "none";
+    // }
 
-    //function to turn off the overlay form 
-    function turnOFFoverlayForm() {
-        document.getElementById("editProfileform").style.display = "none";
-    }
-
-    //Function to display the overlay form for editing/updating user profile 
-    function turnONoverlayForm() {
-        document.getElementById("editProfileform").style.display = "block";
-    } //end of overlayForm()
+    // //Function to display the overlay form for editing/updating user profile 
+    // function turnONoverlayForm() {
+    //     document.getElementById("editProfileform").style.display = "block";
+    // } //end of overlayForm()
 
     //Create the functions to show password for the users if they check the check box 
     function showPassword() {

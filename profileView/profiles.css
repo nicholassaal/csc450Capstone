@@ -1,11 +1,11 @@
 /************************************************************************
  *******************         Profile Page         **********************
 ************************************************************************/
-body {
+/* body {
     background-attachment: fixed;
     background-image: url("graphic/LandingPageBackgroundIMG.jpg");
-}
-.stickyHead {
+} */
+/* .stickyHead {
     position: fixed;
     background-color: rgba(34, 34, 34, 0.9);
     left: 0;
@@ -18,7 +18,26 @@ body {
     color: white;
     margin-left: 25px;
     font-family: Georgia, 'Times New Roman', Times, serif; 
-}
+} */
+
+body {
+    background-attachment: fixed;
+    font-family: sans-serif;
+    background-image: url("graphic/LandingPageBackgroundIMG.jpg");
+    padding-top: 25px;
+    padding-bottom: 100px;
+    color:rgba(34, 34, 34, 34); 
+  }
+  /* hide scrollbar but allow scrolling */
+body {
+    -ms-overflow-style: none; /* for Internet Explorer, Edge */
+    scrollbar-width: none; /* for Firefox */
+    overflow-y: scroll; 
+  }
+  
+  body::-webkit-scrollbar {
+    display: none; /* for Chrome, Safari, and Opera */
+  }
 .wrapButton a {
     color: white;
     text-decoration: none;
@@ -101,7 +120,7 @@ a:hover {
 #examplePicture {
     border: 2px groove rgb(50, 50, 51);
     border-radius: 90px;
-    margin-top: 20px;
+     margin-top: -15px; 
     margin-right: 15px;
     width: 150px;
     height: 180px;
@@ -140,16 +159,18 @@ CSS STYLING FOR THE OVERLAY EDIT PROFILE FORM
 /*Styling the edit Profile button under the Profile picture */
 #editProfileButton{
     display: block; /*Put the button under the image, NOTE: same container*/
-    margin-top: 5%;
+    margin-top: 2%;
     margin-left: 10%;
+    margin-bottom: 2%;
     border-radius: 10px;/*Curve the corners of the buttons*/   
     font-size:large;
-    padding:5px;
+    padding:4px;
     background-color:rgb(233, 225, 225);
 }
 
 /* Styling the overlay edit Profile form \*/
-.editProfileForm{
+.editProfileForm, #editProfilePictureForm{
+    display: none; /* using display none so that the form wont display when the page is loaded */
     float:left; /*Move form to the left*/
     padding: 20px;
     background-color:rgba(34, 34, 34, 0.9);
@@ -157,6 +178,8 @@ CSS STYLING FOR THE OVERLAY EDIT PROFILE FORM
     position: absolute; /*Keep form on the page for user to see if they scroll*/
     width:13%;
     height:115%;
+    
+block-size: fit-content;
     z-index: 0;
     border: 2px groove rgb(71, 163, 182);
 }
@@ -200,4 +223,179 @@ input[type="checkbox"]{
 
 .editProfileForm > div > textarea { /* Setting the additional information textarea to be the full size of the pop up for ascetics */
     width: 100%;
+}
+
+/*
+ css code for the nav bar below
+*/
+nav {
+    background: rgba(34, 34, 34, 0.9);
+    height: 50px;
+    
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    transition: .5s;
+  }
+  ul {
+    list-style-type: none;
+  }
+  a {
+    color: white;
+    text-decoration: none;
+  }
+  a:hover {
+    text-decoration: underline;
+  }
+  .logo a:hover {
+    text-decoration: none;
+  }
+  .menu li {
+    font-size: 16px;
+    padding: 15px 5px;
+    white-space: nowrap;
+  
+  }
+  .logo a,
+  .toggle a {
+    font-size: 20px;
+  }
+  .button.secondary {
+    border-bottom: 1px #444 solid;
+  }
+  
+  
+  
+  /* Navbar Toggle */
+  .toggle {
+    cursor:pointer;
+  }
+  .bars {
+    background: #999;
+    display: inline-block;
+    height: 2px;
+    position: relative;
+    transition: background .2s ease-out;
+    width: 18px;
+  }
+  .bars:before,
+  .bars:after {
+    background: #999;
+    content: '';
+    display: block;
+    height: 100%;
+    position: absolute;
+    transition: all .2s ease-out;
+    width: 100%;
+  }
+  .bars:before {
+    top: 5px;
+  }
+  .bars:after {
+    top: -5px;
+  }
+  /* Below is the view you will see if viewing from a phone*/
+  .menu {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 0px;
+    height: 25px;
+    padding-right: 10px;
+  }
+  .toggle {
+    order: 1;
+  }
+  .item.button {
+    order: 2;
+  }
+  .item {
+    width: 100%;
+    text-align: center;
+    order: 3;
+    display: none;
+  }
+  .item.active {
+    display: block;
+  }
+  /* Below is the view you will see if viewing from a tablet */
+  @media all and (min-width: 468px) {
+    .menu {
+        justify-content: center;
+    }
+  
+    .logo {
+        flex: 1;
+    }
+  
+    .item.button {
+        width: auto;
+        order: 1;
+        display: block;
+    }
+    .toggle {
+        order: 2;
+    }
+    .button.secondary {
+        border: 0;
+    }
+    .button a {
+        padding: 7.5px 15px;
+        background: teal;
+        border: 1px #006d6d solid;
+        border-radius:50em;
+    }
+    .button.secondary a {
+        background: transparent;    
+    }
+    .button a:hover {
+        text-decoration: none;
+        transition:all .25s;
+    }
+    .button:not(.secondary) a:hover {
+        background: #006d6d;
+        border-color: #005959;
+    }
+    .button.secondary a:hover {
+        color: #ddd;
+    } 
+  }
+  /* Below is the view you will see if viewing from a Desktop */
+  @media all and (min-width: 768px) {
+    .item {
+        display: block;
+        width: auto;
+    }
+    .toggle {
+        display: none;
+    }
+    .logo {
+        order: 0;
+    }
+    .item {
+        order: 1;
+    }
+    .button {
+        order: 2;
+    }
+    .menu li {
+        padding: 15px 10px;
+    }
+    .menu li.button {
+        padding-right: 0;
+    }
+  }
+  /* styling for the exit button on the edit profile form */
+#closeButton{
+   color: white;
+   background: none;
+   background-color: Transparent;
+   background-repeat:no-repeat;
+   border: none;
+   text-align: right;
+   font-size: 25px;
+   padding-left: 90%;
+   padding-bottom: 15px;
 }

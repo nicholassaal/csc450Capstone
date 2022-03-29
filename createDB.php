@@ -64,7 +64,8 @@ $sqlStudentInfo = "CREATE TABLE IF NOT EXISTS studentInfo(
     student_birthday DATE,
     student_phoneNumber VARCHAR(20),
     student_year VARCHAR(50),
-    about_student VARCHAR(450)
+    about_student VARCHAR(450),
+    user_image VARCHAR(1000)
     )";
 
 $sqlStudentCourse = "CREATE TABLE IF NOT EXISTS studentCourse(
