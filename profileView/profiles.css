@@ -373,6 +373,7 @@ nav {
     }
     .logo {
         order: 0;
+        color:white;
     }
     .item {
         order: 1;

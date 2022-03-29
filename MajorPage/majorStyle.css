@@ -169,6 +169,7 @@ a:hover {
 
   .logo {
       flex: 1;
+      color:white;
   }
 
   .item.button {

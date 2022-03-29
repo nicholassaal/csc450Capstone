@@ -81,14 +81,29 @@ function displayCourseReviewMessage()
     } //end of while loop 
 } //end of displayCourseReviewMessage()
 
+function correctTitle() {
+    global $connectToDB;
+    $courseCode = $_GET["id"];
 
+    $sqlStudentCourse = "SELECT * FROM course WHERE course_code =  $courseCode"; //Retrieve the course info using the course_code that was sent from what the user Clicked on in MajorPage
+
+    //Run and assign query 
+    $data = mysqli_query($connectToDB, $sqlStudentCourse);
+
+
+    while ($rows = mysqli_fetch_array($data)) {
+        $courseName = $rows['course_name']; //Retrieve course_name
+    }
+
+    echo $courseName;
+}
 ?>
 
 <!DOCTYPE html>
 <html>
 
 <head>
-    <title>CourseNameHere</title>
+    <title><?php correctTitle(); ?></title>
     <link rel="stylesheet" type="text/css" href="CoursePage.css">
 </head>
 
@@ -101,7 +116,7 @@ function displayCourseReviewMessage()
             <li style="float: right"><a href="http://localhost/csc450Capstone/LoginPage/logOut.php">Sign Out</a></li>
             <li style="float: right"><a href="http://localhost/csc450Capstone/MajorPage/CSCMajorPage.php">Majors</a>
             </li>
-            <li style="float: right"><a href="http://localhost/csc450Capstone/profileView/profiles.php">My Profile</a>
+            <li style="float: right"><a href="http://localhost/csc450Capstone/profileView/profiles.php">Profile</a>
             </li>
             <li style="float: right"><a href="http://localhost/csc450Capstone/LandingPage/LandingPage.php">Home</a></li>
         </ul>
