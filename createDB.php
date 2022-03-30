@@ -74,7 +74,13 @@ $sqlStudentCourse = "CREATE TABLE IF NOT EXISTS studentCourse(
    review_message VARCHAR(450),
    difficulty_review_rating INT,
    enjoyability_review_rating INT, 
-   overall_review_rating INT
+   overall_review_rating INT,
+   q1Answer VARCHAR(450),
+   q2Answer VARCHAR(450),
+   q3Answer VARCHAR(450),
+   comments VARCHAR(450),
+   replies VARCHAR(450),
+   date_written DATETIME NOT NUll
   )";
 
 $sqlStudentMajor = "CREATE TABLE IF NOT EXISTS studentMajor(
@@ -135,12 +141,14 @@ $insertUserLogin = "INSERT INTO userLoginInfo (user_name, user_password, is_admi
     VALUES  ('MillerJ26', 'passwordEx', '0', '1'),
             ('PaulS19', 'password', '0', '2'),
             ('GrantM65', 'exPassword', '0', '3'),
+            ('SmithM29', 'aPassword', '0', '3'),
             ('SampleAdmin14', 'adminPassword', '1', NULL)";
 
 //Insert into studentInfo table
 $insertStudentInfo = "INSERT INTO studentInfo (student_fName, student_lName, student_social, student_birthday, student_phoneNumber, student_year, about_student)
     VALUES  ('Jake', 'Miller', 'jakeMiller@csp.edu', '2001-01-01', '6516516511', 'Senior', 'Enjoys programming and working on side projects. Some hobbies are fishing and hunting.'),
             ('Steve', 'Paul', '', '2002-02-02' , '1223123123' , '' , 'Hobbies are playing guitar, running, and build computers.'),
+            ('Matthew', 'Smith', '', '2002-05-5' , '5555555555' , '' , 'Some of my hobbies are playing piano, swimming, and gaming.'),
             ('Mark', 'Grant', '', '2003-03-03' , '1111111111' , '' , 'Loves fishing.')";
 
 //Insert into student course composite/join table
@@ -148,6 +156,7 @@ $insertStudentCourse = "INSERT INTO studentCourse (student_id, course_code, revi
     VALUES  ('1', '1', 'Great course, highly recommended if you are interesting in web designed.', '2', '5','15'),
             ('2', '1', 'I see this course as an internship kind of. I was able to work with a team and learn new skills in HTML, CSS, PHP, and JavaScript.', '3', '5', '18'),
             ('3', '1', 'I thought the course was great. Loved working with the team I was assigned to.', '3', '5', '7'),
+            ('4', '1', 'Overall great course to gain experience of working with a team.', '3', '5', '9'),
             ('2', '2', 'Greate course to start learning about the software development process. Also, really enjoyed working with the team.', '3', '4', '12'),
             ('3', '3', 'Super interesting course. Loved learning how the code we write actually works.', '3', '4', '7'),
             ('3', '4', 'Challenging course, but at the same time enjoyable to learn.', '5', '5', '1')"; //added additional reviews for one person to test my idea in profiles.php
@@ -156,7 +165,8 @@ $insertStudentCourse = "INSERT INTO studentCourse (student_id, course_code, revi
 $insertStudentMajor = "INSERT INTO studentMajor (student_id, major_id, enrollment_status)
     VALUES  ('1', '1', '1'),
             ('2', '1', '1'),
-            ('3', '1', '1')";
+            ('3', '1', '1'),
+            ('4', '1', '1')";
 
 //Insert into course table
 $insertCourse = "INSERT INTO course (course_name, course_description, major_id)

@@ -167,7 +167,7 @@ display: block;
 }
 /* styling for the exit button on the edit profile form */
 #closeButton{
-color: white;
+color: rgb(189, 16, 16);
 background: none;
 background-color: Transparent;
 background-repeat:no-repeat;
