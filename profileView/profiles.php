@@ -113,6 +113,23 @@ function displayStudentInfo()
     } //end while()
 } //end of displayStudentInfo 
 
+//creating function to get users profile pictures
+function getProfilePicture(){
+    global $connectToDB;
+    $sqlStudentInfo = "SELECT * FROM studentInfo";
+
+    //Run and assign query 
+    $data = mysqli_query($connectToDB, $sqlStudentInfo);
+     //While loop to retrieve data from studentInfo table. 
+     while ($rows = mysqli_fetch_array($data)) {
+        $studentId = $rows['student_id'];
+        if ($studentId == $_SESSION["currentUserLoginId"]) {
+            $picture = $rows['user_image'];
+            echo  "<img  src='upload/" . $picture . "' alt='img'>";
+        }
+    }
+
+}
 function displayAboutStudent()
 {
     global $connectToDB;
@@ -144,6 +161,7 @@ function displayAboutStudent()
             echo "<p>" . $student_year . "</p>";
             echo "<h3>About me: </h3>";
             echo "<p>" . $about_student . "</p>";  
+
         }
     }
     echo "</fieldset>";
@@ -351,13 +369,14 @@ window.addEventListener('scroll',function(){
     $filename = $_FILES["uploadfile"]["name"];
     $tempname = $_FILES["uploadfile"]["tmp_name"];    
     $folder = "upload/".$filename;
-    $folde = "upload/".$filename;
     $studentId = $_SESSION["currentUserLoginId"];
+    
         // Get all the submitted data from the form
         
         global $connectToDB;
         $sqlStudentInfo = "SELECT * FROM studentInfo";
         $data = mysqli_query($connectToDB, $sqlStudentInfo);
+        $users = mysqli_fetch_all($data, MYSQLI_ASSOC);
 
      
 
@@ -437,11 +456,13 @@ window.addEventListener('scroll',function(){
 
     <div class="studentInfo">
         <div class="studentDescript1">
-            <!-- Code for updating users profile picture -->
-    
+            <!-- using created function to pull correct picture from the database -->
+            <div >
+            <?php  getProfilePicture(); ?>
+            </div>
+       
             
-            <!-- End of updating users profile picture -->
-            <a href="<?php echo $folder ?>"><img src="<?php echo $folder ?>" id="examplePicture"></a>
+            
             <!-- Created button for editing account information-->
 
             <!-- OG button for opening the profile editor form -->

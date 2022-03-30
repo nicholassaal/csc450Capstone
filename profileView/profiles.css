@@ -19,7 +19,6 @@
     margin-left: 25px;
     font-family: Georgia, 'Times New Roman', Times, serif; 
 } */
-
 body {
     background-attachment: fixed;
     font-family: sans-serif;
@@ -117,7 +116,8 @@ a:hover {
     background-color: rgba(34, 34, 34, 0.9);
     color: white;
 }
-#examplePicture {
+
+img{
     border: 2px groove rgb(50, 50, 51);
     border-radius: 90px;
      margin-top: -15px; 

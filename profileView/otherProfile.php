@@ -149,6 +149,24 @@
         echo "</fieldset>";
     }//end of displayAboutStudent()
 
+//creating function to get users profile pictures
+function getProfilePicture(){
+    global $connectToDB;
+    $sqlStudentInfo = "SELECT * FROM studentInfo";
+    $clickedUserId = $_GET["uid"];
+    //Run and assign query 
+    $data = mysqli_query($connectToDB, $sqlStudentInfo);
+     //While loop to retrieve data from studentInfo table. 
+     while ($rows = mysqli_fetch_array($data)) {
+        $studentId = $rows['student_id'];
+        if ($studentId == $clickedUserId) { 
+            $picture = $rows['user_image'];
+            echo  "<img  src='upload/" . $picture . "' alt='img'>";
+        }
+    }
+
+}//end of getProfilePicture()
+
     function getClickedUserName(){
         global $connectToDB;
         $clickedUserId = $_GET["uid"];
@@ -229,7 +247,13 @@ window.addEventListener('scroll',function(){
 
     <div class = "studentInfo">
         <div class = "studentDescript1">
-            <a href = "graphic/cool_guy.png"><img src = "graphic/cool_guy.png" id = "examplePicture"></a>
+            <?php
+            
+             
+            getProfilePicture();
+             
+            ?>
+            <!-- <a href = "graphic/cool_guy.png"><img src = "graphic/cool_guy.png" id = "examplePicture"></a> -->
         </div>
 
         <div class = "studentDescript2">
