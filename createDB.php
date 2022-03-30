@@ -80,7 +80,7 @@ $sqlStudentCourse = "CREATE TABLE IF NOT EXISTS studentCourse(
    q3Answer VARCHAR(450),
    comments VARCHAR(450),
    replies VARCHAR(450),
-   date_written DATETIME NOT NUll
+   date_written DATETIME
   )";
 
 $sqlStudentMajor = "CREATE TABLE IF NOT EXISTS studentMajor(
@@ -141,15 +141,15 @@ $insertUserLogin = "INSERT INTO userLoginInfo (user_name, user_password, is_admi
     VALUES  ('MillerJ26', 'passwordEx', '0', '1'),
             ('PaulS19', 'password', '0', '2'),
             ('GrantM65', 'exPassword', '0', '3'),
-            ('SmithM29', 'aPassword', '0', '3'),
+            ('SmithM29', 'aPassword', '0', '4'),
             ('SampleAdmin14', 'adminPassword', '1', NULL)";
 
 //Insert into studentInfo table
 $insertStudentInfo = "INSERT INTO studentInfo (student_fName, student_lName, student_social, student_birthday, student_phoneNumber, student_year, about_student)
     VALUES  ('Jake', 'Miller', 'jakeMiller@csp.edu', '2001-01-01', '6516516511', 'Senior', 'Enjoys programming and working on side projects. Some hobbies are fishing and hunting.'),
             ('Steve', 'Paul', '', '2002-02-02' , '1223123123' , '' , 'Hobbies are playing guitar, running, and build computers.'),
-            ('Matthew', 'Smith', '', '2002-05-5' , '5555555555' , '' , 'Some of my hobbies are playing piano, swimming, and gaming.'),
-            ('Mark', 'Grant', '', '2003-03-03' , '1111111111' , '' , 'Loves fishing.')";
+            ('Mark', 'Grant', '', '2003-03-03' , '1111111111' , '' , 'Loves fishing.'),
+            ('Matthew', 'Smith', '', '2002-05-5' , '5555555555' , '' , 'Some of my hobbies are playing piano, swimming, and gaming.')";
 
 //Insert into student course composite/join table
 $insertStudentCourse = "INSERT INTO studentCourse (student_id, course_code, review_message, difficulty_review_rating, enjoyability_review_rating, overall_review_rating)

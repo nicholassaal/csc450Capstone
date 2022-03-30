@@ -13,14 +13,14 @@ $connectToDB = mysqli_connect($SERVER_NAME, $DBF_USER, $DBF_PASSWORD, $DBF_NAME)
 if ($connectToDB->connect_error) { //-> is used to point to items contained in an object.
     die("Connection failed: " . $conn->connect_error); //die( ) will kill the current program after displaying the message in the String parameter.
 }
-
+$courseCode = $_GET["id"]; //Retrieve the course_code that was sent over from the Major Page
 
 
 
 function displayCourseTitle()
 {
     global $connectToDB;
-    $courseCode = $_GET["id"]; //Retrieve the course_code that was sent over from the Major Page
+    global $courseCode;
 
     $sqlStudentCourse = "SELECT * FROM course WHERE course_code =  $courseCode"; //Retrieve the course info using the course_code that was sent from what the user Clicked on in MajorPage
 
@@ -39,12 +39,71 @@ function displayCourseTitle()
     echo "<h2>" . $courseDes . "</h1>";
 } //end of displayCourseTitle()
 
+function featuredCourseReviews() {
+    global $connectToDB;
+    global $courseCode;
+
+    $sqlFeaturedReviews = "SELECT * FROM studentcourse WHERE course_code = $courseCode";
+
+    $sqlFeaturedQuery = mysqli_query($connectToDB, $sqlFeaturedReviews);
+
+    while ($rowsOverallReview = mysqli_fetch_array($sqlFeaturedQuery)) {
+        $topReviewsNumbers = $rowsOverallReview['overall_review_rating'];
+        $topReviews[] = $topReviewsNumbers;
+    } //end of while()
+
+    sort($topReviews); //sorting the array created for 'overall_review_rating' from least to greatest [1,2,3,4...]
+
+    if (count($topReviews) >= 3) {
+        echo "<h3>Featured Reviews</h3>";
+        echo "<div class=lower-flex-container>";
+        for($i = count($topReviews)-1; $i >= count($topReviews)-3; $i--) {
+            $storedFeaturedReviews[] = $topReviews[$i];   
+        }
+        for($t = 0; $t < count($storedFeaturedReviews); $t++) {
+            $sqlSelectingFeatured = "SELECT * FROM studentcourse WHERE overall_review_rating = $storedFeaturedReviews[$t] AND course_code = $courseCode";
+            $selectingFeaturedQuery = mysqli_query($connectToDB, $sqlSelectingFeatured);
+            $studentCourseTableRow = mysqli_fetch_array($selectingFeaturedQuery);
+
+            $topReviews = $studentCourseTableRow['review_message'];
+            $topStudentId = $studentCourseTableRow['student_id'];
+
+            $sqlSelectingFeatured = "SELECT CONCAT(student_fname,' ',student_lname) AS 'fullName' FROM studentInfo WHERE student_id = $topStudentId";
+            $topStudentQuery = mysqli_query($connectToDB, $sqlSelectingFeatured);
+            $studentTableRow = mysqli_fetch_array($topStudentQuery);
+
+            $topStudentName = $studentTableRow['fullName'];
+                
+            if($topStudentQuery && $selectingFeaturedQuery) {
+                echo "<div>";
+                    echo "<h1>".$topStudentName."</h1>";
+                    echo "<h2>".$topReviews."</h2>";
+                echo "</div>";
+            } else {
+                print_r($connectToDB);
+                print_r($selectingFeaturedQuery);
+            }
+        } //end of 2nd for()
+        echo "</div>";
+
+    } else {
+        echo "<script> document.getElementById(featuredReviews).style.display = none; </script>";
+    }
+    
+
+    
+    
+
+
+    //print_r($topReviews);
+} //end of featuredCourseReviews()
+
 function displayCourseReviewMessage()
 {
     global $connectToDB;
-    $courseCode = $_GET["id"]; //Retrieve the course_code that was sent over from the Major Page
+    global $courseCode;
 
-    $j = 0;
+    
     //Retrieve the review message in studentCourse table
     $sqlStudentCourse = "SELECT * FROM studentcourse WHERE course_code = $courseCode";
 
@@ -52,11 +111,41 @@ function displayCourseReviewMessage()
     //Run and assign query 
     $data = mysqli_query($connectToDB, $sqlStudentCourse);
 
+    $arrayIndex = 0;
+    $ReviewRating = 1;
+
     while ($rows = mysqli_fetch_array($data)) {
+        
         $courseReviewMessage = $rows['review_message']; //Retrieve the review_message
         $studentID = $rows['student_id']; //Retrieve the student_id in studentCourse Table
 
         $studentIdArray[] = $studentID;
+
+        /*************** WORKING ON ***************/
+
+        $sqlReviewRating = "SELECT overall_review_rating FROM studentcourse WHERE student_id = $studentID AND course_code = $courseCode";
+
+        $sqlReviewQuery = mysqli_query($connectToDB, $sqlReviewRating);
+        $retrieveReview = mysqli_fetch_assoc($sqlReviewQuery);
+
+        $reviewRatings = $retrieveReview['overall_review_rating'];
+
+        echo $reviewRatings;
+        echo "<form method=POST>";
+            echo "<button type = submit name = reviewBtn$ReviewRating id = reviewBtn$ReviewRating> Like the Review </button>";
+        echo "</form>";
+
+        if(isset($_POST['reviewBtn'.$ReviewRating])){
+            $sqlUpdateReviewRating = "UPDATE studentcourse SET overall_review_rating = $reviewRatings+1 WHERE student_id = $studentID AND course_code = $courseCode";
+            $sqlUpdateReviewQuery = mysqli_query($connectToDB, $sqlUpdateReviewRating);
+            if ($sqlUpdateReviewQuery) {
+
+            } else {
+                print_r($sqlUpdateReviewQuery);
+            }
+        } //if(isset($_POST[]))
+
+        /*************** WORKING ON ***************/
 
         //Retrieve the student id and full name using CONCAT()
         $sqlStudentInfo = "SELECT CONCAT(student_fname,' ',student_lname) AS 'fullName' FROM studentInfo
@@ -73,11 +162,13 @@ function displayCourseReviewMessage()
         echo "<div> <a name = $studentID>";
         echo "<h1>" . $studentName . "</h1>";
         echo "<button type = button name = submit class = btn id = btn>  
-                        <a href = http://localhost/csc450Capstone/profileView/otherProfile.php?uid=$studentIdArray[$j]>View Profile</a> 
+                        <a href = http://localhost/csc450Capstone/profileView/otherProfile.php?uid=$studentIdArray[$arrayIndex]>View Profile</a> 
                       </button>";
         echo "<h2>" . $courseReviewMessage . "</h1>";
         echo "</a> </div>";
-        $j++;
+        $arrayIndex++;
+        $ReviewRating++;
+    
     } //end of while loop 
 } //end of displayCourseReviewMessage()
 
@@ -97,6 +188,12 @@ function correctTitle() {
 
     echo $courseName;
 }
+
+// if(isset($_POST['reviewBtn'])){
+//     echo "<br><br><br><br><br><br><br><br><br><br><br>";
+//     echo "CONGRATS YOU PRESSED A BUTTON, WELL DONE!";
+// }
+
 ?>
 
 <!DOCTYPE html>
@@ -182,29 +279,10 @@ window.addEventListener('scroll',function(){
         <button type="submit" name="submitButton" id="submitButton" class="submitButton">Submit</button>
     </form>
 
-
-    <h3>Featured Reviews</h3>
-    <div class="lower-flex-container">
-
-        <div>
-            <h2>Username</h2>
-            <h2>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Natus sapiente obcaecati repudiandae rem
-                omnis, optio, a architecto, debitis saepe magni voluptate esse. Voluptas perferendis id voluptatibus aut
-                reprehenderit dicta eaque.</h2>
-        </div>
-        <div>
-            <h2>Username</h2>
-            <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore aut minima tenetur totam libero, dolor
-                laudantium esse quae at, explicabo corporis magni dicta suscipit blanditiis laborum doloremque tempora
-                aliquid facilis!</h2>
-        </div>
-        <div>
-            <h2>Username</h2>
-            <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident unde alias cumque aliquam, suscipit,
-                molestias quidem ullam omnis officia dolor esse impedit inventore, aut numquam excepturi assumenda
-                tempore. Sapiente, repudiandae!</h2>
-        </div>
+    <div id = "featuredReviews">
+            <?php featuredCourseReviews(); ?>
     </div>
+    
 
     <form method="POST">
         <h3>All Reviews</h3>
