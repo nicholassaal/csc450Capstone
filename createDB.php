@@ -65,10 +65,21 @@ $sqlStudentInfo = "CREATE TABLE IF NOT EXISTS studentInfo(
     student_phoneNumber VARCHAR(20),
     student_year VARCHAR(50),
     about_student VARCHAR(450),
+    student_on_campus BOOLEAN,
     user_image VARCHAR(1000)
     )";
 
-$sqlStudentCourse = "CREATE TABLE IF NOT EXISTS studentCourse(
+$ticketRequestTable = "CREATE TABLE IF NOT EXISTS ticketRequest(
+    ticket_id INT AUTO_INCREMENT PRIMARY KEY,
+    ticket_fName_change VARCHAR(20) NOT NULL,
+    ticket_lName_change VARCHAR(20) NOT NULL,
+    ticket_major_change VARCHAR(50) NOT NULL,
+    ticket_enrollment_change BOOLEAN,
+    ticket_OnCampus_change BOOLEAN, 
+    student_id INT
+    )";
+
+$sqlStudentCourse = "CREATE TABLE IF NOT EXISTS studentCourse( 
    student_id INT NOT NULL,
    course_code INT NOT NULL,
    review_message VARCHAR(450),
@@ -78,10 +89,17 @@ $sqlStudentCourse = "CREATE TABLE IF NOT EXISTS studentCourse(
    q1Answer VARCHAR(450),
    q2Answer VARCHAR(450),
    q3Answer VARCHAR(450),
-   comments VARCHAR(450),
-   replies VARCHAR(450),
-   date_written DATETIME
+   review_date_written DATE,
+   reply_id INT 
   )";
+
+$sqlReview_message_replies = "CREATE TABLE IF NOT EXISTS reviewMessageReplies(
+    reply_id INT AUTO_INCREMENT PRIMARY KEY,
+    student_id INT NOT NULL,
+    course_code INT NOT NULL,
+    reply_message VARCHAR(450),
+    date_written DATE
+)";
 
 $sqlStudentMajor = "CREATE TABLE IF NOT EXISTS studentMajor(
    student_id INT NOT NULL,
@@ -116,8 +134,10 @@ $sqlProfessor = "CREATE TABLE IF NOT EXISTS professor(
 
 //'$tableCreate1 =' Assigns queries for each connection type for each table creation... This cleans it up with using AND statements
 $tableCreate = mysqli_query($connectTable, $sqlStudentInfo) 
+    AND mysqli_query($connectTable, $ticketRequestTable) 
     AND mysqli_query($connectTable, $sqlUserLoginInfo) 
     AND mysqli_query($connectTable, $sqlStudentCourse)
+    AND mysqli_query($connectTable, $sqlReview_message_replies) 
     AND mysqli_query($connectTable, $sqlStudentMajor) 
     AND mysqli_query($connectTable, $sqlMajor) 
     AND mysqli_query($connectTable, $sqlCourse)
@@ -145,21 +165,28 @@ $insertUserLogin = "INSERT INTO userLoginInfo (user_name, user_password, is_admi
             ('SampleAdmin14', 'adminPassword', '1', NULL)";
 
 //Insert into studentInfo table
-$insertStudentInfo = "INSERT INTO studentInfo (student_fName, student_lName, student_social, student_birthday, student_phoneNumber, student_year, about_student)
-    VALUES  ('Jake', 'Miller', 'jakeMiller@csp.edu', '2001-01-01', '6516516511', 'Senior', 'Enjoys programming and working on side projects. Some hobbies are fishing and hunting.'),
-            ('Steve', 'Paul', '', '2002-02-02' , '1223123123' , '' , 'Hobbies are playing guitar, running, and build computers.'),
-            ('Mark', 'Grant', '', '2003-03-03' , '1111111111' , '' , 'Loves fishing.'),
-            ('Matthew', 'Smith', '', '2002-05-5' , '5555555555' , '' , 'Some of my hobbies are playing piano, swimming, and gaming.')";
+$insertStudentInfo = "INSERT INTO studentInfo (student_fName, student_lName, student_social, student_birthday, student_phoneNumber, student_year, about_student, student_on_campus)
+    VALUES  ('Jake', 'Miller', 'jakeMiller@csp.edu', '2001-01-01', '6516516511', 'Senior', 'Enjoys programming and working on side projects. Some hobbies are fishing and hunting.', '1'),
+            ('Steve', 'Paul', '', '2002-02-02' , '1223123123' , '' , 'Hobbies are playing guitar, running, and build computers.', '1' ),
+            ('Mark', 'Grant', '', '2003-03-03' , '1111111111' , '' , 'Loves fishing.', '1'),
+            ('Matthew', 'Smith', '', '2002-05-5' , '5555555555' , '' , 'Some of my hobbies are playing piano, swimming, and gaming.', '0')";
+
+$insertTicketRequest = "INSERT INTO ticketRequest (ticket_fName_change, ticket_lName_change, ticket_major_change, ticket_enrollment_change, ticket_OnCampus_change, student_id)
+    VALUE ('Jackie', 'Brown', 'Communications', '1', '0', '1')";
 
 //Insert into student course composite/join table
-$insertStudentCourse = "INSERT INTO studentCourse (student_id, course_code, review_message, difficulty_review_rating, enjoyability_review_rating, overall_review_rating)
-    VALUES  ('1', '1', 'Great course, highly recommended if you are interesting in web designed.', '2', '5','15'),
-            ('2', '1', 'I see this course as an internship kind of. I was able to work with a team and learn new skills in HTML, CSS, PHP, and JavaScript.', '3', '5', '18'),
-            ('3', '1', 'I thought the course was great. Loved working with the team I was assigned to.', '3', '5', '7'),
-            ('4', '1', 'Overall great course to gain experience of working with a team.', '3', '5', '9'),
-            ('2', '2', 'Greate course to start learning about the software development process. Also, really enjoyed working with the team.', '3', '4', '12'),
-            ('3', '3', 'Super interesting course. Loved learning how the code we write actually works.', '3', '4', '7'),
-            ('3', '4', 'Challenging course, but at the same time enjoyable to learn.', '5', '5', '1')"; //added additional reviews for one person to test my idea in profiles.php
+$insertStudentCourse = "INSERT INTO studentCourse (student_id, course_code, review_message, difficulty_review_rating, enjoyability_review_rating, overall_review_rating, reply_id)
+    VALUES  ('1', '1', 'Great course, highly recommended if you are interesting in web designed.', '2', '5','15', '1'),
+            ('2', '1', 'I see this course as an internship kind of. I was able to work with a team and learn new skills in HTML, CSS, PHP, and JavaScript.', '3', '5', '18' , NULL),
+            ('3', '1', 'I thought the course was great. Loved working with the team I was assigned to.', '3', '5', '7' , NULL),
+            ('4', '1', 'Overall great course to gain experience of working with a team.', '3', '5', '9', NULL),
+            ('2', '2', 'Greate course to start learning about the software development process. Also, really enjoyed working with the team.', '3', '4', '12', NULL),
+            ('3', '3', 'Super interesting course. Loved learning how the code we write actually works.', '3', '4', '7', NULL),
+            ('3', '4', 'Challenging course, but at the same time enjoyable to learn.', '5', '5', '1', NULL)"; //added additional reviews for one person to test my idea in profiles.php
+
+//Insert into reviewMessageReplies
+$insertReviewMessageReplies = "INSERT INTO reviewMessageReplies (student_id, course_code, reply_message, date_written)
+    VALUES ('2', '1', 'Great review for capstone', '2002-02-02')";
 
 //Insert into student major composite/join table
 $insertStudentMajor = "INSERT INTO studentMajor (student_id, major_id, enrollment_status)
@@ -193,7 +220,9 @@ $insertProfessor = "INSERT INTO professor (prof_fName, prof_lName)
 //'$insert =' Assigns queries for each connection type for each insert (into) tables... This cleans it up with using AND statements
 $insert = mysqli_query($connectTable, $insertUserLogin)
     AND mysqli_query($connectTable, $insertStudentInfo) 
+    AND mysqli_query($connectTable, $insertTicketRequest) 
     AND mysqli_query($connectTable, $insertStudentCourse)
+    AND mysqli_query($connectTable, $insertReviewMessageReplies) 
     AND mysqli_query($connectTable, $insertStudentMajor) 
     AND mysqli_query($connectTable, $insertCourse) 
     AND mysqli_query($connectTable, $insertMajor) 
@@ -212,10 +241,13 @@ if ($insert) {
 *************************************/
 $sqlAlterUserLoginInfo = "ALTER TABLE `userlogininfo` ADD CONSTRAINT `fk_student_id` FOREIGN KEY (`student_id`) REFERENCES `studentInfo`(`student_id`) ON DELETE RESTRICT ON UPDATE RESTRICT";
 
+$sqlAlterTicketRequest = "ALTER TABLE `ticketRequest` ADD CONSTRAINT `fk_students_id` FOREIGN KEY (`student_id`) REFERENCES `studentInfo`(`student_id`) ON DELETE RESTRICT ON UPDATE RESTRICT";
+
 $sqlAlterCourseTable = "ALTER TABLE `course` ADD CONSTRAINT `fk_Major_id` FOREIGN KEY (`major_id`) REFERENCES `major`(`major_id`) ON DELETE RESTRICT ON UPDATE RESTRICT";
 
 $sqlAlterStudentCourse1 = "ALTER TABLE `studentCourse` ADD CONSTRAINT `uk_student_id` FOREIGN KEY (`student_id`) REFERENCES `studentinfo`(`student_id`) ON DELETE RESTRICT ON UPDATE RESTRICT";
 $sqlAlterStudentCourse2 = "ALTER TABLE `studentCourse` ADD CONSTRAINT `uk_course_code` FOREIGN KEY (`course_code`) REFERENCES `course`(`course_code`) ON DELETE RESTRICT ON UPDATE RESTRICT";
+$sqlAlterStudentCourse3 = "ALTER TABLE `studentCourse` ADD CONSTRAINT `uk_reply_id` FOREIGN KEY (`reply_id`) REFERENCES `reviewMessageReplies`(`reply_id`) ON DELETE RESTRICT ON UPDATE RESTRICT";
 
 $sqlAlterStudentMajor1 = "ALTER TABLE `studentMajor` ADD CONSTRAINT `uk_studentMajor_id` FOREIGN KEY (`student_id`) REFERENCES `studentinfo`(`student_id`) ON DELETE RESTRICT ON UPDATE RESTRICT";
 $sqlAlterStudentMajor2 = "ALTER TABLE `studentMajor` ADD CONSTRAINT `uk_major_id` FOREIGN KEY (`major_id`) REFERENCES `major`(`major_id`) ON DELETE RESTRICT ON UPDATE RESTRICT";
@@ -225,9 +257,11 @@ $sqlAlterProfCourse2 = "ALTER TABLE `professorCourse` ADD CONSTRAINT `uk_profCou
 
 //Running the queries, assigning runs to a variable to check if successful or not. 
 $alterTablesPKFK = mysqli_query($connectTable, $sqlAlterUserLoginInfo) 
+    AND mysqli_query($connectTable, $sqlAlterTicketRequest)
     AND mysqli_query($connectTable, $sqlAlterCourseTable)
     AND mysqli_query($connectTable, $sqlAlterStudentCourse1)
     AND mysqli_query($connectTable, $sqlAlterStudentCourse2)
+    AND mysqli_query($connectTable, $sqlAlterStudentCourse3)
     AND mysqli_query($connectTable, $sqlAlterStudentMajor1)
     AND mysqli_query($connectTable, $sqlAlterStudentMajor2)
     AND mysqli_query($connectTable, $sqlAlterProfCourse1)

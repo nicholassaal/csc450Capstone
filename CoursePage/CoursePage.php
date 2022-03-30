@@ -1,4 +1,6 @@
 <?php
+
+include "coursePage_inc.php";
 session_start();
 
 $SERVER_NAME    = "localhost";   //Server name 
