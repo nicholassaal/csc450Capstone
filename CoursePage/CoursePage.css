@@ -69,10 +69,14 @@ h1 {
   box-shadow: 5px 5px 5px rgb(34, 34, 34);
 }
 
-h3 {
+.subHeader {
   margin-top: 5%;
   margin-left: 5%;
   font-size: 40px;
+}
+
+.reviewDateWritten{
+  float:right;
 }
 
 .review-area {
@@ -152,4 +156,41 @@ h3 {
 /*VIEW OTHER PROFILE BUTTON*/
 .btn a{
   color:black;
+}
+
+/* 
+--------------------------------------------------
+--------- Display Replies <details> CSS  ---------
+--------------------------------------------------
+*/ 
+
+details{
+}
+
+summary, #replyBtn{
+  padding:5px;
+  border: solid 1px black;
+  width:11%;
+  background-color: white;
+  color: black;
+  border-radius: 5px;
+}
+
+.viewReplySection{
+  padding:5px;
+  margin-left:1%;
+  border:solid 5px black;
+}
+
+.replyDate{
+  margin-left:80%;
+}
+
+.replyNames{
+  text-decoration: underline;
+}
+
+#replyBtn{
+  font-size: 16px;;
+  width:15%;
 }

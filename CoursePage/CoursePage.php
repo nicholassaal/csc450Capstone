@@ -57,7 +57,7 @@ function featuredCourseReviews() {
     sort($topReviews); //sorting the array created for 'overall_review_rating' from least to greatest [1,2,3,4...]
 
     if (count($topReviews) >= 3) {
-        echo "<h3>Featured Reviews</h3>";
+        echo "<h3 class=subHeader>Featured Reviews</h3>";
         echo "<div class=lower-flex-container>";
         for($i = count($topReviews)-1; $i >= count($topReviews)-3; $i--) {
             $storedFeaturedReviews[] = $topReviews[$i];   
@@ -91,88 +91,9 @@ function featuredCourseReviews() {
     } else {
         echo "<script> document.getElementById(featuredReviews).style.display = none; </script>";
     }
-    
-
-    
-    
-
-
     //print_r($topReviews);
 } //end of featuredCourseReviews()
 
-function displayCourseReviewMessage()
-{
-    global $connectToDB;
-    global $courseCode;
-
-    
-    //Retrieve the review message in studentCourse table
-    $sqlStudentCourse = "SELECT * FROM studentcourse WHERE course_code = $courseCode";
-
-
-    //Run and assign query 
-    $data = mysqli_query($connectToDB, $sqlStudentCourse);
-
-    $arrayIndex = 0;
-    $ReviewRating = 1;
-
-    while ($rows = mysqli_fetch_array($data)) {
-        
-        $courseReviewMessage = $rows['review_message']; //Retrieve the review_message
-        $studentID = $rows['student_id']; //Retrieve the student_id in studentCourse Table
-
-        $studentIdArray[] = $studentID;
-
-        /*************** WORKING ON ***************/
-
-        $sqlReviewRating = "SELECT overall_review_rating FROM studentcourse WHERE student_id = $studentID AND course_code = $courseCode";
-
-        $sqlReviewQuery = mysqli_query($connectToDB, $sqlReviewRating);
-        $retrieveReview = mysqli_fetch_assoc($sqlReviewQuery);
-
-        $reviewRatings = $retrieveReview['overall_review_rating'];
-
-        echo $reviewRatings;
-        echo "<form method=POST>";
-            echo "<button type = submit name = reviewBtn$ReviewRating id = reviewBtn$ReviewRating> Like the Review </button>";
-        echo "</form>";
-
-        if(isset($_POST['reviewBtn'.$ReviewRating])){
-            $sqlUpdateReviewRating = "UPDATE studentcourse SET overall_review_rating = $reviewRatings+1 WHERE student_id = $studentID AND course_code = $courseCode";
-            $sqlUpdateReviewQuery = mysqli_query($connectToDB, $sqlUpdateReviewRating);
-            if ($sqlUpdateReviewQuery) {
-
-            } else {
-                print_r($sqlUpdateReviewQuery);
-            }
-        } //if(isset($_POST[]))
-
-        /*************** WORKING ON ***************/
-
-        //Retrieve the student id and full name using CONCAT()
-        $sqlStudentInfo = "SELECT CONCAT(student_fname,' ',student_lname) AS 'fullName' FROM studentInfo
-            WHERE student_id = $studentID";
-
-        //Run query 
-        $sqlStudentTable = mysqli_query($connectToDB, $sqlStudentInfo);
-        $retrieveStudentName = mysqli_fetch_assoc($sqlStudentTable);
-
-        //Assign the fullname to a variable once retrieved above 
-        $studentName = $retrieveStudentName['fullName'];
-
-        //Display reviews 
-        echo "<div> <a name = $studentID>";
-        echo "<h1>" . $studentName . "</h1>";
-        echo "<button type = button name = submit class = btn id = btn>  
-                        <a href = http://localhost/csc450Capstone/profileView/otherProfile.php?uid=$studentIdArray[$arrayIndex]>View Profile</a> 
-                      </button>";
-        echo "<h2>" . $courseReviewMessage . "</h1>";
-        echo "</a> </div>";
-        $arrayIndex++;
-        $ReviewRating++;
-    
-    } //end of while loop 
-} //end of displayCourseReviewMessage()
 
 function correctTitle() {
     global $connectToDB;
@@ -228,25 +149,25 @@ function navGetProfilePicture(){
     <script>
         var lastScrollTop; // This Varibale will store the top position
 
-navbar = document.getElementById('navbar'); // Get The NavBar
+        navbar = document.getElementById('navbar'); // Get The NavBar
 
-window.addEventListener('scroll',function(){
- //on every scroll this funtion will be called
-  
-  var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-  //This line will get the location on scroll
-  
-  if(scrollTop > lastScrollTop){ //if it will be greater than the previous
-    navbar.style.top='-80px';
-    //set the value to the negetive of height of navbar 
-  }
-  
-  else{
-    navbar.style.top='0';
-  }
-  
-  lastScrollTop = scrollTop; //New Position Stored
-});
+        window.addEventListener('scroll',function(){
+        //on every scroll this funtion will be called
+        
+        var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        //This line will get the location on scroll
+        
+        if(scrollTop > lastScrollTop){ //if it will be greater than the previous
+            navbar.style.top='-80px';
+            //set the value to the negetive of height of navbar 
+        }
+        
+        else{
+            navbar.style.top='0';
+        }
+        
+        lastScrollTop = scrollTop; //New Position Stored
+        });
     </script>
         <ul class="menu">
             <li class="logo" id="logo">CSP Course Page</li>
@@ -308,14 +229,21 @@ window.addEventListener('scroll',function(){
     
 
     <form method="POST">
-        <h3>All Reviews</h3>
+        <h3 class="subHeader">All Reviews</h3>
         <div class="review-flex-container">
             <!--Called php function to the review message for that specific course -->
             <?php displayCourseReviewMessage(); ?>
         </div>
+
     </form>
     <script>
+
         document.getElementById("leaveReviewForm").style.display = "none";
+
+        var maxReviewsNum = <?php echo $numIterator ?>;
+        for(let i = 1; i < maxReviewsNum; i++){
+            document.getElementById("replyForms"+i).style.display = "block";
+        }
 
         var prevScrollpos = window.pageYOffset;
         window.onscroll = function() {
@@ -336,6 +264,22 @@ window.addEventListener('scroll',function(){
         function turnOFFoverlayForm() {
             document.getElementById("leaveReviewForm").style.display = "none";
         }
+
+        //..................WORK IN PROGESS......................//
+        // function toggleReplyForm(){
+        //     var maxReviewsNum = <?php echo $numIterator ?>;
+        //     for(let i = 1; i < maxReviewsNum; i++){
+        //         var replybtn = document.getElementById('replyBtn'+i);
+        //             if(){
+        //                 if (replyForm.offsetWidth == 0 && replyForm.offsetHeight == 0 ) {
+        //                     replyForm.style.display = 'block';
+        //                 } else {
+        //                     replyForm.style.display = 'none';
+        //                 }
+        //             }
+        //     }//end of for loop 
+        // }//end of toggleEditProfilePicture button function
+
     </script>
 </body>
 
