@@ -1,6 +1,35 @@
 <?php
     session_start();
 
+    $SERVER_NAME    = "localhost";   //Server name 
+    $DBF_USER       = "root";        //UserName for the localhost database
+    $DBF_PASSWORD   = "";       //Password for the localhost database/ When using XAMPPS, make this value emtpy. Use: $DBF_PASSWORD   = "";
+    $DBF_NAME       = "CSPCourseReview";    //DB name for the localhost database
+    //$connect = mysqli_connect($SERVER_NAME, $DBF_USER, $DBF_PASSWORD);
+    $connectToDB = mysqli_connect($SERVER_NAME, $DBF_USER, $DBF_PASSWORD, $DBF_NAME);
+    echo "<br><br><br><br><br>";
+    
+    
+ //creating function to get users profile pictures for the Nav bar
+function navGetProfilePicture(){
+    global $connectToDB;
+    $sqlStudentInfo = "SELECT * FROM studentInfo";
+
+    //Run and assign query 
+    $data = mysqli_query($connectToDB, $sqlStudentInfo);
+     //While loop to retrieve data from studentInfo table. 
+     while ($rows = mysqli_fetch_array($data)) {
+        $studentId = $rows['student_id'];
+        if ($studentId == $_SESSION["currentUserLoginId"]) {
+            $testid = $studentId;
+            $picture = $rows['user_image'];
+            echo  "<img  src='/csc450Capstone/profileView/upload/" . $picture . "' alt='img' id ='navImage'>";
+            //echo"$testid";
+        }
+
+    }
+
+}//end of navGetProfilePicture()
 ?>
 
 
@@ -18,8 +47,6 @@
    
 </head>
 <body>
-    
-
 
 <nav id="navbar">
     <script>
@@ -48,6 +75,11 @@ window.addEventListener('scroll',function(){
         <ul class="menu">
             <li class="logo" id="logo">CSP Home Page</li>
             <li class="item"><a href="http://localhost/csc450Capstone/LandingPage/LandingPage.php">Home</a></li>
+            <li class="item">   
+            <div >
+            <?php  navGetProfilePicture() ?>
+            </div> 
+            </li>
             <li class="item"><a href="http://localhost/csc450Capstone/profileView/profiles.php">Profile</a></li>
             <li class="item"><a href="http://localhost/csc450Capstone/MajorPage/CSCMajorPage.php">Majors</a></li>
             <li class="item button"><a href="http://localhost/csc450Capstone/LoginPage/logOut.php">Sign Out</a></li>

@@ -195,7 +195,23 @@ function correctTitle() {
 //     echo "<br><br><br><br><br><br><br><br><br><br><br>";
 //     echo "CONGRATS YOU PRESSED A BUTTON, WELL DONE!";
 // }
+//creating function to get users profile pictures for the Nav bar
+function navGetProfilePicture(){
+    global $connectToDB;
+    $sqlStudentInfo = "SELECT * FROM studentInfo";
 
+    //Run and assign query 
+    $data = mysqli_query($connectToDB, $sqlStudentInfo);
+     //While loop to retrieve data from studentInfo table. 
+     while ($rows = mysqli_fetch_array($data)) {
+        $studentId = $rows['student_id'];
+        if ($studentId == $_SESSION["currentUserLoginId"]) {
+            $picture = $rows['user_image'];
+            echo  "<img  src='/csc450Capstone/profileView/upload/" . $picture . "' alt='img' id ='navImage'>";
+        }
+    }
+
+}//end of navGetProfilePicture()
 ?>
 
 <!DOCTYPE html>
@@ -235,6 +251,11 @@ window.addEventListener('scroll',function(){
         <ul class="menu">
             <li class="logo" id="logo">CSP Course Page</li>
             <li class="item"><a href="http://localhost/csc450Capstone/LandingPage/LandingPage.php">Home</a></li>
+            <li class="item">   
+            <div id="navPicture" >
+            <?php  navGetProfilePicture(); ?>
+            </div> 
+            </li>
             <li class="item"><a href="http://localhost/csc450Capstone/profileView/profiles.php">Profile</a></li>
             <li class="item"><a href="http://localhost/csc450Capstone/MajorPage/CSCMajorPage.php">Majors</a></li>
             <li class="item button"><a href="http://localhost/csc450Capstone/LoginPage/logOut.php">Sign Out</a></li>

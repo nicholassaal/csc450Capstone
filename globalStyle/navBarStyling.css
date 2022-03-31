@@ -1,6 +1,7 @@
 /*
 css code for the nav bar below
 */
+
 ul{
 padding-left:15px;
 }
@@ -43,7 +44,6 @@ border-bottom: 1px #444 solid;
 }
 
 
-
 /* Navbar Toggle */
 .toggle {
 cursor:pointer;
@@ -72,6 +72,7 @@ top: 5px;
 .bars:after {
 top: -5px;
 }
+
 /* Below is the view you will see if viewing from a phone*/
 .menu {
 display: flex;
@@ -176,4 +177,14 @@ text-align: right;
 font-size: 25px;
 padding-left: 90%;
 padding-bottom: 15px;
+}
+
+/* styling for the profile picture on the nav bar */
+#navImage{
+    width: 30px;
+    height: 35px;
+    margin-top: -5px;
+    margin-right: -15px;
+    border: 1px solid rgb(50, 50, 51);
+    border-radius: 90px;
 }

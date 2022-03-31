@@ -125,11 +125,29 @@ function getProfilePicture(){
         $studentId = $rows['student_id'];
         if ($studentId == $_SESSION["currentUserLoginId"]) {
             $picture = $rows['user_image'];
-            echo  "<img  src='upload/" . $picture . "' alt='img'>";
+            echo  "<img  src='upload/" . $picture . "' alt='img' id ='profilePictureImage'>";
         }
     }
 
 }
+//creating function to get users profile pictures for the Nav bar
+function navGetProfilePicture(){
+    global $connectToDB;
+    $sqlStudentInfo = "SELECT * FROM studentInfo";
+
+    //Run and assign query 
+    $data = mysqli_query($connectToDB, $sqlStudentInfo);
+     //While loop to retrieve data from studentInfo table. 
+     while ($rows = mysqli_fetch_array($data)) {
+        $studentId = $rows['student_id'];
+        if ($studentId == $_SESSION["currentUserLoginId"]) {
+            $picture = $rows['user_image'];
+            echo  "<img  src='upload/" . $picture . "' alt='img' id ='navImage'>";
+        }
+    }
+
+}//end of navGetProfilePicture()
+
 function displayAboutStudent()
 {
     global $connectToDB;
@@ -292,6 +310,7 @@ if (isset($_POST['submitButton'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="profiles.css">
     <link rel="stylesheet" type="text/css" href="../globalStyle/navBarStyling.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
         <?php include("profiles.css"); ?>
         
@@ -329,6 +348,11 @@ window.addEventListener('scroll',function(){
         <ul class="menu">
             <li class="logo" id="logo">CSP Student Profile</li>
             <li class="item"><a href="http://localhost/csc450Capstone/LandingPage/LandingPage.php">Home</a></li>
+            <li class="item">   
+            <div  >
+            <?php  navGetProfilePicture(); ?>
+            </div> 
+            </li>
             <li class="item"><a href="http://localhost/csc450Capstone/profileView/profiles.php">Profile</a></li>
             <li class="item"><a href="http://localhost/csc450Capstone/MajorPage/CSCMajorPage.php">Majors</a></li>
             <li class="item button"><a href="http://localhost/csc450Capstone/LoginPage/logOut.php">Sign Out</a></li>
@@ -407,7 +431,7 @@ window.addEventListener('scroll',function(){
         <h3 id="passwordHeader">Change Password</h3>
        
         <div>
-
+       
             <label for="oldPassword">Enter old password</label> <!-- Creating a label for input type of "text" then giving a name and id to match the lable name-->
             <input type="password" name="oldPassword" id="oldPassword">
 
@@ -456,21 +480,16 @@ window.addEventListener('scroll',function(){
 
     <div class="studentInfo">
         <div class="studentDescript1">
+            <!-- Edit profile picture button with camera icon -->
+             <button type="button" id="editProfilePictureButton" onclick="toggleEditProfilePicture()"><i class="fa fa-camera" ></i></button>
             <!-- using created function to pull correct picture from the database -->
             <div >
             <?php  getProfilePicture(); ?>
             </div>
        
-            
-            
-            <!-- Created button for editing account information-->
-
-            <!-- OG button for opening the profile editor form -->
-            <!-- <button type="button" id="editProfileButton" onclick="turnONoverlayForm()">Edit Account</button> -->
-
-            <!-- new button that will use the toggle function to turn show or not show the profile editor -->
+           <!-- button for editing accound information -->
             <button type="button" id="editProfileButton" onclick="toggleEditProfile()">Edit Account</button>
-            <button type="button" id="editProfileButton" onclick="toggleEditProfilePicture()">Update Picture</button>
+           
         </div>
 
         <div class="studentDescript2">
