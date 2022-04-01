@@ -74,6 +74,7 @@ window.addEventListener('scroll',function(){
     </script>
         <ul class="menu">
             <li class="logo" id="logo">CSP Home Page</li>
+            <li class="item"><a href="http://localhost/csc450Capstone/ticketRequest/ticketRequest.php">Ticket Request</a></li>
             <li class="item"><a href="http://localhost/csc450Capstone/LandingPage/LandingPage.php">Home</a></li>
             <li class="item">   
             <div >

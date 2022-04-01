@@ -23,8 +23,9 @@
             $studentID = $rows['student_id']; //Retrieve the student_id in studentCourse Table
             $studentIdArray[] = $studentID;
     
-            /*************** WORKING ON ***************/
-    
+            /*****************************************
+             ***             WORKING ON            ***
+             *****************************************/
             $sqlReviewRating = "SELECT overall_review_rating FROM studentcourse WHERE student_id = $studentID AND course_code = $courseCode";
     
             $sqlReviewQuery = mysqli_query($connectToDB, $sqlReviewRating);
@@ -209,7 +210,7 @@
             $queryUpdateReplyID = mysqli_query($connectToDB, $sqlUpdateReplyID);
     }//end of replyForm();
 
-    function retrieveReviewReplies($connectToDB,){
+    function retrieveReviewReplies($connectToDB){
         $sqlRetrieveReplies = "SELECT * FROM reviewReplies";
         $queryRetrieveReplies = mysqli_query($connectToDB, $sqlRetrieveReplies);
 

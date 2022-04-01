@@ -1,0 +1,78 @@
+body {
+    font-family: sans-serif;
+    padding-top: 85px;
+    margin-right: 30%;
+    margin-left: 30%;
+    background-image: url("graphic/LandingPageBackgroundIMG.jpg");
+}
+.outside-container {
+    border: 2px dashed rgb(231, 13, 86);
+    
+}
+.overallTicketField {
+    border: 2px groove rgb(71, 163, 182);
+    background-color: rgba(34, 34, 34, 0.9);
+}
+.ticketLegend {
+    font-size: 21px;
+    background-color: rgba(34, 34, 34, 0.9);
+    font-family: Georgia, 'Times New Roman', Times, serif; 
+    color:white;
+    border-bottom: 2px groove rgb(50, 50, 51);
+    border-top: 2px groove rgb(50, 50, 51);
+    border-left: 2px groove rgb(71, 163, 182);
+    border-right: 2px groove rgb(71, 163, 182);
+    border-radius: 7px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+.div_container {
+    margin-left: 5%;
+    
+}
+
+.firstNameChange, .lastNameChange, .majorChange {
+    color: white;
+    display: block;
+    margin-top: 10px;
+}
+
+.inner_div_container {
+    float:right;
+    margin-top:-145px;
+    margin-right: 35px;
+}
+
+.tableEnrolled {
+    background-color: rgba(209, 248, 253, 0.9); 
+    border-radius: 10px;
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+.tableOnCampus {
+    background-color: rgba(250, 234, 209, 0.9); 
+    border-radius: 10px;
+}
+
+.tableOnCampus th, td, .tableEnrolled th, td {
+    text-align: center;
+    color: rgb(0, 0, 0);
+    border: 1px groove rgb(0, 0, 0);
+    border-radius: 10px;
+    width: 27%;
+}
+
+.radio_Yes {
+    background-color: rgba(96, 243, 187, 0.9);
+}
+
+.radio_No {
+    background-color: rgba(240, 143, 143, 0.9);
+}
+
+.ticketBtn {
+    float: right;
+    margin-top: 30px;
+}
+
