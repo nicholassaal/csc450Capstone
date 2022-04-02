@@ -77,21 +77,22 @@
             //START OF FORM TO REPLY TO REVIEWS
             echo "<form method=POST id=replyForms$numIterator class=replyForms$numIterator>";
                 echo"<textarea style='resize:none;' name='replyMessage' id='replyMessage' cols='50%' rows='10' placeholder='Reply to the review'></textarea>";
-                echo"<button type = 'submit' id='replySubmitBtn$numIterator' name='replySubmitBtn$numIterator'>Reply</button>";
+                echo"<input type='hidden' name='studentReviewID' value= '$studentID'>";
+                echo"<button type = 'submit' id='replySubmitBtn' name='replySubmitBtn'>Reply</button>";
                 echo"<button type = 'button' id='cancelReplyBtn' name='cancelReplyBtn' onclick='toggleReplyForm()'>Cancel</button>";
             echo "</form>";
-        
 
-            if(isset($_POST['replySubmitBtn'.$numIterator])){
-                replyForm($connectToDB, $studentID);
-            }
-            
             viewReplies($studentID);
 
             echo"</div>";//end of review message div
             $arrayIndex++;
             $numIterator++;
         } //end of while loop
+
+        if(isset($_POST['replySubmitBtn'])){
+            replyForm();
+        }
+        
     } //end of displayCourseReviewMessage()
     
     function displayReplies($replyID){
@@ -123,12 +124,12 @@
 
     function viewReplies($studentID){
         global $connectToDB;
-        $numOfReplies = onlyViewifExists($studentID); 
+        //$numOfReplies = onlyViewifExists($studentID); 
         
         $sqlRetrieveReviewID = "SELECT studentCourseReview_id FROM studentCourse WHERE student_id = $studentID";
         $queryReviewID = mysqli_query($connectToDB, $sqlRetrieveReviewID);
         echo "<details>";//Details for viewing the replies
-            echo"<summary>View Replies (".$numOfReplies.")</summary>";
+            echo"<summary>View Replies</summary>";
                 while($reviewRows = mysqli_fetch_array($queryReviewID)){
                     $studentCourseReview_id = $reviewRows['studentCourseReview_id']; //The student's id that wrote the reply
 
@@ -178,47 +179,46 @@
         
         for($i = 1; $i <= count($arrayOfNumOfReplies)-1; $i++){
             if($arrayOfNumOfReplies[$i] == $arrayOfNumOfReplies[$i+1]){
-                $numOfReplies+=2;
-            }
-            else{
-                $numOfReplies++;
+                return $numOfReplies+=2;
             }
         }
         
         return $numOfReplies;
     }//end of onlyViewifExists()
 
-
-    function replyForm($connectToDB, $studentID){
+    /***************************************************/
+    /*REPLY FORM FUNCTION TO SEND REPLIES TO DATABASE */
+    /***************************************************/
+    function replyForm(){
         global $courseCode;
-
+        global $connectToDB;
         //Student's reply to a review message inputs 
+        $studentReviewID = $_POST['studentReviewID'];
         $replyMessage = $_POST['replyMessage'];
         $currentLoggedStudent = $_SESSION["currentUserLoginId"];
 
-            $sqlInsertReply = "INSERT INTO reviewMessageReplies (student_id, course_code, reply_message, date_written)
+        //INSERT THE REPLY MESSAGE TO THE replies table 
+        if($replyMessage != ''){
+            $sqlInsertReply = "INSERT INTO replies (student_id, course_code, reply_message, date_written)
             VALUES ('$currentLoggedStudent', '$courseCode', '$replyMessage', '2002-02-02')";
-
             $queryInsertReply = mysqli_query($connectToDB, $sqlInsertReply);
+            
+            //RETRIEVE THE REVIEW MESSAGE ID OF WHERE THE REPLY MESSAGE WAS WRITTEN TO
+            $sqlRetrieveReviewID = "SELECT studentCourseReview_id FROM studentCourse WHERE student_id = $studentReviewID AND course_code = $courseCode";
+            $queryReviewID = mysqli_query($connectToDB, $sqlRetrieveReviewID);
+            $retrievedReviewID = mysqli_fetch_assoc($queryReviewID);
+            $reviewID = $retrievedReviewID['studentCourseReview_id'];
 
-            $sqlUpdateReplyID = "SELECT reply_id FROM reviewMessageReplies WHERE student_id = $currentLoggedStudent AND course_code = $courseCode";
-            $queryUpdateReplyID = mysqli_query($connectToDB, $sqlUpdateReplyID);
-            $retrievedReplyID = mysqli_fetch_assoc($queryUpdateReplyID);
+            //RETRIEVE THRE REPLY ID OF STUDENT THAT WROTE REPLY, THE LATEST REPLY_ID THAT WAS INSERTED INTO THE DATABASE
+            $sqlRetrieveReplyID = "SELECT reply_id FROM replies ORDER BY reply_id DESC LIMIT 1";
+            $queryReplyID = mysqli_query($connectToDB, $sqlRetrieveReplyID);
+            $retrievedReplyID = mysqli_fetch_assoc($queryReplyID);
             $replyID = $retrievedReplyID['reply_id'];
 
-            $sqlUpdateReplyID = "UPDATE studentCourse SET reply_id = $replyID WHERE student_id = $studentID AND course_code = $courseCode"; 
-            $queryUpdateReplyID = mysqli_query($connectToDB, $sqlUpdateReplyID);
+            $sqlInsertIntoReviewReplies = "INSERT INTO reviewReplies (studentCourseReview_id, reply_id)
+            VALUE('$reviewID', '$replyID')";
+            $queryInsertReviewReplies = mysqli_query($connectToDB, $sqlInsertIntoReviewReplies);
+        }
     }//end of replyForm();
-
-    function retrieveReviewReplies($connectToDB){
-        $sqlRetrieveReplies = "SELECT * FROM reviewReplies";
-        $queryRetrieveReplies = mysqli_query($connectToDB, $sqlRetrieveReplies);
-
-        while ($rows = mysqli_fetch_array($queryRetrieveReplies)) {
-            $studentCourseReview_id = $rows['studentCourseReview_id'];//The student's id that wrote the reply
-            $replyID = $rows['reply_id'];
-            
-        }//end of while loop 
-    }//end of retrieveReviewReplies
     
 ?>
