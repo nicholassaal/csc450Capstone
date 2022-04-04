@@ -77,9 +77,9 @@ window.addEventListener('scroll',function(){
             <li class="item"><a href="http://localhost/csc450Capstone/ticketRequest/ticketRequest.php">Ticket Request</a></li>
             <li class="item"><a href="http://localhost/csc450Capstone/LandingPage/LandingPage.php">Home</a></li>
             <li class="item">   
-            <div >
+          
             <?php  navGetProfilePicture() ?>
-            </div> 
+         
             </li>
             <li class="item"><a href="http://localhost/csc450Capstone/profileView/profiles.php">Profile</a></li>
             <li class="item"><a href="http://localhost/csc450Capstone/MajorPage/CSCMajorPage.php">Majors</a></li>

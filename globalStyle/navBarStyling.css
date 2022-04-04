@@ -1,6 +1,7 @@
 /*
 css code for the nav bar below
 */
+/* styling for the profile picture on the nav bar */
 
 ul{
 padding-left:15px;
@@ -179,12 +180,11 @@ padding-left: 90%;
 padding-bottom: 15px;
 }
 
-/* styling for the profile picture on the nav bar */
-#navImage{
+#navImage img{
     width: 30px;
     height: 35px;
     margin-top: -5px;
     margin-right: -15px;
-    border: 1px solid rgb(50, 50, 51);
+   
     border-radius: 90px;
 }

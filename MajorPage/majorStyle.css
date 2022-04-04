@@ -58,11 +58,13 @@ a.fill-div {
   text-decoration: none;
   color: white;
  }
+ 
+/* 
 
 img {
   border-radius: 10px 10px 0px 0px;
   max-width: 100%;
-  max-height: 100%;
-  display: block;
-}
+  max-height: 100%; 
+ 
+} */
 

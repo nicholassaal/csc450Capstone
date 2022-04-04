@@ -1,0 +1,71 @@
+
+body {
+    background-attachment: fixed;
+    font-family: sans-serif;
+    background-image: url("Images/LandingPageBackgroundIMG.jpg");
+    padding-top: 25px;
+    padding-bottom: 100px;
+    color:rgba(34, 34, 34, 34); 
+  }
+  /* hide scrollbar but allow scrolling */
+  body {
+    -ms-overflow-style: none; /* for Internet Explorer, Edge */
+    scrollbar-width: none; /* for Firefox */
+    overflow-y: scroll; 
+  }
+  
+  body::-webkit-scrollbar {
+    display: none; /* for Chrome, Safari, and Opera */
+  }
+  h1 {
+    font-size: 30px;
+  }
+  h2 {
+    font-size: 20px;
+  }
+   
+  ul{
+    padding-left:15px;
+  }
+  
+  .flex-container {
+    justify-content: center;
+    height: 50%;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 10% 5% 5% 5%;
+  }
+  
+  .flex-container > div {
+    border-radius: 10px;
+    margin: 10px;
+    max-width: 20%;
+    background-color: rgb(34, 34, 34, 0.9);
+    box-shadow: 5px 5px 5px rgb(34, 34, 34);
+  }
+  
+  .flex-container > div > h1,
+  h2 {
+    padding-left: 2%;
+    padding-right: 2%;
+    text-align: center;
+  }
+  a.fill-div {
+    text-align: center;
+    display: block;
+    height: 100%;
+    width: 100%;
+    text-decoration: none;
+    color: white;
+   }
+   
+  
+  
+  #courseImage {
+    border-radius: 10px 10px 0px 0px;
+    max-width: 100%;
+    max-height: 100%; 
+   
+  }
+  
+  
