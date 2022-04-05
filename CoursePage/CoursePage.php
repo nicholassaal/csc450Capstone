@@ -1,7 +1,6 @@
 <?php
-
-include "coursePage_inc.php";
 session_start();
+include "coursePage_inc.php";
 
 $SERVER_NAME    = "localhost";   //Server name 
 $DBF_USER       = "root";        //UserName for the localhost database
@@ -16,7 +15,6 @@ if ($connectToDB->connect_error) { //-> is used to point to items contained in a
     die("Connection failed: " . $conn->connect_error); //die( ) will kill the current program after displaying the message in the String parameter.
 }
 $courseCode = $_GET["id"]; //Retrieve the course_code that was sent over from the Major Page
-
 
 
 function displayCourseTitle()

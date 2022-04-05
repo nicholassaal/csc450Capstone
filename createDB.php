@@ -95,7 +95,8 @@ $sqlStudentCourse = "CREATE TABLE IF NOT EXISTS studentCourse(
 
 $sqlReviewReplies = "CREATE TABLE IF NOT EXISTS reviewReplies(
     studentCourseReview_id INT NOT NULL,
-    reply_id INT NOT NULL
+    reply_id INT NOT NULL,
+    replyToReply VARCHAR(450)
 )";
 
 $sqlReview_message_replies = "CREATE TABLE IF NOT EXISTS replies(

@@ -1,4 +1,6 @@
 <?php
+    date_default_timezone_set('America/Chicago');
+
     $numIterator = 1;  
     function displayCourseReviewMessage()
     {
@@ -17,36 +19,29 @@
         //$numIterator = 1;
     
         while ($rows = mysqli_fetch_array($data)) {
-            
+            $reviewID = $rows['studentCourseReview_id']; 
             $courseReviewMessage = $rows['review_message']; //Retrieve the review_message
             $dateOfWrittenReview = $rows['review_date_written'];
             $studentID = $rows['student_id']; //Retrieve the student_id in studentCourse Table
             $studentIdArray[] = $studentID;
     
             /*****************************************
-             ***             WORKING ON            ***
+             ***         LIKING REVIEWS            ***
              *****************************************/
             $sqlReviewRating = "SELECT overall_review_rating FROM studentcourse WHERE student_id = $studentID AND course_code = $courseCode";
     
             $sqlReviewQuery = mysqli_query($connectToDB, $sqlReviewRating);
             $retrieveReview = mysqli_fetch_assoc($sqlReviewQuery);
     
-            $reviewRatings = $retrieveReview['overall_review_rating'];
+            $overallReviewRatings = $retrieveReview['overall_review_rating'];
     
-            echo $reviewRatings;
-            echo "<form method=POST>";
-                echo "<button type = submit name = reviewBtn$numIterator id = reviewBtn$numIterator> Like the Review </button>";
+            echo $overallReviewRatings;
+            echo "<form method=POST action= formActions.php?id=$courseCode>";
+                echo"<input type='hidden' name='reviewID' value= '$reviewID'>";
+                echo"<input type='hidden' name='studentReviewID' value= '$studentID'>";
+                echo"<input type='hidden' name='overallReviewRatings' value= '$overallReviewRatings'>";
+                echo "<button type = submit name = likeReviewBtn id = likeReviewBtn> Like the Review </button>";
             echo "</form>";
-    
-            if(isset($_POST['reviewBtn'.$numIterator])){
-                $sqlUpdateReviewRating = "UPDATE studentcourse SET overall_review_rating = $reviewRatings+1 WHERE student_id = $studentID AND course_code = $courseCode";
-                $sqlUpdateReviewQuery = mysqli_query($connectToDB, $sqlUpdateReviewRating);
-                if ($sqlUpdateReviewQuery) {
-    
-                } else {
-                    print_r($sqlUpdateReviewQuery);
-                }
-            } //if(isset($_POST[]))
     
             /*************** WORKING ON ***************/
     
@@ -75,8 +70,10 @@
             echo "<button type = button name = replyBtn id = replyBtn$numIterator onclick=toggleReplyForm()>Reply</button>";
             
             //START OF FORM TO REPLY TO REVIEWS
-            echo "<form method=POST id=replyForms$numIterator class=replyForms$numIterator>";
+            echo "<form method=POST action= formActions.php?id=$courseCode id=replyForms$numIterator class=replyForms$numIterator>";
                 echo"<textarea style='resize:none;' name='replyMessage' id='replyMessage' cols='50%' rows='10' placeholder='Reply to the review'></textarea>";
+                echo"<input type='hidden' name='dateWritten' value= ".date('Y-m-d').">";
+                echo"<input type='hidden' name='reviewID' value= '$reviewID'>";
                 echo"<input type='hidden' name='studentReviewID' value= '$studentID'>";
                 echo"<button type = 'submit' id='replySubmitBtn' name='replySubmitBtn'>Reply</button>";
                 echo"<button type = 'button' id='cancelReplyBtn' name='cancelReplyBtn' onclick='toggleReplyForm()'>Cancel</button>";
@@ -89,21 +86,18 @@
             $numIterator++;
         } //end of while loop
 
-        if(isset($_POST['replySubmitBtn'])){
-            replyForm();
-        }
-        
     } //end of displayCourseReviewMessage()
     
     function displayReplies($replyID){
         global $connectToDB;
         global $courseCode;
+
         //Retrieve all the replies for a certain review message using the replyID 
-        $sqlRetrieveReplies = "SELECT * FROM replies WHERE reply_id = $replyID";
+        $sqlRetrieveReplies = "SELECT * FROM replies WHERE reply_id = $replyID AND course_code = $courseCode";
         $queryRetrieveReplies = mysqli_query($connectToDB, $sqlRetrieveReplies);
                 //Retrieve all the rows that associate with the replyID
                 while ($rows = mysqli_fetch_array($queryRetrieveReplies)) {
-                    
+                    $replyID = $rows['reply_id'];
                     $studentID = $rows['student_id'];//The student's id that wrote the reply
                     $replyMessage = $rows['reply_message'];
                     $replyDateWritten = $rows['date_written'];
@@ -118,6 +112,14 @@
                         echo"<h2 class=replyNames>".$studentName."</h2>";
                         echo"<h3>".$replyMessage."</h3>";
                         echo"<p class=replyDate>Date Written: " . $replyDateWritten . "</p>";
+                            //START OF FORM TO REPLY TO REPLIES
+                            // echo "<form method=POST action= formActions.php?id=$courseCode id=replyToReplyForms class=replytoReplyForms>";
+                            //     echo"<textarea style='resize:none;' name='replyToReplyMessage' id='replyToReplyMessage' cols='50%' rows='10' placeholder='Reply to Reply'></textarea>";
+                            //     echo"<input type='hidden' name='studentReviewID' value= '$studentReviewID'>";
+                            //     echo"<input type='hidden' name='reviewID' value= '$reviewID'>";
+                            //     echo"<input type='hidden' name='replyID' value= '$replyID'>";
+                            //     echo"<button type = 'submit' id='replyBtn2' name='replyBtn2'>Reply</button>";
+                            // echo "</form>";
                     echo"</div>";
                 }//end of while loop 
     }//end of displayReplies()
@@ -185,40 +187,5 @@
         
         return $numOfReplies;
     }//end of onlyViewifExists()
-
-    /***************************************************/
-    /*REPLY FORM FUNCTION TO SEND REPLIES TO DATABASE */
-    /***************************************************/
-    function replyForm(){
-        global $courseCode;
-        global $connectToDB;
-        //Student's reply to a review message inputs 
-        $studentReviewID = $_POST['studentReviewID'];
-        $replyMessage = $_POST['replyMessage'];
-        $currentLoggedStudent = $_SESSION["currentUserLoginId"];
-
-        //INSERT THE REPLY MESSAGE TO THE replies table 
-        if($replyMessage != ''){
-            $sqlInsertReply = "INSERT INTO replies (student_id, course_code, reply_message, date_written)
-            VALUES ('$currentLoggedStudent', '$courseCode', '$replyMessage', '2002-02-02')";
-            $queryInsertReply = mysqli_query($connectToDB, $sqlInsertReply);
-            
-            //RETRIEVE THE REVIEW MESSAGE ID OF WHERE THE REPLY MESSAGE WAS WRITTEN TO
-            $sqlRetrieveReviewID = "SELECT studentCourseReview_id FROM studentCourse WHERE student_id = $studentReviewID AND course_code = $courseCode";
-            $queryReviewID = mysqli_query($connectToDB, $sqlRetrieveReviewID);
-            $retrievedReviewID = mysqli_fetch_assoc($queryReviewID);
-            $reviewID = $retrievedReviewID['studentCourseReview_id'];
-
-            //RETRIEVE THRE REPLY ID OF STUDENT THAT WROTE REPLY, THE LATEST REPLY_ID THAT WAS INSERTED INTO THE DATABASE
-            $sqlRetrieveReplyID = "SELECT reply_id FROM replies ORDER BY reply_id DESC LIMIT 1";
-            $queryReplyID = mysqli_query($connectToDB, $sqlRetrieveReplyID);
-            $retrievedReplyID = mysqli_fetch_assoc($queryReplyID);
-            $replyID = $retrievedReplyID['reply_id'];
-
-            $sqlInsertIntoReviewReplies = "INSERT INTO reviewReplies (studentCourseReview_id, reply_id)
-            VALUE('$reviewID', '$replyID')";
-            $queryInsertReviewReplies = mysqli_query($connectToDB, $sqlInsertIntoReviewReplies);
-        }
-    }//end of replyForm();
     
 ?>
