@@ -168,6 +168,7 @@ details{
 }
 
 summary, #replyBtn{
+  /*list-style: none;*//* This will hide the 'details' black arrow */
   padding:5px;
   border: solid 1px black;
   width:10%;

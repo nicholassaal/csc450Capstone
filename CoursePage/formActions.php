@@ -65,7 +65,7 @@
                 header("Location: http://localhost/csc450Capstone/CoursePage/CoursePage.php?id=$courseCode");
             }
             else{
-                print_r($sql);
+                print_r('Failed to save reply!');
             }
         }
     }//end of replyForm();
@@ -98,7 +98,7 @@
                 WHERE reply_id = $replyID";
             $queryInsert = mysqli_query($connectToDB, $sqlInsertReplyMessage);
 
-            if($sqlRetrieveReviewID && $sqlInsertReplyMessage){
+            if($sqlInsertReplyMessage){
                 echo"SUCCESS INSERT REPLY TO REPLY";
             }
             else{

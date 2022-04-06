@@ -20,7 +20,7 @@
       <div class="flex-container">
         <a href="addUpdateDelete.php">Add Student and Staff</a>
         <a href="courseUpdate.php">Update/ Add Course</a>
-    
+        <a href="ticketRequest.php">Ticket Requests</a>
       </div>
      
     
