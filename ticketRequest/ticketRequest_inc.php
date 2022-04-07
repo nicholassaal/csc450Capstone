@@ -37,7 +37,7 @@
         $sqlMajor = "SELECT major_name FROM major";
         $queryMajorName = mysqli_query($connectToDB, $sqlMajor);
 
-        echo"<select name=majors id=majors>";
+        echo"<select name=majors id=majors required>";
         while($rows = mysqli_fetch_array($queryMajorName)) { 
             $majorName = $rows['major_name'];
             echo"<option>$majorName</option>";

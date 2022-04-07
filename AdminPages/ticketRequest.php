@@ -19,8 +19,8 @@
         $queryTicketStudentId = mysqli_query($connectToDB, $sqlTicketStudentId);
 
         echo "<form method = 'POST'>";
-            echo"<select name = studentSelect id = studentSelect>";
-                echo "<option>Please Select a Student</option>";
+            echo"<select name = studentSelect id = studentSelect size = '1'>";
+                echo "<option value = '-1'>Please Select a Student</option>";
                 while($studentTicketRows = mysqli_fetch_array($queryTicketStudentId)){
                     $studentID = $studentTicketRows['student_id'];
                     $sqlStudentInfo = "SELECT * FROM studentInfo WHERE student_id = $studentID";
@@ -73,13 +73,86 @@
                 echo "</form>";
             echo "</fieldset>";
         } else {
-            print_r($ticketQuery);
+            print_r($ticketQuery); //error print if something goes wrong
         }
     }// end of displayTicketTable()
 
     function displayOriginalStudentInfo() {
-        
+        global $connectToDB;
+        if(isset($_POST['ddlSubmit'])) {
+
+            $studentInfoID = $_POST['studentSelect'];
+
+            if ($studentInfoID > 0) { //this is to check if the value being sent over form the DDL is someone selected, if the default value is selected ('Please select a student') it will populate nothing
+                $sqlStudentMajor = "SELECT * FROM studentMajor WHERE student_id = $studentInfoID"; //connecting and querying data from studentMajor only when $studentInfoID being passed form DDL matches with someone in the DB
+                $studentMajorQuery = mysqli_query($connectToDB, $sqlStudentMajor);
+
+                while ($studentMajorRows = mysqli_fetch_assoc($studentMajorQuery)) { //loop to fetch_associated for majorID and studentEnrollment
+                    $majorId = $studentMajorRows['major_id'];
+                    $studentEnrollment = $studentMajorRows['enrollment_status']; 
+                    if ($studentEnrollment == 0) { //checking for 'IF FALSE' first ----->  0 = not enrolled * 1 = is enrolled
+                        $wordVersionEnrollment = "Student is not enrolled";
+                    } else {
+                        $wordVersionEnrollment = "Student is currently enrolled";
+                    }
+                } //end of while()
+
+                $sqlMajor = "SELECT major_name FROM major WHERE major_id = $majorId"; //connecting and querying data from major only when major_id = $majorId which was grabbed from studentMajor (previous query)
+                $majorQuery = mysqli_query($connectToDB, $sqlMajor);
+
+                while ($majorRows = mysqli_fetch_assoc($majorQuery)) { //loop to fetch_associated for majorName
+                    $majorName = $majorRows['major_name'];
+                }//end of while()
+
+
+                $sqlStudentInfo = "SELECT * FROM studentinfo WHERE student_id = $studentInfoID"; //connecting and querying data from studentinfo only when $studentInfoID being passed form DDL matches with someone in the DB
+                $studentInfoQuery = mysqli_query($connectToDB, $sqlStudentInfo);
+
+                while ($studentInfoRows = mysqli_fetch_assoc($studentInfoQuery)) { //loop to fetch_associated for studentFirstName, studentLastName, and studentOnCampus
+                    $studentFirstName = $studentInfoRows['student_fName'];
+                    $studentLastName = $studentInfoRows['student_lName'];
+                    $studentOnCampus = $studentInfoRows['student_on_campus'];
+                    if ($studentOnCampus == 0) { //checking for 'IF FALSE' first ----->  0 = not enrolled * 1 = is enrolled
+                        $wordVersionOnCampus = "Student is off-campus";
+                    } else {
+                        $wordVersionOnCampus = "Student is currently on-campus";
+                    }
+                }//end of while()
+
+                throwValuesIntoHTMLFields($studentFirstName, $studentLastName, $majorName, $wordVersionEnrollment, $wordVersionOnCampus); //passing the variables found above while() into 'throwValuesIntoHTMLFields' so that data can be placed into HTML READONLY sections
+                
+            }else {
+                throwValuesIntoHTMLFields('','','','',''); //if no-one is selected (the default value), then nothing will be passed into 'throwValuesIntoHTMLFields', this will leave the input fields empty
+            }
+        } else {
+            throwValuesIntoHTMLFields('','','','',''); //This is the default version of PHP, since no-one was ever selected (via the button was never pressed) it will still populate the page.
+        }     
     }
+
+    function throwValuesIntoHTMLFields($studentFirstName, $studentLastName, $majorName, $wordVersionEnrollment, $wordVersionOnCampus) { //This function is HTML code to allow for values to be passed into each given field via student selected
+        echo "<div class= wrapper>";
+                echo "<h1 class = 'formHeaders'>Original Student Info</h1>";
+                echo "<form action='' method= 'POST' class = 'form-area'>";
+                    echo "<div class='details-area'>";
+                        echo "<label for='originalFirstName'>Student First Name</label>";
+                        echo "<input type='text' name='originalFirstName' id='originalFirstName' READONLY value = '$studentFirstName'>"; //passing in $studentFirstName as value for READONLY input 
+
+                        echo "<label for='originalLastName'>Student Last Name</label>";
+                        echo "<input type='text' name='originalLastName' id='originalLastName' READONLY value = '$studentLastName'>"; //passing in $studentLastName as value for READONLY input 
+
+                        echo "<label for='originalMajor'>Major</label>";
+                        echo "<input type='text' name='originalMajor' id='originalMajor' READONLY value = '$majorName'>"; //passing in $studentMajor as value for READONLY input 
+
+                        echo "<label for='originalEnrollment'>Enrollment Status</label>";
+                        echo "<input type='text' name='originalEnrollment' id='originalEnrollment' READONLY value = '$wordVersionEnrollment'>"; //passing in $studentEnrollment as value for READONLY input 
+ 
+                        echo "<label for='originalOnCampus'>On-Campus Status</label>";
+                        echo "<input type='text' name='originalOnCampus' id='originalOnCampus' READONLY value = '$wordVersionOnCampus'>"; //passing in $studentOnCampus as value for READONLY input 
+                    echo "</div>";
+                echo "</form>";
+            echo "</div>";
+    }
+
 
 ?>
 
@@ -111,28 +184,29 @@
             <?php populateStudentDropDown(); ?>
         </div>
         
+        <?php displayOriginalStudentInfo(); ?>
 
-        <div class="wrapper">
+        <!-- <div class="wrapper">
             <h1 class = "formHeaders">Original Student Info</h1>
             <form action="" method= "POST" class="form-area">
                 <div class="details-area">
                     <label for="originalFirstName">Student First Name</label>
                     <input type="text" name="originalFirstName" id="originalFirstName" READONLY>
 
-                    <label for="lastNameChange">Student Last Name</label>
-                    <input type="text" name="lastNameChange" id="lastNameChange" READONLY>
+                    <label for="originalLastName">Student Last Name</label>
+                    <input type="text" name="originalLastName" id="originalLastName" READONLY>
 
-                    <label for="majorChange">Major</label>
-                    <input type="text" name="majorChange" id="majorChange" READONLY>
+                    <label for="originalMajor">Major</label>
+                    <input type="text" name="originalMajor" id="originalMajor" READONLY>
 
-                    <label for="enrollmentChange">Enrollment Status</label>
-                    <input type="text" name="enrollmentChange" id="enrollmentChange" READONLY>
+                    <label for="originalEnrollment">Enrollment Status</label>
+                    <input type="text" name="originalEnrollment" id="originalEnrollment" READONLY>
 
-                    <label for="onCampusChange">On-Campus Status</label>
-                    <input type="text" name="onCampusChange" id="onCampusChange" READONLY>
+                    <label for="originalOnCampus">On-Campus Status</label>
+                    <input type="text" name="originalOnCampus" id="originalOnCampus" READONLY>
                 </div>
             </form>
-        </div>
+        </div> -->
 
         <div class="wrapper">
             <h1 class = "formHeaders">Check Student Changes</h1>

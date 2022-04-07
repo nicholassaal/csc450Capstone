@@ -61,10 +61,10 @@ include("ticketRequest_inc.php");
             <legend class = ticketLegend name = ticketLegend>Ticket Request Form</legend>
             <div class = "div_container">
                 <label class = "firstNameChange">First Name Change:</label>
-                    <input type="text" id="firstNameChange" name="firstNameChange"><br><br>
+                    <input type="text" id="firstNameChange" name="firstNameChange" required><br><br>
 
                 <label class = "lastNameChange">Last Name Change:</label>
-                    <input type="text" id="lastNameChange" name="lastNameChange"><br><br>
+                    <input type="text" id="lastNameChange" name="lastNameChange" required><br><br>
 
                 <label class = "majorChange">Major Change:</label>
                 <?php populateMajorDropdown(); ?>   
@@ -80,8 +80,8 @@ include("ticketRequest_inc.php");
                             <th scope = "col" class = "radio_No">No</th>
                         </tr>
                         <tr>
-                            <td><input type="radio" id="enrolled1" name="enrolled" value = "1"></td>
-                            <td><input type="radio" id="enrolled2" name="enrolled" value = "0"></td>
+                            <td><input type="radio" id="enrolled1" name="enrolled" value = "1" required></td>
+                            <td><input type="radio" id="enrolled2" name="enrolled" value = "0" required></td>
                         </tr>
                     </table>
                     <!-- ************************** ENROLLMENT Status table ************************** -->
@@ -96,8 +96,8 @@ include("ticketRequest_inc.php");
                             <th scope = "col" class = "radio_No">No</th>
                         </tr>
                         <tr>
-                            <td><input type="radio" id="onCampus1" name="onCampus" value = "1"></td>
-                            <td><input type="radio" id="onCampus2" name="onCampus" value = "0"></td>
+                            <td><input type="radio" id="onCampus1" name="onCampus" value = "1" required></td>
+                            <td><input type="radio" id="onCampus2" name="onCampus" value = "0" required></td>
                         </tr>
                     </table>
                     <!-- ************************** ON_CAMPUS Status table ************************** -->
