@@ -93,18 +93,15 @@ $sqlStudentCourse = "CREATE TABLE IF NOT EXISTS studentCourse(
    review_date_written DATE
 )";
 
-$sqlReviewReplies = "CREATE TABLE IF NOT EXISTS reviewReplies(
-    studentCourseReview_id INT NOT NULL,
-    reply_id INT NOT NULL,
-    replyToReply VARCHAR(450)
-)";
-
 $sqlReview_message_replies = "CREATE TABLE IF NOT EXISTS replies(
     reply_id INT AUTO_INCREMENT PRIMARY KEY,
     student_id INT NOT NULL,
     course_code INT NOT NULL,
     reply_message VARCHAR(450),
-    date_written DATE
+    date_written DATE, 
+    studentCourseReview_id INT,
+    replyToReply_id INT, 
+    CONSTRAINT fk_studentCourseReview_id FOREIGN KEY (studentCourseReview_id) REFERENCES studentCourse(studentCourseReview_id) ON DELETE RESTRICT ON UPDATE RESTRICT
 )";
 
 $sqlStudentMajor = "CREATE TABLE IF NOT EXISTS studentMajor(
@@ -143,7 +140,6 @@ $tableCreate = mysqli_query($connectTable, $sqlStudentInfo)
     AND mysqli_query($connectTable, $ticketRequestTable) 
     AND mysqli_query($connectTable, $sqlUserLoginInfo) 
     AND mysqli_query($connectTable, $sqlStudentCourse)
-    AND mysqli_query($connectTable, $sqlReviewReplies)
     AND mysqli_query($connectTable, $sqlReview_message_replies) 
     AND mysqli_query($connectTable, $sqlStudentMajor) 
     AND mysqli_query($connectTable, $sqlMajor) 
@@ -181,10 +177,6 @@ $insertStudentInfo = "INSERT INTO studentInfo (student_fName, student_lName, stu
 $insertTicketRequest = "INSERT INTO ticketRequest (ticket_fName_change, ticket_lName_change, ticket_major_change, ticket_enrollment_change, ticket_OnCampus_change, student_id)
     VALUE ('Jackie', 'Brown', 'Communications', '1', '0', '1')";
 
-$insertReviewReplies = "INSERT INTO reviewReplies (studentCourseReview_id, reply_id)
-    VALUES  ('1', '1'),
-            ('1', '2')";
-
 //Insert into student course composite/join table
 $insertStudentCourse = "INSERT INTO studentCourse (student_id, course_code, review_message, difficulty_review_rating, enjoyability_review_rating, overall_review_rating, review_date_written)
     VALUES  ('1', '1', 'Great course, highly recommended if you are interesting in web designed.', '2', '5','15', '2020-06-5'),
@@ -195,9 +187,9 @@ $insertStudentCourse = "INSERT INTO studentCourse (student_id, course_code, revi
             ('3', '3', 'Super interesting course. Loved learning how the code we write actually works.', '3', '4', '7', '2019-08-14'),
             ('3', '4', 'Challenging course, but at the same time enjoyable to learn.', '5', '5', '1', '2020-12-26')"; //added additional reviews for one person to test my idea in profiles.php
 //Insert into reviewMessageReplies
-$insertReviewMessageReplies = "INSERT INTO replies (student_id, course_code, reply_message, date_written)
-    VALUES ('2', '1', 'Great review for capstone', '2002-02-02'),
-           ('3', '1', 'Very helpful review!', '2002-02-03')";
+$insertReviewMessageReplies = "INSERT INTO replies (student_id, course_code, reply_message, date_written, studentCourseReview_id, replyToReply_id)
+    VALUES ('2', '1', 'Great review for capstone', '2002-02-02', '1', '0'),
+           ('3', '1', 'Very helpful review!', '2002-02-03', '1', '0')";
 
 //Insert into student major composite/join table
 $insertStudentMajor = "INSERT INTO studentMajor (student_id, major_id, enrollment_status)
@@ -233,7 +225,6 @@ $insert = mysqli_query($connectTable, $insertUserLogin)
     AND mysqli_query($connectTable, $insertStudentInfo) 
     AND mysqli_query($connectTable, $insertTicketRequest) 
     AND mysqli_query($connectTable, $insertStudentCourse)
-    AND mysqli_query($connectTable, $insertReviewReplies) 
     AND mysqli_query($connectTable, $insertReviewMessageReplies) 
     AND mysqli_query($connectTable, $insertStudentMajor) 
     AND mysqli_query($connectTable, $insertCourse) 
@@ -266,9 +257,6 @@ $sqlAlterStudentMajor2 = "ALTER TABLE `studentMajor` ADD CONSTRAINT `uk_major_id
 $sqlAlterProfCourse1 = "ALTER TABLE `professorCourse` ADD CONSTRAINT `uk_prof_id` FOREIGN KEY (`prof_id`) REFERENCES `professor`(`prof_id`) ON DELETE RESTRICT ON UPDATE RESTRICT";
 $sqlAlterProfCourse2 = "ALTER TABLE `professorCourse` ADD CONSTRAINT `uk_profCourse_code` FOREIGN KEY (`course_code`) REFERENCES `course`(`course_code`) ON DELETE RESTRICT ON UPDATE RESTRICT";
 
-$sqlAlterReviewReplyTable1 = "ALTER TABLE `reviewReplies` ADD CONSTRAINT `pkfk_studentCourseReview_id` FOREIGN KEY (`studentCourseReview_id`) REFERENCES `studentCourse`(`studentCourseReview_id`) ON DELETE RESTRICT ON UPDATE RESTRICT";
-$sqlAlterReviewReplyTable2 = "ALTER TABLE `reviewReplies` ADD CONSTRAINT `pkfk_reply_id` FOREIGN KEY (`reply_id`) REFERENCES `replies`(`reply_id`) ON DELETE RESTRICT ON UPDATE RESTRICT";
-
 $sqlAlterReplyTable = "ALTER TABLE `replies` ADD CONSTRAINT `pkfk_student_id` FOREIGN KEY (`student_id`) REFERENCES `studentInfo`(`student_id`) ON DELETE RESTRICT ON UPDATE RESTRICT";
 $sqlAlterReplyTable2 = "ALTER TABLE `replies` ADD CONSTRAINT `pkfk_course_code` FOREIGN KEY (`course_code`) REFERENCES `course`(`course_code`) ON DELETE RESTRICT ON UPDATE RESTRICT";
 
@@ -278,8 +266,6 @@ $alterTablesPKFK = mysqli_query($connectTable, $sqlAlterUserLoginInfo)
     AND mysqli_query($connectTable, $sqlAlterCourseTable)
     AND mysqli_query($connectTable, $sqlAlterStudentCourse1)
     AND mysqli_query($connectTable, $sqlAlterStudentCourse2)
-    AND mysqli_query($connectTable, $sqlAlterReviewReplyTable1)
-    AND mysqli_query($connectTable, $sqlAlterReviewReplyTable2)
     AND mysqli_query($connectTable, $sqlAlterReplyTable)
     AND mysqli_query($connectTable, $sqlAlterReplyTable2)
     AND mysqli_query($connectTable, $sqlAlterStudentMajor1)

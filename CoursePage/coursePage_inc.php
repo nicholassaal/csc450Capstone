@@ -1,7 +1,7 @@
 <?php
     date_default_timezone_set('America/Chicago');
 
-    $numIterator = 1;  
+    $numIterator = 0;  
     function displayCourseReviewMessage()
     {
         global $connectToDB;
@@ -65,21 +65,27 @@
                 echo "<h2>" . $courseReviewMessage . "</h1>";
                 echo "<h4 class=reviewDateWritten>Date Written: " . $dateOfWrittenReview . "</h4>";
             echo "</a>";
-    
-            //REPLY button 
-            echo "<button type = button name = replyBtn id = replyBtn$numIterator onclick=toggleReplyForm()>Reply</button>";
-            
-            //START OF FORM TO REPLY TO REVIEWS
-            echo "<form method=POST action= formActions.php?id=$courseCode id=replyForms$numIterator class=replyForms$numIterator>";
-                echo"<textarea style='resize:none;' name='replyMessage' id='replyMessage' cols='50%' rows='10' placeholder='Reply to the review'></textarea>";
-                echo"<input type='hidden' name='dateWritten' value= ".date('Y-m-d').">";
-                echo"<input type='hidden' name='reviewID' value= '$reviewID'>";
-                echo"<input type='hidden' name='studentReviewID' value= '$studentID'>";
-                echo"<button type = 'submit' id='replySubmitBtn' name='replySubmitBtn'>Reply</button>";
-                echo"<button type = 'button' id='cancelReplyBtn' name='cancelReplyBtn' onclick='toggleReplyForm()'>Cancel</button>";
-            echo "</form>";
 
-            viewReplies($studentID);
+            //REPLY button 
+            echo "<button type = button class=replyBtn id = replyBtn$numIterator onclick=f$numIterator()>Reply</button>";
+            
+            /*****************************************
+             START OF FORM TO REPLY TO REVIEWS
+             *****************************************/
+            //echo "<details class=replyBtnDetails>";
+                //echo "<summary id=replyBtnSummary>Reply</summary>";
+                    echo "<form method=POST action= formActions.php?id=$courseCode id=replyForms$numIterator class=replyForms$numIterator>";
+                        echo"<textarea style='resize:none;' name='replyMessage' id='replyMessage' cols='50%' rows='10' placeholder='Reply to the review'></textarea>";
+                        echo"<input type='hidden' name='dateWritten' value= ".date('Y-m-d').">";
+                        echo"<input type='hidden' name='reviewID' value= '$reviewID'>";
+                        echo"<button type = 'submit' id='replySubmitBtn' name='replySubmitBtn'>Reply</button>";
+                        echo"<button type = 'button' id='cancelReplyBtn' name='cancelReplyBtn' onclick='f$numIterator()'>Cancel</button>";
+                    echo "</form>";
+            //echo "</details>";
+            /*****************************************
+              VIEW ALL REPLIES TO REVIEW FUNCTION 
+             *****************************************/
+            viewReplies($studentID, $reviewID);
 
             echo"</div>";//end of review message div
             $arrayIndex++;
@@ -87,46 +93,13 @@
         } //end of while loop
 
     } //end of displayCourseReviewMessage()
-    
-    function displayReplies($replyID){
+
+    /*****************************************
+     VIEW ALL REPLIES TO REVIEW FUNCTION 
+    *****************************************/
+    function viewReplies($studentID, $reviewID){
         global $connectToDB;
         global $courseCode;
-
-        //Retrieve all the replies for a certain review message using the replyID 
-        $sqlRetrieveReplies = "SELECT * FROM replies WHERE reply_id = $replyID AND course_code = $courseCode";
-        $queryRetrieveReplies = mysqli_query($connectToDB, $sqlRetrieveReplies);
-                //Retrieve all the rows that associate with the replyID
-                while ($rows = mysqli_fetch_array($queryRetrieveReplies)) {
-                    $replyID = $rows['reply_id'];
-                    $studentID = $rows['student_id'];//The student's id that wrote the reply
-                    $replyMessage = $rows['reply_message'];
-                    $replyDateWritten = $rows['date_written'];
-    
-                    //Retrieve the student id and full name using CONCAT()
-                    $sqlStudentInfo = "SELECT CONCAT(student_fname,' ',student_lname) AS 'fullName' FROM studentInfo WHERE student_id = $studentID";
-                    $sqlStudentTable = mysqli_query($connectToDB, $sqlStudentInfo);
-                    $retrieveStudentName = mysqli_fetch_assoc($sqlStudentTable);
-                    $studentName = $retrieveStudentName['fullName'];//Assign the fullname to a variable once retrieved above 
-                    
-                    echo"<div class=viewReplySection>";
-                        echo"<h2 class=replyNames>".$studentName."</h2>";
-                        echo"<h3>".$replyMessage."</h3>";
-                        echo"<p class=replyDate>Date Written: " . $replyDateWritten . "</p>";
-                            //START OF FORM TO REPLY TO REPLIES
-                            // echo "<form method=POST action= formActions.php?id=$courseCode id=replyToReplyForms class=replytoReplyForms>";
-                            //     echo"<textarea style='resize:none;' name='replyToReplyMessage' id='replyToReplyMessage' cols='50%' rows='10' placeholder='Reply to Reply'></textarea>";
-                            //     echo"<input type='hidden' name='studentReviewID' value= '$studentReviewID'>";
-                            //     echo"<input type='hidden' name='reviewID' value= '$reviewID'>";
-                            //     echo"<input type='hidden' name='replyID' value= '$replyID'>";
-                            //     echo"<button type = 'submit' id='replyBtn2' name='replyBtn2'>Reply</button>";
-                            // echo "</form>";
-                    echo"</div>";
-                }//end of while loop 
-    }//end of displayReplies()
-
-    function viewReplies($studentID){
-        global $connectToDB;
-        //$numOfReplies = onlyViewifExists($studentID); 
         
         $sqlRetrieveReviewID = "SELECT studentCourseReview_id FROM studentCourse WHERE student_id = $studentID";
         $queryReviewID = mysqli_query($connectToDB, $sqlRetrieveReviewID);
@@ -135,22 +108,92 @@
                 while($reviewRows = mysqli_fetch_array($queryReviewID)){
                     $studentCourseReview_id = $reviewRows['studentCourseReview_id']; //The student's id that wrote the reply
 
-                    $sqlRetrieveReplies = "SELECT * FROM reviewReplies";
+                    $sqlRetrieveReplies = "SELECT * FROM replies WHERE studentCourseReview_id = $studentCourseReview_id AND course_code = $courseCode AND replyToReply_id = 0";
                     $queryRetrieveReplies = mysqli_query($connectToDB, $sqlRetrieveReplies);
-                
-                    while($reviewRepliesRows = mysqli_fetch_array($queryRetrieveReplies)){
-                        $reviewReplies_id = $reviewRepliesRows['studentCourseReview_id'];
-                        $replyID = $reviewRepliesRows['reply_id'];
 
-                        if($studentCourseReview_id == $reviewReplies_id){//If there is a reply, retrieve the reply
-                            displayReplies($replyID);
-                        }   
-                    }//end of inner while loop 
-                }//end of outter while loop 
+                            /*****************************************
+                             RETRIEVE AND VIEW ALL REPLIES TO REVIEW 
+                            *****************************************/
+                            //Retrieve all the replies row that was written for that review 
+                            while ($rows = mysqli_fetch_array($queryRetrieveReplies)) {
+                                $replyID = $rows['reply_id'];
+                                $studentID = $rows['student_id'];//The student's id that wrote the reply
+                                $replyMessage = $rows['reply_message'];
+                                $replyDateWritten = $rows['date_written'];
+                                $replyToReplyID = $rows['replyToReply_id'];
+                
+                                $studentName = studentName($studentID);//Used studentName function to retrieve the student's name that wrote reply
+                                
+                                /*****************************************
+                                        REPLY TO REPLIES FORM  
+                                *****************************************/
+                                echo"<div class=viewReplySection>";
+                                    echo"<h2 class=replyNames>".$studentName."</h2>";
+                                    echo"<h3>".$replyMessage."</h3>";
+                                    echo"<p class=replyDate>Date Written: " . $replyDateWritten . "</p>";
+                                        //START OF FORM TO REPLY TO REPLIES
+                                        echo "<details class=replyToReplyFrom>";
+                                            echo "<summary class=replyToReplySummary>Reply</summary>";
+                                                echo "<form method=POST action= formActions.php?id=$courseCode id=replyToReplyForms class=replytoReplyForms>";
+                                                    echo"<textarea style='resize:none;' name='replyToReplyMessage' id='replyToReplyMessage' cols='50%' rows='10' placeholder='Reply to Reply'></textarea>";
+                                                    echo"<input type='hidden' name='dateWritten2' value= ".date('Y-m-d').">";
+                                                    echo"<input type='hidden' name='reviewID' value= '$reviewID'>";
+                                                    echo"<input type='hidden' name='replyID' value= '$replyID'>";
+                                                    echo"<button type = 'submit' id='replyBtn2' name='replyBtn2'>Reply</button>";
+                                                    //echo"<button type = 'button' id='cancelReplyBtn' name='cancelReplyBtn' onclick='toggleReplyForms()'>Cancel</button>";
+                                                echo "</form>";
+                                        echo "</details>";
+                                        viewRepliesToReplies($reviewID, $replyID);
+                                echo"</div>";//end of viewRepliesSection <div>
+                                
+                    }//end of inner while loop to retrieve replies
+                }//end of outter while loop to retrieve the review id
         echo "</details>";
         //END OF VIEW REPLY SECTION
     }//end of viewReplies();
+
+    /*****************************************
+     VIEW ALL REPLIES TO REPLIES FUNCTION 
+    *****************************************/
+    function viewRepliesToReplies($reviewID, $replyID){
+        global $connectToDB;
+        global $courseCode;
+            
+            $sqlRepliesToReplies = "SELECT * FROM replies WHERE studentCourseReview_id = $reviewID AND replyToReply_id = $replyID";//Get all replies to replies that match a reply_id
+            $queryReplyToReplies = mysqli_query($connectToDB, $sqlRepliesToReplies);
+
+            while($replyToReplies = mysqli_fetch_array($queryReplyToReplies)){
+                $replyMessage = $replyToReplies['reply_message'];
+                $replyDateWritten = $replyToReplies['date_written'];
+                $studentID = $_SESSION["currentUserLoginId"];
+                $studentName = studentName($studentID);//Used studentName function to retrieve the student's name that wrote reply
+                echo "<details>";//Details for viewing the replies
+                    echo"<summary>View Replies</summary>";
+                        //echo"<div class=viewReplyToReplies>";
+                            echo"<h2 class=replyNames>".$studentName."</h2>";
+                            echo"<h3>".$replyMessage."</h3>";
+                            echo"<p class=replyDate>Date Written: " . $replyDateWritten . "</p>";
+                        //echo"</div";
+                echo"</details>";
+            }//end of while loop to retrieve all replies to replies
+    }//end of viewRepliesToReplies()
+
+    /*****************************************************
+     RETRIEVE THE STUDENT'S NAME THAT WROTE REPLY FUNCTION
+    *****************************************************/
+    function studentName($studentID){
+        global $connectToDB;
+        //Retrieve the student's full name using CONCAT() that wrote the reply
+        $sqlStudentInfo = "SELECT CONCAT(student_fname,' ',student_lname) AS 'fullName' FROM studentInfo WHERE student_id = $studentID";
+        $sqlStudentTable = mysqli_query($connectToDB, $sqlStudentInfo);
+        $retrieveStudentName = mysqli_fetch_assoc($sqlStudentTable);
+        $studentName = $retrieveStudentName['fullName'];//Assign the fullname to a variable once retrieved above 
+        return $studentName;
+    }//end of studentName()
     
+    /*****************************************************
+    IN PROGRESS TO PRINT HOW MANY REPLIES
+    *****************************************************/
     function onlyViewifExists($studentID){
         global $connectToDB;
         $numOfReplies = 0;   

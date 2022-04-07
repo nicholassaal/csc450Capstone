@@ -1,7 +1,6 @@
 <?php
     session_start();
     $courseCode = $_GET["id"]; //Retrieve the courseCode, Course page that we are on
-    $studentReviewID = $_POST['studentReviewID']; //Retrieve the studentReviewID, the student that wrote the review 
     $currentLoggedStudent = $_SESSION["currentUserLoginId"];
     $reviewID = $_POST['reviewID'];
 
@@ -26,43 +25,22 @@
     function replyForm(){
         global $courseCode;
         global $connectToDB;
-        global $studentReviewID;
+        global $reviewID;
         global $currentLoggedStudent;
 
         $replyMessage = $_POST['replyMessage'];
         $dateWritten = $_POST['dateWritten'];
 
-        //INSERT THE REPLY MESSAGE TO THE replies table 
+        //INSERT THE REPLY TO REPLIES TABLE USING CORRECT IDs ALSO 
         if($replyMessage != ''){
-            $sqlInsertReply = "INSERT INTO replies (student_id, course_code, reply_message, date_written)
-            VALUES ('$currentLoggedStudent', '$courseCode', '$replyMessage', '$dateWritten')";
-            
-            //RETRIEVE THE REVIEW MESSAGE ID OF WHERE THE REPLY MESSAGE WAS WRITTEN TO
-            $sqlRetrieveReviewID = "SELECT studentCourseReview_id FROM studentCourse WHERE student_id = $studentReviewID AND course_code = $courseCode";
-
-            //RETRIEVE THRE REPLY ID OF STUDENT THAT WROTE REPLY, THE LATEST REPLY_ID THAT WAS INSERTED INTO THE DATABASE
-            $sqlRetrieveReplyID = "SELECT reply_id FROM replies ORDER BY reply_id DESC LIMIT 1";
+            $sqlInsertReply = "INSERT INTO replies (student_id, course_code, reply_message, date_written, studentCourseReview_id, replyToReply_id)
+            VALUES ('$currentLoggedStudent', '$courseCode', '$replyMessage', '$dateWritten', '$reviewID', '0')";
 
             $queryInsertReply = mysqli_query($connectToDB, $sqlInsertReply);
 
-            $queryReviewID = mysqli_query($connectToDB, $sqlRetrieveReviewID);
-            $retrievedReviewID = mysqli_fetch_assoc($queryReviewID);
-            $reviewID = $retrievedReviewID['studentCourseReview_id'];
-
-            $queryReplyID = mysqli_query($connectToDB, $sqlRetrieveReplyID);
-            $retrievedReplyID = mysqli_fetch_assoc($queryReplyID);
-            $replyID = $retrievedReplyID['reply_id'];
-                
-            echo"<br>REVIEW ID ".$reviewID."<br><br>";
-            echo "REPLY ID ".$replyID."<br>";
-
-            $sqlInsertIntoReviewReplies = "INSERT INTO reviewReplies (studentCourseReview_id, reply_id)
-            VALUE('$reviewID', '$replyID')";
-            $queryInsertReviewReplies = mysqli_query($connectToDB, $sqlInsertIntoReviewReplies);
-
-            if($queryInsertReply && $queryReviewID && $queryReplyID && $queryInsertReviewReplies){
+            if($queryInsertReply){
                 //echo"SUCCESS for all queries !!!!";
-                header("Location: http://localhost/csc450Capstone/CoursePage/CoursePage.php?id=$courseCode");
+                header("Location: http://localhost/csc450Capstone/CoursePage/CoursePage.php?id=$courseCode");//Send user back to coursePage
             }
             else{
                 print_r('Failed to save reply!');
@@ -76,30 +54,20 @@
     function replyToReplyForm(){
         global $courseCode;
         global $connectToDB;
-        global $studentReviewID;
+        global $reviewID;
         global $currentLoggedStudent;
-        echo"<br><br> THE COURSE CODE IS ".$courseCode."";
-        echo"<br><br> THE STUDENT ID FOR THE REVIEW IS ".$studentReviewID."";
-        echo"<br><br> THE CURRENT USER ID IS ".$currentLoggedStudent."";
         
-        $replyID = $_POST["replyID"];
+        $replyID = $_POST["replyID"];//The reply id of where the replyToReply_id will be connected to 
         $replyToReplyMessage = $_POST["replyToReplyMessage"];
-
-        echo"<br><br>REPLY ID IS ".$replyID."<br>";
-        echo"<br>THE REPLY TO REPLY MESSAGE IS ".$replyToReplyMessage."<br>";
+        $dateWritten = $_POST['dateWritten2'];
 
         if($replyToReplyMessage != ''){
-            // $sqlRetrieveReviewID = "SELECT studentCourseReview_id FROM studentCourse WHERE student_id = $studentReviewID AND course_code = $courseCode";
-            // $queryReviewID = mysqli_query($connectToDB, $sqlRetrieveReviewID);
-            // $retrievedReviewID = mysqli_fetch_assoc($queryReviewID);
-            // $reviewID = $retrievedReviewID['studentCourseReview_id'];
+            $sqlInsertReplyToReply = "INSERT INTO replies (student_id, course_code, reply_message, date_written, studentCourseReview_id, replyToReply_id)
+            VALUES ('$currentLoggedStudent', '$courseCode', '$replyToReplyMessage', '$dateWritten', '$reviewID', '$replyID')";
+            $queryInsert = mysqli_query($connectToDB, $sqlInsertReplyToReply);
 
-            $sqlInsertReplyMessage = "UPDATE reviewReplies SET replyToReply = '$replyToReplyMessage'
-                WHERE reply_id = $replyID";
-            $queryInsert = mysqli_query($connectToDB, $sqlInsertReplyMessage);
-
-            if($sqlInsertReplyMessage){
-                echo"SUCCESS INSERT REPLY TO REPLY";
+            if($queryInsert){
+                header("Location: http://localhost/csc450Capstone/CoursePage/CoursePage.php?id=$courseCode");//Send user back to coursePage
             }
             else{
                 echo"FAIL TO INSERT REPLY TO REPLY";

@@ -234,13 +234,14 @@ function navGetProfilePicture(){
         </div>
 
     </form>
+
     <script>
 
         document.getElementById("leaveReviewForm").style.display = "none";
 
         var maxReviewsNum = <?php echo $numIterator ?>;
-        for(let i = 1; i < maxReviewsNum; i++){
-            document.getElementById("replyForms"+i).style.display = "block";
+        for(let i = 0; i < maxReviewsNum; i++){
+            document.getElementById("replyForms"+i).style.display = "none";
         }
 
         var prevScrollpos = window.pageYOffset;
@@ -263,20 +264,82 @@ function navGetProfilePicture(){
             document.getElementById("leaveReviewForm").style.display = "none";
         }
 
-        //..................WORK IN PROGESS......................//
-        // function toggleReplyForm(){
-        //     var maxReviewsNum = <?php echo $numIterator ?>;
-        //     for(let i = 1; i < maxReviewsNum; i++){
-        //         var replybtn = document.getElementById('replyBtn'+i);
-        //             if(){
-        //                 if (replyForm.offsetWidth == 0 && replyForm.offsetHeight == 0 ) {
-        //                     replyForm.style.display = 'block';
-        //                 } else {
-        //                     replyForm.style.display = 'none';
-        //                 }
-        //             }
-        //     }//end of for loop 
-        // }//end of toggleEditProfilePicture button function
+        //..................WORK IN PROGESS DONT THINK OF IT AS CREATING MULTIPLE FUNCTION......................//
+        // var functions = [];
+        // for(var i = 0; i < maxReviewsNum; i++){
+        //     num[i] = i; 
+        // }   
+
+        // replyBtns = document.getElementsByClassName("replyBtn");
+
+        // for(var i = 0; i < replyBtns.length; i++){
+        //     replyBtns[i].addEventListener("click", function(){
+        //         var replyForms = document.getElementById('replyForms'+(i-1));
+        //         window.alert(replyForms);
+        //         if (replyForms.offsetWidth == 0 && replyForms.offsetHeight == 0){
+        //             replyForms.style.display = 'block';
+        //         } else {
+        //             replyForms.style.display = 'none';
+        //         }
+        //     });
+        // }
+        
+        // var functionName = [];
+        // for(var i = 0; i < maxReviewsNum; i++){
+        //     functionName[i] = 'f'+i; 
+        // }   
+
+        // for(var i = 0; i < maxReviewsNum; i++){
+        //     var replyForms = document.getElementById("replyForms"+i);
+        //     window[functionName[i]] = function toggleForms(replyForms){
+        //         if (replyForms.offsetWidth == 0 && replyForms.offsetHeight == 0 ) {
+        //             replyForms.style.display = 'block';
+        //         } else {
+        //             replyForms.style.display = 'none';
+        //         }
+        //     };
+        // }
+        // var replyForms = document.getElementById("replyForms"+i);
+
+        function f0(){
+            var replyForms = document.getElementById("replyForms0");
+            if (replyForms.offsetWidth == 0 && replyForms.offsetHeight == 0 ) {
+                replyForms.style.display = 'block';
+            } else {
+                replyForms.style.display = 'none';
+            }
+        }//end of f0()
+
+        function f1(){
+            var replyForms = document.getElementById("replyForms1");
+            if (replyForms.offsetWidth == 0 && replyForms.offsetHeight == 0 ) {
+                replyForms.style.display = 'block';
+            } else {
+                replyForms.style.display = 'none';
+            }
+        }//end of f1()
+
+        function f2(){
+            var replyForms = document.getElementById("replyForms2");
+            if (replyForms.offsetWidth == 0 && replyForms.offsetHeight == 0 ) {
+                replyForms.style.display = 'block';
+            } else {
+                replyForms.style.display = 'none';
+            }
+        }//end of f2()
+
+        function f3(){
+            var replyForms = document.getElementById("replyForms3");
+            if (replyForms.offsetWidth == 0 && replyForms.offsetHeight == 0 ) {
+                replyForms.style.display = 'block';
+            } else {
+                replyForms.style.display = 'none';
+            }
+        }//end of f3()
+
+
+
+
 
     </script>
 </body>

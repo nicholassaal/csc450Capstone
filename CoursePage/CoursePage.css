@@ -164,22 +164,30 @@ h1 {
 --------------------------------------------------
 */ 
 
-details{
+.repliesDetails{
 }
 
-summary, #replyBtn{
+.replyBtnSummary, .replyToReplySummary{
+  list-style: none;
+}
+
+summary{
   /*list-style: none;*//* This will hide the 'details' black arrow */
   padding:5px;
-  border: solid 1px black;
   width:10%;
-  background-color: white;
-  color: black;
-  border-radius: 5px;
+  color: white;
+  text-decoration: underline;
 }
 
 .viewReplySection{
   padding:5px;
   margin-left:1%;
+  border:solid 5px black;
+}
+
+.replyToRepliesDetail{
+  padding:2px;
+  margin-left:5%;
   border:solid 5px black;
 }
 
@@ -189,9 +197,4 @@ summary, #replyBtn{
 
 .replyNames{
   text-decoration: underline;
-}
-
-#replyBtn{
-  font-size: 16px;;
-  width:15%;
 }
