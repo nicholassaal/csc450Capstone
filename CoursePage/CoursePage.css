@@ -164,10 +164,7 @@ h1 {
 --------------------------------------------------
 */ 
 
-.repliesDetails{
-}
-
-.replyBtnSummary, .replyToReplySummary{
+.replyToReplySummary{
   list-style: none;
 }
 
@@ -182,13 +179,18 @@ summary{
 .viewReplySection{
   padding:5px;
   margin-left:1%;
-  border:solid 5px black;
+  border:solid 3px black;
+  background-color: rgb(117, 116, 116);
+  border-radius: 10px;
 }
 
-.replyToRepliesDetail{
+.replyToRepiesDiv{
   padding:2px;
-  margin-left:5%;
-  border:solid 5px black;
+  width: 80%;
+  margin-left:2%;
+  border:solid 3px black;
+  background-color: rgb(117, 116, 116);
+  border-radius: 10px;
 }
 
 .replyDate{
@@ -197,4 +199,9 @@ summary{
 
 .replyNames{
   text-decoration: underline;
+}
+
+
+#replySubmitBtn, #replyBtn2{
+  display:block;
 }

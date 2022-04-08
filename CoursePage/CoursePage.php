@@ -236,7 +236,6 @@ function navGetProfilePicture(){
     </form>
 
     <script>
-
         document.getElementById("leaveReviewForm").style.display = "none";
 
         var maxReviewsNum = <?php echo $numIterator ?>;
@@ -306,6 +305,7 @@ function navGetProfilePicture(){
             if (replyForms.offsetWidth == 0 && replyForms.offsetHeight == 0 ) {
                 replyForms.style.display = 'block';
             } else {
+                document.getElementsByClassName("replyMessage")[0].value = ''; 
                 replyForms.style.display = 'none';
             }
         }//end of f0()
@@ -315,6 +315,7 @@ function navGetProfilePicture(){
             if (replyForms.offsetWidth == 0 && replyForms.offsetHeight == 0 ) {
                 replyForms.style.display = 'block';
             } else {
+                document.getElementsByClassName("replyMessage")[1].value = ''; 
                 replyForms.style.display = 'none';
             }
         }//end of f1()
@@ -324,6 +325,7 @@ function navGetProfilePicture(){
             if (replyForms.offsetWidth == 0 && replyForms.offsetHeight == 0 ) {
                 replyForms.style.display = 'block';
             } else {
+                document.getElementsByClassName("replyMessage")[2].value = ''; 
                 replyForms.style.display = 'none';
             }
         }//end of f2()
@@ -333,6 +335,7 @@ function navGetProfilePicture(){
             if (replyForms.offsetWidth == 0 && replyForms.offsetHeight == 0 ) {
                 replyForms.style.display = 'block';
             } else {
+                document.getElementsByClassName("replyMessage")[3].value = ''; 
                 replyForms.style.display = 'none';
             }
         }//end of f3()

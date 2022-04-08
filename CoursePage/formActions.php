@@ -4,6 +4,10 @@
     $currentLoggedStudent = $_SESSION["currentUserLoginId"];
     $reviewID = $_POST['reviewID'];
 
+    //If a student_id for that particular review was sent over, retrieve and store it
+    if(isset($_POST['studentReviewID'])){
+        $studentReviewID = $_POST['studentReviewID'];
+    }
 
     $SERVER_NAME    = "localhost";   //Server name 
     $DBF_USER       = "root";        //UserName for the localhost database

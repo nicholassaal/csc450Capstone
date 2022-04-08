@@ -75,7 +75,7 @@
             //echo "<details class=replyBtnDetails>";
                 //echo "<summary id=replyBtnSummary>Reply</summary>";
                     echo "<form method=POST action= formActions.php?id=$courseCode id=replyForms$numIterator class=replyForms$numIterator>";
-                        echo"<textarea style='resize:none;' name='replyMessage' id='replyMessage' cols='50%' rows='10' placeholder='Reply to the review'></textarea>";
+                        echo"<textarea style='resize:none;'name='replyMessage' class='replyMessage' id='replyMessage' cols='50%' rows='10' placeholder='Reply to the review'></textarea>";
                         echo"<input type='hidden' name='dateWritten' value= ".date('Y-m-d').">";
                         echo"<input type='hidden' name='reviewID' value= '$reviewID'>";
                         echo"<button type = 'submit' id='replySubmitBtn' name='replySubmitBtn'>Reply</button>";
@@ -135,7 +135,7 @@
                                         echo "<details class=replyToReplyFrom>";
                                             echo "<summary class=replyToReplySummary>Reply</summary>";
                                                 echo "<form method=POST action= formActions.php?id=$courseCode id=replyToReplyForms class=replytoReplyForms>";
-                                                    echo"<textarea style='resize:none;' name='replyToReplyMessage' id='replyToReplyMessage' cols='50%' rows='10' placeholder='Reply to Reply'></textarea>";
+                                                    echo"<textarea style='resize:none;' name='replyToReplyMessage' id='replyToReplyMessage' cols='50%' rows='10' placeholder='Reply'></textarea>";
                                                     echo"<input type='hidden' name='dateWritten2' value= ".date('Y-m-d').">";
                                                     echo"<input type='hidden' name='reviewID' value= '$reviewID'>";
                                                     echo"<input type='hidden' name='replyID' value= '$replyID'>";
@@ -161,22 +161,21 @@
             
             $sqlRepliesToReplies = "SELECT * FROM replies WHERE studentCourseReview_id = $reviewID AND replyToReply_id = $replyID";//Get all replies to replies that match a reply_id
             $queryReplyToReplies = mysqli_query($connectToDB, $sqlRepliesToReplies);
-
-            while($replyToReplies = mysqli_fetch_array($queryReplyToReplies)){
-                $replyMessage = $replyToReplies['reply_message'];
-                $replyDateWritten = $replyToReplies['date_written'];
-                $studentID = $_SESSION["currentUserLoginId"];
-                $studentName = studentName($studentID);//Used studentName function to retrieve the student's name that wrote reply
-                echo "<details>";//Details for viewing the replies
-                    echo"<summary>View Replies</summary>";
-                        //echo"<div class=viewReplyToReplies>";
-                            echo"<h2 class=replyNames>".$studentName."</h2>";
-                            echo"<h3>".$replyMessage."</h3>";
-                            echo"<p class=replyDate>Date Written: " . $replyDateWritten . "</p>";
-                        //echo"</div";
-                echo"</details>";
-            }//end of while loop to retrieve all replies to replies
-    }//end of viewRepliesToReplies()
+            echo "<details class=replyToRepiesDetails>";//Details for viewing the replies
+                echo"<summary>View Replies</summary>";
+                    while($replyToReplies = mysqli_fetch_array($queryReplyToReplies)){
+                        $replyMessage = $replyToReplies['reply_message'];
+                        $replyDateWritten = $replyToReplies['date_written'];
+                        $studentID = $_SESSION["currentUserLoginId"];
+                        $studentName = studentName($studentID);//Used studentName function to retrieve the student's name that wrote reply
+                                echo"<div class=replyToRepiesDiv>";
+                                    echo"<h2 class=replyNames>".$studentName."</h2>";
+                                    echo"<h3>".$replyMessage."</h3>";
+                                    echo"<p class=replyDate>Date Written: " . $replyDateWritten . "</p>";
+                                echo"</div>";
+                    }//end of while loop to retrieve all replies to replies
+            echo "</details>";
+        }//end of viewRepliesToReplies()
 
     /*****************************************************
      RETRIEVE THE STUDENT'S NAME THAT WROTE REPLY FUNCTION
