@@ -39,7 +39,8 @@ function displayCourseTitle()
     echo "<h2>" . $courseDes . "</h1>";
 } //end of displayCourseTitle()
 
-function featuredCourseReviews() {
+function featuredCourseReviews()
+{
     global $connectToDB;
     global $courseCode;
 
@@ -57,10 +58,10 @@ function featuredCourseReviews() {
     if (count($topReviews) >= 3) {
         echo "<h3 class=subHeader>Featured Reviews</h3>";
         echo "<div class=lower-flex-container>";
-        for($i = count($topReviews)-1; $i >= count($topReviews)-3; $i--) {
-            $storedFeaturedReviews[] = $topReviews[$i];   
+        for ($i = count($topReviews) - 1; $i >= count($topReviews) - 3; $i--) {
+            $storedFeaturedReviews[] = $topReviews[$i];
         }
-        for($t = 0; $t < count($storedFeaturedReviews); $t++) {
+        for ($t = 0; $t < count($storedFeaturedReviews); $t++) {
             $sqlSelectingFeatured = "SELECT * FROM studentcourse WHERE overall_review_rating = $storedFeaturedReviews[$t] AND course_code = $courseCode";
             $selectingFeaturedQuery = mysqli_query($connectToDB, $sqlSelectingFeatured);
             $studentCourseTableRow = mysqli_fetch_array($selectingFeaturedQuery);
@@ -73,11 +74,11 @@ function featuredCourseReviews() {
             $studentTableRow = mysqli_fetch_array($topStudentQuery);
 
             $topStudentName = $studentTableRow['fullName'];
-                
-            if($topStudentQuery && $selectingFeaturedQuery) {
+
+            if ($topStudentQuery && $selectingFeaturedQuery) {
                 echo "<div>";
-                    echo "<h1>".$topStudentName."</h1>";
-                    echo "<h2>".$topReviews."</h2>";
+                echo "<h1>" . $topStudentName . "</h1>";
+                echo "<h2>" . $topReviews . "</h2>";
                 echo "</div>";
             } else {
                 print_r($connectToDB);
@@ -85,7 +86,6 @@ function featuredCourseReviews() {
             }
         } //end of 2nd for()
         echo "</div>";
-
     } else {
         echo "<script> document.getElementById(featuredReviews).style.display = none; </script>";
     }
@@ -93,7 +93,8 @@ function featuredCourseReviews() {
 } //end of featuredCourseReviews()
 
 
-function correctTitle() {
+function correctTitle()
+{
     global $connectToDB;
     $courseCode = $_GET["id"];
 
@@ -115,22 +116,22 @@ function correctTitle() {
 //     echo "CONGRATS YOU PRESSED A BUTTON, WELL DONE!";
 // }
 //creating function to get users profile pictures for the Nav bar
-function navGetProfilePicture(){
+function navGetProfilePicture()
+{
     global $connectToDB;
     $sqlStudentInfo = "SELECT * FROM studentInfo";
 
     //Run and assign query 
     $data = mysqli_query($connectToDB, $sqlStudentInfo);
-     //While loop to retrieve data from studentInfo table. 
-     while ($rows = mysqli_fetch_array($data)) {
+    //While loop to retrieve data from studentInfo table. 
+    while ($rows = mysqli_fetch_array($data)) {
         $studentId = $rows['student_id'];
         if ($studentId == $_SESSION["currentUserLoginId"]) {
             $picture = $rows['user_image'];
             echo  "<img  src='/csc450Capstone/profileView/upload/" . $picture . "' alt='img' id ='navImage'>";
         }
     }
-
-}//end of navGetProfilePicture()
+} //end of navGetProfilePicture()
 ?>
 
 <!DOCTYPE html>
@@ -144,41 +145,39 @@ function navGetProfilePicture(){
 
 <body>
     <nav id="navbar">
-    <script>
-        var lastScrollTop; // This Varibale will store the top position
+        <script>
+            var lastScrollTop; // This Varibale will store the top position
 
-        navbar = document.getElementById('navbar'); // Get The NavBar
+            navbar = document.getElementById('navbar'); // Get The NavBar
 
-        window.addEventListener('scroll',function(){
-        //on every scroll this funtion will be called
-        
-        var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        //This line will get the location on scroll
-        
-        if(scrollTop > lastScrollTop){ //if it will be greater than the previous
-            navbar.style.top='-80px';
-            //set the value to the negetive of height of navbar 
-        }
-        
-        else{
-            navbar.style.top='0';
-        }
-        
-        lastScrollTop = scrollTop; //New Position Stored
-        });
-    </script>
+            window.addEventListener('scroll', function() {
+                //on every scroll this funtion will be called
+
+                var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                //This line will get the location on scroll
+
+                if (scrollTop > lastScrollTop) { //if it will be greater than the previous
+                    navbar.style.top = '-80px';
+                    //set the value to the negetive of height of navbar 
+                } else {
+                    navbar.style.top = '0';
+                }
+
+                lastScrollTop = scrollTop; //New Position Stored
+            });
+        </script>
         <ul class="menu">
             <li class="logo" id="logo">CSP Course Page</li>
             <li class="item"><a href="http://localhost/csc450Capstone/LandingPage/LandingPage.php">Home</a></li>
-            <li class="item">   
-            <div id="navPicture" >
-            <?php  navGetProfilePicture(); ?>
-            </div> 
+            <li class="item">
+                <div id="navPicture">
+                    <?php navGetProfilePicture(); ?>
+                </div>
             </li>
             <li class="item"><a href="http://localhost/csc450Capstone/profileView/profiles.php">Profile</a></li>
             <li class="item"><a href="http://localhost/csc450Capstone/MajorPage/CSCMajorPage.php">Majors</a></li>
             <li class="item button"><a href="http://localhost/csc450Capstone/LoginPage/logOut.php">Sign Out</a></li>
-    
+
             <li class="toggle"><span class="bars"></span></li>
         </ul>
     </nav>
@@ -198,33 +197,37 @@ function navGetProfilePicture(){
 
     <!-- Leave review overlay. Displayed using button above. Hidden when function tied to cancel button is called -->
 
-    <form method="POST" class="leaveReviewForm" id="leaveReviewForm">
-        <div>
-            <h3>Question 1</h3>
-            <textarea rows="5" cols="50"></textarea>
+    <form method="POST" id="leaveReviewForm">
+        <div class="leaveReviewForm" >
+            <div>
+                <h3>What did you learn?</h3>
+                <br>
+                <br>
+                <textarea rows="5" cols="30"></textarea>
+            </div>
+            <div>
+                <h3>How would ou suggest others prepare for this course?</h3>
+                <textarea rows="5" cols="30"></textarea>
+            </div>
+            <div>
+                <h3>What did you find the most challenging about this course?</h3>
+                <textarea rows="5" cols="30"></textarea>
+            </div>
+            <div class="addComment">
+                <h3>Any Additional Comments?</h3>
+                <textarea rows="5" cols="30"></textarea>
+            </div>
+            <!--Turn off overlay form-->
+            
         </div>
-        <div>
-            <h3>Question 2</h3>
-            <textarea rows="5" cols="50"></textarea>
-        </div>
-        <div>
-            <h3>Question 3</h3>
-            <textarea rows="5" cols="50"></textarea>
-        </div>
-        <div>
-            <h3>Any Additional Comments?</h3>
-            <textarea rows="5" cols="50"></textarea>
-        </div>
-        <!--Turn off overlay form-->
-        <button type="button" onclick="turnOFFoverlayForm()">Cancel</button>
-
-        <button type="submit" name="submitButton" id="submitButton" class="submitButton">Submit</button>
+        <button type="button" onclick="turnOFFoverlayForm()" class="reviewButton">Cancel</button>
+        <button type="submit" name="submitButton" id="submitButton" >Submit</button>
     </form>
 
-    <div id = "featuredReviews">
-            <?php featuredCourseReviews(); ?>
+    <div id="featuredReviews">
+        <?php featuredCourseReviews(); ?>
     </div>
-    
+
 
     <form method="POST">
         <h3 class="subHeader">All Reviews</h3>
@@ -239,8 +242,8 @@ function navGetProfilePicture(){
         document.getElementById("leaveReviewForm").style.display = "none";
 
         var maxReviewsNum = <?php echo $numIterator ?>;
-        for(let i = 0; i < maxReviewsNum; i++){
-            document.getElementById("replyForms"+i).style.display = "none";
+        for (let i = 0; i < maxReviewsNum; i++) {
+            document.getElementById("replyForms" + i).style.display = "none";
         }
 
         var prevScrollpos = window.pageYOffset;
@@ -255,7 +258,7 @@ function navGetProfilePicture(){
         }
         //Function to display the leave review overlay
         function turnOnOverlayForm() {
-            document.getElementById("leaveReviewForm").style.display = "block";
+            document.getElementById("leaveReviewForm").style.display = "flex";
         } //end of overlayForm()
 
         //function to turn off the overlay form 
@@ -282,7 +285,7 @@ function navGetProfilePicture(){
         //         }
         //     });
         // }
-        
+
         // var functionName = [];
         // for(var i = 0; i < maxReviewsNum; i++){
         //     functionName[i] = 'f'+i; 
@@ -300,50 +303,45 @@ function navGetProfilePicture(){
         // }
         // var replyForms = document.getElementById("replyForms"+i);
 
-        function f0(){
+        function f0() {
             var replyForms = document.getElementById("replyForms0");
-            if (replyForms.offsetWidth == 0 && replyForms.offsetHeight == 0 ) {
+            if (replyForms.offsetWidth == 0 && replyForms.offsetHeight == 0) {
                 replyForms.style.display = 'block';
             } else {
-                document.getElementsByClassName("replyMessage")[0].value = ''; 
+                document.getElementsByClassName("replyMessage")[0].value = '';
                 replyForms.style.display = 'none';
             }
-        }//end of f0()
+        } //end of f0()
 
-        function f1(){
+        function f1() {
             var replyForms = document.getElementById("replyForms1");
-            if (replyForms.offsetWidth == 0 && replyForms.offsetHeight == 0 ) {
+            if (replyForms.offsetWidth == 0 && replyForms.offsetHeight == 0) {
                 replyForms.style.display = 'block';
             } else {
-                document.getElementsByClassName("replyMessage")[1].value = ''; 
+                document.getElementsByClassName("replyMessage")[1].value = '';
                 replyForms.style.display = 'none';
             }
-        }//end of f1()
+        } //end of f1()
 
-        function f2(){
+        function f2() {
             var replyForms = document.getElementById("replyForms2");
-            if (replyForms.offsetWidth == 0 && replyForms.offsetHeight == 0 ) {
+            if (replyForms.offsetWidth == 0 && replyForms.offsetHeight == 0) {
                 replyForms.style.display = 'block';
             } else {
-                document.getElementsByClassName("replyMessage")[2].value = ''; 
+                document.getElementsByClassName("replyMessage")[2].value = '';
                 replyForms.style.display = 'none';
             }
-        }//end of f2()
+        } //end of f2()
 
-        function f3(){
+        function f3() {
             var replyForms = document.getElementById("replyForms3");
-            if (replyForms.offsetWidth == 0 && replyForms.offsetHeight == 0 ) {
+            if (replyForms.offsetWidth == 0 && replyForms.offsetHeight == 0) {
                 replyForms.style.display = 'block';
             } else {
-                document.getElementsByClassName("replyMessage")[3].value = ''; 
+                document.getElementsByClassName("replyMessage")[3].value = '';
                 replyForms.style.display = 'none';
             }
-        }//end of f3()
-
-
-
-
-
+        } //end of f3()
     </script>
 </body>
 
