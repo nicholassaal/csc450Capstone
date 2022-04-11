@@ -78,6 +78,7 @@ li a:hover {
 }
 .overallWrapper {
     width: 50%;
+    min-width: 600px;
     border: 2px groove rgb(71, 163, 182);
     display: inline-block;
     margin-left: 2%;
@@ -92,17 +93,32 @@ li a:hover {
     width: 200px;
     height: 25px;
 }
+
+
+/********************************************************
+ ************* TICKET REQUEST CHECKER BOXES *************
+ ********************************************************/
+
+.ticketRequestContainer {
+    /* border: 1px solid blue; TESTER OUTER BORDER FOR CSSING */
+    text-align: center;
+    
+}
 .wrapper{
     width: 40%;
+    min-width: 340px;
     padding: 20px;
-    border: 1px solid black;
+    border: 1px groove rgb(255, 81, 50);
     border-radius: 50px;
     background-color: rgba(34, 34, 34, 0.7);
-    float: left;
-    margin-left: 3.5%;
+    display: inline-block;
     margin-top: 20px;
-    
-    
+    margin-left: 1%;
+    margin-right: 1%;
+}
+
+.form-area {
+    text-align: left;
 }
 
 .details-area{
@@ -114,31 +130,116 @@ li a:hover {
     font-weight: bold;
 }
 .details-area input{
-    width:100%;
+    width:90%;
     background-color: rgba(255, 255, 255, 0.85);
     color:rgb(37, 37, 37);
     border-radius: 10px;
+    font-weight: bold;
 }
 .details-area input,
 .details-area button{
     padding: 1em;
     margin-bottom: 1em;
-
 }
-#acceptChanges{
-    background: rgb(52, 168, 159);
-    color:#fff;
-    border: 0;
-    padding: 15px 50px;
-    border-radius: 40px;
-    font-family: poppins;
-    font-size: 15px;
-    text-transform: uppercase;
-    margin-top: 10px;
+
+/********************************************************
+ ******************* CUSTOM CHECK BOX *******************
+ ********************************************************/
+ /* ASSIGNING PLACEMENT AND DIMENSIONS OF THE CONTAINER FOR THE CHECKBOXES */
+.chkboxContainer {
+    display: inline-block;
+    position: absolute;
+    padding-left: 25px;
+    padding-top: 2px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    color: black;
+    font-size: 13px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    margin-top: 13px;
+    margin-left: -107px;    
+}
+
+/* HIDE ORIGINAL TEXT BOX */
+.chkboxContainer input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+/* CREATING A NEW CHECK BOX ACCORDING THESE DIMENSIONS  */
+.newChkBox {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 18px;
+    width: 18px;
+    background-color: rgba(255, 255, 255, 0.85);
+    border: 1px solid rgb(63, 63, 63);
+    border-radius: 3px;
+}
+/* ALLOWS FOR BACKGROUND CHANGE WHEN HOVERING OVER CHECKBOX (including the word tied to it) */
+.chkboxContainer:hover input ~ .newChkBox {
+    background-color: rgb(187, 187, 187);
+}
+/* CHANGES BACKGROUND TO COLOR SUGGESTED BELOW WHEN 'CHECKED' */
+.chkboxContainer input:checked ~ .newChkBox {
+    background-color: #21f360;
+}
+/* WHEN NOT CHECKED, SHOW NOTHING... */
+.newChkBox:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* WHEN CHECKED, DISPLAY CHECKMARK */
+.chkboxContainer input:checked ~ .newChkBox:after {
+    display: block;
+}
+
+/* CREATED CUSTOM CHECKMARK */
+.chkboxContainer .newChkBox:after {
+    left: 5px;
+    top: 1px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+.changesInputDiv {
+    /* border: 1px solid turquoise; TESTER OUTER BORDER FOR CSSING */
+    width: 110%;;
+    min-width: 280px;
+}
+
+
+/********************************************************
+ **************** ACCEPT / DISCARD BTNs *****************
+ ********************************************************/
+.btnContainer {
+    display: block;
+    /* border: 1px solid green; TESTER OUTER BORDER FOR CSSING */
+    text-align: center;
     
 }
-#discardChanges{
-    background: rgb(255, 81, 50);
+ #acceptChanges, #discardChanges, #lockIn {
+    width: 30%;
+    min-width: 230px;   
+    text-align: center;
+ }
+
+/******* Lock In Button CSS *******/
+#lockIn {
+    background-color: rgb(50, 146, 138);
     color:#fff;
     border: 0;
     padding: 15px 50px;
@@ -148,6 +249,65 @@ li a:hover {
     text-transform: uppercase;
     margin-top: 10px;
 }
+
+#lockIn:hover:enabled {
+    background-color: rgb(69, 199, 188);
+    cursor:pointer;
+}
+
+/******* Accept Changes Button CSS *******/
+#acceptChanges{
+    background-color: #329642;
+    color:#fff;
+    border: 0;
+    padding: 15px 50px;
+    border-radius: 40px;
+    font-family: poppins;
+    font-size: 15px;
+    text-transform: uppercase;
+    margin-top: 10px; 
+}
+
+#acceptChanges:hover:enabled {
+    background-color: #40c556;
+    cursor:pointer;
+}
+
+#acceptChanges:disabled {
+    background-color: rgb(99, 99, 99);
+}
+
+#acceptChanges:hover:disabled {
+    cursor: not-allowed;
+}
+
+
+/******* Discard Changes Button CSS *******/
+#discardChanges{
+    background-color: rgb(255, 81, 50);
+    color:#fff;
+    border: 0;
+    padding: 15px 50px;
+    border-radius: 40px;
+    font-family: poppins;
+    font-size: 15px;
+    text-transform: uppercase;
+    margin-top: 10px;
+}
+
+#discardChanges:hover:enabled {
+    cursor:pointer;
+    background-color: rgb(243, 121, 73);
+}
+
+#discardChanges:disabled {
+    background-color: rgb(99, 99, 99);
+}
+ 
+#discardChanges:hover:disabled {
+    cursor:not-allowed;
+}
+
 
 
  

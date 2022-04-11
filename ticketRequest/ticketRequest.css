@@ -1,14 +1,18 @@
 body {
     font-family: sans-serif;
     padding-top: 85px;
-    margin-right: 30%;
-    margin-left: 30%;
+    margin-right: 25%;
+    margin-left: 25%;
     background-image: url("graphic/LandingPageBackgroundIMG.jpg");
 }
 .outside-container {
-    border: 2px dashed rgb(231, 13, 86);
+    /* border: 2px dashed rgb(231, 13, 86); BORDER FOR CSSING PURPOSES */
+    min-width: 700px;
     
 }
+/*********************************************
+ ************ TICKET REQUEST FORM ************
+ *********************************************/
 .overallTicketField {
     border: 2px groove rgb(71, 163, 182);
     background-color: rgba(34, 34, 34, 0.9);
@@ -27,8 +31,16 @@ body {
     padding-right: 5px;
 }
 .div_container {
-    margin-left: 5%;
-    
+    display: block;
+}
+
+/**************** INNER LEFT DIV ****************/
+.inner_Left_Div {
+    /* border: 2px dashed rgb(231, 13, 86); BORDER FOR CSSING PURPOSES */
+    float: left;
+    width: 45%;
+    min-width: 300px;
+    margin-left: 25px;
 }
 
 .firstNameChange, .lastNameChange, .majorChange {
@@ -37,10 +49,17 @@ body {
     margin-top: 10px;
 }
 
-.inner_div_container {
+#firstNameChangeInput, #lastNameChangeInput {
+    width: 65%;
+}
+
+/**************** INNER RIGHT DIV ****************/
+.inner_Right_Div {
+    /* border: 2px dashed rgb(231, 13, 86); BORDER FOR CSSING PURPOSES */
     float:right;
-    margin-top:-145px;
-    margin-right: 35px;
+    width: 45%;
+    min-width: 300px;
+    margin-right: 25px;
 }
 
 .tableEnrolled {
@@ -53,6 +72,7 @@ body {
 .tableOnCampus {
     background-color: rgba(250, 234, 209, 0.9); 
     border-radius: 10px;
+    width: 100%;
 }
 
 .tableOnCampus th, td, .tableEnrolled th, td {
@@ -76,3 +96,54 @@ body {
     margin-top: 30px;
 }
 
+/*******************************************************
+ ************ TICKET REQUEST MESSAGE SYSTEM ************
+ *******************************************************/
+
+.containerForTRMessage {
+    margin-top: 30px;
+    min-width: 667px;
+    height: 300px;
+    border: 2px dashed rgb(247, 112, 157);
+    background-color: rgba(34, 34, 34, 0.9);
+}
+
+.ticketRequestMessageLegend {
+    font-size: 21px;
+    background-color: rgba(34, 34, 34, 0.9);
+    font-family: Georgia, 'Times New Roman', Times, serif; 
+    color:white;
+    border-bottom: 2px groove rgb(50, 50, 51);
+    border-top: 2px groove rgb(50, 50, 51);
+    border-left: 2px groove rgb(71, 163, 182);
+    border-right: 2px groove rgb(71, 163, 182);
+    border-radius: 7px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.detailsTR {
+    float: left;
+    border: 1px solid red;
+    width: 16%;
+    height: 42px;
+    padding-top: 25px;
+}
+
+
+.TRHeader {
+    border: 2px dashed rgb(231, 13, 86);
+    text-align: center;
+    color: white;
+    margin-top: 10px;
+    
+}
+
+.studentChangeHeader {
+    width: 16%;
+    height: 40px;
+    padding-top: 22px;
+    
+    float: right;
+    border: 2px solid black;
+}
