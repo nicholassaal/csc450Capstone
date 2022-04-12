@@ -127,34 +127,58 @@ h1 {
 
 .leaveReviewForm { /* this is the container for holding review elements */
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
   justify-content: center;
-  align-items: center;
-  width: 90%;
-  height: 50%;
-  max-width: 1200px;
-  margin-left: auto;
-  margin-right: auto;
-  background-color: rgb(34, 34, 34, 0.9);
+  flex-direction: row;
+  
 }
 
 .leaveReviewForm > div { /* review questions  */
   padding: 1%;
   margin: 1%;
-  width: auto;
+  flex: 1 0 25%;
   text-align: center;
+  background-color: rgb(117, 116, 116);
+
 }
 
-.leaveReviewForm > textarea { /* review text boxes */
+#leaveReviewForm {
+  position: relative;
+  width: 90%;
+  height: 50%;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: rgb(34, 34, 34, 0.9);
+  padding-bottom: 40px;
+}
+
+.reviewButton {
+  position: absolute;
+  bottom: 2.5%;
+  margin: 0 40%;
+  width: 60px;
+  height: 30px;
+}
+#submitButton {
+  position: absolute;
+  bottom: 2.5%;
+  margin: 0 50%;
+  width: 60px;
+  height: 30px;
+}
+
+.addComment > textarea {
+  height: 150px;
+}
+
+
+.leaveReviewForm > div > textarea { /* review text boxes */
+  width: 90%;
+  bottom: 0;
   resize: none;
 }
 
-.leaveReviewForm > button { /* */
-  margin-left: 1%;
-  margin-top: 1%;
-  margin-bottom: 1%;
-  padding: 1%;
-}
 
 /*VIEW OTHER PROFILE BUTTON*/
 .btn a{
