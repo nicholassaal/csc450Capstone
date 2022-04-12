@@ -187,17 +187,10 @@ function navGetProfilePicture(){
 
         <!-- Display course title at the top using the php function -->
         <?php displayCourseTitle(); ?>
-
-        <!-- <h1>Course Name</h1>
-        <h2>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iure facere ea eaque, vel odit minus id,
-            perferendis eos tenetur earum est doloremque possimus dignissimos nam at voluptatibus optio unde esse. Lorem
-            ipsum dolor sit amet consectetur adipisicing elit. Harum, ea ad vitae accusamus aliquid minus perferendis,
-            provident dolore explicabo quod nemo eos! Totam ducimus quasi enim repellat, harum libero debitis!</h2> -->
         <button type="button" id="editProfileButton" onclick="turnOnOverlayForm()">Leave a Review</button>
     </div>
 
     <!-- Leave review overlay. Displayed using button above. Hidden when function tied to cancel button is called -->
-
     <form method="POST" class="leaveReviewForm" id="leaveReviewForm">
         <div>
             <h3>Question 1</h3>
@@ -226,21 +219,27 @@ function navGetProfilePicture(){
     </div>
     
 
-    <form method="POST">
         <h3 class="subHeader">All Reviews</h3>
         <div class="review-flex-container">
             <!--Called php function to the review message for that specific course -->
-            <?php displayCourseReviewMessage(); ?>
+                <?php displayCourseReviewMessage(); ?>
         </div>
 
-    </form>
 
     <script>
         document.getElementById("leaveReviewForm").style.display = "none";
 
+        /******************************************
+         *********   HIDE ALL REPLY FROMS   *********
+        ********************************************/
         var maxReviewsNum = <?php echo $numIterator ?>;
         for(let i = 0; i < maxReviewsNum; i++){
             document.getElementById("replyForms"+i).style.display = "none";
+        }
+        var maxReviewsNum = <?php echo $numIterator2?>;
+        var replyToReplyForms = document.getElementsByClassName("replytoReplyForms");
+        for(let j = 0; j < maxReviewsNum; j++){
+            replyToReplyForms[j].style.display = "none";
         }
 
         var prevScrollpos = window.pageYOffset;
@@ -253,6 +252,7 @@ function navGetProfilePicture(){
             }
             prevScrollpos = currentScrollPos;
         }
+
         //Function to display the leave review overlay
         function turnOnOverlayForm() {
             document.getElementById("leaveReviewForm").style.display = "block";
@@ -263,86 +263,56 @@ function navGetProfilePicture(){
             document.getElementById("leaveReviewForm").style.display = "none";
         }
 
-        //..................WORK IN PROGESS DONT THINK OF IT AS CREATING MULTIPLE FUNCTION......................//
-        // var functions = [];
-        // for(var i = 0; i < maxReviewsNum; i++){
-        //     num[i] = i; 
-        // }   
+        /******************************************
+         *********   TOGGLE REPLY FROMS   *********
+        ********************************************/
+        const replyBtns = document.querySelectorAll('.replyBtn');
+        for(let i = 0; i < replyBtns.length; i++) {
+            replyBtns[i].addEventListener('click', () => {
+                for(let j = 0; j < replyBtns.length; j++){
+                    replyBtns[j].classList.remove('active');
+                }
 
-        // replyBtns = document.getElementsByClassName("replyBtn");
+                replyBtns[i].innerHTML = "Cancel";
+                replyBtns[i].style.color = "rgb(255, 112, 112)";
+                replyBtns[i].classList.add('active');
 
-        // for(var i = 0; i < replyBtns.length; i++){
-        //     replyBtns[i].addEventListener("click", function(){
-        //         var replyForms = document.getElementById('replyForms'+(i-1));
-        //         window.alert(replyForms);
-        //         if (replyForms.offsetWidth == 0 && replyForms.offsetHeight == 0){
-        //             replyForms.style.display = 'block';
-        //         } else {
-        //             replyForms.style.display = 'none';
-        //         }
-        //     });
-        // }
-        
-        // var functionName = [];
-        // for(var i = 0; i < maxReviewsNum; i++){
-        //     functionName[i] = 'f'+i; 
-        // }   
+                var replyForms = document.getElementById("replyForms"+i);
+                    if (replyForms.offsetWidth == 0 && replyForms.offsetHeight == 0 ) {
+                        replyForms.style.display = 'block';
+                    } else {
+                        replyBtns[i].style.color = "white";
+                        replyBtns[i].innerHTML = "Reply";
+                        document.getElementsByClassName("replyMessage")[i].value = ''; 
+                        replyForms.style.display = 'none';
+                    }
+            })
+        }
 
-        // for(var i = 0; i < maxReviewsNum; i++){
-        //     var replyForms = document.getElementById("replyForms"+i);
-        //     window[functionName[i]] = function toggleForms(replyForms){
-        //         if (replyForms.offsetWidth == 0 && replyForms.offsetHeight == 0 ) {
-        //             replyForms.style.display = 'block';
-        //         } else {
-        //             replyForms.style.display = 'none';
-        //         }
-        //     };
-        // }
-        // var replyForms = document.getElementById("replyForms"+i);
+        /******************************************
+        *****   TOGGLE REPLY TO REPLY FROMS   *****
+        ********************************************/
+        const replyToReplyBtns = document.querySelectorAll('.replyToReplyBtn');
+        for(let i = 0; i < replyToReplyBtns.length; i++) {
+            replyToReplyBtns[i].addEventListener('click', () => {
+                for(let j = 0; j < replyToReplyBtns.length; j++){
+                    replyToReplyBtns[j].classList.remove('active');
+                }
+                replyToReplyBtns[i].innerHTML = "Cancel";
+                replyToReplyBtns[i].style.color = "firebrick";
+                replyToReplyBtns[i].classList.add('active');
 
-        function f0(){
-            var replyForms = document.getElementById("replyForms0");
-            if (replyForms.offsetWidth == 0 && replyForms.offsetHeight == 0 ) {
-                replyForms.style.display = 'block';
-            } else {
-                document.getElementsByClassName("replyMessage")[0].value = ''; 
-                replyForms.style.display = 'none';
-            }
-        }//end of f0()
-
-        function f1(){
-            var replyForms = document.getElementById("replyForms1");
-            if (replyForms.offsetWidth == 0 && replyForms.offsetHeight == 0 ) {
-                replyForms.style.display = 'block';
-            } else {
-                document.getElementsByClassName("replyMessage")[1].value = ''; 
-                replyForms.style.display = 'none';
-            }
-        }//end of f1()
-
-        function f2(){
-            var replyForms = document.getElementById("replyForms2");
-            if (replyForms.offsetWidth == 0 && replyForms.offsetHeight == 0 ) {
-                replyForms.style.display = 'block';
-            } else {
-                document.getElementsByClassName("replyMessage")[2].value = ''; 
-                replyForms.style.display = 'none';
-            }
-        }//end of f2()
-
-        function f3(){
-            var replyForms = document.getElementById("replyForms3");
-            if (replyForms.offsetWidth == 0 && replyForms.offsetHeight == 0 ) {
-                replyForms.style.display = 'block';
-            } else {
-                document.getElementsByClassName("replyMessage")[3].value = ''; 
-                replyForms.style.display = 'none';
-            }
-        }//end of f3()
-
-
-
-
+                var replyForms = document.getElementById("replytoReplyForms"+i);
+                    if (replyForms.offsetWidth == 0 && replyForms.offsetHeight == 0 ) {
+                        replyForms.style.display = 'block';
+                    } else {
+                        replyToReplyBtns[i].style.color = "white";
+                        replyToReplyBtns[i].innerHTML = "Reply";
+                        document.getElementsByClassName("replyToReplyMessage")[i].value = ''; 
+                        replyForms.style.display = 'none';
+                    }
+            })
+        }
 
     </script>
 </body>

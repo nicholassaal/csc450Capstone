@@ -113,6 +113,9 @@ h1 {
   color: black;
 }
 
+#likeReviewBtn{
+  width: 10%;
+}
 
 /* 
 --------------------------------------------------
@@ -164,10 +167,6 @@ h1 {
 --------------------------------------------------
 */ 
 
-.replyToReplySummary{
-  list-style: none;
-}
-
 summary{
   /*list-style: none;*//* This will hide the 'details' black arrow */
   padding:5px;
@@ -204,4 +203,16 @@ summary{
 
 #replySubmitBtn, #replyBtn2{
   display:block;
+}
+
+.replyBtn, .replyToReplyBtn:hover{
+  cursor:pointer;
+}
+
+.replyBtn, .replyToReplyBtn{
+  font-size:large;
+  color: white;
+  text-decoration: underline;
+  background-color: transparent;
+  border:none;
 }

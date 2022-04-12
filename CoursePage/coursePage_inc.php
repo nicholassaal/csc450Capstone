@@ -16,8 +16,7 @@
         $data = mysqli_query($connectToDB, $sqlStudentCourse);
     
         $arrayIndex = 0;
-        //$numIterator = 1;
-    
+
         while ($rows = mysqli_fetch_array($data)) {
             $reviewID = $rows['studentCourseReview_id']; 
             $courseReviewMessage = $rows['review_message']; //Retrieve the review_message
@@ -36,11 +35,12 @@
             $overallReviewRatings = $retrieveReview['overall_review_rating'];
     
             echo $overallReviewRatings;
-            echo "<form method=POST action= formActions.php?id=$courseCode>";
+
+            echo "<form method=POST action= formActions.php?id=$courseCode >";
                 echo"<input type='hidden' name='reviewID' value= '$reviewID'>";
                 echo"<input type='hidden' name='studentReviewID' value= '$studentID'>";
                 echo"<input type='hidden' name='overallReviewRatings' value= '$overallReviewRatings'>";
-                echo "<button type = submit name = likeReviewBtn id = likeReviewBtn> Like the Review </button>";
+                echo "<input type = submit name = likeReviewBtn id = likeReviewBtn value = Like the Review>  ";
             echo "</form>";
     
             /*************** WORKING ON ***************/
@@ -67,21 +67,18 @@
             echo "</a>";
 
             //REPLY button 
-            echo "<button type = button class=replyBtn id = replyBtn$numIterator onclick=f$numIterator()>Reply</button>";
+            echo "<button type = button class=replyBtn>Reply</button>";
             
             /*****************************************
              START OF FORM TO REPLY TO REVIEWS
              *****************************************/
-            //echo "<details class=replyBtnDetails>";
-                //echo "<summary id=replyBtnSummary>Reply</summary>";
-                    echo "<form method=POST action= formActions.php?id=$courseCode id=replyForms$numIterator class=replyForms$numIterator>";
+                    echo "<form method=POST action= formActions.php?id=$courseCode id=replyForms$numIterator class=replyForms>";
                         echo"<textarea style='resize:none;'name='replyMessage' class='replyMessage' id='replyMessage' cols='50%' rows='10' placeholder='Reply to the review'></textarea>";
                         echo"<input type='hidden' name='dateWritten' value= ".date('Y-m-d').">";
+                        echo"<input type='hidden' name='studentReviewID' value= '$studentID'>";
                         echo"<input type='hidden' name='reviewID' value= '$reviewID'>";
                         echo"<button type = 'submit' id='replySubmitBtn' name='replySubmitBtn'>Reply</button>";
-                        echo"<button type = 'button' id='cancelReplyBtn' name='cancelReplyBtn' onclick='f$numIterator()'>Cancel</button>";
                     echo "</form>";
-            //echo "</details>";
             /*****************************************
               VIEW ALL REPLIES TO REVIEW FUNCTION 
              *****************************************/
@@ -97,9 +94,11 @@
     /*****************************************
      VIEW ALL REPLIES TO REVIEW FUNCTION 
     *****************************************/
+    $numIterator2 = 0;
     function viewReplies($studentID, $reviewID){
         global $connectToDB;
         global $courseCode;
+        global $numIterator2;
         
         $sqlRetrieveReviewID = "SELECT studentCourseReview_id FROM studentCourse WHERE student_id = $studentID";
         $queryReviewID = mysqli_query($connectToDB, $sqlRetrieveReviewID);
@@ -132,20 +131,19 @@
                                     echo"<h3>".$replyMessage."</h3>";
                                     echo"<p class=replyDate>Date Written: " . $replyDateWritten . "</p>";
                                         //START OF FORM TO REPLY TO REPLIES
-                                        echo "<details class=replyToReplyFrom>";
-                                            echo "<summary class=replyToReplySummary>Reply</summary>";
-                                                echo "<form method=POST action= formActions.php?id=$courseCode id=replyToReplyForms class=replytoReplyForms>";
-                                                    echo"<textarea style='resize:none;' name='replyToReplyMessage' id='replyToReplyMessage' cols='50%' rows='10' placeholder='Reply'></textarea>";
+                                        echo "<button type = button class=replyToReplyBtn>Reply</button>";
+                                                echo "<form method=POST action=formActions.php?id=$courseCode id=replytoReplyForms$numIterator2 class=replytoReplyForms>";
+                                                    echo"<textarea style='resize:none;' name='replyToReplyMessage' class='replyToReplyMessage' id='replyToReplyMessage' cols='50%' rows='10' placeholder='Reply'></textarea>";
                                                     echo"<input type='hidden' name='dateWritten2' value= ".date('Y-m-d').">";
                                                     echo"<input type='hidden' name='reviewID' value= '$reviewID'>";
+                                                    echo"<input type='hidden' name='studentReviewID' value= '$studentID'>";
                                                     echo"<input type='hidden' name='replyID' value= '$replyID'>";
                                                     echo"<button type = 'submit' id='replyBtn2' name='replyBtn2'>Reply</button>";
-                                                    //echo"<button type = 'button' id='cancelReplyBtn' name='cancelReplyBtn' onclick='toggleReplyForms()'>Cancel</button>";
                                                 echo "</form>";
-                                        echo "</details>";
+                                                
                                         viewRepliesToReplies($reviewID, $replyID);
+                                        $numIterator2++;
                                 echo"</div>";//end of viewRepliesSection <div>
-                                
                     }//end of inner while loop to retrieve replies
                 }//end of outter while loop to retrieve the review id
         echo "</details>";

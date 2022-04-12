@@ -531,24 +531,6 @@ function toggleEditProfilePicture() {
 }//end of toggleEditProfilePicture button function
 
 
-    // $(document).ready(function() {
-    //     $('form').submit(function(e){
-    //         e.preventDefault();
-    //     });
-    // });
-
-    
-    // document.getElementById("editProfileform").style.display = "";
-    // //function to turn off the overlay form 
-    // function turnOFFoverlayForm() {
-    //     document.getElementById("editProfileform").style.display = "none";
-    // }
-
-    // //Function to display the overlay form for editing/updating user profile 
-    // function turnONoverlayForm() {
-    //     document.getElementById("editProfileform").style.display = "block";
-    // } //end of overlayForm()
-
     //Create the functions to show password for the users if they check the check box 
     function showPassword() {
         //retrieve the two passwords
@@ -567,18 +549,4 @@ function toggleEditProfilePicture() {
             confirmedPassword.type = "password";
         }
     } //end of showPassword function 
-
-
-    // var savedVar;
-    // for (var t = 0; t < 50; t++){
-    //     savedVar = document.getElementById(t);
-    //     if (typeof window.addEventListener === 'function'){
-    //         (function (savedVar) {
-    //             savedVar.addEventListener('click', function(){
-    //                 console.log(savedVar);
-
-    //             });
-    //         })(savedVar);
-    //     }
-    // }
 </script>
