@@ -223,13 +223,13 @@ li a:hover {
 
 
 /********************************************************
- **************** ACCEPT / DISCARD BTNs *****************
+ *********** LOCKIN / ACCEPT / DISCARD BTNs *************
  ********************************************************/
 .btnContainer {
     display: block;
     /* border: 1px solid green; TESTER OUTER BORDER FOR CSSING */
     text-align: center;
-    
+    margin-top: 60px;
 }
  #acceptChanges, #discardChanges, #lockIn {
     width: 30%;

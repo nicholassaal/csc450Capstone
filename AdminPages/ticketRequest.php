@@ -336,25 +336,31 @@
                 $majorChange        = $_POST['majorChange'];
                 $enrollmentChange   = $_POST['numericEnrollmentChange'];
                 $onCampusChange     = $_POST['numericOnCampusChange'];
-
-                echo "<br><br> SESSION CHECKBOX1: ".$_SESSION["checkBox1"];
-
-                echo "<br> $enrollmentChange <br> <br> $onCampusChange <br><br>";
-
-                echo "Student First Name Change: ".$firstNameChange;
-                echo "<br>studentID: ".$studentID;
-                echo "<br>CHECKBOX 1:".$checkBox1;
                 
                 /**************************** Confirming choice for checkBox1 ****************************/
                 if($checkBox1 == 1) {
                     $sqlfNameChangeAccepted = "UPDATE studentinfo SET student_fName = '$firstNameChange' WHERE student_id = '$studentID'";
                     $fNameChangeQuery = mysqli_query($connectToDB, $sqlfNameChangeAccepted);
-                    if ($fNameChangeQuery) {
+
+                    $sqlfNameChangeCompletionTable = "UPDATE ticketrequestcompletion SET ticket_fName_check = '1' WHERE student_id = '$studentID'";
+                    $fNameChangeCompletionQuery = mysqli_query($connectToDB, $sqlfNameChangeCompletionTable);
+
+                    if ($fNameChangeQuery && $fNameChangeCompletionQuery) {
                         echo "STUDENT WAS UPDATED!";
                     } else {
                         print_r($fNameChangeQuery);
                     }
                 } else { //This is just a thought for auto populating a response to the user for what was denied
+
+                    $sqlfNameChangeCompletionTable = "UPDATE ticketrequestcompletion SET ticket_fName_check = '0' WHERE student_id = '$studentID'";
+                    $fNameChangeCompletionQuery = mysqli_query($connectToDB, $sqlfNameChangeCompletionTable);
+
+                    if ($fNameChangeCompletionQuery) {
+                        echo "<br>Student will be notified of the changes!";
+                    } else {
+                        print_r($fNameChangeCompletionQuery);
+                    }
+
                     $fNameChangeQuery = TRUE;
                     $firstNameNotAccepted = "First name change was not accepted to be changed!";
                 } //end of checking NameChanged
@@ -363,12 +369,26 @@
                 if ($checkBox2 == 1) {
                     $sqllNameChangeAccepted = "UPDATE studentinfo SET student_lName = '$lastNameChange' WHERE student_id = '$studentID'";
                     $lNameChangeQuery = mysqli_query($connectToDB, $sqllNameChangeAccepted);
-                    if ($lNameChangeQuery) {
+
+                    $sqllNameChangeCompletionTable = "UPDATE ticketrequestcompletion SET ticket_lName_check = '1' WHERE student_id = '$studentID'";
+                    $lNameChangeCompletionQuery = mysqli_query($connectToDB, $sqllNameChangeCompletionTable);
+
+                    if ($lNameChangeQuery && $lNameChangeCompletionQuery) {
                         echo "STUDENT WAS UPDATED!";
                     } else {
                         print_r($lNameChangeQuery);
                     }
                 } else {
+
+                    $sqllNameChangeCompletionTable = "UPDATE ticketrequestcompletion SET ticket_lName_check = '0' WHERE student_id = '$studentID'";
+                    $lNameChangeCompletionQuery = mysqli_query($connectToDB, $sqllNameChangeCompletionTable);
+
+                    if ($lNameChangeCompletionQuery) {
+                        echo "<br>Student will be notified of the changes!";
+                    } else {
+                        print_r($lNameChangeCompletionQuery);
+                    }
+
                     $lNameChangeQuery = TRUE;
                     $lastNameNotAccepted = "Last name change was not accepted to be changed!";
                 }
@@ -382,12 +402,26 @@
                     $sqlMajorChangeAccepted = "UPDATE studentmajor SET major_id = $majorUpdateId[major_id] WHERE student_id = '$studentID'"; //using the newly grabbed major_id to the desired student
                     $majorChangeAcceptedQuery = mysqli_query($connectToDB, $sqlMajorChangeAccepted);
 
-                    if ($majorChangeAcceptedQuery) {
+                    $sqlMajorChangeCompletion = "UPDATE ticketrequestcompletion SET ticket_major_check = '1' WHERE student_id = '$studentID'";
+                    $majorChangeCompletionQuery = mysqli_query($connectToDB, $sqlMajorChangeCompletion);
+
+
+                    if ($majorChangeAcceptedQuery && $majorChangeCompletionQuery) {
                         echo "STUDENT WAS UPDATED!";
                     } else {
                         print_r($majorChangeAcceptedQuery);
                     }
                 } else {
+
+                    $sqlMajorChangeCompletion = "UPDATE ticketrequestcompletion SET ticket_major_check = '0' WHERE student_id = '$studentID'";
+                    $majorChangeCompletionQuery = mysqli_query($connectToDB, $sqlMajorChangeCompletion);
+
+                    if ($majorChangeCompletionQuery) {
+                        echo "<br>Student will be notified of the changes!";
+                    } else {
+                        print_r($majorChangeCompletionQuery);
+                    }
+
                     $majorChangeAcceptedQuery = TRUE;
                     $majorChangeNotAccepted = "Major change was not accepted to be changed!";
                 }
@@ -395,12 +429,26 @@
                 if ($checkBox4 == 1) {
                     $sqlEnrollmentChangeAccepted = "UPDATE studentmajor SET enrollment_status = '$enrollmentChange' WHERE student_id = '$studentID'";
                     $enrollmentChangeAcceptedQuery = mysqli_query($connectToDB, $sqlEnrollmentChangeAccepted);
-                    if ($enrollmentChangeAcceptedQuery) {
+
+                    $sqlEnrollmentChangeCompletion = "UPDATE ticketrequestcompletion SET ticket_enrollment_check = '1' WHERE student_id = '$studentID'";
+                    $erollmentChangeCompletionQuery = mysqli_query($connectToDB, $sqlEnrollmentChangeCompletion);
+
+                    if ($enrollmentChangeAcceptedQuery && $erollmentChangeCompletionQuery) {
                         echo "STUDENT WAS UPDATED!";
                     } else {
                         print_r($enrollmentChangeAcceptedQuery);
                     }
                 } else {
+
+                    $sqlMajorChangeCompletion = "UPDATE ticketrequestcompletion SET ticket_enrollment_check = '0' WHERE student_id = '$studentID'";
+                    $majorChangeCompletionQuery = mysqli_query($connectToDB, $sqlMajorChangeCompletion);
+
+                    if ($majorChangeCompletionQuery) {
+                        echo "<br>Student will be notified of the changes!";
+                    } else {
+                        print_r($majorChangeCompletionQuery);
+                    }
+
                     $enrollmentChangeAcceptedQuery = TRUE;
                     $enrollmentChangeNotAccepted = "It says that you are still enrolled with your school!";
                 }
@@ -409,12 +457,26 @@
                 if ($checkBox5 == 1) {
                     $sqlOnCampusChangeAccepted = "UPDATE studentinfo SET student_on_campus = '$onCampusChange' WHERE student_id = '$studentID'";
                     $onCampusChangeAcceptedQuery = mysqli_query($connectToDB, $sqlOnCampusChangeAccepted);
-                    if ($onCampusChangeAcceptedQuery) {
+
+                    $sqlOnCampusChangeCompletion = "UPDATE ticketrequestcompletion SET ticket_onCampus_check = '1' WHERE student_id = '$studentID'";
+                    $onCampusChangeCompletionQuery = mysqli_query($connectToDB, $sqlOnCampusChangeCompletion);
+
+                    if ($onCampusChangeAcceptedQuery && $onCampusChangeCompletionQuery) {
                         echo "STUDENT WAS UPDATED!";
                     } else {
                         print_r($onCampusChangeAcceptedQuery);
                     }
                 } else {
+
+                    $sqlOnCampusChangeCompletion = "UPDATE ticketrequestcompletion SET ticket_onCampus_check = '0' WHERE student_id = '$studentID'";
+                    $onCampusChangeCompletionQuery = mysqli_query($connectToDB, $sqlOnCampusChangeCompletion);
+
+                    if ($onCampusChangeCompletionQuery) {
+                        echo "<br>Student will be notified of the changes!";
+                    } else {
+                        print_r($onCampusChangeCompletionQuery);
+                    }
+                    
                     $onCampusChangeAcceptedQuery = TRUE;
                     $onCampusChangeNotAccepted = "Says under file that you are still on campus!";
                 }

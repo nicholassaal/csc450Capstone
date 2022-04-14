@@ -79,6 +79,18 @@ $ticketRequestTable = "CREATE TABLE IF NOT EXISTS ticketRequest(
     student_id INT
     )";
 
+$ticketRequestCompletionTable = "CREATE TABLE IF NOT EXISTS ticketRequestCompletion(
+    ticketComplete_id INT AUTO_INCREMENT PRIMARY KEY,
+    ticketComplete_check BOOLEAN,
+    ticket_fName_check BOOLEAN,
+    ticket_lName_check BOOLEAN,
+    ticket_major_check BOOLEAN,
+    ticket_enrollment_check BOOLEAN,
+    ticket_onCampus_check BOOLEAN,
+    ticketComplete_Message VARCHAR(600),
+    student_id INT
+)";
+
 $sqlStudentCourse = "CREATE TABLE IF NOT EXISTS studentCourse( 
    studentCourseReview_id INT AUTO_INCREMENT PRIMARY KEY,
    student_id INT NOT NULL,
@@ -138,6 +150,7 @@ $sqlProfessor = "CREATE TABLE IF NOT EXISTS professor(
 //'$tableCreate1 =' Assigns queries for each connection type for each table creation... This cleans it up with using AND statements
 $tableCreate = mysqli_query($connectTable, $sqlStudentInfo) 
     AND mysqli_query($connectTable, $ticketRequestTable) 
+    AND mysqli_query($connectTable, $ticketRequestCompletionTable)
     AND mysqli_query($connectTable, $sqlUserLoginInfo) 
     AND mysqli_query($connectTable, $sqlStudentCourse)
     AND mysqli_query($connectTable, $sqlReview_message_replies) 
@@ -176,6 +189,10 @@ $insertStudentInfo = "INSERT INTO studentInfo (student_fName, student_lName, stu
 
 $insertTicketRequest = "INSERT INTO ticketRequest (ticket_fName_change, ticket_lName_change, ticket_major_change, ticket_enrollment_change, ticket_OnCampus_change, student_id)
     VALUE ('Jackie', 'Brown', 'Communications', '1', '0', '1')";
+
+$insertTicketRequestCompletion = "INSERT INTO ticketrequestcompletion (ticketComplete_check, ticket_fName_check, ticket_lName_check, ticket_major_check, ticket_enrollment_check, ticket_onCampus_check, ticketComplete_Message, student_id)
+    VALUE ('0', NULL, NULL, NULL, NULL, NULL, '', '1')";
+
 
 //Insert into student course composite/join table
 $insertStudentCourse = "INSERT INTO studentCourse (student_id, course_code, review_message, difficulty_review_rating, enjoyability_review_rating, overall_review_rating, review_date_written)
@@ -223,7 +240,8 @@ $insertProfessor = "INSERT INTO professor (prof_fName, prof_lName)
 //'$insert =' Assigns queries for each connection type for each insert (into) tables... This cleans it up with using AND statements
 $insert = mysqli_query($connectTable, $insertUserLogin)
     AND mysqli_query($connectTable, $insertStudentInfo) 
-    AND mysqli_query($connectTable, $insertTicketRequest) 
+    AND mysqli_query($connectTable, $insertTicketRequest)
+    AND mysqli_query($connectTable, $insertTicketRequestCompletion)  
     AND mysqli_query($connectTable, $insertStudentCourse)
     AND mysqli_query($connectTable, $insertReviewMessageReplies) 
     AND mysqli_query($connectTable, $insertStudentMajor) 
@@ -246,6 +264,8 @@ $sqlAlterUserLoginInfo = "ALTER TABLE `userlogininfo` ADD CONSTRAINT `fk_student
 
 $sqlAlterTicketRequest = "ALTER TABLE `ticketRequest` ADD CONSTRAINT `fk_students_id` FOREIGN KEY (`student_id`) REFERENCES `studentInfo`(`student_id`) ON DELETE RESTRICT ON UPDATE RESTRICT";
 
+$sqlAlterTicketRequestCompletion = "ALTER TABLE `ticketrequestcompletion` ADD CONSTRAINT `fk_studentId` FOREIGN KEY (`student_id`) REFERENCES `studentInfo`(`student_id`) ON DELETE RESTRICT ON UPDATE RESTRICT";
+
 $sqlAlterCourseTable = "ALTER TABLE `course` ADD CONSTRAINT `fk_Major_id` FOREIGN KEY (`major_id`) REFERENCES `major`(`major_id`) ON DELETE RESTRICT ON UPDATE RESTRICT";
 
 $sqlAlterStudentCourse1 = "ALTER TABLE `studentCourse` ADD CONSTRAINT `uk_student_id` FOREIGN KEY (`student_id`) REFERENCES `studentinfo`(`student_id`) ON DELETE RESTRICT ON UPDATE RESTRICT";
@@ -263,6 +283,7 @@ $sqlAlterReplyTable2 = "ALTER TABLE `replies` ADD CONSTRAINT `pkfk_course_code` 
 //Running the queries, assigning runs to a variable to check if successful or not. 
 $alterTablesPKFK = mysqli_query($connectTable, $sqlAlterUserLoginInfo) 
     AND mysqli_query($connectTable, $sqlAlterTicketRequest)
+    AND mysqli_query($connectTable, $sqlAlterTicketRequestCompletion)
     AND mysqli_query($connectTable, $sqlAlterCourseTable)
     AND mysqli_query($connectTable, $sqlAlterStudentCourse1)
     AND mysqli_query($connectTable, $sqlAlterStudentCourse2)
