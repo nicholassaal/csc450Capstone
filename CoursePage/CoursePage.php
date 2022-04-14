@@ -191,27 +191,31 @@ function navGetProfilePicture(){
     </div>
 
     <!-- Leave review overlay. Displayed using button above. Hidden when function tied to cancel button is called -->
-    <form method="POST" class="leaveReviewForm" id="leaveReviewForm">
-        <div>
-            <h3>Question 1</h3>
-            <textarea rows="5" cols="50"></textarea>
-        </div>
-        <div>
-            <h3>Question 2</h3>
-            <textarea rows="5" cols="50"></textarea>
-        </div>
-        <div>
-            <h3>Question 3</h3>
-            <textarea rows="5" cols="50"></textarea>
-        </div>
-        <div>
-            <h3>Any Additional Comments?</h3>
-            <textarea rows="5" cols="50"></textarea>
+    <form method="POST" id="leaveReviewForm">
+        <div class="leaveReviewForm" >
+            <div>
+                <h3>What did you learn?</h3>
+                <br>
+                <textarea name="question1" rows="5" cols="30" required></textarea>
+            </div>
+            <div>
+                <h3>How would ou suggest others prepare for this course?</h3>
+                <textarea name="question2" rows="5" cols="30" required></textarea>
+            </div>
+            <div>
+                <h3>What did you find the most challenging about this course?</h3>
+                <textarea name="question3" rows="5" cols="30" required></textarea>
+            </div>
+            <div class="addComment">
+                <h3>Additional comments:</h3>
+                <textarea name="reviewMessage" rows="5" cols="30" required></textarea>
+            </div>
+            <!--Turn off overlay form-->
+            
         </div>
         <!--Turn off overlay form-->
-        <button type="button" onclick="turnOFFoverlayForm()">Cancel</button>
-
-        <button type="submit" name="submitButton" id="submitButton" class="submitButton">Submit</button>
+        <button type="button" onclick="turnOFFoverlayForm()" class="reviewButton">Cancel</button>
+        <button type="submit" name="submitButton" id="submitButton" >Submit</button>
     </form>
 
     <div id = "featuredReviews">
