@@ -22,9 +22,9 @@
         die("Connection failed: " . $conn->connect_error); //die( ) will kill the current program after displaying the message in the String parameter.
     }
 
-/**/
+    /********************************************* */
     /**      WRITING THE REVIEWS FUNCTION           /
-    **/
+    ***********************************************/
     function writingReviews(){
         global $courseCode;
         global $connectToDB;
@@ -49,6 +49,38 @@
             print_r('Failed to write review!');
         }
     }//end of writingReviews() function
+
+    /********************************************* */
+    /**      WRITING THE REVIEWS FUNCTION           /
+    ***********************************************/
+    function editReviews(){
+        global $courseCode;
+        global $connectToDB;
+        global $currentLoggedStudent;
+        global $reviewID;
+
+        //Retrieve user Input 
+        $q1Edit = $_POST['editQ1'];
+        $q2Edit = $_POST['editQ2'];
+        $q3Edit = $_POST['editQ3'];
+        $editReviewMessage = $_POST['editReviewMessage'];
+        $dateWritten = $_POST['dateWritten'];
+
+        $sqlUpdateReview = "UPDATE studentcourse SET review_message = '$editReviewMessage', 
+                                                    q1Answer = '$q1Edit', 
+                                                    q2Answer = '$q2Edit', 
+                                                    q3Answer = '$q3Edit' 
+                                                    WHERE studentCourseReview_id = $reviewID";
+
+        //Query sql statement above
+        $queryUpdateReview = mysqli_query($connectToDB, $sqlUpdateReview);
+        if($queryUpdateReview){
+            //header("Location: http://localhost/csc450Capstone/CoursePage/CoursePage.php?id=$courseCode");//Send user back to coursePage
+        }
+        else{
+            print_r('Failed to update/edit review!');
+        }
+    }//end of editReviews() function
 
 
     /***************************************************/
@@ -109,10 +141,18 @@
         }
     }//end of replyToReplyForm()
 
-    /* /             WRITING REVIEWS              / */
-
+    /***************************************************/
+    /****             WRITING REVIEWS              *****/
+    /***************************************************/
     if(isset($_POST['submitReviewButton'])){
         writingReviews();
+    }
+
+    /***************************************************/
+    /****             EDITING REVIEWS              *****/
+    /***************************************************/
+    if(isset($_POST['editReviewBtn'])){
+        editReviews();
     }
 
     /***************************************************/

@@ -20,6 +20,9 @@
         while ($rows = mysqli_fetch_array($data)) {
             $reviewID = $rows['studentCourseReview_id']; 
             $courseReviewMessage = $rows['review_message']; //Retrieve the review_message
+            $q1Answer = $rows['q1Answer'];
+            $q2Answer = $rows['q2Answer'];
+            $q3Answer = $rows['q3Answer'];
             $dateOfWrittenReview = $rows['review_date_written'];
             $studentID = $rows['student_id']; //Retrieve the student_id in studentCourse Table
             $studentIdArray[] = $studentID;
@@ -43,7 +46,12 @@
                 echo "<input type = submit name = likeReviewBtn id = likeReviewBtn value = Like the Review>  ";
             echo "</form>";
     
-            /*************** WORKING ON ***************/
+
+
+
+            /*****************************************
+            ***         Disaply Reviews            ***
+            *****************************************/
     
             //Retrieve the student id and full name using CONCAT()
             $sqlStudentInfo = "SELECT CONCAT(student_fname,' ',student_lname) AS 'fullName' FROM studentInfo
@@ -58,11 +66,20 @@
     
             //Display reviews 
             echo "<div class = 'reviewMessageContainer'> <a name = $studentID>";
+                
+            /*****************************************
+            ***   CALLING EDITING REVIEWS FORM     ***
+            *****************************************/
+            editReviewForm($studentID, $reviewID);
+
                 echo "<h1>" . $studentName . "</h1>";
                 echo "<button type = button name = submit class = btn id = btn>  
                                 <a href = http://localhost/csc450Capstone/profileView/otherProfile.php?uid=$studentIdArray[$arrayIndex]>View Profile</a> 
                             </button>";
-                echo "<h2>" . $courseReviewMessage . "</h1>";
+                echo "<h2>" . $q1Answer . "</h2>";
+                echo "<h2>" . $q2Answer . "</h2>";
+                echo "<h2>" . $q3Answer . "</h2>";
+                echo "<h2>" . $courseReviewMessage . "</h2>";
                 echo "<h4 class=reviewDateWritten>Date Written: " . $dateOfWrittenReview . "</h4>";
             echo "</a>";
 
@@ -90,6 +107,52 @@
         } //end of while loop
 
     } //end of displayCourseReviewMessage()
+
+    /*****************************************
+            EDIT REVIEW FORM FUNCTION 
+    *****************************************/
+    function editReviewForm($studentID, $reviewID){ 
+        global $connectToDB;
+        global $courseCode;
+        
+        if($studentID == $_SESSION['currentUserLoginId']){
+            $sqlRetrieveReview = "SELECT * FROM studentcourse WHERE studentCourseReview_id = $reviewID AND student_id = $studentID AND course_code = $courseCode";
+            $queryReview = mysqli_query($connectToDB, $sqlRetrieveReview);
+            $reviewRow = mysqli_fetch_assoc($queryReview);
+
+            $q1Answer = $reviewRow['q1Answer'];
+            $q2Answer = $reviewRow['q2Answer'];
+            $q3Answer = $reviewRow['q3Answer'];
+            $reviewMessage = $reviewRow['review_message'];
+            echo "<button type='button' class='editReviewFormBtn'>Edit</button>";
+
+            echo "<form method='POST' action='formActions.php?id=$courseCode' class='editReviewForm' id='editReviewForm'>
+                    <div class='leaveReviewForm' >
+                        <div>
+                            <h3>What did you learn?</h3>
+                            <br>
+                            <textarea name='editQ1' rows='5' cols='30' required>$q1Answer</textarea>
+                        </div>
+                        <div>
+                            <h3>How would you suggest others prepare for this course?</h3>
+                            <textarea name='editQ2' rows='5' cols='30' required>$q2Answer</textarea>
+                        </div>
+                        <div>
+                            <h3>What did you find the most challenging about this course?</h3>
+                            <textarea name='editQ3' rows='5' cols='30' required>$q3Answer</textarea>
+                        </div>
+                        <div class='addComment'>
+                            <h3>Additional comments:</h3>
+                            <textarea name='editReviewMessage' rows='5' cols='30' required>$reviewMessage</textarea>
+                        </div>
+                    </div>
+                    <input type='hidden' name='dateWritten' value= ".date('Y-m-d').">
+                    <input type='hidden' name='reviewID' value= ".$reviewID.">
+                <button type='submit' name='editReviewBtn' id='editReviewBtn'>Submit Edit</button>
+            </form>";
+        }
+        
+    }//end of editReviewForm() function  
 
     /*****************************************
      VIEW ALL REPLIES TO REVIEW FUNCTION 

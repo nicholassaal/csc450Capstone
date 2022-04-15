@@ -101,8 +101,6 @@ $sqlStudentCourse = "CREATE TABLE IF NOT EXISTS studentCourse(
    student_id INT NOT NULL,
    course_code INT NOT NULL,
    review_message VARCHAR(450),
-   difficulty_review_rating INT,
-   enjoyability_review_rating INT, 
    overall_review_rating INT,
    q1Answer VARCHAR(450),
    q2Answer VARCHAR(450),
@@ -200,14 +198,15 @@ $insertTicketRequestCompletion = "INSERT INTO ticketrequestcompletion (ticketCom
 
 
 //Insert into student course composite/join table
-$insertStudentCourse = "INSERT INTO studentCourse (student_id, course_code, review_message, difficulty_review_rating, enjoyability_review_rating, overall_review_rating, review_date_written)
-    VALUES  ('1', '1', 'Great course, highly recommended if you are interesting in web designed.', '2', '5','15', '2020-06-5'),
-            ('2', '1', 'I see this course as an internship kind of. I was able to work with a team and learn new skills in HTML, CSS, PHP, and JavaScript.', '3', '5', '18', '2021-08-8'),
-            ('3', '1', 'I thought the course was great. Loved working with the team I was assigned to.', '3', '5', '7', '2019-01-6'),
-            ('4', '1', 'Overall great course to gain experience of working with a team.', '3', '5', '9', '2020-02-6'),
-            ('2', '2', 'Greate course to start learning about the software development process. Also, really enjoyed working with the team.', '3', '4', '12', '2022-05-3'),
-            ('3', '3', 'Super interesting course. Loved learning how the code we write actually works.', '3', '4', '7', '2019-08-14'),
-            ('3', '4', 'Challenging course, but at the same time enjoyable to learn.', '5', '5', '1', '2020-12-26')"; //added additional reviews for one person to test my idea in profiles.php
+$insertStudentCourse = "INSERT INTO studentCourse (student_id, course_code, review_message, overall_review_rating, q1Answer, q2Answer ,q3Answer, review_date_written)
+    VALUES  ('1', '1', 'Great course, highly recommended if you are interesting in web designed.', '15', 'I was able to learn JavaScript.', 'Learned PHP', 'Database work was challenging for me.', '2020-06-5'),
+            ('2', '1', 'I see this course as an internship kind of. I was able to work with a team and learn new skills in HTML, CSS, PHP, and JavaScript.', '18', 'I learned PHP.', 'Make sure the understand normalization.', 'Database normalization.', '2021-08-8'),
+            ('3', '1', 'I thought the course was great. Loved working with the team I was assigned to.', '7', 'I was able to relearn HTML and CSS.', 'Practice using flex boxes.', 'Malnipluating data in a database using PHP.', '2019-01-6'),
+            ('4', '1', 'Overall great course to gain experience of working with a team.', '9', 'I was able to learn how to use GitHub Desktop.', 'Watch videos on using GitHub to collaborate well with a team.', 'Learning how to use new tools.', '2020-02-6'),
+            ('2', '2', 'Greate course to start learning about the software development process. Also, really enjoyed working with the team.', '12', 'I learned how to use UML diagrams.', 'Make sure you test GitHub with your own projects to make sure everything works.', 'Learning how to apply different UML diagrams to different problems.', '2022-05-3'),
+            ('3', '3', 'Super interesting course. Loved learning how the code we write actually works.', '7', 'I was able to learn different programming paradigms, like imperative programming.', 'Research on your own time on how to implement lexer and parser for a language.', 'Generating a EBNF for programming.', '2019-08-14'),
+            ('3', '4', 'Challenging course, but at the same time enjoyable to learn.', '1', 'I learned how to use different data structures like LinkLists, Stacks, and Queues.', 'Research different ways on how to traverse through a tree.', 'Learning how different many different algorithms.', '2020-12-26')"; //added additional reviews for one person to test my idea in profiles.php
+
 //Insert into reviewMessageReplies
 $insertReviewMessageReplies = "INSERT INTO replies (student_id, course_code, reply_message, date_written, studentCourseReview_id, replyToReply_id)
     VALUES ('2', '1', 'Great review for capstone', '2002-02-02', '1', '0'),
