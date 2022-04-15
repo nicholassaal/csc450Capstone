@@ -159,7 +159,8 @@ h1 {
   width: 60px;
   height: 30px;
 }
-#submitButton {
+
+#submitReviewButton {
   position: absolute;
   bottom: 2.5%;
   margin: 0 50%;
@@ -183,7 +184,57 @@ h1 {
 .btn a{
   color:black;
 }
+/* 
+--------------------------------------------------
+--------- Edit Review Form CSS  ---------
+--------------------------------------------------
+*/ 
+.editReviewFormBtn:hover{
+  cursor:pointer;
+}
 
+.editReviewFormBtn{
+  color: white;
+  margin-left:90%;
+  text-decoration: underline;
+  background-color: transparent;
+  border:none;
+  font-size:larger;
+}
+
+.editReviewForm{
+  /* display:none; */
+  /* transition: 5s;
+  position: absolute;
+  width:90%;
+  z-index: 2;
+  background-color: black;
+  padding:10%; */
+
+  /*Previous CSS*/
+  display:none;
+  /* left:100%; */
+  padding:1%;
+  position: absolute;
+  z-index: 2;
+  background-color: black;
+  width:88%;
+  left:5%; 
+  /*top:115%; */
+  animation: slideIn 1s ease-in;
+  /* margin-right:100px; 
+  width:88%;*/
+}
+
+@keyframes slideIn {
+  0%{
+    /* transform: translateY(-100%); */
+    opacity: 0.1;
+
+    /* transform: rotate(1080deg);  */
+     /* transform: skewX(50deg);  */
+  }
+}
 /* 
 --------------------------------------------------
 --------- Display Replies <details> CSS  ---------
@@ -239,3 +290,4 @@ summary{
   background-color: transparent;
   border:none;
 }
+

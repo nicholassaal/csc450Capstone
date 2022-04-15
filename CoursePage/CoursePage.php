@@ -187,35 +187,37 @@ function navGetProfilePicture(){
 
         <!-- Display course title at the top using the php function -->
         <?php displayCourseTitle(); ?>
-        <button type="button" id="editProfileButton" onclick="turnOnOverlayForm()">Leave a Review</button>
+        <button type="button" id="leaveReview" onclick="toggleLeavingReview()">Leave a Review</button>
     </div>
 
     <!-- Leave review overlay. Displayed using button above. Hidden when function tied to cancel button is called -->
-    <form method="POST" id="leaveReviewForm">
+    <form method="POST" id="leaveReviewForm" action="formActions.php?id=<?php echo $courseCode; ?>">
         <div class="leaveReviewForm" >
             <div>
                 <h3>What did you learn?</h3>
                 <br>
-                <textarea name="question1" rows="5" cols="30" required></textarea>
+                <textarea id="question1" name="question1" rows="5" cols="30" required></textarea>
             </div>
             <div>
-                <h3>How would ou suggest others prepare for this course?</h3>
-                <textarea name="question2" rows="5" cols="30" required></textarea>
+                <h3>How would you suggest others prepare for this course?</h3>
+                <textarea id="question2" name="question2" rows="5" cols="30" required></textarea>
             </div>
             <div>
                 <h3>What did you find the most challenging about this course?</h3>
-                <textarea name="question3" rows="5" cols="30" required></textarea>
+                <textarea id="question3" name="question3" rows="5" cols="30" required></textarea>
             </div>
             <div class="addComment">
                 <h3>Additional comments:</h3>
-                <textarea name="reviewMessage" rows="5" cols="30" required></textarea>
+                <textarea id="reviewMessage" name="reviewMessage" rows="5" cols="30" required></textarea>
             </div>
             <!--Turn off overlay form-->
             
         </div>
+        <!-- hidden values needed to be sent over to the form action page. -->
+        <input type='hidden' name='dateWritten' value= "<?php echo date('Y-m-d');?>">
         <!--Turn off overlay form-->
-        <button type="button" onclick="turnOFFoverlayForm()" class="reviewButton">Cancel</button>
-        <button type="submit" name="submitButton" id="submitButton" >Submit</button>
+        <button type="button" onclick="toggleLeavingReview()" class="reviewButton">Cancel</button>
+        <button type="submit" name="submitReviewButton" id="submitReviewButton" >Submit</button>
     </form>
 
     <div id = "featuredReviews">
@@ -232,7 +234,6 @@ function navGetProfilePicture(){
 
     <script>
         document.getElementById("leaveReviewForm").style.display = "none";
-
         /******************************************
          *********   HIDE ALL REPLY FROMS   *********
         ********************************************/
@@ -240,6 +241,7 @@ function navGetProfilePicture(){
         for(let i = 0; i < maxReviewsNum; i++){
             document.getElementById("replyForms"+i).style.display = "none";
         }
+
         var maxReviewsNum = <?php echo $numIterator2?>;
         var replyToReplyForms = document.getElementsByClassName("replytoReplyForms");
         for(let j = 0; j < maxReviewsNum; j++){
@@ -257,15 +259,47 @@ function navGetProfilePicture(){
             prevScrollpos = currentScrollPos;
         }
 
-        //Function to display the leave review overlay
-        function turnOnOverlayForm() {
-            document.getElementById("leaveReviewForm").style.display = "block";
-        } //end of overlayForm()
+        /******************************************
+        *******     TOGGLE REVIEW FORM      *******
+        ********************************************/
+        function toggleLeavingReview() {
+            var reviewForm = document.getElementById('leaveReviewForm');
+            if (reviewForm.offsetWidth == 0 && reviewForm.offsetHeight == 0 ) {
+                reviewForm.style.display = 'block';
+            } else {
+                reviewForm.style.display = 'none';
+                document.getElementById('question1').value = '';
+                document.getElementById('question2').value = '';
+                document.getElementById('question3').value = '';
+                document.getElementById('reviewMessage').value = '';
+            }
+        }//end of toggleEditProfilePicture button function
 
-        //function to turn off the overlay form 
-        function turnOFFoverlayForm() {
-            document.getElementById("leaveReviewForm").style.display = "none";
-        }
+
+        /******************************************
+        *****   TOGGLE EDIT REVIEW FORMS *****
+        ********************************************/
+        const editReviewBtns = document.querySelectorAll('.editReviewFormBtn');
+        for(let i = 0; i < editReviewBtns.length; i++) {
+            editReviewBtns[i].addEventListener('click', () => {
+                for(let j = 0; j < editReviewBtns.length; j++){
+                    editReviewBtns[j].classList.remove('active');
+                }
+
+                editReviewBtns[i].innerHTML = "Cancel Edit";
+                editReviewBtns[i].classList.add('active');
+                editReviewBtns[i].style.zIndex = "3";
+
+                var editreplyForms = document.getElementById("editReviewForm");
+                    if (editreplyForms.offsetWidth == 0 && editreplyForms.offsetHeight == 0 ) {
+                        editreplyForms.style.display = 'block';
+                    } else {
+                        editReviewBtns[i].style.color = "white";
+                        editReviewBtns[i].innerHTML = "Edit";
+                        editreplyForms.style.display = 'none';
+                    }
+            })
+        }//end of for loop for editFormBtns
 
         /******************************************
          *********   TOGGLE REPLY FROMS   *********
@@ -291,7 +325,7 @@ function navGetProfilePicture(){
                         replyForms.style.display = 'none';
                     }
             })
-        }
+        }//end of for loop for replyBtns
 
         /******************************************
         *****   TOGGLE REPLY TO REPLY FROMS   *****
@@ -316,7 +350,8 @@ function navGetProfilePicture(){
                         replyForms.style.display = 'none';
                     }
             })
-        }
+        }//end of for loop for replyToReplyBtns
+
 
     </script>
 </body>

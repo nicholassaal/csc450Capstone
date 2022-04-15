@@ -22,6 +22,34 @@
         die("Connection failed: " . $conn->connect_error); //die( ) will kill the current program after displaying the message in the String parameter.
     }
 
+/**/
+    /**      WRITING THE REVIEWS FUNCTION           /
+    **/
+    function writingReviews(){
+        global $courseCode;
+        global $connectToDB;
+        global $currentLoggedStudent;
+
+        //Retrieve user Input 
+        $q1Answer = $_POST['question1'];
+        $q2Answer = $_POST['question2'];
+        $q3Answer = $_POST['question3'];
+        $reviewMessage = $_POST['reviewMessage'];
+        $dateWritten = $_POST['dateWritten'];
+
+        $sqlInsertReview = "INSERT INTO studentCourse (student_id, course_code, review_message, overall_review_rating, q1Answer, q2Answer ,q3Answer, review_date_written)
+        VALUES ('$currentLoggedStudent', '$courseCode', '$reviewMessage', 0, '$q1Answer', '$q2Answer', '$q3Answer', $dateWritten)";
+
+        //Query sql statement above
+        $queryInsertReview = mysqli_query($connectToDB, $sqlInsertReview);
+        if($queryInsertReview){
+            header("Location: http://localhost/csc450Capstone/CoursePage/CoursePage.php?id=$courseCode");//Send user back to coursePage
+        }
+        else{
+            print_r('Failed to write review!');
+        }
+    }//end of writingReviews() function
+
 
     /***************************************************/
     /*REPLY FORM FUNCTION TO SEND REPLIES TO DATABASE */
@@ -80,6 +108,12 @@
             }
         }
     }//end of replyToReplyForm()
+
+    /* /             WRITING REVIEWS              / */
+
+    if(isset($_POST['submitReviewButton'])){
+        writingReviews();
+    }
 
     /***************************************************/
     /*IF USER SUBMITTED A REPLY */
