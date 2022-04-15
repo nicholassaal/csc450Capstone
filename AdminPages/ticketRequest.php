@@ -484,11 +484,15 @@
                 if ($fNameChangeQuery && $lNameChangeQuery && $majorChangeAcceptedQuery && $enrollmentChangeAcceptedQuery && $onCampusChangeAcceptedQuery) {
                     $sqlResolvedTicketRequest = "DELETE FROM ticketrequest WHERE student_id = $studentID";
                     $resolvedTicketRequestQuery = mysqli_query($connectToDB, $sqlResolvedTicketRequest);
-                    if ($resolvedTicketRequestQuery) {
+
+                    $sqlResolvedUpdateTRCompletion = "UPDATE ticketrequestcompletion SET ticketComplete_check = '1' WHERE student_id = '$studentID'";
+                    $resolvedUpdateTRCompletionQuery = mysqli_query($connectToDB, $sqlResolvedUpdateTRCompletion);
+                    if ($resolvedTicketRequestQuery && $resolvedUpdateTRCompletionQuery) {
                         echo "<br>Ticket has been resolved, deletion will commence!";
                     } else {
                         echo "<br>Ticket was not resolved!<br>";
                         print_r($resolvedTicketRequestQuery);
+                        print_r($resolvedUpdateTRCompletionQuery);
                     }
                 } 
             } else {

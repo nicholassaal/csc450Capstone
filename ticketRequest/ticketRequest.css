@@ -4,6 +4,7 @@ body {
     margin-right: 25%;
     margin-left: 25%;
     background-image: url("graphic/LandingPageBackgroundIMG.jpg");
+    
 }
 .outside-container {
     /* border: 2px dashed rgb(231, 13, 86); BORDER FOR CSSING PURPOSES */
@@ -103,8 +104,8 @@ body {
 .containerForTRMessage {
     margin-top: 30px;
     min-width: 667px;
-    height: 300px;
-    border: 2px dashed rgb(247, 112, 157);
+    height: 460px;
+    border: 2px groove rgb(71, 163, 182);
     background-color: rgba(34, 34, 34, 0.9);
 }
 
@@ -124,26 +125,425 @@ body {
 
 .detailsTR {
     float: left;
-    border: 1px solid red;
+    
     width: 16%;
     height: 42px;
     padding-top: 25px;
 }
 
 
-.TRHeader {
-    border: 2px dashed rgb(231, 13, 86);
+.ticketRequestContainer {
+    
     text-align: center;
     color: white;
-    margin-top: 10px;
+    margin-top: 20px;
     
 }
 
+.studentChangeHeader, .childRowsTR {
+    width: 0px;
+    height: 0px;
+    border: 0px;
+
+}
+
+.ticketRequestTable {
+    width:100%;
+    color: white;
+}
+
 .studentChangeHeader {
-    width: 16%;
-    height: 40px;
-    padding-top: 22px;
+    color: white;
+    width: 20%;
+    height: 70px;
+    border: 2px solid rgb(255, 255, 255);
+}
+
+.childRowsTR {
+    border-radius: 0px;
+    text-align: left;
+    border: 1px solid white;
+    color: white;
+    padding-left: 35px;
+}
+
+.tableColorChange {
+    color: aliceblue;
+}
+
+
+/*******************************************************
+ ************  CONTAINER FOR ALL ANIMATIONS  ***********
+ *******************************************************/
+
+.containerForLoading {
+    /* border: 2px dashed red; BORDER FOR CSSING PURPOSES */
+    position: absolute;
+    width: 47%;
+    min-width: 657px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    color: yellow;
+    font-size:1.15ch;
     
-    float: right;
-    border: 2px solid black;
+}
+
+/*******************************************************
+ ************  PENDING REQUEST ANIMATION 1  ************
+ *******************************************************/
+.pendingRequest1 {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+  
+.pendingRequest1::after {
+    content: "";
+    width: 30px;
+    height: 30px;
+    border: 8px solid transparent;
+    border-top-color: #dbd81a;
+    border-bottom-color: #dbd81a;
+    border-radius: 50%;
+    animation: pendingRequest1 1s ease infinite;
+}
+
+@keyframes pendingRequest1 {
+    from {
+        transform: rotate(0turn);
+    } to {
+        transform: rotate(1turn);
+    }
+}
+
+
+/*******************************************************
+ ************  PENDING REQUEST ANIMATION 2  ************
+ *******************************************************/
+
+.pendingRequest2 {
+    display: flex;
+    justify-content: center;
+    margin-top: 32px;
+}
+
+  
+.pendingRequest2::after {
+    content: "";
+    width: 30px;
+    height: 30px;
+    border: 8px solid transparent;
+    border-top-color: #dbd81a;
+    border-bottom-color: #dbd81a;
+    border-radius: 50%;
+    animation: pendingRequest2 1s ease infinite;
+}
+
+@keyframes pendingRequest2 {
+    from {
+        transform: rotate(0turn);
+    } to {
+        transform: rotate(1turn);
+    }
+}
+
+
+/*******************************************************
+ ************  PENDING REQUEST ANIMATION 3  ************
+ *******************************************************/
+
+.pendingRequest3 {
+    display: flex;
+    justify-content: center;
+    margin-top: 32px;
+}
+
+.pendingRequest3::after {
+    content: "";
+    width: 30px;
+    height: 30px;
+    border: 8px solid transparent;
+    border-top-color: #dbd81a;
+    border-bottom-color: #dbd81a;
+    border-radius: 50%;
+    animation: pendingRequest3 1s ease infinite;
+}
+
+@keyframes pendingRequest3 {
+    from {
+        transform: rotate(0turn);
+    } to {
+        transform: rotate(1turn);
+    }
+}
+
+/*******************************************************
+ ************  PENDING REQUEST ANIMATION 4  ************
+ *******************************************************/
+
+.pendingRequest4 {
+    display: flex;
+    justify-content: center;
+    margin-top: 32px;
+}
+
+  
+.pendingRequest4::after {
+    content: "";
+    width: 30px;
+    height: 30px;
+    border: 8px solid transparent;
+    border-top-color: #dbd81a;
+    border-bottom-color: #dbd81a;
+    border-radius: 50%;
+    animation: pendingRequest4 1s ease infinite;
+}
+
+@keyframes pendingRequest4 {
+    from {
+        transform: rotate(0turn);
+    } to {
+        transform: rotate(1turn);
+    }
+}
+
+
+/*******************************************************
+ ************  PENDING REQUEST ANIMATION 5  ************
+ *******************************************************/
+
+.pendingRequest5 {
+    display: flex;
+    justify-content: center;
+    margin-top: 32px;
+}
+  
+.pendingRequest5::after {
+    content: "";
+    width: 30px;
+    height: 30px;
+    border: 8px solid transparent;
+    border-top-color: #dbd81a;
+    border-bottom-color: #dbd81a;
+    border-radius: 50%;
+    animation: pendingRequest5 1s ease infinite;
+}
+
+@keyframes pendingRequest5 {
+    from {
+        transform: rotate(0turn);
+    } to {
+        transform: rotate(1turn);
+    }
+}
+
+/*******************************************************
+ **************    CHECK-MARK CREATION   ***************
+ *******************************************************/
+.allowedSymbol1 { /* THE CHECK MARK */
+    display: inline-block;
+    transform: rotate(45deg);
+    height: 30px;
+    width: 13px;
+    border-bottom: 8px solid #87d836;
+    border-right: 8px solid #87d836;
+    margin-top: 15px;
+    margin-right: 20px;
+}
+
+
+/*******************************************************
+ *****************    CHECK-MARK 2    ******************
+ *******************************************************/
+.allowedSymbol2 { /* THE CHECK MARK */
+    display: inline-block;
+    transform: rotate(45deg);
+    height: 30px;
+    width: 13px;
+    border-bottom: 8px solid #87d836;
+    border-right: 8px solid #87d836;
+    margin-top: 38px;
+    margin-right: 20px;
+}
+
+/*******************************************************
+ *****************    CHECK-MARK 3    ******************
+ *******************************************************/
+.allowedSymbol3 { /* THE CHECK MARK */
+    display: inline-block;
+    transform: rotate(45deg);
+    height: 30px;
+    width: 13px;
+    border-bottom: 8px solid #87d836;
+    border-right: 8px solid #87d836;
+    margin-top: 38px;
+    margin-right: 20px;
+}
+
+/*******************************************************
+ *****************    CHECK-MARK 4    ******************
+ *******************************************************/
+.allowedSymbol4 { /* THE CHECK MARK */
+    display: inline-block;
+    transform: rotate(45deg);
+    height: 30px;
+    width: 13px;
+    border-bottom: 8px solid #87d836;
+    border-right: 8px solid #87d836;
+    margin-top: 38px;
+    margin-right: 20px;
+}
+
+/*******************************************************
+ *****************    CHECK-MARK 5    ******************
+ *******************************************************/
+.allowedSymbol5 { /* THE CHECK MARK */
+    display: inline-block;
+    transform: rotate(45deg);
+    height: 30px;
+    width: 13px;
+    border-bottom: 8px solid #87d836;
+    border-right: 8px solid #87d836;
+    margin-top: 38px;
+    margin-right: 20px;
+}
+
+/*******************************************************
+ ************   EXCLAMATION MARK CREATION  *************
+ *******************************************************/
+
+.mark {
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+    width: 35px;
+    height: 35px;
+    border: 3px solid #e67e22;
+    border-radius: 100px;
+    margin-top: 18px;
+    margin-right: 12px;
+}
+.mark:before, .mark:after {
+    content: '';
+    display: block;
+    position: absolute;
+}
+
+.markNext {
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+    width: 35px;
+    height: 35px;
+    border: 3px solid #e67e22;
+    border-radius: 100px;
+    margin-top: 40px;
+    margin-right: 12px;
+}
+.markNext:before, .markNext:after {
+    content: '';
+    display: block;
+    position: absolute;
+}
+
+/*******************************************************
+ ****************   EXCLAMATION MARK 1  ****************
+ *******************************************************/
+.exclamation-point1:before {
+    top: 15%;
+    left: 30%;
+    height: 14px;
+    width: 5px;
+    border: solid #e67e22;
+    border-width: 0 4px 0 0;
+}
+.exclamation-point1:after {
+    top: 70%;
+    left: 30%;
+    height: 5px;
+    width: 5px;
+    border: solid #e67e22;
+    border-width: 0 4px 0 0;
+}
+
+/*******************************************************
+ ****************   EXCLAMATION MARK 1  ****************
+ *******************************************************/
+.exclamation-point2:before {
+    top: 15%;
+    left: 30%;
+    height: 14px;
+    width: 5px;
+    border: solid #e67e22;
+    border-width: 0 4px 0 0;
+}
+.exclamation-point2:after {
+    top: 70%;
+    left: 30%;
+    height: 5px;
+    width: 5px;
+    border: solid #e67e22;
+    border-width: 0 4px 0 0;
+}
+
+/*******************************************************
+ ****************   EXCLAMATION MARK 1  ****************
+ *******************************************************/
+.exclamation-point3:before {
+    top: 15%;
+    left: 30%;
+    height: 14px;
+    width: 5px;
+    border: solid #e67e22;
+    border-width: 0 4px 0 0;
+}
+.exclamation-point3:after {
+    top: 70%;
+    left: 30%;
+    height: 5px;
+    width: 5px;
+    border: solid #e67e22;
+    border-width: 0 4px 0 0;
+}
+
+/*******************************************************
+ ****************   EXCLAMATION MARK 1  ****************
+ *******************************************************/
+.exclamation-point4:before {
+    top: 15%;
+    left: 30%;
+    height: 14px;
+    width: 5px;
+    border: solid #e67e22;
+    border-width: 0 4px 0 0;
+}
+.exclamation-point4:after {
+    top: 70%;
+    left: 30%;
+    height: 5px;
+    width: 5px;
+    border: solid #e67e22;
+    border-width: 0 4px 0 0;
+}
+
+/*******************************************************
+ ****************   EXCLAMATION MARK 1  ****************
+ *******************************************************/
+.exclamation-point5:before {
+    top: 15%;
+    left: 30%;
+    height: 14px;
+    width: 5px;
+    border: solid #e67e22;
+    border-width: 0 4px 0 0;
+}
+.exclamation-point5:after {
+    top: 70%;
+    left: 30%;
+    height: 5px;
+    width: 5px;
+    border: solid #e67e22;
+    border-width: 0 4px 0 0;
 }

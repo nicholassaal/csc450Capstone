@@ -83,10 +83,15 @@ $ticketRequestCompletionTable = "CREATE TABLE IF NOT EXISTS ticketRequestComplet
     ticketComplete_id INT AUTO_INCREMENT PRIMARY KEY,
     ticketComplete_check BOOLEAN,
     ticket_fName_check BOOLEAN,
+    ticket_fName_change VARCHAR(20),
     ticket_lName_check BOOLEAN,
+    ticket_lName_change VARCHAR(20),
     ticket_major_check BOOLEAN,
+    ticket_major_change VARCHAR(50),
     ticket_enrollment_check BOOLEAN,
+    ticket_enrollment_change BOOLEAN,
     ticket_onCampus_check BOOLEAN,
+    ticket_OnCampus_change BOOLEAN, 
     ticketComplete_Message VARCHAR(600),
     student_id INT
 )";
@@ -190,8 +195,8 @@ $insertStudentInfo = "INSERT INTO studentInfo (student_fName, student_lName, stu
 $insertTicketRequest = "INSERT INTO ticketRequest (ticket_fName_change, ticket_lName_change, ticket_major_change, ticket_enrollment_change, ticket_OnCampus_change, student_id)
     VALUE ('Jackie', 'Brown', 'Communications', '1', '0', '1')";
 
-$insertTicketRequestCompletion = "INSERT INTO ticketrequestcompletion (ticketComplete_check, ticket_fName_check, ticket_lName_check, ticket_major_check, ticket_enrollment_check, ticket_onCampus_check, ticketComplete_Message, student_id)
-    VALUE ('0', NULL, NULL, NULL, NULL, NULL, '', '1')";
+$insertTicketRequestCompletion = "INSERT INTO ticketrequestcompletion (ticketComplete_check, ticket_fName_check, ticket_fName_change, ticket_lName_check, ticket_lName_change, ticket_major_check, ticket_major_change, ticket_enrollment_check, ticket_enrollment_change, ticket_onCampus_check, ticket_OnCampus_change, ticketComplete_Message, student_id)
+    VALUE ('0', NULL, 'Jackie', NULL, 'Brown', NULL, 'Communications', NULL, '1', NULL, '0', NULL, '1')";
 
 
 //Insert into student course composite/join table

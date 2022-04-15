@@ -25,17 +25,24 @@
         // $sqlMajorChangeAccepted = "UPDATE studentmajor SET major_id = $majorUpdateId[major_id] WHERE student_id = '$studentID'"; //using the newly grabbed major_id to the desired student
         //             $majorChangeAcceptedQuery = mysqli_query($connectToDB, $sqlMajorChangeAccepted);
 
-        if ($ifExistsStudentId > 0) {
+        if ($ifExistsStudentId > 0 || $ifExistsStudentId != NULL) {
             $sqlUpdateTicketRequest = "UPDATE ticketrequest SET ticket_fName_change = '$firstNameChange', 
                                                                 ticket_lName_change = '$lastNameChange', 
                                                                 ticket_major_change = '$majorChange', 
                                                                 ticket_enrollment_change = '$enrolledRadioBtn', 
                                                                 ticket_OnCampus_change = '$onCampusRadioBtn'
                                                         WHERE   student_id = '$ifExistsStudentId[student_id]'";
-
             $ticketRequestUpdateQuery = mysqli_query($connectToDB, $sqlUpdateTicketRequest);
 
-            if ($ticketRequestUpdateQuery) {
+            $sqlUpdateTicketRequestCompletion = "UPDATE ticketrequestcompletion SET ticket_fName_change = '$firstNameChange', 
+                                                                          ticket_lName_change = '$lastNameChange', 
+                                                                          ticket_major_change = '$majorChange', 
+                                                                          ticket_enrollment_change = '$enrolledRadioBtn', 
+                                                                          ticket_OnCampus_change = '$onCampusRadioBtn'
+                                                                WHERE     student_id = '$ifExistsStudentId[student_id]'";
+            $updateTicketRequestCompletionQuery = mysqli_query($connectToDB, $sqlUpdateTicketRequestCompletion);
+
+            if ($ticketRequestUpdateQuery && $updateTicketRequestCompletionQuery) {
                 echo"You Updated your currently registered Ticket Request!";
             } else {
                 print_r($ticketRequestUpdateQuery);
@@ -44,10 +51,13 @@
         } else {
             $sqlInsertTicketRequest = "INSERT INTO ticketrequest (ticket_fName_change, ticket_lName_change, ticket_major_change, ticket_enrollment_change, ticket_OnCampus_change, student_id)
                 VALUES ('$firstNameChange','$lastNameChange','$majorChange','$enrolledRadioBtn','$onCampusRadioBtn', '$studentId')";
-
             $ticketRequestQuery = mysqli_query($connectToDB, $sqlInsertTicketRequest);
 
-            if ($ticketRequestQuery) {
+            $sqlInsertTicketRequestCompletion = "INSERT INTO ticketrequestCompletion (ticketComplete_check, ticket_fName_change, ticket_lName_change, ticket_major_change, ticket_enrollment_change, ticket_OnCampus_change, student_id)
+                VALUES ('0', '$firstNameChange', '$lastNameChange', '$majorChange', '$enrolledRadioBtn', '$onCampusRadioBtn', '$studentId')";
+            $insertTicketRequestCompletionQuery = mysqli_query($connectToDB, $sqlInsertTicketRequestCompletion);
+
+            if ($ticketRequestQuery && $insertTicketRequestCompletionQuery) {
                 echo"TICKET WAS SENT SUCCESSFULLY!";
             } else {
                 print_r($ticketRequestQuery);
@@ -74,6 +84,143 @@
 
     if(isset($_POST['sendTicket'])) {
         populateTicketForm();
+        header("Refresh:0");
+    }
+
+
+    function sqlStatementsForTicketRequestTable() {
+        global $connectToDB;
+        global $studentId;
+
+        $sqlIfTicketRequestExists = "SELECT student_id FROM ticketrequestcompletion WHERE student_id = '$studentId'";
+        $ifTicketRequestExistsQuery = mysqli_query($connectToDB, $sqlIfTicketRequestExists);
+        $ifTicketRequestExists = mysqli_fetch_assoc($ifTicketRequestExistsQuery);
+
+        if ($ifTicketRequestExists > 0 || $ifTicketRequestExists != NULL) { 
+            $sqlTicketRequestCompletionCheck = "SELECT ticketComplete_check FROM ticketrequestcompletion WHERE student_id = $studentId";
+            $ticketRequestCompletionCheckQuery = mysqli_query($connectToDB, $sqlTicketRequestCompletionCheck);
+            $pendingOrCompletedCheck = mysqli_fetch_assoc($ticketRequestCompletionCheckQuery);
+
+            $pendingOrComplete = $pendingOrCompletedCheck['ticketComplete_check'];
+
+            $sqlTicketRequestInfo = "SELECT * FROM ticketrequestcompletion WHERE student_id = $studentId";
+            $ticketRequestInfoQuery = mysqli_query ($connectToDB, $sqlTicketRequestInfo);
+
+            echo "<table class = 'ticketRequestTable'>";
+            while ($rows = mysqli_fetch_array($ticketRequestInfoQuery)) {
+                $firstNameRequest           = $rows['ticket_fName_change'];
+                $lastNameRequest            = $rows['ticket_lName_change'];
+                $majorRequestChange         = $rows['ticket_major_change'];
+                $enrollmentRequestChange    = $rows['ticket_enrollment_change'];
+                $onCampusRequestChange      = $rows['ticket_OnCampus_change'];
+
+                if ($enrollmentRequestChange == 0) {
+                    $enrollmentRequestChange = "Requested Enrollment Status - <b>NOT ENROLLED</b>";
+                } else {
+                    $enrollmentRequestChange = "Requested Enrollment Status - <b>ENROLLED</b>";
+                }
+                
+                if ($onCampusRequestChange == 0) {
+                    $onCampusRequestChange = "Requested On-Campus Status - <b>NOT ON-CAMPUS</b>";
+                } else {
+                    $onCampusRequestChange = "Requested On-Campus Status - <b>ON-CAMPUS</b>";
+                }
+            
+                pendingTicketRequestTable($studentId, $pendingOrComplete, $firstNameRequest, $lastNameRequest, $majorRequestChange, $enrollmentRequestChange, $onCampusRequestChange);
+
+            }
+            echo "</table>";
+        } else {
+            echo "You have no pending Ticket Request!";
+        }
+    }
+
+
+
+    function pendingTicketRequestTable($studentId, $pendingOrComplete, $firstNameRequest, $lastNameRequest, $majorRequestChange, $enrollmentRequestChange, $onCampusRequestChange) {
+        global $connectToDB;
+
+        $sqlCheckIfAccepted = "SELECT ticket_fName_check, ticket_lName_check, ticket_major_check, ticket_enrollment_change, ticket_onCampus_check FROM ticketrequestcompletion WHERE student_id = $studentId";
+        $checkIfAcceptedQuery = mysqli_query($connectToDB, $sqlCheckIfAccepted);
+        $checkIfAccepted = mysqli_fetch_assoc($checkIfAcceptedQuery);
+
+        $fNameCheck         =  $checkIfAccepted['ticket_fName_check'];
+        $lNameCheck         =  $checkIfAccepted['ticket_lName_check'];
+        $majorCheck         =  $checkIfAccepted['ticket_major_check'];
+        $enrollmentCheck    =  $checkIfAccepted['ticket_enrollment_change'];
+        $onCampusCheck      =  $checkIfAccepted['ticket_onCampus_check'];
+
+        if ($pendingOrComplete == 0) {
+            echo "<div class = containerForLoading>";
+                echo "<div class = 'pendingRequest1'>PENDING</div>";
+                echo "<div class = 'pendingRequest2'>PENDING</div>";
+                echo "<div class = 'pendingRequest3'>PENDING</div>";
+                echo "<div class = 'pendingRequest4'>PENDING</div>";
+                echo "<div class = 'pendingRequest5'>PENDING</div>";
+            echo "</div>";
+        }
+
+        if ($pendingOrComplete == 1) {
+            echo "<div class = containerForLoading>";
+            if ($fNameCheck == 0) {
+                echo "<div class = 'mark exclamation-point1'></div>";
+            } else {
+                echo "<div class = 'allowedSymbol1'></div>";
+            }
+            if ($lNameCheck == 0) {
+                echo "<div class = 'markNext exclamation-point2'></div>";
+            } else {
+                echo "<div class = 'allowedSymbol2'></div>";
+            }
+            if ($majorCheck == 0) {
+                echo "<div class = 'markNext exclamation-point3'></div>";
+            } else {
+                echo "<div class = 'allowedSymbol3'></div>";
+            }
+            if ($enrollmentCheck == 0) {
+                echo "<div class = 'markNext exclamation-point4'></div>";
+            } else {
+                echo "<div class = 'allowedSymbol4'></div>";
+            }
+            if ($onCampusCheck == 0) {
+                echo "<div class = 'markNext exclamation-point5'></div>";
+            } else {
+                echo "<div class = 'allowedSymbol5'></div>";
+            }
+            echo "</div>";
+        }
+
+        // Was used to Test the creation process of the exclamation-point and Checkmark
+        //echo "<div class = 'allowedSymbol'></div>";  
+        //echo "<div class='mark exclamation-point'></div>";
+        
+
+        echo "<tr>";
+            echo "<th class = 'studentChangeHeader'> First Name Change</th>";
+            echo "<td class = 'childRowsTR'>Requested First Name Change - <b>$firstNameRequest</b></td>";
+        echo "</tr>";
+        
+        echo "<tr>";
+            echo "<th class = 'studentChangeHeader'>Last Name Change</th>";
+            echo "<td class = 'childRowsTR'>Requested Last Name Change - <b>$lastNameRequest</b></td>";
+        echo "</tr>";
+        
+        echo "<tr>";
+            echo "<th class = 'studentChangeHeader'>Major Change</th>";
+            echo "<td class = 'childRowsTR'>Requested Major Change - <b>$majorRequestChange</b></td>";
+        echo "</tr>";
+        
+        echo "<tr>";
+            echo "<th class = 'studentChangeHeader'>Enrollment Change</th>";
+            echo "<td class = 'childRowsTR'>$enrollmentRequestChange</td>";
+        echo "</tr>";
+        
+        echo "<tr>";
+            echo "<th class = 'studentChangeHeader'>On-Campus Change</th>";
+            echo "<td class = 'childRowsTR'>$onCampusRequestChange</td>";
+        echo "</tr>";
+
+
     }
 
 ?>

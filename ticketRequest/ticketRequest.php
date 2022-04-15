@@ -117,22 +117,11 @@ include("ticketRequest_inc.php");
     <!-- ************************** TICKET REQUEST MESSAGE ADMIN/USER ************************** -->
     <!-- NOTE: TR stands for 'Ticket Request' -->
     <fieldset class = containerForTRMessage>
-        <legend class = ticketRequestMessageLegend>Current/Pending Ticket Request</legend>
-        <div class = "TRHeader">
-            <label class = "studentChangeHeader">On-Campus Change</label>
-            <label class = "studentChangeHeader">Enrollment Change</label>
-            <label class = "studentChangeHeader">Major Change</label>
-            <label class = "studentChangeHeader">Last Name Change</label>
-            <label class = "studentChangeHeader">First Name Change</label>
-            <details>
+        <legend class = ticketRequestMessageLegend>Ticket Request Status</legend>
+        <div class = "ticketRequestContainer">
             
-                <summary class = "detailsTR">Details</summary>
-                <label class = "studentChangeHeader">*****DETAILS*****</label>
-                <label class = "studentChangeHeader">*****DETAILS*****</label>
-                <label class = "studentChangeHeader">*****DETAILS*****</label>
-                <label class = "studentChangeHeader">*****DETAILS*****</label>
-                <label class = "studentChangeHeader">*****DETAILS*****</label>
-            </details>
+            <?php sqlStatementsForTicketRequestTable(); ?>
+            
             
         </div>
         </fieldset>
