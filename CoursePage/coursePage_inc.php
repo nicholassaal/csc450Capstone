@@ -4,6 +4,7 @@
     $numIterator = 0;  
     function displayCourseReviewMessage()
     {
+        echo"<div class='review-flex-container'>";
         global $connectToDB;
         global $courseCode;
         global $numIterator;
@@ -37,20 +38,17 @@
     
             $overallReviewRatings = $retrieveReview['overall_review_rating'];
     
-            echo $overallReviewRatings;
+            echo"<p class=overallRatingsP>$overallReviewRatings</p>";
 
             echo "<form method=POST action= formActions.php?id=$courseCode >";
                 echo"<input type='hidden' name='reviewID' value= '$reviewID'>";
                 echo"<input type='hidden' name='studentReviewID' value= '$studentID'>";
                 echo"<input type='hidden' name='overallReviewRatings' value= '$overallReviewRatings'>";
-                echo "<input type = submit name = likeReviewBtn id = likeReviewBtn value = Like the Review>  ";
+                echo "<button type = submit name = likeReviewBtn id = likeReviewBtn><div class = 'carret up'></div></button>";
             echo "</form>";
-    
-
-
 
             /*****************************************
-            ***         Disaply Reviews            ***
+            ***         Dispaly Reviews            ***
             *****************************************/
     
             //Retrieve the student id and full name using CONCAT()
@@ -63,49 +61,72 @@
     
             //Assign the fullname to a variable once retrieved above 
             $studentName = $retrieveStudentName['fullName'];
-    
-            //Display reviews 
-            echo "<div class = 'reviewMessageContainer'> <a name = $studentID>";
-                
-            /*****************************************
-            ***   CALLING EDITING REVIEWS FORM     ***
-            *****************************************/
-            editReviewForm($studentID, $reviewID);
-
-                echo "<h1>" . $studentName . "</h1>";
-                echo "<button type = button name = submit class = btn id = btn>  
-                                <a href = http://localhost/csc450Capstone/profileView/otherProfile.php?uid=$studentIdArray[$arrayIndex]>View Profile</a> 
-                            </button>";
-                echo "<h2>" . $q1Answer . "</h2>";
-                echo "<h2>" . $q2Answer . "</h2>";
-                echo "<h2>" . $q3Answer . "</h2>";
-                echo "<h2>" . $courseReviewMessage . "</h2>";
-                echo "<h4 class=reviewDateWritten>Date Written: " . $dateOfWrittenReview . "</h4>";
-            echo "</a>";
-
-            //REPLY button 
-            echo "<button type = button class=replyBtn>Reply</button>";
             
-            /*****************************************
-             START OF FORM TO REPLY TO REVIEWS
-             *****************************************/
-                    echo "<form method=POST action= formActions.php?id=$courseCode id=replyForms$numIterator class=replyForms>";
-                        echo"<textarea style='resize:none;'name='replyMessage' class='replyMessage' id='replyMessage' cols='50%' rows='10' placeholder='Reply to the review'></textarea>";
-                        echo"<input type='hidden' name='dateWritten' value= ".date('Y-m-d').">";
-                        echo"<input type='hidden' name='studentReviewID' value= '$studentID'>";
-                        echo"<input type='hidden' name='reviewID' value= '$reviewID'>";
-                        echo"<button type = 'submit' id='replySubmitBtn' name='replySubmitBtn'>Reply</button>";
-                    echo "</form>";
-            /*****************************************
-              VIEW ALL REPLIES TO REVIEW FUNCTION 
-             *****************************************/
-            viewReplies($studentID, $reviewID);
+            //EDIT REVIEW BUTTON
+            if($studentID == $_SESSION['currentUserLoginId']){
+                echo "<button type='button' class='editReviewFormBtn'>Edit</button>";
+            }
+            echo"<div class=reviewBackGround>";
+                //Display reviews 
+                echo "<div class = 'reviewMessageContainer'> <a name = $studentID>";
+                    
+                /*****************************************
+                ***   CALLING EDITING REVIEWS FORM     ***
+                *****************************************/
+                editReviewForm($studentID, $reviewID);
 
-            echo"</div>";//end of review message div
+                    echo "<h2>" . $studentName . "</h2>";
+                    echo "<button type = button name = submit class = btn id = btn>  
+                                    <a href = http://localhost/csc450Capstone/profileView/otherProfile.php?uid=$studentIdArray[$arrayIndex]>View Profile</a> 
+                                </button>";
+                    //QUESTION 1 CONTAINER
+                    echo"<div class=questionsDivContainer>";
+                        echo"<div class=q1Review>";
+                            echo"<h3 class = questionHeaders>What did you learn?</h3>";
+                            echo"<p>$q1Answer</p>";
+                        echo"</div>";
+                        //QUESTION 2 CONTAINER
+                        echo"<div class=q2Review>";
+                            echo"<h3 class = questionHeaders>How would you suggest others prepare for this course?</h3>";
+                            echo"<p>$q2Answer</p>";
+                        echo"</div>";
+                        //QUESTION 3 CONTAINER
+                        echo"<div class=q3Review>";
+                            echo"<h3 class = questionHeaders>What did you find the most challenging about this course?</h3>";
+                            echo"<p>$q3Answer</p>";
+                        echo"</div>";
+                    echo"</div>";//end of questionsDivContainer
+                    //ADDITIONAL REVIEW MESSAGE CONTAINER
+                    echo"<div class = reviewMessage>";
+                        echo"<h3 class = questionHeaders>Student Review:</h3>";
+                        echo"<p class= courseReviewMessage>$courseReviewMessage</p>";
+                    echo"</div>";
+                    echo "<h4 class=reviewDateWritten>Date Written: " . $dateOfWrittenReview . "</h4>";
+                echo "</a>";
+
+                //REPLY button 
+                    echo "<button type = button class=replyBtn>Reply</button>";
+                    /*****************************************
+                     START OF FORM TO REPLY TO REVIEWS
+                    *****************************************/
+                            echo "<form method=POST action= formActions.php?id=$courseCode id=replyForms$numIterator class=replyForms>";
+                                echo"<textarea style='resize:none;'name='replyMessage' class='replyMessage' id='replyMessage' cols='50%' rows='10' placeholder='Reply to the review'></textarea>";
+                                echo"<input type='hidden' name='dateWritten' value= ".date('Y-m-d').">";
+                                echo"<input type='hidden' name='studentReviewID' value= '$studentID'>";
+                                echo"<input type='hidden' name='reviewID' value= '$reviewID'>";
+                                echo"<button type = 'submit' id='replySubmitBtn' name='replySubmitBtn'>Reply</button>";
+                            echo "</form>";
+                    /*****************************************
+                     VIEW ALL REPLIES TO REVIEW FUNCTION 
+                    *****************************************/
+                    viewReplies($studentID, $reviewID);
+                echo"</div>";//end of review message div
+            echo"</div>";//outter background div
             $arrayIndex++;
             $numIterator++;
         } //end of while loop
 
+        echo"</div>";//End of outer review container
     } //end of displayCourseReviewMessage()
 
     /*****************************************
@@ -124,7 +145,7 @@
             $q2Answer = $reviewRow['q2Answer'];
             $q3Answer = $reviewRow['q3Answer'];
             $reviewMessage = $reviewRow['review_message'];
-            echo "<button type='button' class='editReviewFormBtn'>Edit</button>";
+            
 
             echo "<form method='POST' action='formActions.php?id=$courseCode' class='editReviewForm' id='editReviewForm'>
                     <div class='leaveReviewForm' >
@@ -191,7 +212,7 @@
                                 *****************************************/
                                 echo"<div class=viewReplySection>";
                                     echo"<h2 class=replyNames>".$studentName."</h2>";
-                                    echo"<h3>".$replyMessage."</h3>";
+                                    echo"<p class=replyMessageP>".$replyMessage."</p>";
                                     echo"<p class=replyDate>Date Written: " . $replyDateWritten . "</p>";
                                         //START OF FORM TO REPLY TO REPLIES
                                         echo "<button type = button class=replyToReplyBtn>Reply</button>";
@@ -231,8 +252,8 @@
                         $studentName = studentName($studentID);//Used studentName function to retrieve the student's name that wrote reply
                                 echo"<div class=replyToRepiesDiv>";
                                     echo"<h2 class=replyNames>".$studentName."</h2>";
-                                    echo"<h3>".$replyMessage."</h3>";
-                                    echo"<p class=replyDate>Date Written: " . $replyDateWritten . "</p>";
+                                    echo"<p class=replyMessageP>".$replyMessage."</p>";
+                                    echo"<p class=replyToReplyDate>Date Written: " . $replyDateWritten . "</p>";
                                 echo"</div>";
                     }//end of while loop to retrieve all replies to replies
             echo "</details>";
@@ -252,43 +273,25 @@
     }//end of studentName()
     
     /*****************************************************
-    IN PROGRESS TO PRINT HOW MANY REPLIES
+                CHECK IF THE USER ALREADY WROTE A REVIEW
     *****************************************************/
-    function onlyViewifExists($studentID){
+    function writtenReviewCheck(){
         global $connectToDB;
-        $numOfReplies = 0;   
-        $arrayOfNumOfReplies[] = 1; 
+        global $courseCode;
 
-        $sqlRetrieveReviewID = "SELECT studentCourseReview_id FROM studentCourse WHERE student_id = $studentID";
-        $queryReviewID = mysqli_query($connectToDB, $sqlRetrieveReviewID);
+        $currentLoggedStudent = $_SESSION['currentUserLoginId'];
+        $sqlCheckReview = "SELECT * FROM studentcourse WHERE student_id = $currentLoggedStudent AND course_code = $courseCode";
+        $queryCheckReview = mysqli_query($connectToDB, $sqlCheckReview);
         
-        if(count($arrayOfNumOfReplies) > 0){
-            unset($arrayOfNumOfReplies[0]);
-            //unset($arrayOfNumOfReplies[1]);
+        if(mysqli_num_rows($queryCheckReview) == 1){
+            echo"<button type='button' id='checkIfReviewExist'>You already written a review</button>";
         }
-
-        while($reviewRows = mysqli_fetch_array($queryReviewID)){
-            $studentCourseReview_id = $reviewRows['studentCourseReview_id'];
-
-            $sqlRetrieveReplies = "SELECT * FROM reviewReplies";
-            $queryRetrieveReplies = mysqli_query($connectToDB, $sqlRetrieveReplies);
-
-            while($reviewRepliesRows = mysqli_fetch_array($queryRetrieveReplies)){
-                $reviewReplies_id = $reviewRepliesRows['studentCourseReview_id'];
-
-                if($studentCourseReview_id == $reviewReplies_id){//If there is a reply, retrieve the reply
-                    $arrayOfNumOfReplies[] = $studentCourseReview_id; 
-                }   
-            }//end of inner while loop 
-        }//end of outter while loop
-        
-        for($i = 1; $i <= count($arrayOfNumOfReplies)-1; $i++){
-            if($arrayOfNumOfReplies[$i] == $arrayOfNumOfReplies[$i+1]){
-                return $numOfReplies+=2;
-            }
+        else{
+            echo"<button type='button' id='leaveReview' onclick='toggleLeavingReview()'>Leave a Review</button>";
         }
-        
-        return $numOfReplies;
-    }//end of onlyViewifExists()
-    
+            
+
+            
+
+    }//end of writtenReviewCheck()
 ?>

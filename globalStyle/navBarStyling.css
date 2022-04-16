@@ -15,7 +15,7 @@ padding-left:15px;
 nav {
 background: rgba(34, 34, 34, 0.9);
 height: 60px;
-
+z-index:5;
 position: fixed;
 width: 100%;
 top: 0;

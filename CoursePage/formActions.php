@@ -38,7 +38,7 @@
         $dateWritten = $_POST['dateWritten'];
 
         $sqlInsertReview = "INSERT INTO studentCourse (student_id, course_code, review_message, overall_review_rating, q1Answer, q2Answer ,q3Answer, review_date_written)
-        VALUES ('$currentLoggedStudent', '$courseCode', '$reviewMessage', 0, '$q1Answer', '$q2Answer', '$q3Answer', $dateWritten)";
+        VALUES ('$currentLoggedStudent', '$courseCode', '$reviewMessage', 0, '$q1Answer', '$q2Answer', '$q3Answer', '$dateWritten')";
 
         //Query sql statement above
         $queryInsertReview = mysqli_query($connectToDB, $sqlInsertReview);
@@ -69,7 +69,8 @@
         $sqlUpdateReview = "UPDATE studentcourse SET review_message = '$editReviewMessage', 
                                                     q1Answer = '$q1Edit', 
                                                     q2Answer = '$q2Edit', 
-                                                    q3Answer = '$q3Edit' 
+                                                    q3Answer = '$q3Edit',
+                                                    review_date_written = '$dateWritten'
                                                     WHERE studentCourseReview_id = $reviewID";
 
         //Query sql statement above
