@@ -114,39 +114,39 @@ function displayStudentInfo()
 } //end of displayStudentInfo 
 
 //creating function to get users profile pictures
-function getProfilePicture(){
+function getProfilePicture()
+{
     global $connectToDB;
     $sqlStudentInfo = "SELECT * FROM studentInfo";
 
     //Run and assign query 
     $data = mysqli_query($connectToDB, $sqlStudentInfo);
-     //While loop to retrieve data from studentInfo table. 
-     while ($rows = mysqli_fetch_array($data)) {
+    //While loop to retrieve data from studentInfo table. 
+    while ($rows = mysqli_fetch_array($data)) {
         $studentId = $rows['student_id'];
         if ($studentId == $_SESSION["currentUserLoginId"]) {
             $picture = $rows['user_image'];
             echo  "<img  src='upload/" . $picture . "' alt='img' id ='profilePictureImage'>";
         }
     }
-
 }
 //creating function to get users profile pictures for the Nav bar
-function navGetProfilePicture(){
+function navGetProfilePicture()
+{
     global $connectToDB;
     $sqlStudentInfo = "SELECT * FROM studentInfo";
 
     //Run and assign query 
     $data = mysqli_query($connectToDB, $sqlStudentInfo);
-     //While loop to retrieve data from studentInfo table. 
-     while ($rows = mysqli_fetch_array($data)) {
+    //While loop to retrieve data from studentInfo table. 
+    while ($rows = mysqli_fetch_array($data)) {
         $studentId = $rows['student_id'];
         if ($studentId == $_SESSION["currentUserLoginId"]) {
             $picture = $rows['user_image'];
             echo  "<img  src='upload/" . $picture . "' alt='img' id ='navImage'>";
         }
     }
-
-}//end of navGetProfilePicture()
+} //end of navGetProfilePicture()
 
 function displayAboutStudent()
 {
@@ -178,8 +178,7 @@ function displayAboutStudent()
             echo "<h3>Year of study: </h3>";
             echo "<p>" . $student_year . "</p>";
             echo "<h3>About me: </h3>";
-            echo "<p>" . $about_student . "</p>";  
-
+            echo "<p>" . $about_student . "</p>";
         }
     }
     echo "</fieldset>";
@@ -313,54 +312,53 @@ if (isset($_POST['submitButton'])) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
         <?php include("profiles.css"); ?>
-        
     </style>
 
     <title>User Profile</title>
 </head>
 
 <body>
-        <!-- Start of Nav Script -->
-<nav id="navbar">
-    <script>
-        var lastScrollTop; // This Varibale will store the top position
+    <!-- Start of Nav Script -->
+    <nav id="navbar">
+        <script>
+            var lastScrollTop; // This Varibale will store the top position
 
-navbar = document.getElementById('navbar'); // Get The NavBar
+            navbar = document.getElementById('navbar'); // Get The NavBar
 
-window.addEventListener('scroll',function(){
- //on every scroll this funtion will be called
-  
-  var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-  //This line will get the location on scroll
-  
-  if(scrollTop > lastScrollTop){ //if it will be greater than the previous
-    navbar.style.top='-80px';
-    //set the value to the negetive of height of navbar 
-  }
-  
-  else{
-    navbar.style.top='0';
-  }
-  
-  lastScrollTop = scrollTop; //New Position Stored
-});
-    </script>
+            window.addEventListener('scroll', function() {
+                //on every scroll this funtion will be called
+
+                var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                //This line will get the location on scroll
+
+                if (scrollTop > lastScrollTop) { //if it will be greater than the previous
+                    navbar.style.top = '-80px';
+                    //set the value to the negetive of height of navbar 
+                } else {
+                    navbar.style.top = '0';
+                }
+
+                lastScrollTop = scrollTop; //New Position Stored
+            });
+        </script>
         <ul class="menu">
             <li class="logo" id="logo">CSP Student Profile</li>
             <li class="item"><a href="http://localhost/csc450Capstone/LandingPage/LandingPage.php">Home</a></li>
-            <li class="item">   
-            
-            <?php  navGetProfilePicture(); ?>
-             
+            <li class="item">
+
+                <div id="navImage">
+                    <?php navGetProfilePicture() ?>
+                </div>
+
             </li>
             <li class="item"><a href="http://localhost/csc450Capstone/profileView/profiles.php">Profile</a></li>
             <li class="item"><a href="http://localhost/csc450Capstone/MajorPage/CSCMajorPage.php">Majors</a></li>
             <li class="item button"><a href="http://localhost/csc450Capstone/LoginPage/logOut.php">Sign Out</a></li>
-    
+
             <li class="toggle"><span class="bars"></span></li>
         </ul>
     </nav>
-<!-- End of Nav Script -->
+    <!-- End of Nav Script -->
     <!-- <div class="stickyHead">
         <h1 class="pageName">CSP Student Profile</h1>
         <div class="wrapButton">
@@ -373,65 +371,64 @@ window.addEventListener('scroll',function(){
         </div>
     </div> -->
 
-<!-- code for updating profile picture -->
-      <form id="editProfilePictureform" method="POST" action="" enctype="multipart/form-data">
-      <button id ="closeButton" type="button" onclick="toggleEditProfilePicture()">X</button>
-      <input type="file" id="uploadfile" name="uploadfile" value="Change"/>
-        
-      <div>
-          <button type="submit" name="upload">UPLOAD</button>
+    <!-- code for updating profile picture -->
+    <form id="editProfilePictureform" method="POST" action="" enctype="multipart/form-data">
+        <button id="closeButton" type="button" onclick="toggleEditProfilePicture()">X</button>
+        <input type="file" id="uploadfile" name="uploadfile" value="Change" />
+
+        <div>
+            <button type="submit" name="upload">UPLOAD</button>
         </div>
-  </form>
+    </form>
 
     <!-- End of profile picture update code -->
-      <?php
-  
-  // If upload button is clicked ...
-  $msg = "";
-  if (isset($_POST['upload'])) {
-  
-    $filename = $_FILES["uploadfile"]["name"];
-    $tempname = $_FILES["uploadfile"]["tmp_name"];    
-    $folder = "upload/".$filename;
-    $studentId = $_SESSION["currentUserLoginId"];
-    
+    <?php
+
+    // If upload button is clicked ...
+    $msg = "";
+    if (isset($_POST['upload'])) {
+
+        $filename = $_FILES["uploadfile"]["name"];
+        $tempname = $_FILES["uploadfile"]["tmp_name"];
+        $folder = "upload/" . $filename;
+        $studentId = $_SESSION["currentUserLoginId"];
+
         // Get all the submitted data from the form
-        
+
         global $connectToDB;
         $sqlStudentInfo = "SELECT * FROM studentInfo";
         $data = mysqli_query($connectToDB, $sqlStudentInfo);
         $users = mysqli_fetch_all($data, MYSQLI_ASSOC);
 
-     
+
 
         // Execute query
         $sql = "UPDATE studentinfo SET user_image = '$filename' WHERE student_id = '$studentId'";
-       
-        // this lets us move the uploaded image into the folder: upload
-        if (move_uploaded_file($tempname, $folder))  {
-            $msg = "Image uploaded successfully";
-          
-        }else{
-            $msg = "Failed to upload image";
-      }
-     $result = mysqli_query($connectToDB,$sql);
-  }
 
-?>
-<!-- End of profile picture update code -->
+        // this lets us move the uploaded image into the folder: upload
+        if (move_uploaded_file($tempname, $folder)) {
+            $msg = "Image uploaded successfully";
+        } else {
+            $msg = "Failed to upload image";
+        }
+        $result = mysqli_query($connectToDB, $sql);
+    }
+
+    ?>
+    <!-- End of profile picture update code -->
 
 
     <!--FORM to update/edit the user's profile information (Passwords, and About me sections) -->
     <form class="editProfileform" id="editProfileform" method="POST">
         <!-- button to close out of the form -->
-        <button id ="closeButton" type="button" onclick="toggleEditProfile()">X</button>
+        <button id="closeButton" type="button" onclick="toggleEditProfile()">X</button>
 
 
         <h1 id="formHeader">Edit Profile Information</h1>
         <h3 id="passwordHeader">Change Password</h3>
-       
+
         <div>
-       
+
             <label for="oldPassword">Enter old password</label> <!-- Creating a label for input type of "text" then giving a name and id to match the lable name-->
             <input type="password" name="oldPassword" id="oldPassword">
 
@@ -481,15 +478,15 @@ window.addEventListener('scroll',function(){
     <div class="studentInfo">
         <div class="studentDescript1">
             <!-- Edit profile picture button with camera icon -->
-             <button type="button" id="editProfilePictureButton" onclick="toggleEditProfilePicture()"><i class="fa fa-camera" ></i></button>
+            <button type="button" id="editProfilePictureButton" onclick="toggleEditProfilePicture()"><i class="fa fa-camera"></i></button>
             <!-- using created function to pull correct picture from the database -->
-            <div >
-            <?php  getProfilePicture(); ?>
+            <div>
+                <?php getProfilePicture(); ?>
             </div>
-       
-           <!-- button for editing accound information -->
+
+            <!-- button for editing accound information -->
             <button type="button" id="editProfileButton" onclick="toggleEditProfile()">Edit Account</button>
-           
+
         </div>
 
         <div class="studentDescript2">
@@ -511,24 +508,24 @@ window.addEventListener('scroll',function(){
 </html>
 
 <script>
- // toggle function that will allow the user to exit the form by hitting the Edit Account and X button for better UX
- function toggleEditProfile() {
-    var nav = document.getElementById('editProfileform');
-  if (nav.offsetWidth == 0 && nav.offsetHeight == 0 ) {
-    nav.style.display = 'block';
-  } else {
-    nav.style.display = 'none';
-  }
-}//end of toggleEditProfile button function
+    // toggle function that will allow the user to exit the form by hitting the Edit Account and X button for better UX
+    function toggleEditProfile() {
+        var nav = document.getElementById('editProfileform');
+        if (nav.offsetWidth == 0 && nav.offsetHeight == 0) {
+            nav.style.display = 'block';
+        } else {
+            nav.style.display = 'none';
+        }
+    } //end of toggleEditProfile button function
 
-function toggleEditProfilePicture() {
-    var nav = document.getElementById('editProfilePictureform');
-  if (nav.offsetWidth == 0 && nav.offsetHeight == 0 ) {
-    nav.style.display = 'block';
-  } else {
-    nav.style.display = 'none';
-  }
-}//end of toggleEditProfilePicture button function
+    function toggleEditProfilePicture() {
+        var nav = document.getElementById('editProfilePictureform');
+        if (nav.offsetWidth == 0 && nav.offsetHeight == 0) {
+            nav.style.display = 'block';
+        } else {
+            nav.style.display = 'none';
+        }
+    } //end of toggleEditProfilePicture button function
 
 
     //Create the functions to show password for the users if they check the check box 

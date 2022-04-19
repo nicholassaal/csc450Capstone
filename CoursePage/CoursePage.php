@@ -39,7 +39,8 @@ function displayCourseTitle()
     echo "<h2>" . $courseDes . "</h1>";
 } //end of displayCourseTitle()
 
-function featuredCourseReviews() {
+function featuredCourseReviews()
+{
     global $connectToDB;
     global $courseCode;
 
@@ -57,10 +58,10 @@ function featuredCourseReviews() {
     if (count($topReviews) >= 3) {
         echo "<h3 class=subHeader>Featured Reviews</h3>";
         echo "<div class=lower-flex-container>";
-        for($i = count($topReviews)-1; $i >= count($topReviews)-3; $i--) {
-            $storedFeaturedReviews[] = $topReviews[$i];   
+        for ($i = count($topReviews) - 1; $i >= count($topReviews) - 3; $i--) {
+            $storedFeaturedReviews[] = $topReviews[$i];
         }
-        for($t = 0; $t < count($storedFeaturedReviews); $t++) {
+        for ($t = 0; $t < count($storedFeaturedReviews); $t++) {
             $sqlSelectingFeatured = "SELECT * FROM studentcourse WHERE overall_review_rating = $storedFeaturedReviews[$t] AND course_code = $courseCode";
             $selectingFeaturedQuery = mysqli_query($connectToDB, $sqlSelectingFeatured);
             $studentCourseTableRow = mysqli_fetch_array($selectingFeaturedQuery);
@@ -73,11 +74,11 @@ function featuredCourseReviews() {
             $studentTableRow = mysqli_fetch_array($topStudentQuery);
 
             $topStudentName = $studentTableRow['fullName'];
-                
-            if($topStudentQuery && $selectingFeaturedQuery) {
+
+            if ($topStudentQuery && $selectingFeaturedQuery) {
                 echo "<div>";
-                    echo "<h1>".$topStudentName."</h1>";
-                    echo "<h2>".$topReviews."</h2>";
+                echo "<h1>" . $topStudentName . "</h1>";
+                echo "<h2>" . $topReviews . "</h2>";
                 echo "</div>";
             } else {
                 print_r($connectToDB);
@@ -85,7 +86,6 @@ function featuredCourseReviews() {
             }
         } //end of 2nd for()
         echo "</div>";
-
     } else {
         echo "<script> document.getElementById(featuredReviews).style.display = none; </script>";
     }
@@ -93,7 +93,8 @@ function featuredCourseReviews() {
 } //end of featuredCourseReviews()
 
 
-function correctTitle() {
+function correctTitle()
+{
     global $connectToDB;
     $courseCode = $_GET["id"];
 
@@ -115,22 +116,22 @@ function correctTitle() {
 //     echo "CONGRATS YOU PRESSED A BUTTON, WELL DONE!";
 // }
 //creating function to get users profile pictures for the Nav bar
-function navGetProfilePicture(){
+function navGetProfilePicture()
+{
     global $connectToDB;
     $sqlStudentInfo = "SELECT * FROM studentInfo";
 
     //Run and assign query 
     $data = mysqli_query($connectToDB, $sqlStudentInfo);
-     //While loop to retrieve data from studentInfo table. 
-     while ($rows = mysqli_fetch_array($data)) {
+    //While loop to retrieve data from studentInfo table. 
+    while ($rows = mysqli_fetch_array($data)) {
         $studentId = $rows['student_id'];
         if ($studentId == $_SESSION["currentUserLoginId"]) {
             $picture = $rows['user_image'];
             echo  "<img  src='/csc450Capstone/profileView/upload/" . $picture . "' alt='img' id ='navImage'>";
         }
     }
-
-}//end of navGetProfilePicture()
+} //end of navGetProfilePicture()
 ?>
 
 <!DOCTYPE html>
@@ -144,41 +145,39 @@ function navGetProfilePicture(){
 
 <body>
     <nav id="navbar">
-    <script>
-        var lastScrollTop; // This Varibale will store the top position
+        <script>
+            var lastScrollTop; // This Varibale will store the top position
 
-        navbar = document.getElementById('navbar'); // Get The NavBar
+            navbar = document.getElementById('navbar'); // Get The NavBar
 
-        window.addEventListener('scroll',function(){
-        //on every scroll this funtion will be called
-        
-        var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        //This line will get the location on scroll
-        
-        if(scrollTop > lastScrollTop){ //if it will be greater than the previous
-            navbar.style.top='-80px';
-            //set the value to the negetive of height of navbar 
-        }
-        
-        else{
-            navbar.style.top='0';
-        }
-        
-        lastScrollTop = scrollTop; //New Position Stored
-        });
-    </script>
+            window.addEventListener('scroll', function() {
+                //on every scroll this funtion will be called
+
+                var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                //This line will get the location on scroll
+
+                if (scrollTop > lastScrollTop) { //if it will be greater than the previous
+                    navbar.style.top = '-80px';
+                    //set the value to the negetive of height of navbar 
+                } else {
+                    navbar.style.top = '0';
+                }
+
+                lastScrollTop = scrollTop; //New Position Stored
+            });
+        </script>
         <ul class="menu">
             <li class="logo" id="logo">CSP Course Page</li>
             <li class="item"><a href="http://localhost/csc450Capstone/LandingPage/LandingPage.php">Home</a></li>
-            <li class="item">   
-            <div id="navPicture" >
-            <?php  navGetProfilePicture(); ?>
-            </div> 
+            <li class="item">
+                <div id="navImage">
+                    <?php navGetProfilePicture() ?>
+                </div>
             </li>
             <li class="item"><a href="http://localhost/csc450Capstone/profileView/profiles.php">Profile</a></li>
             <li class="item"><a href="http://localhost/csc450Capstone/MajorPage/CSCMajorPage.php">Majors</a></li>
             <li class="item button"><a href="http://localhost/csc450Capstone/LoginPage/logOut.php">Sign Out</a></li>
-    
+
             <li class="toggle"><span class="bars"></span></li>
         </ul>
     </nav>
@@ -192,7 +191,7 @@ function navGetProfilePicture(){
 
     <!-- Leave review overlay. Displayed using button above. Hidden when function tied to cancel button is called -->
     <form method="POST" id="leaveReviewForm" action="formActions.php?id=<?php echo $courseCode; ?>">
-        <div class="leaveReviewForm" >
+        <div class="leaveReviewForm">
             <div>
                 <h3>What did you learn?</h3>
                 <br>
@@ -211,40 +210,40 @@ function navGetProfilePicture(){
                 <textarea id="reviewMessage" name="reviewMessage" rows="5" cols="30" required></textarea>
             </div>
             <!--Turn off overlay form-->
-            
+
         </div>
         <!-- hidden values needed to be sent over to the form action page. -->
-        <input type='hidden' name='dateWritten' value= "<?php echo "".date("Y-m-d")."";?>">
+        <input type='hidden' name='dateWritten' value="<?php echo "" . date("Y-m-d") . ""; ?>">
         <!--Turn off overlay form-->
         <button type="button" onclick="toggleLeavingReview()" class="reviewButton">Cancel</button>
-        <button type="submit" name="submitReviewButton" id="submitReviewButton" >Submit</button>
+        <button type="submit" name="submitReviewButton" id="submitReviewButton">Submit</button>
     </form>
 
-    <div id = "featuredReviews">
-            <?php featuredCourseReviews(); ?>
+    <div id="featuredReviews">
+        <?php featuredCourseReviews(); ?>
     </div>
-    
 
-        <h3 class="subHeader">All Reviews</h3>
-        <!-- <div class="review-flex-container"> -->
-            <!--Called php function to the review message for that specific course -->
-                <?php displayCourseReviewMessage(); ?>
-        <!-- </div> -->
+
+    <h3 class="subHeader">All Reviews</h3>
+    <!-- <div class="review-flex-container"> -->
+    <!--Called php function to the review message for that specific course -->
+    <?php displayCourseReviewMessage(); ?>
+    <!-- </div> -->
 
 
     <script>
         document.getElementById("leaveReviewForm").style.display = "none";
         /******************************************
          *********   HIDE ALL REPLY FROMS   *********
-        ********************************************/
+         ********************************************/
         var maxReviewsNum = <?php echo $numIterator ?>;
-        for(let i = 0; i < maxReviewsNum; i++){
-            document.getElementById("replyForms"+i).style.display = "none";
+        for (let i = 0; i < maxReviewsNum; i++) {
+            document.getElementById("replyForms" + i).style.display = "none";
         }
 
-        var maxReviewsNum = <?php echo $numIterator2?>;
+        var maxReviewsNum = <?php echo $numIterator2 ?>;
         var replyToReplyForms = document.getElementsByClassName("replytoReplyForms");
-        for(let j = 0; j < maxReviewsNum; j++){
+        for (let j = 0; j < maxReviewsNum; j++) {
             replyToReplyForms[j].style.display = "none";
         }
 
@@ -260,11 +259,11 @@ function navGetProfilePicture(){
         }
 
         /******************************************
-        *******     TOGGLE REVIEW FORM      *******
-        ********************************************/
+         *******     TOGGLE REVIEW FORM      *******
+         ********************************************/
         function toggleLeavingReview() {
             var reviewForm = document.getElementById('leaveReviewForm');
-            if (reviewForm.offsetWidth == 0 && reviewForm.offsetHeight == 0 ) {
+            if (reviewForm.offsetWidth == 0 && reviewForm.offsetHeight == 0) {
                 reviewForm.style.display = 'block';
             } else {
                 reviewForm.style.display = 'none';
@@ -273,16 +272,16 @@ function navGetProfilePicture(){
                 document.getElementById('question3').value = '';
                 document.getElementById('reviewMessage').value = '';
             }
-        }//end of toggleEditProfilePicture button function
+        } //end of toggleEditProfilePicture button function
 
 
         /******************************************
-        *****   TOGGLE EDIT REVIEW FORMS *****
-        ********************************************/
+         *****   TOGGLE EDIT REVIEW FORMS *****
+         ********************************************/
         const editReviewBtns = document.querySelectorAll('.editReviewFormBtn');
-        for(let i = 0; i < editReviewBtns.length; i++) {
+        for (let i = 0; i < editReviewBtns.length; i++) {
             editReviewBtns[i].addEventListener('click', () => {
-                for(let j = 0; j < editReviewBtns.length; j++){
+                for (let j = 0; j < editReviewBtns.length; j++) {
                     editReviewBtns[j].classList.remove('active');
                 }
 
@@ -290,23 +289,23 @@ function navGetProfilePicture(){
                 editReviewBtns[i].classList.add('active');
 
                 var editreplyForms = document.getElementById("editReviewForm");
-                    if (editreplyForms.offsetWidth == 0 && editreplyForms.offsetHeight == 0 ) {
-                        editreplyForms.style.display = 'block';
-                    } else {
-                        editReviewBtns[i].style.color = "white";
-                        editReviewBtns[i].innerHTML = "Edit";
-                        editreplyForms.style.display = 'none';
-                    }
+                if (editreplyForms.offsetWidth == 0 && editreplyForms.offsetHeight == 0) {
+                    editreplyForms.style.display = 'block';
+                } else {
+                    editReviewBtns[i].style.color = "white";
+                    editReviewBtns[i].innerHTML = "Edit";
+                    editreplyForms.style.display = 'none';
+                }
             })
-        }//end of for loop for editFormBtns
+        } //end of for loop for editFormBtns
 
         /******************************************
          *********   TOGGLE REPLY FROMS   *********
-        ********************************************/
+         ********************************************/
         const replyBtns = document.querySelectorAll('.replyBtn');
-        for(let i = 0; i < replyBtns.length; i++) {
+        for (let i = 0; i < replyBtns.length; i++) {
             replyBtns[i].addEventListener('click', () => {
-                for(let j = 0; j < replyBtns.length; j++){
+                for (let j = 0; j < replyBtns.length; j++) {
                     replyBtns[j].classList.remove('active');
                 }
 
@@ -314,44 +313,42 @@ function navGetProfilePicture(){
                 replyBtns[i].style.color = "rgb(255, 112, 112)";
                 replyBtns[i].classList.add('active');
 
-                var replyForms = document.getElementById("replyForms"+i);
-                    if (replyForms.offsetWidth == 0 && replyForms.offsetHeight == 0 ) {
-                        replyForms.style.display = 'block';
-                    } else {
-                        replyBtns[i].style.color = "white";
-                        replyBtns[i].innerHTML = "Reply";
-                        document.getElementsByClassName("replyMessage")[i].value = ''; 
-                        replyForms.style.display = 'none';
-                    }
+                var replyForms = document.getElementById("replyForms" + i);
+                if (replyForms.offsetWidth == 0 && replyForms.offsetHeight == 0) {
+                    replyForms.style.display = 'block';
+                } else {
+                    replyBtns[i].style.color = "white";
+                    replyBtns[i].innerHTML = "Reply";
+                    document.getElementsByClassName("replyMessage")[i].value = '';
+                    replyForms.style.display = 'none';
+                }
             })
-        }//end of for loop for replyBtns
+        } //end of for loop for replyBtns
 
         /******************************************
-        *****   TOGGLE REPLY TO REPLY FROMS   *****
-        ********************************************/
+         *****   TOGGLE REPLY TO REPLY FROMS   *****
+         ********************************************/
         const replyToReplyBtns = document.querySelectorAll('.replyToReplyBtn');
-        for(let i = 0; i < replyToReplyBtns.length; i++) {
+        for (let i = 0; i < replyToReplyBtns.length; i++) {
             replyToReplyBtns[i].addEventListener('click', () => {
-                for(let j = 0; j < replyToReplyBtns.length; j++){
+                for (let j = 0; j < replyToReplyBtns.length; j++) {
                     replyToReplyBtns[j].classList.remove('active');
                 }
                 replyToReplyBtns[i].innerHTML = "Cancel";
                 replyToReplyBtns[i].style.color = "firebrick";
                 replyToReplyBtns[i].classList.add('active');
 
-                var replyForms = document.getElementById("replytoReplyForms"+i);
-                    if (replyForms.offsetWidth == 0 && replyForms.offsetHeight == 0 ) {
-                        replyForms.style.display = 'block';
-                    } else {
-                        replyToReplyBtns[i].style.color = "white";
-                        replyToReplyBtns[i].innerHTML = "Reply";
-                        document.getElementsByClassName("replyToReplyMessage")[i].value = ''; 
-                        replyForms.style.display = 'none';
-                    }
+                var replyForms = document.getElementById("replytoReplyForms" + i);
+                if (replyForms.offsetWidth == 0 && replyForms.offsetHeight == 0) {
+                    replyForms.style.display = 'block';
+                } else {
+                    replyToReplyBtns[i].style.color = "white";
+                    replyToReplyBtns[i].innerHTML = "Reply";
+                    document.getElementsByClassName("replyToReplyMessage")[i].value = '';
+                    replyForms.style.display = 'none';
+                }
             })
-        }//end of for loop for replyToReplyBtns
-
-
+        } //end of for loop for replyToReplyBtns
     </script>
 </body>
 
