@@ -1,11 +1,13 @@
-header {display:flex; /*using flex for header menu/nav bar to keep them side by side*/
-    justify-content: space-between;/*add space between each element*/
-    align-items: center;/*Center the menu in the header*/
+header {
     border: black solid 3px;/*Add a solid border to header*/
-    padding:5px;/*padding for space around the items*/
+    /* padding:5px;padding for space around the items */
     color:white;/*color the text white for a big color contrast with the blue background*/
     background-color: rgba(34, 34, 34, 0.9);
     border-radius:5px;/*Curver the header's corners*/
+    position:absolute;
+    left:0;
+    right:0;
+    top:0;
 }
 
 body{
@@ -26,8 +28,6 @@ a:hover{color:red;} /*Hovering over the list items in the menu/nav bar and it wi
 
 .navigation li {padding: 0px 20px;}/*Padding around the list*/
 
-img {padding:5px;}/*Padding around the image*/
-
 input {display:block; /*Using display:block so the Lables and inputs are on top of one another*/
     margin-bottom: 10px; /*Giving a margin to the bottom and adding padding so inputs are spaced out*/ 
     padding: 10px;
@@ -37,7 +37,6 @@ input {display:block; /*Using display:block so the Lables and inputs are on top 
 #userInformation {
     color:white;
     font-weight: bold;
-    ;
     margin:0 auto; /*Centering the information*/
     padding-top: 100px; /*Adding padding to top to bring down the login info*/ 
 }
@@ -63,8 +62,12 @@ input {display:block; /*Using display:block so the Lables and inputs are on top 
 footer {padding: 5px;
     background-color: rgba(34, 34, 34, 0.9);
     border: black solid 3px;
+    text-align: center;
     color:white;
     border-radius: 3px;
+    position:absolute;
+    left:0;
+    right:0;
 }
 
 .checkLogin{ /*Styling the check login errors container */
@@ -72,4 +75,10 @@ footer {padding: 5px;
     background-color:pink;
     padding: 5px;
     border-radius: 5px;
+}
+
+img{
+    margin-top:5%;
+    height:100%; 
+    width:65%;
 }

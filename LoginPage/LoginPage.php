@@ -14,7 +14,6 @@
         die("Connection failed: " . $conn->connect_error); //die( ) will kill the current program after displaying the message in the String parameter.
     }
 
-
     function loginFunction() {
         global $connectToDB;
 
@@ -86,7 +85,6 @@
 </head>
 
     <body>
-        <div class="rectangle"></div> <!--Creating a rectangle for the header-->
         <header>
             <h1>CSP Student Review Login Page</h1> <!--Nav Bar, used an Unorder lists-->
             <!-- <nav> 
@@ -100,7 +98,7 @@
         </header>
 
         <div class="loginContainer"> <!--Image and Login info-->
-            <img src="image/CSPpicture.JPG" height="100%" width="60%" alt="Picture of CSP">
+            <img src="image/CSPpicture.JPG" alt="Picture of CSP">
 
             <section id = "userInformation"> <!--Container for login user informatoin -->
                 <h1 id="loginHeader">Login</h1>

@@ -145,7 +145,9 @@ function navGetProfilePicture()
             prevScrollpos = currentScrollPos;
         }
     </script>
-
+    <footer>
+        <a href="">Group 1 CSC 450 Capstone Neng Yang | Josiah Skorseth | Mitchell Williamson | Nicholas Saal</a>
+    </footer>
 </body>
 
 </html>

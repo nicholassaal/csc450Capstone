@@ -135,16 +135,32 @@ function displayAboutStudent()
             $student_phoneNumber = $rows['student_phoneNumber'];
             $student_year = $rows['student_year'];
             $about_student = $rows['about_student'];
-            echo "<h3>Socials: </h3>";
-            echo "<p>" . $student_social . "</p>";
-            echo "<h3>Birthday: </h3>";
-            echo "<p>" . $student_birthday . "</p>";
-            echo "<h3>Phone Number: </h3>";
-            echo "<p>" . $student_phoneNumber . "</p>";
-            echo "<h3>Year of study: </h3>";
-            echo "<p>" . $student_year . "</p>";
-            echo "<h3>About me: </h3>";
-            echo "<p>" . $about_student . "</p>";
+
+            
+            echo"<div class=mostOutterAboutMeDiv>";
+                echo"<div class = outterAboutMeDiv>";
+                    echo"<div class = additionalInfoDiv>";
+                        echo "<h3>Socials: </h3>";
+                        echo "<p>" . $student_social . "</p>";
+                    echo"</div>";
+                    echo"<div class = additionalInfoDiv>";
+                        echo "<h3>Birthday: </h3>";
+                        echo "<p>" . $student_birthday . "</p>";
+                    echo"</div>";
+                    echo"<div class = additionalInfoDiv>";
+                        echo "<h3>Phone Number: </h3>";
+                        echo "<p>" . $student_phoneNumber . "</p>";
+                    echo"</div>";
+                    echo"<div class = additionalInfoDiv>";
+                        echo "<h3>Year of study: </h3>";
+                        echo "<p>" . $student_year . "</p>";
+                    echo"</div>";
+                echo"</div>";
+                echo"<div class = aboutStudentDiv>";
+                    echo "<h3>About me: </h3>";
+                    echo "<p>" . $about_student . "</p>";
+                echo"</div>";
+            echo"</div>";
         }
     }
 
@@ -293,7 +309,9 @@ function getClickedUserName()
         <?php displayAboutStudent(); ?>
 
     </div>
-
+    <footer>
+        <a href="">Group 1 CSC 450 Capstone Neng Yang | Josiah Skorseth | Mitchell Williamson | Nicholas Saal</a>
+    </footer>
 </body>
 
 </html>

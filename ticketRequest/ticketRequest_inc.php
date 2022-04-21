@@ -189,10 +189,6 @@
             }
             echo "</div>";
         }
-
-        // Was used to Test the creation process of the exclamation-point and Checkmark
-        //echo "<div class = 'allowedSymbol'></div>";  
-        //echo "<div class='mark exclamation-point'></div>";
         
 
         echo "<tr>";

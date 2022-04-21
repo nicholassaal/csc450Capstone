@@ -3,6 +3,7 @@ body {
     padding-top: 85px;
     margin-right: 25%;
     margin-left: 25%;
+    background-attachment: fixed;
     background-image: url("graphic/LandingPageBackgroundIMG.jpg");
     
 }

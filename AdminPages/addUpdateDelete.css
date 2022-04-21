@@ -5,6 +5,8 @@ margin: 0;
 padding: 0;
 font-family: sans-serif;
 color: white;
+background-repeat: no-repeat;
+background-size: cover;
 }
 
 h1 {
@@ -104,8 +106,8 @@ width: 45%;
 }
 .staffEditContainer {
 width: 45%;
-margin-top: -1310px;
-margin-left: 50%;
+margin-top: 10px;
+margin-left: 1%;
 }
 
 input {
@@ -143,9 +145,35 @@ padding-right: 10px;
 }
 
 
+/* 
+CSS FOR STUDENT TABLE
+*/
 
+.studentFieldSet{
+  width:50%;
+  background-color:lightgray;
+  float: right;
+}
 
+.studentLegend {
+  font-size: 28px;
+  background-color: rgba(34, 34, 34, 0.9);
+  font-family: Georgia, 'Times New Roman', Times, serif; 
+  color:white;
+  border-bottom: 2px groove rgb(50, 50, 51);
+  border-top: 2px groove rgb(50, 50, 51);
+  border-left: 2px groove rgb(71, 163, 182);
+  border-right: 2px groove rgb(71, 163, 182);
+  border-radius: 7px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
 
-
+.studentTable, th, td {
+  border: 1px solid white;
+  text-align: center;
+  padding:5px;
+  background-color: rgba(34, 34, 34, 0.9);
+}
 
 

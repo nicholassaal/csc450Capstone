@@ -1,24 +1,6 @@
 /************************************************************************
  *******************         Profile Page         **********************
 ************************************************************************/
-/* body {
-    background-attachment: fixed;
-    background-image: url("graphic/LandingPageBackgroundIMG.jpg");
-} */
-/* .stickyHead {
-    position: fixed;
-    background-color: rgba(34, 34, 34, 0.9);
-    left: 0;
-    top: 0;
-    right: 0;
-    display: inline;
-    z-index: 10;
-}
-.pageName {
-    color: white;
-    margin-left: 25px;
-    font-family: Georgia, 'Times New Roman', Times, serif; 
-} */
 body {
     background-attachment: fixed;
     font-family: sans-serif;
@@ -134,15 +116,7 @@ a:hover {
     width: 200px;
     height: 230px;
 }
-/* styling for the profile picture on the nav bar
-#navImage{
-    width: 30px;
-    height: 35px;
-    margin-top: -5px;
-    margin-right: -15px;
-    border: 1px solid rgb(50, 50, 51);
-    border-radius: 90px;
-} */
+
 .reviewBox {
     float: left;
     background-color: rgba(34, 34, 34, 0.9);
@@ -252,3 +226,43 @@ input[type="checkbox"]{
     width: 100%;
 }
 
+/*
+----------------------------------------------------------------
+CSS STYLING FOR ADDITIONAL INFORMATION SECTION
+----------------------------------------------------------------
+*/
+.mostOutterAboutMeDiv{
+    display:flex;
+    flex-direction:row;
+}
+
+.outterAboutMeDiv{
+    display:flex;
+    flex-direction:column;
+    width:30%;
+}
+
+.additionalInfoDiv{
+    margin-top:10px;
+    margin-left:10px;
+}
+
+.aboutStudentDiv{
+    padding-left:25px;
+    width:100%;
+}
+
+.aboutStudentDiv > p{
+    margin-left:10px;
+    margin-right:10px;
+    background-color: white;
+    border-radius:10px;
+    height:50%;
+    color:black;
+    padding:5px;
+    font-size:18px;
+}
+
+.aboutStudentDiv > h3{
+    font-size:x-large;
+}

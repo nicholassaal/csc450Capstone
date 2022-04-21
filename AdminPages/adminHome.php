@@ -18,8 +18,9 @@
   </nav>
       
       <div class="flex-container">
-        <a href="addUpdateDelete.php">Add Student and Staff</a>
-        <a href="courseUpdate.php">Update/ Add Course</a>
+        <a href="addUpdateDelete.php">Add/Update/Delete Student</a>
+        <a href="addUpdateDeleteStaff.php">Add/Update Staff</a>
+        <a href="courseUpdate.php">Update/Add/Delete Course</a>
         <a href="ticketRequest.php">Ticket Requests</a>
       </div>
      

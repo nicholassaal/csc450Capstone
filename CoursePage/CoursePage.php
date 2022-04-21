@@ -230,8 +230,14 @@ function navGetProfilePicture()
     <?php displayCourseReviewMessage(); ?>
     <!-- </div> -->
 
+    <footer>
+        <a href="">Group 1 CSC 450 Capstone Neng Yang | Josiah Skorseth | Mitchell Williamson | Nicholas Saal</a>
+    </footer>
+    
+</body>
+</html>
 
-    <script>
+<script>
         document.getElementById("leaveReviewForm").style.display = "none";
         /******************************************
          *********   HIDE ALL REPLY FROMS   *********
@@ -335,7 +341,7 @@ function navGetProfilePicture()
                     replyToReplyBtns[j].classList.remove('active');
                 }
                 replyToReplyBtns[i].innerHTML = "Cancel";
-                replyToReplyBtns[i].style.color = "firebrick";
+                replyToReplyBtns[i].style.color = "rgb(255, 112, 112)";
                 replyToReplyBtns[i].classList.add('active');
 
                 var replyForms = document.getElementById("replytoReplyForms" + i);
@@ -350,6 +356,3 @@ function navGetProfilePicture()
             })
         } //end of for loop for replyToReplyBtns
     </script>
-</body>
-
-</html>

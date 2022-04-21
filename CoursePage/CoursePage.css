@@ -262,7 +262,6 @@ h1 {
   flex-wrap: wrap;
   justify-content: center;
   flex-direction: row;
-  
 }
 
 .leaveReviewForm > div { /* review questions  */
@@ -278,7 +277,7 @@ h1 {
   position: relative;
   width: 70%;
   height: 80%;
-  margin-left: auto;
+  margin-left: 5%;
   margin-right: auto;
   background-color: rgb(34, 34, 34, 0.9);
   padding-bottom: 40px;
@@ -373,7 +372,7 @@ h1 {
 summary{
   /*list-style: none;*//* This will hide the 'details' black arrow */
   padding:5px;
-  width:14%;
+  width:15%;
   color: white;
   text-decoration: underline;
 }

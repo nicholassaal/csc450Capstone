@@ -1,16 +1,3 @@
-<!-- 
-============================================================================
-
-Josiah Skorseth
-skorsetj@csp.edu
-CSC 450 Capstone
-1/24/2022
-Capstone (early stages UI profiles)
-
-url: http://localhost/csc450Capstone/profileView/profiles.php
-
-============================================================================
--->
 <?php
 session_start();
 $SERVER_NAME    = "localhost";   //Server name 
@@ -169,16 +156,31 @@ function displayAboutStudent()
             $student_phoneNumber = $rows['student_phoneNumber'];
             $student_year = $rows['student_year'];
             $about_student = $rows['about_student'];
-            echo "<h3>Socials: </h3>";
-            echo "<p>" . $student_social . "</p>";
-            echo "<h3>Birthday: </h3>";
-            echo "<p>" . $student_birthday . "</p>";
-            echo "<h3>Phone Number: </h3>";
-            echo "<p>" . $student_phoneNumber . "</p>";
-            echo "<h3>Year of study: </h3>";
-            echo "<p>" . $student_year . "</p>";
-            echo "<h3>About me: </h3>";
-            echo "<p>" . $about_student . "</p>";
+
+            echo"<div class=mostOutterAboutMeDiv>";
+                echo"<div class = outterAboutMeDiv>";
+                    echo"<div class = additionalInfoDiv>";
+                        echo "<h3>Socials: </h3>";
+                        echo "<p>" . $student_social . "</p>";
+                    echo"</div>";
+                    echo"<div class = additionalInfoDiv>";
+                        echo "<h3>Birthday: </h3>";
+                        echo "<p>" . $student_birthday . "</p>";
+                    echo"</div>";
+                    echo"<div class = additionalInfoDiv>";
+                        echo "<h3>Phone Number: </h3>";
+                        echo "<p>" . $student_phoneNumber . "</p>";
+                    echo"</div>";
+                    echo"<div class = additionalInfoDiv>";
+                        echo "<h3>Year of study: </h3>";
+                        echo "<p>" . $student_year . "</p>";
+                    echo"</div>";
+                echo"</div>";
+                echo"<div class = aboutStudentDiv>";
+                    echo "<h3>About me: </h3>";
+                    echo "<p>" . $about_student . "</p>";
+                echo"</div>";
+            echo"</div>";
         }
     }
     echo "</fieldset>";
@@ -358,19 +360,7 @@ if (isset($_POST['submitButton'])) {
             <li class="toggle"><span class="bars"></span></li>
         </ul>
     </nav>
-    <!-- End of Nav Script -->
-    <!-- <div class="stickyHead">
-        <h1 class="pageName">CSP Student Profile</h1>
-        <div class="wrapButton">
-            <ul>
-                <li id="landingBtn"><a href="http://localhost/csc450Capstone/LandingPage/LandingPage.php">Home</a></li>
-                <li id="profileBtn"><a href="http://localhost/csc450Capstone/ProfileView/profiles.php">Profile</a></li>
-                <li id="perMajorBtn"><a href="http://localhost/csc450Capstone/MajorPage/CSCMajorPage.php">Majors</a></li>
-                <li id="loginBtn"><a href="http://localhost/csc450Capstone/LoginPage/logOut.php">Sign Out</a></li>
-            </ul>
-        </div>
-    </div> -->
-
+    <!-- End of Nav Script --
     <!-- code for updating profile picture -->
     <form id="editProfilePictureform" method="POST" action="" enctype="multipart/form-data">
         <button id="closeButton" type="button" onclick="toggleEditProfilePicture()">X</button>
@@ -500,9 +490,11 @@ if (isset($_POST['submitButton'])) {
 
     <div>
         <?php displayAboutStudent(); ?>
-
     </div>
 
+    <footer>
+        <a href="">Group 1 CSC 450 Capstone Neng Yang | Josiah Skorseth | Mitchell Williamson | Nicholas Saal</a>
+    </footer>
 </body>
 
 </html>

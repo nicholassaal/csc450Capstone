@@ -183,11 +183,15 @@
         global $connectToDB;
         global $courseCode;
         global $numIterator2;
-        
+
+        $sqlRetrieveReplies = "SELECT * FROM replies WHERE studentCourseReview_id = $reviewID AND replyToReply_id = '0'";
+        $queryRetireveReplies = mysqli_query($connectToDB, $sqlRetrieveReplies);
+        $numberOfReplies = mysqli_num_rows($queryRetireveReplies);
+
         $sqlRetrieveReviewID = "SELECT studentCourseReview_id FROM studentCourse WHERE student_id = $studentID";
         $queryReviewID = mysqli_query($connectToDB, $sqlRetrieveReviewID);
         echo "<details>";//Details for viewing the replies
-            echo"<summary>View Replies</summary>";
+            echo"<summary>View Replies (".$numberOfReplies.")</summary>";
                 while($reviewRows = mysqli_fetch_array($queryReviewID)){
                     $studentCourseReview_id = $reviewRows['studentCourseReview_id']; //The student's id that wrote the reply
 
@@ -243,8 +247,9 @@
             
             $sqlRepliesToReplies = "SELECT * FROM replies WHERE studentCourseReview_id = $reviewID AND replyToReply_id = $replyID";//Get all replies to replies that match a reply_id
             $queryReplyToReplies = mysqli_query($connectToDB, $sqlRepliesToReplies);
+            $numberOfRepliesToReplies = mysqli_num_rows($queryReplyToReplies);
             echo "<details class=replyToRepiesDetails>";//Details for viewing the replies
-                echo"<summary>View Replies</summary>";
+                echo"<summary>View Replies (".$numberOfRepliesToReplies.")</summary>";
                     while($replyToReplies = mysqli_fetch_array($queryReplyToReplies)){
                         $replyMessage = $replyToReplies['reply_message'];
                         $replyDateWritten = $replyToReplies['date_written'];
@@ -289,9 +294,18 @@
         else{
             echo"<button type='button' id='leaveReview' onclick='toggleLeavingReview()'>Leave a Review</button>";
         }
-            
-
-            
-
     }//end of writtenReviewCheck()
+
+   /*****************************************************
+        Display the number
+    *****************************************************/
+    function howManyRepliesWritten($reviewID){
+        global $connectToDB;
+        global $courseCode;
+
+        $sqlRetrieveReplies = "SELECT * FROM replies WHERE studentCourseReview_id = $reviewID";
+        $queryRetireveReplies = mysqli_query($connectToDB, $sqlRetrieveReplies);
+        $numberOfReplies = mysqli_num_rows($queryRetireveReplies);
+        return $numberOfReplies;
+    }//end of howManyRepliesWritten() function 
 ?>

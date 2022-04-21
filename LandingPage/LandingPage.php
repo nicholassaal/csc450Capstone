@@ -40,8 +40,8 @@ function navGetProfilePicture()
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="LandingPage.css">
     <link rel="stylesheet" type="text/css" href="../globalStyle/navBarStyling.css">
+    <link rel="stylesheet" href="LandingPage.css">
 
     <title>Landing Page</title>
 
@@ -98,13 +98,11 @@ function navGetProfilePicture()
 
     <div class="welcomeText2">
         <h1 id="box2h">What is CSP Review</h1>
-        <p id="box2p">
-        <ul>
+        <ul class="box2p">
             <li>This application allows students to review corses they have finish and actually see responces from fellow class mates</li></br>
             <li>The review tool allows you to have better knowlege on what you will learn in a corse along with allowing you to create connections and network with those who have taken the corse before you</li></br>
             <li></li></br>
         </ul>
-        </p>
     </div>
 
     <div class="welcomeText">
@@ -114,8 +112,7 @@ function navGetProfilePicture()
 
     <div class="welcomeText2">
         <h1 id="box2h">What Data Is Being Found</h1>
-        <p id="box2p">
-        <ul>
+        <ul class="box2p">
             <li>All sensitive data such as grades,GPA of each user will not be shown</li></br>
             <li>Data collected will include</li></br>
             <li>Final grade of completed corse</li></br>
@@ -125,36 +122,30 @@ function navGetProfilePicture()
             <li>What you could like to change in the corse</li></br>
             <li>Much more</li></br>
         </ul>
-        </p>
     </div>
 
     <div class="welcomeText">
         <h1 id="firstboxh">How it helps the University</h1>
-        <p id="firstboxp">
-        <ul>
+        <ul class ="box2p">
             <li>Data help the university know whats working and what is not</li></br>
             <li>Information will help universitys adapt to the future</li></br>
             <li>Helps the university staff and students better connect with eachother</li></br>
         </ul>
-        </p>
     </div>
 
     <div class="welcomeText2">
         <h1 id="box2h">This Is The Future</h1>
-        <p id="box2p">
-        <ul>
+        <ul class="box2p">
             <li>Data can be collected from the users attending universitys all around the country </li></br>
             <li>That data can be used to provide whats great or outdated about a major at that university </li></br>
             <li>Industry leaders can give input on new corses that need to be implemented for the ever changing future</li></br>
             <li>This allows university students to be more prepared for there desided career after graduation</li></br>
         </ul>
-        </p>
     </div>
-    <div id=foot>
-        <footer>
-            <a href="">Contact</a></p>
-        </footer>
-    </div>
+
+    <footer>
+        <a href="">Group 1 CSC 450 Capstone Neng Yang | Josiah Skorseth | Mitchell Williamson | Nicholas Saal</a>
+    </footer>
 
 </body>
 

@@ -87,47 +87,49 @@
         }
     } //end of deleteExistingUser();
 
-    function addNewStaff() {
+    function displayStudentTable() {
         global $connectToDB;
 
-        $staffFName = $_POST['staffFName'];
-        $staffLName = $_POST['staffLName'];
+        $sqlStudentInfo = "SELECT * FROM studentinfo";
+        $queryStudentInfo = mysqli_query($connectToDB, $sqlStudentInfo);
 
-        $sqlAddStaff = "INSERT INTO professor (prof_fName, prof_lName)
-                        VALUES ('$staffFName', '$staffLName')";
+        echo "<fieldset class = studentFieldSet>"; //Writing out a fieldset and legend for format purposes for CSSing and UX
+        echo "<legend><h2 class = studentLegend>Student's Info</h2></legend>";
+            echo "<table class = studentTable>";
+                echo "<tr>";
+                    echo "<th class = studentHeader>Student Id</th>";
+                    echo "<th class = studentHeader>Student First Name</th>";
+                    echo "<th class = studentHeader>Student Last Name</th>";
+                    echo "<th class = studentHeader>Student User Name</th>";
+                echo "</tr>";
 
-        $queryAddStaff = mysqli_query($connectToDB, $sqlAddStaff);
+                while($row = mysqli_fetch_array($queryStudentInfo)){
+                    $studentID = $row['student_id'];
+                    $studentFName = $row['student_fName'];
+                    $studentLName = $row['student_lName'];
+                    echo "<tr>";
+                        echo "<td class = studentRows>".$studentID."</td>";
+                        echo "<td class = studentRows>".$studentFName."</td>"; 
+                        echo "<td class = studentRows>".$studentLName."</td>";
 
-        if ($queryAddStaff) {
-            echo"<br><br><br><br><br>";
-            echo"Successfull Added new Staff - ".$staffFName."!";
-        } else {
-            print_r($queryAddStaff);
+                    $sqlUserInfo = "SELECT * FROM userLoginInfo WHERE student_id = $studentID";
+                    $queryUserInfo = mysqli_query($connectToDB, $sqlUserInfo);
+
+                    while ($userLoginRows = mysqli_fetch_array($queryUserInfo)){
+                        echo "<td class = studentRows>".$userLoginRows['user_name']."</td>"; 
+                    } //end of while()
+                    echo "</tr>";
+                }//end of while loop 
+                    echo "</table>";
+            echo "</fieldset>";
+        if($queryStudentInfo && $queryUserInfo){
+
         }
-
-    } //end of addNewStaff();
-
-    function professorStaffUpdate() {
-        global $connectToDB;//global variable to connect to DB 
-
-        //Retrieve all the admin's inputs
-        $staffId = $_POST["staffId"]; 
-        $staffNewFName = $_POST["staffNewFName"];
-        $staffNewLName = $_POST["staffNewLName"];
-
-
-        //SQL query for updating the professor/staff's name base on the student_id that was entered.
-        $sqlUpdateProfName = "UPDATE professor SET prof_fName = '$staffNewFName', prof_lName = '$staffNewLName' WHERE prof_id = '$staffId'"; 
-
-        $queryUpdateProf = mysqli_query($connectToDB, $sqlUpdateProfName); //Run the SQL query 
-
-        if ($queryUpdateProf) { //check if successfull or not
-            echo"<br><br><br><br><br>";
-            echo"Successfull UPDATED staff '.$staffId.'";
-        } else {
-            print_r($queryUpdateProf); 
+        else {
+            print_r($queryStudentInfo); //error print if something goes wrong
+            print_r($queryUserInfo);
         }
-    }//end of professorStaffUpdate()
+    }// end of displayStudentTable()
 
 
     if(isset($_POST['addNewStudent'])) { //isset is looking for the action of the button being pressed named ['addNewStudent']
@@ -139,14 +141,6 @@
     if (isset($_POST['deleteExistingUser'])) {
         deleteExistingUser();
     }
-    if (isset($_POST['addNewStaff'])) {
-        addNewStaff();
-    }
-    if (isset($_POST['updateExistingStaff'])) {
-        professorStaffUpdate();
-    }
-
-
 
 ?>
 
@@ -157,7 +151,7 @@
 <html>
 
 <head>
-    <title>ADMIN Student/Staff Update</title>
+    <title>ADMIN Student Update</title>
     <link rel="stylesheet" type="text/css" href="addUpdateDelete.css">
     <style>
         <?php include("addUpdateDelete.css"); ?>
@@ -214,32 +208,7 @@
             </fieldset>
         </div>
 
-    <!--************************************************************************
-        *******************        Staff editing!        ***********************
-        ************************************************************************-->
-        <div class = "staffEditContainer">
-            <fieldset class = "fieldsetStaff">
-                <legend><h1 class = "staffLegend">Staff Editing Template</h1></legend>
-            <h1 class = title>Add New Staff</h1>
-                <label for="fname">Enter First Name:</label>
-                    <input type="text" id="staffFName" name="staffFName"><br><br>
-                <label for="lname">Enter Last name:</label>
-                    <input type="text" id="staffLName" name="staffLName"><br><br>
-                <input type="submit" value="Submit" name = "addNewStaff" id = "addNewStaff"><br><br>
-
-
-
-            <h1 class = title>Update Existing Staff</h1>
-                <label for="fname">Enter Staff ID:</label>
-                    <input type="text" id="staffId" name="staffId"><br><br>
-                <label for="fname">Enter New First Name:</label>
-                    <input type="text" id="staffNewFName" name="staffNewFName"><br><br>
-                <label for="lname">Enter New Last name:</label>
-                    <input type="text" id="staffNewLName" name="staffNewLName"><br><br>
-                <input type="submit" value="Submit" name = "updateExistingStaff" id = "updateExistingStaff"><br><br>
-            </fieldset>    
-        </div>
-        
+        <?php displayStudentTable(); ?>   
     </form> 
     <br>
     <script>

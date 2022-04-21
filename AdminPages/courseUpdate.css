@@ -137,8 +137,14 @@ li a:hover {
   body{
     background-image: url("Images/LandingPageBackgroundIMG.jpg");
     font-family: sans-serif;
+    background-repeat: no-repeat;
+    background-size: cover;
   }
 
   .formHeaders{
     color: white;
+  }
+
+  #msg{
+    resize:none;
   }
