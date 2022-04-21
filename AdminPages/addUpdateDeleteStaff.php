@@ -26,8 +26,6 @@
         $queryAddStaff = mysqli_query($connectToDB, $sqlAddStaff);
 
         if ($queryAddStaff) {
-            echo"<br><br><br><br><br>";
-            echo"Successfull Added new Staff - ".$staffFName."!";
         } else {
             print_r($queryAddStaff);
         }
@@ -43,19 +41,52 @@
         $staffNewLName = $_POST["staffNewLName"];
 
 
-        //SQL query for updating the professor/staff's name base on the student_id that was entered.
+        //SQL query for updating the professor/staff's name base on the staff id that was entered.
         $sqlUpdateProfName = "UPDATE professor SET prof_fName = '$staffNewFName', prof_lName = '$staffNewLName' WHERE prof_id = '$staffId'"; 
 
         $queryUpdateProf = mysqli_query($connectToDB, $sqlUpdateProfName); //Run the SQL query 
 
         if ($queryUpdateProf) { //check if successfull or not
-            echo"<br><br><br><br><br>";
-            echo"Successfull UPDATED staff '.$staffId.'";
+
         } else {
             print_r($queryUpdateProf); 
         }
     }//end of professorStaffUpdate()
 
+    function displayStaffTable() {
+        global $connectToDB;
+
+        $sqlprofTable = "SELECT * FROM professor";
+        $queryprofTable = mysqli_query($connectToDB, $sqlprofTable);
+
+        echo "<fieldset class = staffFieldSet>"; //Writing out a fieldset and legend for format purposes for CSSing and UX
+        echo "<legend><h2 class = staffLegend>Staff's Info</h2></legend>";
+            echo "<table class = staffTable>";
+                echo "<tr>";
+                    echo "<th class = staffHeader>Staff Id</th>";
+                    echo "<th class = staffHeader>Staff First Name</th>";
+                    echo "<th class = staffHeader>Staff Last Name</th>";
+                echo "</tr>";
+
+                while($row = mysqli_fetch_array($queryprofTable)){
+                    $staffID = $row['prof_id'];
+                    $staffFName = $row['prof_fName'];
+                    $staffLName = $row['prof_lName'];
+                    echo "<tr>";
+                        echo "<td class = staffRows>".$staffID."</td>";
+                        echo "<td class = staffRows>".$staffFName."</td>"; 
+                        echo "<td class = staffRows>".$staffLName."</td>";
+                    echo "</tr>";
+                }//end of while loop 
+                    echo "</table>";
+            echo "</fieldset>";
+        if($queryprofTable){
+
+        }
+        else {
+            print_r($queryprofTable); //error print if something goes wrong
+        }
+    }// end of displayStaffTable()
 
 
 
@@ -117,7 +148,7 @@
                 </fieldset>    
             </div>
         </form> 
-    <br>
+        <?php displayStaffTable()?>
 </body>
 </html>
 
