@@ -110,6 +110,10 @@ body {
     background-color: rgba(34, 34, 34, 0.9);
 }
 
+.shortenContainer {
+    height: 75px;
+}
+
 .ticketRequestMessageLegend {
     font-size: 21px;
     background-color: rgba(34, 34, 34, 0.9);
@@ -170,6 +174,11 @@ body {
 
 .tableColorChange {
     color: aliceblue;
+}
+
+.submitAnotherForm {
+    float: right;
+    margin-top: 10px;
 }
 
 
@@ -432,6 +441,11 @@ body {
     position: absolute;
 }
 
+.mark:hover, .exclamation-point1:hover, .exclamation-point2:hover, .exclamation-point3:hover, .exclamation-point4:hover, .exclamation-point5:hover { 
+    border: solid #ff9e48;
+    background-color: rgba(255, 207, 164, 0.95);
+}
+
 .markNext {
     position: relative;
     display: inline-block;
@@ -440,7 +454,7 @@ body {
     height: 35px;
     border: 3px solid #e67e22;
     border-radius: 100px;
-    margin-top: 40px;
+    margin-top: 37px;
     margin-right: 12px;
 }
 .markNext:before, .markNext:after {
