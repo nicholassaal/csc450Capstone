@@ -80,7 +80,8 @@ li a:hover {
   }
   .wrapper{
       width: 800px;
-      margin: 5% auto;
+      margin-top:5%;
+      margin-left:5%;
   }
   .form-area{
       display: flex;
@@ -147,4 +148,27 @@ li a:hover {
 
   #msg{
     resize:none;
+  }
+
+  .courseTable, th, td {
+    border: 1px solid white;
+    text-align: center;
+    color:white;
+    padding:5px;
+    background-color: rgba(34, 34, 34, 0.9);
+  }
+
+  .courseFieldSet{
+    position: fixed;
+    height: fit-content;
+    max-height: 600px;
+    overflow:auto;
+    top:13%;
+    right:5%;
+    width:fit-content;
+    background-color:black;
+  }
+
+  .courseLegend{
+    color:white;
   }

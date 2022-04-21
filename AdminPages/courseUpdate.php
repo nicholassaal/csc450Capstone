@@ -135,6 +135,48 @@
 
     }
 
+    function displayCourseTable() {
+        global $connectToDB;
+
+        $sqlcourseTable = "SELECT * FROM course";
+        $querycourseTable = mysqli_query($connectToDB, $sqlcourseTable);
+
+        echo "<fieldset class = courseFieldSet>"; //Writing out a fieldset and legend for format purposes for CSSing and UX
+        echo "<legend><h2 class = courseLegend>Course's Info</h2></legend>";
+            echo "<table class = courseTable>";
+                echo "<tr>";
+                    echo "<th class = courseHeader>Course Code</th>";
+                    echo "<th class = courseHeader>Course Name</th>";
+                    echo "<th class = courseHeader>Major</th>";
+                echo "</tr>";
+
+                while($courseRow = mysqli_fetch_array($querycourseTable)){
+                    $courseCode = $courseRow['course_code'];
+                    $courseName = $courseRow['course_name'];
+                    $majorId = $courseRow['major_id'];
+
+                    $sqlMajorTable = "SELECT * FROM major WHERE major_id = $majorId";
+                    $queryMajorTable = mysqli_query($connectToDB, $sqlMajorTable);
+
+                    $majorTableRow = mysqli_fetch_assoc($queryMajorTable);
+                    $majorName = $majorTableRow['major_name'];
+
+                    echo "<tr>";
+                        echo "<td class = courseHeader>".$courseCode."</td>";
+                        echo "<td class = courseHeader>".$courseName."</td>"; 
+                        echo "<td class = courseHeader>".$majorName."</td>";
+                    echo "</tr>";
+                }//end of while loop 
+                    echo "</table>";
+            echo "</fieldset>";
+        if($querycourseTable && $queryMajorTable){
+
+        }
+        else {
+            print_r($querycourseTable); //error print if something goes wrong
+            print_r($queryMajorTable);
+        }
+    }// end of displayCourseTable()
 
 
     if(isset($_POST['updateCourse'])) { //isset is looking for the action of the button being pressed named ['updateCourse']
@@ -245,6 +287,7 @@
 
     </div>
     
+    <?php displayCourseTable() ?>
 </body>
 </html>
 
