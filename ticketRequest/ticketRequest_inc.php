@@ -127,27 +127,42 @@
                 }
             
                 pendingTicketRequestTable($studentId, $pendingOrComplete, $firstNameRequest, $lastNameRequest, $majorRequestChange, $enrollmentRequestChange, $onCampusRequestChange);
-
             }
             echo "</table>";
-        } else {
+
+            echo "<script>";
+                echo "function pendingTicket() {";
+                    echo "var outSideContainer = document.querySelector('.containerForTRMessage');";
+                    echo "outSideContainer.classList.remove('shortenContainer');";
+                echo "}";
+                echo "pendingTicket()";
+            echo "</script>";
+
+        } else { 
+            echo "<script>";
+                echo "function noPendingTicket() {";
+                    echo "var outSideContainer = document.querySelector('.containerForTRMessage');";
+                    echo "outSideContainer.classList.add('shortenContainer');";
+                echo "}";
+                echo "noPendingTicket()";
+            echo "</script>";
+
             echo "You have no pending Ticket Request!";
         }
-    }
-
+    } // end of sqlStatementsForTicketRequestTable()
 
 
     function pendingTicketRequestTable($studentId, $pendingOrComplete, $firstNameRequest, $lastNameRequest, $majorRequestChange, $enrollmentRequestChange, $onCampusRequestChange) {
         global $connectToDB;
 
-        $sqlCheckIfAccepted = "SELECT ticket_fName_check, ticket_lName_check, ticket_major_check, ticket_enrollment_change, ticket_onCampus_check FROM ticketrequestcompletion WHERE student_id = $studentId";
+        $sqlCheckIfAccepted = "SELECT ticket_fName_check, ticket_lName_check, ticket_major_check, ticket_enrollment_check, ticket_onCampus_check FROM ticketrequestcompletion WHERE student_id = $studentId";
         $checkIfAcceptedQuery = mysqli_query($connectToDB, $sqlCheckIfAccepted);
         $checkIfAccepted = mysqli_fetch_assoc($checkIfAcceptedQuery);
 
         $fNameCheck         =  $checkIfAccepted['ticket_fName_check'];
         $lNameCheck         =  $checkIfAccepted['ticket_lName_check'];
         $majorCheck         =  $checkIfAccepted['ticket_major_check'];
-        $enrollmentCheck    =  $checkIfAccepted['ticket_enrollment_change'];
+        $enrollmentCheck    =  $checkIfAccepted['ticket_enrollment_check'];
         $onCampusCheck      =  $checkIfAccepted['ticket_onCampus_check'];
 
         if ($pendingOrComplete == 0) {
@@ -220,3 +235,4 @@
     }
 
 ?>
+

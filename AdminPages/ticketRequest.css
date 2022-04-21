@@ -48,16 +48,66 @@ li a:hover {
     float : left;
 }
 
+.flexOverallLook {
+    display: flex;
+    flex-direction: row;
+}
+
 .ticketFieldset {
     width: 40%;
-    float: right;
-    margin-right: 2%;
+    height:fit-content;
+    max-height: 767px;
+    margin-top: -23px;
+    margin-left: 60px;
+    background-color: rgba(221, 221, 221, 0.9);
+    border: 2px groove rgb(247, 138, 49);
+    border-radius: 11px;
+    overflow: auto;
 }
+
 .ticketLegend {
     font-size: 28px;
+    font-weight: 100;
+    background-color: rgba(221, 221, 221, 0.98);
+    font-family: Georgia, 'Times New Roman', Times, serif; 
+    color:rgb(34, 34, 34);
+    border-left: 2px groove rgb(247, 138, 49);
+    border-right: 2px groove rgb(247, 138, 49);
+    border-top: 2px groove rgb(92, 92, 92);
+    border-bottom: 2px groove rgb(92, 92, 92); 
+    border-radius: 7px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.ticketTable {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.ticketTable, th, td {
+    border: 2px solid rgb(50, 50, 51);
+    text-align: center;
+    color: rgb(50, 50, 51);
+}
+
+.overallWrapper {
+    width: 50%;
+    min-width: 699px;
+    border: 2px groove rgb(71, 163, 182);
+    display: inline-block;
+    margin-left: 30px;
+    background-color: rgba(34, 34, 34, 0.9);
+    padding: 18px;
+    border-radius: 15px;
+}
+
+.ticketLegendCheck {
+    font-size: 28px;
+    font-weight: 100;
     background-color: rgba(34, 34, 34, 0.9);
     font-family: Georgia, 'Times New Roman', Times, serif; 
-    color:white;
+    color:rgb(221, 221, 221);
     border-bottom: 2px groove rgb(50, 50, 51);
     border-top: 2px groove rgb(50, 50, 51);
     border-left: 2px groove rgb(71, 163, 182);
@@ -67,31 +117,27 @@ li a:hover {
     padding-right: 5px;
 }
 
-.ticketTable {
-    width: 97%;
-    margin-left: auto;
-    margin-right: auto;
+#studentSelect {
+    background-color: rgb(153, 238, 255);
+    height: 25px;
+    border-radius: 5px 5px 0px 0px;
+    font-weight: bold;
 }
-.ticketTable, th, td {
-    border: 1px solid black;
-    text-align: center;
-}
-.overallWrapper {
-    width: 50%;
-    min-width: 600px;
-    border: 2px groove rgb(71, 163, 182);
-    display: inline-block;
-    margin-left: 2%;
-    background-color: rgba(34, 34, 34, 0.8);
-    padding: 18px;
-}
+
 .dropDownWrap {
     margin-bottom: 2%;
     margin-left: 5%;
 }
 .ddlSubmit {
-    width: 200px;
-    height: 25px;
+    position: relative;
+    top: 1px;
+    margin-left: 10px;
+    border-radius: 5px;
+    width: 150px;
+    height: 28px;
+    background-color: rgb(255, 196, 147);
+    font-weight: bold;
+    overflow: auto;
 }
 
 
@@ -108,9 +154,9 @@ li a:hover {
     width: 40%;
     min-width: 340px;
     padding: 20px;
-    border: 1px groove rgb(255, 81, 50);
-    border-radius: 50px;
-    background-color: rgba(34, 34, 34, 0.7);
+    border: 2px groove rgb(255, 81, 50);
+    border-radius: 20px 55px;
+    background-color: rgba(37, 37, 37, 0.7);
     display: inline-block;
     margin-top: 20px;
     margin-left: 1%;
@@ -140,6 +186,48 @@ li a:hover {
 .details-area button{
     padding: 1em;
     margin-bottom: 1em;
+}
+
+.alert {
+    padding: 15px;
+    background-color: #f44336;
+    color: white;
+    opacity: 1;
+    transition: opacity 0.6s;
+    margin-bottom: 15px;
+    transition: 1s;
+}
+
+.alert.error, .alert.success {
+    width: 40%;
+    min-width: 510px;
+    position: relative;
+    margin-top: -125px;
+    margin-left: 130px;
+    border-radius: 3px;
+}
+  
+.alert.success {
+    background-color: #04AA6D; 
+}
+
+.alert.warning {
+    background-color: #ff9800;
+}
+
+.closebtn {
+    margin-left: 15px;
+    color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.closebtn:hover {
+    color: black;
 }
 
 /********************************************************
@@ -232,7 +320,7 @@ li a:hover {
     margin-top: 60px;
 }
  #acceptChanges, #discardChanges, #lockIn {
-    width: 30%;
+    width: 31%;
     min-width: 230px;   
     text-align: center;
  }
@@ -253,6 +341,14 @@ li a:hover {
 #lockIn:hover:enabled {
     background-color: rgb(69, 199, 188);
     cursor:pointer;
+}
+
+#lockIn:disabled {
+    background-color: rgb(99, 99, 99);
+}
+
+#lockIn:hover:disabled {
+    cursor: not-allowed;
 }
 
 /******* Accept Changes Button CSS *******/
@@ -307,6 +403,7 @@ li a:hover {
 #discardChanges:hover:disabled {
     cursor:not-allowed;
 }
+
 
 
 

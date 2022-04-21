@@ -25,16 +25,16 @@
 
         // echo "<form method = 'POST'>";
         echo"<select name = studentSelect id = studentSelect size = '1'>";
-            echo "<option value = '-1'>Please Select a Student</option>";
+            echo "<option  class = studentOptions value = '-1'>Please Select a Student</option>";
             while($studentTicketRows = mysqli_fetch_array($queryTicketStudentId)){
                 $studentID = $studentTicketRows['student_id'];
-                $sqlStudentInfo = "SELECT * FROM studentInfo WHERE student_id = $studentID";
-                $queryStudentInfo = mysqli_query($connectToDB, $sqlStudentInfo);
+                $sqlticketRequest = "SELECT * FROM ticketrequest WHERE student_id = $studentID";
+                $ticketRequestQuery = mysqli_query($connectToDB, $sqlticketRequest);
 
-                while($rows = mysqli_fetch_array($queryStudentInfo)) { 
-                    $studentName    = $rows['student_fName']." ".$rows['student_lName'];
+                while($rows = mysqli_fetch_array($ticketRequestQuery)) { 
+                    $studentName    = $rows['ticket_fName_change']." ".$rows['ticket_lName_change'];
                     $studentInfoID  = $rows['student_id'];
-                    echo"<option value = $studentInfoID>$studentName</option>";
+                    echo"<option value = '$studentInfoID'>$studentName</option>";
 
                 }//end Inner while()
             }// end outer while()
@@ -42,6 +42,7 @@
         echo "<input type = submit name = ddlSubmit id = ddlSubmit class = ddlSubmit value = 'Select this Student'>";
         // echo "</form>";
     }//end of populateMajorDropdown()
+
 
     /*****************************************************
      **********   POPULATE STUDENT DDL BLOCK    **********
@@ -250,7 +251,7 @@
     //---------------> Since this is the case, I would have wrote this out 3 separate times in other ways to solve this issue.
     function throwValuesIntoHTMLCheckChanges($checkStudentFName, $checkStudentLName, $checkMajorChange, $checkEnrollmentChange, $wordVersionEnrollmentChange, $checkOnCampusChange, $wordVersionCampusChange) {
         echo "<div class = 'wrapper'>";
-            echo "<h1 class = 'formHeaders'>Check Student Changes</h1>";
+            echo "<h1 class = 'formHeaders'>Student Changes</h1>";
             echo "<div class = 'form-area'>";
                 echo "<div class='details-area'>";
                     echo "<label for='firstNameChange'>Student First Name</label>";
@@ -321,8 +322,10 @@
 
     function updateStudentInformation() {
         global $connectToDB;
+        
         if(isset($_POST['acceptChanges'])){
             $studentID = $_SESSION["studentID"];
+            
             if ($studentID > 0) {
 
                 $checkBox1          = $_POST['changeChkBox1'];
@@ -346,7 +349,7 @@
                     $fNameChangeCompletionQuery = mysqli_query($connectToDB, $sqlfNameChangeCompletionTable);
 
                     if ($fNameChangeQuery && $fNameChangeCompletionQuery) {
-                        echo "STUDENT WAS UPDATED!";
+                        //echo "STUDENT WAS UPDATED!"; Message to the admin
                     } else {
                         print_r($fNameChangeQuery);
                     }
@@ -356,7 +359,7 @@
                     $fNameChangeCompletionQuery = mysqli_query($connectToDB, $sqlfNameChangeCompletionTable);
 
                     if ($fNameChangeCompletionQuery) {
-                        echo "<br>Student will be notified of the changes!";
+                        //echo "<br>Student will be notified of the changes!"; Message to the admin
                     } else {
                         print_r($fNameChangeCompletionQuery);
                     }
@@ -374,7 +377,7 @@
                     $lNameChangeCompletionQuery = mysqli_query($connectToDB, $sqllNameChangeCompletionTable);
 
                     if ($lNameChangeQuery && $lNameChangeCompletionQuery) {
-                        echo "STUDENT WAS UPDATED!";
+                        //echo "STUDENT WAS UPDATED!"; Message to the admin
                     } else {
                         print_r($lNameChangeQuery);
                     }
@@ -384,7 +387,7 @@
                     $lNameChangeCompletionQuery = mysqli_query($connectToDB, $sqllNameChangeCompletionTable);
 
                     if ($lNameChangeCompletionQuery) {
-                        echo "<br>Student will be notified of the changes!";
+                        //echo "<br>Student will be notified of the changes!"; Message to the admin
                     } else {
                         print_r($lNameChangeCompletionQuery);
                     }
@@ -407,7 +410,7 @@
 
 
                     if ($majorChangeAcceptedQuery && $majorChangeCompletionQuery) {
-                        echo "STUDENT WAS UPDATED!";
+                        //echo "STUDENT WAS UPDATED!"; Message to the admin
                     } else {
                         print_r($majorChangeAcceptedQuery);
                     }
@@ -417,7 +420,7 @@
                     $majorChangeCompletionQuery = mysqli_query($connectToDB, $sqlMajorChangeCompletion);
 
                     if ($majorChangeCompletionQuery) {
-                        echo "<br>Student will be notified of the changes!";
+                        //echo "<br>Student will be notified of the changes!"; Message to the admin
                     } else {
                         print_r($majorChangeCompletionQuery);
                     }
@@ -434,17 +437,17 @@
                     $erollmentChangeCompletionQuery = mysqli_query($connectToDB, $sqlEnrollmentChangeCompletion);
 
                     if ($enrollmentChangeAcceptedQuery && $erollmentChangeCompletionQuery) {
-                        echo "STUDENT WAS UPDATED!";
+                        //echo "STUDENT WAS UPDATED!"; Message to the admin
                     } else {
                         print_r($enrollmentChangeAcceptedQuery);
                     }
                 } else {
-
+                   
                     $sqlMajorChangeCompletion = "UPDATE ticketrequestcompletion SET ticket_enrollment_check = '0' WHERE student_id = '$studentID'";
                     $majorChangeCompletionQuery = mysqli_query($connectToDB, $sqlMajorChangeCompletion);
 
                     if ($majorChangeCompletionQuery) {
-                        echo "<br>Student will be notified of the changes!";
+                        //echo "<br>Student will be notified of the changes!"; Message to the admin
                     } else {
                         print_r($majorChangeCompletionQuery);
                     }
@@ -462,7 +465,7 @@
                     $onCampusChangeCompletionQuery = mysqli_query($connectToDB, $sqlOnCampusChangeCompletion);
 
                     if ($onCampusChangeAcceptedQuery && $onCampusChangeCompletionQuery) {
-                        echo "STUDENT WAS UPDATED!";
+                        //echo "STUDENT WAS UPDATED!"; Message to the admin
                     } else {
                         print_r($onCampusChangeAcceptedQuery);
                     }
@@ -472,7 +475,7 @@
                     $onCampusChangeCompletionQuery = mysqli_query($connectToDB, $sqlOnCampusChangeCompletion);
 
                     if ($onCampusChangeCompletionQuery) {
-                        echo "<br>Student will be notified of the changes!";
+                        //echo "<br>Student will be notified of the changes!"; Message to the admin
                     } else {
                         print_r($onCampusChangeCompletionQuery);
                     }
@@ -488,7 +491,11 @@
                     $sqlResolvedUpdateTRCompletion = "UPDATE ticketrequestcompletion SET ticketComplete_check = '1' WHERE student_id = '$studentID'";
                     $resolvedUpdateTRCompletionQuery = mysqli_query($connectToDB, $sqlResolvedUpdateTRCompletion);
                     if ($resolvedTicketRequestQuery && $resolvedUpdateTRCompletionQuery) {
-                        echo "<br>Ticket has been resolved, deletion will commence!";
+                        echo"<div class='alert success'>
+                                <span class='closebtn'>&times;</span> 
+                                <b>Success!</b> Ticket has been resolved for $firstNameChange $lastNameChange!
+                            </div>";
+                        
                     } else {
                         echo "<br>Ticket was not resolved!<br>";
                         print_r($resolvedTicketRequestQuery);
@@ -496,7 +503,7 @@
                     }
                 } 
             } else {
-                echo "Please Select a Student!";
+                echo "Please select a student!";
             }
         } //end of if(isset($_POST['acceptChanges']))    
     } //end of updateStudentInformation()
@@ -528,7 +535,10 @@
                 }
 
             } else {
-                echo "Please select a student!";
+                echo "<div class='alert error'>
+                        <span class='closebtn'>&times;</span>  
+                        <strong>Discarded!</strong> The Student will be notified about the changes!
+                      </div>";
             }
         } //end of if(isset($_POST['']))
     } //end of discardRequestedChanges()
@@ -560,29 +570,31 @@
     </nav>
 
     
+    <div class = "flexOverallLook">
+        <fieldset class = "overallWrapper">
+            <legend class = "ticketLegendCheck">Check Student Changes</legend>
+            <form method = "POST">
+                <div class = "dropDownWrap">
+                    <?php populateStudentDropDown(); ?>
+                </div>
+            
+                <div class = "ticketRequestContainer">
+                    <?php displayOriginalStudentInfo(); ?>
+                    <?php displayCheckStudentChanges(); ?>   
+                </div>
 
-    <fieldset class = "overallWrapper">
-        <legend class = "ticketLegend">Check Student Changes</legend>
-        <form method = "POST">
-            <div class = "dropDownWrap">
-                <?php populateStudentDropDown(); ?>
-            </div>
+                <div class = btnContainer>
+                    <input type="button"  value="Lock In Selection" name = "lockIn" id = "lockIn" onclick = "lockedInSelection();">
+                    <input type="submit"  value="Accept Selected" name = "acceptChanges" id = "acceptChanges">
+                    <input type="submit"  value="Discard All" name = "discardChanges" id = "discardChanges">
+                </div>
+            </form>
+            
+        </fieldset>
+        <?php displayTicketTable(); ?>
+    </div>
 
-        
-            <div class = "ticketRequestContainer">
-                <?php displayOriginalStudentInfo(); ?>
-                <?php displayCheckStudentChanges(); ?>   
-            </div>
-
-            <div class = btnContainer>
-                <input type="button"  value="Lock In Selection" name = "lockIn" id = "lockIn" onclick = "lockedInSelection();">
-                <input type="submit"  value="Accept Selected" name = "acceptChanges" id = "acceptChanges">
-                <input type="submit"  value="Discard All" name = "discardChanges" id = "discardChanges">
-            </div>
-        </form>
-        
-    </fieldset>
-    <?php displayTicketTable(); updateStudentInformation(); discardRequestedChanges();?>
+    <?php updateStudentInformation(); discardRequestedChanges(); ?>
     
 
 
@@ -598,6 +610,17 @@
     function lockedInSelection() { //after the admin clicks 'lockIn' button, then ACCEPT SELECTED & DISCARD ALL will be readily available to them
         document.getElementById("acceptChanges").disabled = false;
         document.getElementById("discardChanges").disabled = false;
+    }
+
+    var exitAlert = document.getElementsByClassName("closebtn");
+    var i;
+
+    for (i = 0; i < exitAlert.length; i++) {
+        exitAlert[i].onclick = function(){
+            var div = this.parentElement;
+            div.style.opacity = "0";
+            setTimeout(function(){ div.style.display = "none"; }, 600);
+        }
     }
 
 </script>
