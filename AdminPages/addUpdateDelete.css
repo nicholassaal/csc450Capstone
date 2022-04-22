@@ -150,9 +150,14 @@ CSS FOR STUDENT TABLE
 */
 
 .studentFieldSet{
-  width:50%;
-  background-color:lightgray;
-  float: right;
+  height: fit-content;
+  max-height: 767px;
+  overflow: auto;
+  position: fixed;
+  top: 10%;
+  right: 10%;
+  width:auto;
+  background-color:rgba(34, 34, 34, 0.9);
 }
 
 .studentLegend {
@@ -175,6 +180,7 @@ CSS FOR STUDENT TABLE
   padding:5px;
   background-color: rgba(34, 34, 34, 0.9);
 }
+
 
 .staffFieldSet{
   position: fixed;

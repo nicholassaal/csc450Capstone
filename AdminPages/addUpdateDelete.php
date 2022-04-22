@@ -56,15 +56,19 @@
         $studentId = $_POST["studentId"]; 
         $studentNewFName = $_POST["studentNewFName"];
         $studentNewLName = $_POST["studentNewLName"];
+        $studentUsername = $_POST["studentUsername"];
 
         //SQL query for updating the student's name base on the student_id that was entered.
         $sqlUpdateStudentName = "UPDATE studentinfo SET student_fName = '$studentNewFName', student_lName = '$studentNewLName' WHERE student_id = '$studentId'"; 
 
+        $sqlUpdateUsername = "UPDATE userLoginInfo SET user_name = '$studentUsername' WHERE student_id = '$studentId'"; 
+
         $queryUpdateStudent = mysqli_query($connectToDB, $sqlUpdateStudentName); //Run the SQL query 
 
-        if ($queryUpdateStudent) { //check if successfull or not
-            echo"<br><br><br><br><br>";
-            echo"Successfull UPDATED student '.$studentId.'";
+        $queryUpdateUsername = mysqli_query($connectToDB, $sqlUpdateUsername); //Run the SQL query 
+
+        if ($queryUpdateStudent && $queryUpdateUsername) { //check if successfull or not
+
         } else {
             print_r($queryUpdateStudent); 
         }
@@ -192,6 +196,8 @@
                 <h1 class = title>Update Existing Student</h1>
                     <label for = "studentId">Enter Student ID:</label>
                         <input type = "text" id = "studentId" name = "studentId"><br><br>
+                    <label for = "studentUsername">Enter Student Username:</label>
+                        <input type = "text" id = "studentUsername" name = "studentUsername"><br><br>
                     <label for="fname">Enter New First Name:</label>
                         <input type="text" id="studentNewFName" name="studentNewFName"><br><br>
                     <label for="lname">Enter New Last name:</label>
