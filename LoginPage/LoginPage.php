@@ -1,12 +1,27 @@
 <?php
     //This starts the session for this php page to handle and assign variables
     session_start();
-    $SERVER_NAME    = "localhost";   //Server name 
-    $DBF_USER       = "root";        //UserName for the localhost database
-    $DBF_PASSWORD   = "";       //Password for the localhost database/ When using XAMPPS, make this value emtpy. Use: $DBF_PASSWORD   = "";
-    $DBF_NAME       = "CSPCourseReview";    //DB name for the localhost database
+    //  Called php loginFunction() for login functionalities
+    if(isset($_POST['btnSubmit'])){
+        loginFunction();
+    }
 
+
+    // Hosted server connection
+    $SERVER_NAME    = "localhost:3306";   //Server name 
+    $DBF_USER       = "thewooz7_admin";        //UserName for the localhost database
+    $DBF_PASSWORD   = "password";       //Password for the localhost database/ When using XAMPPS, make this value emtpy. Use: $DBF_PASSWORD   = "";
+    $DBF_NAME       = "thewooz7_cspcoursereview";    //DB name for the localhost database
+    //$connect = mysqli_connect($SERVER_NAME, $DBF_USER, $DBF_PASSWORD);
     $connectToDB = mysqli_connect($SERVER_NAME, $DBF_USER, $DBF_PASSWORD, $DBF_NAME);
+
+
+    // $SERVER_NAME    = "localhost";   //Server name 
+    // $DBF_USER       = "root";        //UserName for the localhost database
+    // $DBF_PASSWORD   = "";       //Password for the localhost database/ When using XAMPPS, make this value emtpy. Use: $DBF_PASSWORD   = "";
+    // $DBF_NAME       = "CSPCourseReview";    //DB name for the localhost database
+
+    // $connectToDB = mysqli_connect($SERVER_NAME, $DBF_USER, $DBF_PASSWORD, $DBF_NAME);
     
     // Check connection
     //$conn->connect_error: The connect_error property in the $conn (Connection) object. This property contains any error message from the last operation.
@@ -32,7 +47,7 @@
                 echo "<p>Please enter in a password</p>";
             }
             else{//Check is user's login info is correct using the userLoginInfo from the database 
-                $sqlLogin = "SELECT * FROM userLoginInfo WHERE user_name = '$userName' AND user_password = '$password' "; 
+                $sqlLogin = "SELECT * FROM userlogininfo WHERE user_name = '$userName' AND user_password = '$password' "; 
                 
 
                 //Run and assign query to $login
@@ -44,7 +59,7 @@
                 //user's inputs is an existing record and will successfully sign in 
                 if(mysqli_num_rows($login) == 1){
                     //retrieve the current users primary key (user_id) when successfully types in their user_name and password (along with grabbing Is_admin field)
-                    $sqlLoginId = "SELECT user_id, Is_admin FROM userLoginInfo WHERE user_name = '$userName' AND user_password = '$password'";
+                    $sqlLoginId = "SELECT user_id, Is_admin FROM userlogininfo WHERE user_name = '$userName' AND user_password = '$password'";
                     //query the username and password to the database (while searching for the user_id)
                     $grabUserId = mysqli_query($connectToDB, $sqlLoginId);
                     //fetching the association of that row (the matching username and password row)
@@ -55,12 +70,17 @@
                     //if (checks to see if the user logging in is an admin or not an admin)
                     if ($userRow['Is_admin'] == 1) {
                         //Go to the admin view page when the admin is logged in.
-                        header("Location: http://localhost/csc450Capstone/AdminPages/adminHome.php");
+                        // header("Location: http://localhost/csc450Capstone/AdminPages/adminHome.php");
+
+                        header("Location: ../AdminPages/adminHome.php");
+                        
                     } else {
                         //Go to the landing page if the login was successful (if their account is of student status)
-                        header("Location: http://localhost/csc450Capstone/LandingPage/LandingPage.php");
-                    }
+                        // header("Location: http://localhost/csc450Capstone/LandingPage/LandingPage.php");
 
+                        header("Location: https://www.youtube.com/watch?v=dQw4w9WgXcQ");
+                        exit;
+                    }
                     
                 }
                 //if login query does not return an existing record...........
@@ -80,31 +100,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" type="text/css" href ="LogInPage.css"> <!--linking the CSS-->
+    <link rel="stylesheet" type="text/css" href ="LoginPage.css"> <!--linking the CSS-->
     <title>Form</title>
 </head>
 
     <body>
         <header>
             <h1>CSP Student Review Login Page</h1> <!--Nav Bar, used an Unorder lists-->
-            <!-- <nav> 
-                <ul class="navigation">
-                    <li><a href="http://localhost/csc450Capstone/LoginPage/LoginPage.php">Login Page</a></li>
-                    <li><a href="http://localhost/csc450Capstone/LandingPage/LandingPage.php">Home</a></li>
-                    <li><a href="http://localhost/csc450Capstone/profileView/profiles.php">Profile</a></li>
-                    <li><a href="http://localhost/csc450Capstone/MajorPage/CSCMajorPage.php">Majors</a></li>
-                </ul>
-            </nav> -->
         </header>
 
         <div class="loginContainer"> <!--Image and Login info-->
-            <img src="image/CSPpicture.JPG" alt="Picture of CSP">
+            <img src="image/CSPpicture.jpg" alt="Picture of CSP">
 
             <section id = "userInformation"> <!--Container for login user informatoin -->
                 <h1 id="loginHeader">Login</h1>
                 <p>Login using your college user name and password.</p>
 
-                <form action ="http://localhost/csc450Capstone/LoginPage/LoginPage.php" method="POST">
+                <form method="POST">
                     <lable for ="userName">Username</lable> <!-- Creating a lable for input type of "text" then giving a name and
                                                                 id to match the lable name-->
                     <input type="text" name="userName" id = "userName">
@@ -115,8 +127,7 @@
                     <!--Submit button-->
                     <input type="submit" name="btnSubmit" value="Login"  />
                     
-                    <!-- Called php loginFunction() for login functionalities  -->
-                    <?php loginFunction(); ?>
+                  
                 </form>
 
             </section>

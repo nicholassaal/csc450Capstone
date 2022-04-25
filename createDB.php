@@ -5,12 +5,20 @@ function displayMessage($msg, $color) {
     echo "<hr /><strong style='color:" . $color . ";'>" . $msg . "</strong><hr />";
  }
  
+ // Hosted server connection
+$SERVER_NAME    = "localhost:3306";   //Server name 
+$DBF_USER       = "thewooz7_admin";        //UserName for the localhost database
+$DBF_PASSWORD   = "password";       //Password for the localhost database/ When using XAMPPS, make this value emtpy. Use: $DBF_PASSWORD   = "";
+$DBF_NAME       = "thewooz7_cspcoursereview";    //DB name for the localhost database
+//$connect = mysqli_connect($SERVER_NAME, $DBF_USER, $DBF_PASSWORD);
+$connectToDB = mysqli_connect($SERVER_NAME, $DBF_USER, $DBF_PASSWORD, $DBF_NAME);
 
- $SERVER_NAME    = "localhost";   //Server name 
- $DBF_USER       = "root";        //UserName for the localhost database
- $DBF_PASSWORD   = "";            //Password for the localhost database/ When using XAMPPS, make this value emtpy. Use: $DBF_PASSWORD   = "";
- $DBF_NAME       = "CSPCourseReview";    //DB name for the localhost database
- $connect = mysqli_connect($SERVER_NAME, $DBF_USER, $DBF_PASSWORD);
+
+//  $SERVER_NAME    = "localhost";   //Server name 
+//  $DBF_USER       = "root";        //UserName for the localhost database
+//  $DBF_PASSWORD   = "";            //Password for the localhost database/ When using XAMPPS, make this value emtpy. Use: $DBF_PASSWORD   = "";
+//  $DBF_NAME       = "CSPCourseReview";    //DB name for the localhost database
+//  $connect = mysqli_connect($SERVER_NAME, $DBF_USER, $DBF_PASSWORD);
  
  $dropExisting = "DROP DATABASE IF EXISTS $DBF_NAME"; //making sure that table exists first so that it will not run into errors
 

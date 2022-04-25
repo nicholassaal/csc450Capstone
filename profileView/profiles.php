@@ -1,11 +1,21 @@
 <?php
 session_start();
-$SERVER_NAME    = "localhost";   //Server name 
-$DBF_USER       = "root";        //UserName for the localhost database
-$DBF_PASSWORD   = "";       //Password for the localhost database/ When using XAMPPS, make this value emtpy. Use: $DBF_PASSWORD   = "";
-$DBF_NAME       = "CSPCourseReview";    //DB name for the localhost database
+
+// Hosted server connection
+$SERVER_NAME    = "localhost:3306";   //Server name 
+$DBF_USER       = "thewooz7_admin";        //UserName for the localhost database
+$DBF_PASSWORD   = "password";       //Password for the localhost database/ When using XAMPPS, make this value emtpy. Use: $DBF_PASSWORD   = "";
+$DBF_NAME       = "thewooz7_cspcoursereview";    //DB name for the localhost database
 //$connect = mysqli_connect($SERVER_NAME, $DBF_USER, $DBF_PASSWORD);
 $connectToDB = mysqli_connect($SERVER_NAME, $DBF_USER, $DBF_PASSWORD, $DBF_NAME);
+
+
+// $SERVER_NAME    = "localhost";   //Server name 
+// $DBF_USER       = "root";        //UserName for the localhost database
+// $DBF_PASSWORD   = "";       //Password for the localhost database/ When using XAMPPS, make this value emtpy. Use: $DBF_PASSWORD   = "";
+// $DBF_NAME       = "CSPCourseReview";    //DB name for the localhost database
+// //$connect = mysqli_connect($SERVER_NAME, $DBF_USER, $DBF_PASSWORD);
+// $connectToDB = mysqli_connect($SERVER_NAME, $DBF_USER, $DBF_PASSWORD, $DBF_NAME);
 echo "<br><br><br><br><br>";
 
 function displayReviewCourse()
@@ -121,7 +131,7 @@ function getProfilePicture()
 function navGetProfilePicture()
 {
     global $connectToDB;
-    $sqlStudentInfo = "SELECT * FROM studentInfo";
+    $sqlStudentInfo = "SELECT * FROM studentinfo";
 
     //Run and assign query 
     $data = mysqli_query($connectToDB, $sqlStudentInfo);
@@ -344,12 +354,29 @@ if (isset($_POST['submitButton'])) {
             });
         </script>
         <ul class="menu">
+            <li class="logo" id="logo">CSP Profile</li>
+            <li class="item"><a href="https://thewoodlandwickcandleco.com/csc450Capstone/ticketRequest/ticketRequest.php">Ticket Request</a></li>
+            <li class="item"><a href="https://thewoodlandwickcandleco.com/csc450Capstone/LandingPage/LandingPage.php">Home</a></li>
+            <li class="item">
+                <div id="navImage">
+                    <?php navGetProfilePicture() ?>
+                </div>
+
+
+            </li>
+            <li class="item"><a href="https://thewoodlandwickcandleco.com/csc450Capstone/profileView/profiles.php">Profile</a></li>
+            <li class="item"><a href="https://thewoodlandwickcandleco.com/csc450Capstone/MajorPage/CSCMajorPage.php">Majors</a></li>
+            <li class="item button"><a href="https://thewoodlandwickcandleco.com/csc450Capstone/LoginPage/logOut.php">Sign Out</a></li>
+            <li class="toggle"><span class="bars"></span></li>
+        </ul>
+
+        <!-- <ul class="menu">
             <li class="logo" id="logo">CSP Student Profile</li>
             <li class="item"><a href="http://localhost/csc450Capstone/LandingPage/LandingPage.php">Home</a></li>
             <li class="item">
 
                 <div id="navImage">
-                    <?php navGetProfilePicture() ?>
+                    <?php //navGetProfilePicture() ?>
                 </div>
 
             </li>
@@ -358,7 +385,7 @@ if (isset($_POST['submitButton'])) {
             <li class="item button"><a href="http://localhost/csc450Capstone/LoginPage/logOut.php">Sign Out</a></li>
 
             <li class="toggle"><span class="bars"></span></li>
-        </ul>
+        </ul> -->
     </nav>
     <!-- End of Nav Script --
     <!-- code for updating profile picture -->

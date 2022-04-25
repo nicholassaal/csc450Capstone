@@ -2,12 +2,23 @@
 session_start();
 include "coursePage_inc.php";
 date_default_timezone_set('America/Chicago');
-$SERVER_NAME    = "localhost";   //Server name 
-$DBF_USER       = "root";        //UserName for the localhost database
-$DBF_PASSWORD   = "";       //Password for the localhost database/ When using XAMPPS, make this value emtpy. Use: $DBF_PASSWORD   = "";
-$DBF_NAME       = "CSPCourseReview";    //DB name for the localhost database
+
+
+// Hosted server connection
+$SERVER_NAME    = "localhost:3306";   //Server name 
+$DBF_USER       = "thewooz7_admin";        //UserName for the localhost database
+$DBF_PASSWORD   = "password";       //Password for the localhost database/ When using XAMPPS, make this value emtpy. Use: $DBF_PASSWORD   = "";
+$DBF_NAME       = "thewooz7_cspcoursereview";    //DB name for the localhost database
 //$connect = mysqli_connect($SERVER_NAME, $DBF_USER, $DBF_PASSWORD);
 $connectToDB = mysqli_connect($SERVER_NAME, $DBF_USER, $DBF_PASSWORD, $DBF_NAME);
+
+
+// $SERVER_NAME    = "localhost";   //Server name 
+// $DBF_USER       = "root";        //UserName for the localhost database
+// $DBF_PASSWORD   = "";       //Password for the localhost database/ When using XAMPPS, make this value emtpy. Use: $DBF_PASSWORD   = "";
+// $DBF_NAME       = "CSPCourseReview";    //DB name for the localhost database
+// //$connect = mysqli_connect($SERVER_NAME, $DBF_USER, $DBF_PASSWORD);
+// $connectToDB = mysqli_connect($SERVER_NAME, $DBF_USER, $DBF_PASSWORD, $DBF_NAME);
 
 // Check connection
 //$conn->connect_error: The connect_error property in the $conn (Connection) object. This property contains any error message from the last operation.
@@ -119,7 +130,7 @@ function correctTitle()
 function navGetProfilePicture()
 {
     global $connectToDB;
-    $sqlStudentInfo = "SELECT * FROM studentInfo";
+    $sqlStudentInfo = "SELECT * FROM studentinfo";
 
     //Run and assign query 
     $data = mysqli_query($connectToDB, $sqlStudentInfo);
@@ -168,10 +179,25 @@ function navGetProfilePicture()
         </script>
         <ul class="menu">
             <li class="logo" id="logo">CSP Course Page</li>
-            <li class="item"><a href="http://localhost/csc450Capstone/LandingPage/LandingPage.php">Home</a></li>
+            <li class="item"><a href="http://thewoodlandwickcandleco.com/csc450Capstone/LandingPage/LandingPage.php">Home</a></li>
             <li class="item">
                 <div id="navImage">
                     <?php navGetProfilePicture() ?>
+                </div>
+            </li>
+            <li class="item"><a href="http://thewoodlandwickcandleco.com/csc450Capstone/profileView/profiles.php">Profile</a></li>
+            <li class="item"><a href="http://thewoodlandwickcandleco.com/csc450Capstone/MajorPage/CSCMajorPage.php">Majors</a></li>
+            <li class="item button"><a href="http://thewoodlandwickcandleco.com/csc450Capstone/LoginPage/logOut.php">Sign Out</a></li>
+
+            <li class="toggle"><span class="bars"></span></li>
+        </ul>
+
+        <!-- <ul class="menu">
+            <li class="logo" id="logo">CSP Course Page</li>
+            <li class="item"><a href="http://localhost/csc450Capstone/LandingPage/LandingPage.php">Home</a></li>
+            <li class="item">
+                <div id="navImage">
+                    <?php //navGetProfilePicture() ?>
                 </div>
             </li>
             <li class="item"><a href="http://localhost/csc450Capstone/profileView/profiles.php">Profile</a></li>
@@ -179,7 +205,7 @@ function navGetProfilePicture()
             <li class="item button"><a href="http://localhost/csc450Capstone/LoginPage/logOut.php">Sign Out</a></li>
 
             <li class="toggle"><span class="bars"></span></li>
-        </ul>
+        </ul> -->
     </nav>
 
     <div class="upper-flex-container">
@@ -233,126 +259,127 @@ function navGetProfilePicture()
     <footer>
         <a href="">Group 1 CSC 450 Capstone Neng Yang | Josiah Skorseth | Mitchell Williamson | Nicholas Saal</a>
     </footer>
-    
+
 </body>
+
 </html>
 
 <script>
-        document.getElementById("leaveReviewForm").style.display = "none";
-        /******************************************
-         *********   HIDE ALL REPLY FROMS   *********
-         ********************************************/
-        var maxReviewsNum = <?php echo $numIterator ?>;
-        for (let i = 0; i < maxReviewsNum; i++) {
-            document.getElementById("replyForms" + i).style.display = "none";
-        }
+    document.getElementById("leaveReviewForm").style.display = "none";
+    /******************************************
+     *********   HIDE ALL REPLY FROMS   *********
+     ********************************************/
+    var maxReviewsNum = <?php echo $numIterator ?>;
+    for (let i = 0; i < maxReviewsNum; i++) {
+        document.getElementById("replyForms" + i).style.display = "none";
+    }
 
-        var maxReviewsNum = <?php echo $numIterator2 ?>;
-        var replyToReplyForms = document.getElementsByClassName("replytoReplyForms");
-        for (let j = 0; j < maxReviewsNum; j++) {
-            replyToReplyForms[j].style.display = "none";
-        }
+    var maxReviewsNum = <?php echo $numIterator2 ?>;
+    var replyToReplyForms = document.getElementsByClassName("replytoReplyForms");
+    for (let j = 0; j < maxReviewsNum; j++) {
+        replyToReplyForms[j].style.display = "none";
+    }
 
-        var prevScrollpos = window.pageYOffset;
-        window.onscroll = function() {
-            var currentScrollPos = window.pageYOffset;
-            if (prevScrollpos > currentScrollPos) {
-                document.getElementById("navbar").style.top = "0";
-            } else {
-                document.getElementById("navbar").style.top = "-150px";
+    var prevScrollpos = window.pageYOffset;
+    window.onscroll = function() {
+        var currentScrollPos = window.pageYOffset;
+        if (prevScrollpos > currentScrollPos) {
+            document.getElementById("navbar").style.top = "0";
+        } else {
+            document.getElementById("navbar").style.top = "-150px";
+        }
+        prevScrollpos = currentScrollPos;
+    }
+
+    /******************************************
+     *******     TOGGLE REVIEW FORM      *******
+     ********************************************/
+    function toggleLeavingReview() {
+        var reviewForm = document.getElementById('leaveReviewForm');
+        if (reviewForm.offsetWidth == 0 && reviewForm.offsetHeight == 0) {
+            reviewForm.style.display = 'block';
+        } else {
+            reviewForm.style.display = 'none';
+            document.getElementById('question1').value = '';
+            document.getElementById('question2').value = '';
+            document.getElementById('question3').value = '';
+            document.getElementById('reviewMessage').value = '';
+        }
+    } //end of toggleEditProfilePicture button function
+
+
+    /******************************************
+     *****   TOGGLE EDIT REVIEW FORMS *****
+     ********************************************/
+    const editReviewBtns = document.querySelectorAll('.editReviewFormBtn');
+    for (let i = 0; i < editReviewBtns.length; i++) {
+        editReviewBtns[i].addEventListener('click', () => {
+            for (let j = 0; j < editReviewBtns.length; j++) {
+                editReviewBtns[j].classList.remove('active');
             }
-            prevScrollpos = currentScrollPos;
-        }
 
-        /******************************************
-         *******     TOGGLE REVIEW FORM      *******
-         ********************************************/
-        function toggleLeavingReview() {
-            var reviewForm = document.getElementById('leaveReviewForm');
-            if (reviewForm.offsetWidth == 0 && reviewForm.offsetHeight == 0) {
-                reviewForm.style.display = 'block';
+            editReviewBtns[i].innerHTML = "Cancel";
+            editReviewBtns[i].classList.add('active');
+
+            var editreplyForms = document.getElementById("editReviewForm");
+            if (editreplyForms.offsetWidth == 0 && editreplyForms.offsetHeight == 0) {
+                editreplyForms.style.display = 'block';
             } else {
-                reviewForm.style.display = 'none';
-                document.getElementById('question1').value = '';
-                document.getElementById('question2').value = '';
-                document.getElementById('question3').value = '';
-                document.getElementById('reviewMessage').value = '';
+                editReviewBtns[i].style.color = "white";
+                editReviewBtns[i].innerHTML = "Edit";
+                editreplyForms.style.display = 'none';
             }
-        } //end of toggleEditProfilePicture button function
+        })
+    } //end of for loop for editFormBtns
 
+    /******************************************
+     *********   TOGGLE REPLY FROMS   *********
+     ********************************************/
+    const replyBtns = document.querySelectorAll('.replyBtn');
+    for (let i = 0; i < replyBtns.length; i++) {
+        replyBtns[i].addEventListener('click', () => {
+            for (let j = 0; j < replyBtns.length; j++) {
+                replyBtns[j].classList.remove('active');
+            }
 
-        /******************************************
-         *****   TOGGLE EDIT REVIEW FORMS *****
-         ********************************************/
-        const editReviewBtns = document.querySelectorAll('.editReviewFormBtn');
-        for (let i = 0; i < editReviewBtns.length; i++) {
-            editReviewBtns[i].addEventListener('click', () => {
-                for (let j = 0; j < editReviewBtns.length; j++) {
-                    editReviewBtns[j].classList.remove('active');
-                }
+            replyBtns[i].innerHTML = "Cancel";
+            replyBtns[i].style.color = "rgb(255, 112, 112)";
+            replyBtns[i].classList.add('active');
 
-                editReviewBtns[i].innerHTML = "Cancel";
-                editReviewBtns[i].classList.add('active');
+            var replyForms = document.getElementById("replyForms" + i);
+            if (replyForms.offsetWidth == 0 && replyForms.offsetHeight == 0) {
+                replyForms.style.display = 'block';
+            } else {
+                replyBtns[i].style.color = "white";
+                replyBtns[i].innerHTML = "Reply";
+                document.getElementsByClassName("replyMessage")[i].value = '';
+                replyForms.style.display = 'none';
+            }
+        })
+    } //end of for loop for replyBtns
 
-                var editreplyForms = document.getElementById("editReviewForm");
-                if (editreplyForms.offsetWidth == 0 && editreplyForms.offsetHeight == 0) {
-                    editreplyForms.style.display = 'block';
-                } else {
-                    editReviewBtns[i].style.color = "white";
-                    editReviewBtns[i].innerHTML = "Edit";
-                    editreplyForms.style.display = 'none';
-                }
-            })
-        } //end of for loop for editFormBtns
+    /******************************************
+     *****   TOGGLE REPLY TO REPLY FROMS   *****
+     ********************************************/
+    const replyToReplyBtns = document.querySelectorAll('.replyToReplyBtn');
+    for (let i = 0; i < replyToReplyBtns.length; i++) {
+        replyToReplyBtns[i].addEventListener('click', () => {
+            for (let j = 0; j < replyToReplyBtns.length; j++) {
+                replyToReplyBtns[j].classList.remove('active');
+            }
+            replyToReplyBtns[i].innerHTML = "Cancel";
+            replyToReplyBtns[i].style.color = "rgb(255, 112, 112)";
+            replyToReplyBtns[i].classList.add('active');
 
-        /******************************************
-         *********   TOGGLE REPLY FROMS   *********
-         ********************************************/
-        const replyBtns = document.querySelectorAll('.replyBtn');
-        for (let i = 0; i < replyBtns.length; i++) {
-            replyBtns[i].addEventListener('click', () => {
-                for (let j = 0; j < replyBtns.length; j++) {
-                    replyBtns[j].classList.remove('active');
-                }
-
-                replyBtns[i].innerHTML = "Cancel";
-                replyBtns[i].style.color = "rgb(255, 112, 112)";
-                replyBtns[i].classList.add('active');
-
-                var replyForms = document.getElementById("replyForms" + i);
-                if (replyForms.offsetWidth == 0 && replyForms.offsetHeight == 0) {
-                    replyForms.style.display = 'block';
-                } else {
-                    replyBtns[i].style.color = "white";
-                    replyBtns[i].innerHTML = "Reply";
-                    document.getElementsByClassName("replyMessage")[i].value = '';
-                    replyForms.style.display = 'none';
-                }
-            })
-        } //end of for loop for replyBtns
-
-        /******************************************
-         *****   TOGGLE REPLY TO REPLY FROMS   *****
-         ********************************************/
-        const replyToReplyBtns = document.querySelectorAll('.replyToReplyBtn');
-        for (let i = 0; i < replyToReplyBtns.length; i++) {
-            replyToReplyBtns[i].addEventListener('click', () => {
-                for (let j = 0; j < replyToReplyBtns.length; j++) {
-                    replyToReplyBtns[j].classList.remove('active');
-                }
-                replyToReplyBtns[i].innerHTML = "Cancel";
-                replyToReplyBtns[i].style.color = "rgb(255, 112, 112)";
-                replyToReplyBtns[i].classList.add('active');
-
-                var replyForms = document.getElementById("replytoReplyForms" + i);
-                if (replyForms.offsetWidth == 0 && replyForms.offsetHeight == 0) {
-                    replyForms.style.display = 'block';
-                } else {
-                    replyToReplyBtns[i].style.color = "white";
-                    replyToReplyBtns[i].innerHTML = "Reply";
-                    document.getElementsByClassName("replyToReplyMessage")[i].value = '';
-                    replyForms.style.display = 'none';
-                }
-            })
-        } //end of for loop for replyToReplyBtns
-    </script>
+            var replyForms = document.getElementById("replytoReplyForms" + i);
+            if (replyForms.offsetWidth == 0 && replyForms.offsetHeight == 0) {
+                replyForms.style.display = 'block';
+            } else {
+                replyToReplyBtns[i].style.color = "white";
+                replyToReplyBtns[i].innerHTML = "Reply";
+                document.getElementsByClassName("replyToReplyMessage")[i].value = '';
+                replyForms.style.display = 'none';
+            }
+        })
+    } //end of for loop for replyToReplyBtns
+</script>

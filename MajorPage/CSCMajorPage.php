@@ -1,21 +1,27 @@
 <?php
 session_start();
 
-$SERVER_NAME    = "localhost";   //Server name 
-$DBF_USER       = "root";        //UserName for the localhost database
-$DBF_PASSWORD   = "";       //Password for the localhost database/ When using XAMPPS, make this value emtpy. Use: $DBF_PASSWORD   = "";
-$DBF_NAME       = "CSPCourseReview";    //DB name for the localhost database
+// Hosted server connection
+$SERVER_NAME    = "localhost:3306";   //Server name 
+$DBF_USER       = "thewooz7_admin";        //UserName for the localhost database
+$DBF_PASSWORD   = "password";       //Password for the localhost database/ When using XAMPPS, make this value emtpy. Use: $DBF_PASSWORD   = "";
+$DBF_NAME       = "thewooz7_cspcoursereview";    //DB name for the localhost database
 //$connect = mysqli_connect($SERVER_NAME, $DBF_USER, $DBF_PASSWORD);
 $connectToDB = mysqli_connect($SERVER_NAME, $DBF_USER, $DBF_PASSWORD, $DBF_NAME);
+
+
+// $SERVER_NAME    = "localhost";   //Server name 
+// $DBF_USER       = "root";        //UserName for the localhost database
+// $DBF_PASSWORD   = "";       //Password for the localhost database/ When using XAMPPS, make this value emtpy. Use: $DBF_PASSWORD   = "";
+// $DBF_NAME       = "CSPCourseReview";    //DB name for the localhost database
+// //$connect = mysqli_connect($SERVER_NAME, $DBF_USER, $DBF_PASSWORD);
+// $connectToDB = mysqli_connect($SERVER_NAME, $DBF_USER, $DBF_PASSWORD, $DBF_NAME);
 
 // Check connection
 //$conn->connect_error: The connect_error property in the $conn (Connection) object. This property contains any error message from the last operation.
 if ($connectToDB->connect_error) { //-> is used to point to items contained in an object.
     die("Connection failed: " . $conn->connect_error); //die( ) will kill the current program after displaying the message in the String parameter.
 }
-
-
-
 
 function displayCourses()
 {
@@ -40,7 +46,7 @@ function displayCourses()
 
         //Populate the div containers using data from the course table in the database
         echo "<div >";
-        echo "<a href=http://localhost/csc450Capstone/CoursePage/CoursePage.php?id=$courseCodeArray[$j] class='fill-div'>"; //fetching from the array by iterating $j to check each index
+        echo "<a href=http://thewoodlandwickcandleco.com/csc450Capstone/CoursePage/CoursePage.php?id=$courseCodeArray[$j] class='fill-div'>"; //fetching from the array by iterating $j to check each index
         echo "<img  id = 'courseImage'src='Images/courseImage2.jfif' alt='waaaaaaa' />";
         echo "<h1>" . $courseName . "</h1>";
         echo "<h2>" . $courseDes . "</h1>";
@@ -57,7 +63,7 @@ $randomNum = 1;
 function navGetProfilePicture()
 {
     global $connectToDB;
-    $sqlStudentInfo = "SELECT * FROM studentInfo";
+    $sqlStudentInfo = "SELECT * FROM studentinfo";
 
     //Run and assign query 
     $data = mysqli_query($connectToDB, $sqlStudentInfo);
@@ -115,12 +121,30 @@ function navGetProfilePicture()
                 lastScrollTop = scrollTop; //New Position Stored
             });
         </script>
+
         <ul class="menu">
+            <li class="logo" id="logo">CSP Major Page</li>
+            <li class="item"><a href="https://thewoodlandwickcandleco.com/csc450Capstone/ticketRequest/ticketRequest.php">Ticket Request</a></li>
+            <li class="item"><a href="https://thewoodlandwickcandleco.com/csc450Capstone/LandingPage/LandingPage.php">Home</a></li>
+            <li class="item">
+                <div id="navImage">
+                    <?php navGetProfilePicture() ?>
+                </div>
+
+
+            </li>
+            <li class="item"><a href="https://thewoodlandwickcandleco.com/csc450Capstone/profileView/profiles.php">Profile</a></li>
+            <li class="item"><a href="https://thewoodlandwickcandleco.com/csc450Capstone/MajorPage/CSCMajorPage.php">Majors</a></li>
+            <li class="item button"><a href="https://thewoodlandwickcandleco.com/csc450Capstone/LoginPage/logOut.php">Sign Out</a></li>
+            <li class="toggle"><span class="bars"></span></li>
+        </ul>
+
+        <!-- <ul class="menu">
             <li class="logo" id="logo">CSP Major Page</li>
             <li class="item"><a href="http://localhost/csc450Capstone/LandingPage/LandingPage.php">Home</a></li>
             <li class="item">
                 <div id="navImage">
-                    <?php navGetProfilePicture() ?>
+                    <?php //navGetProfilePicture() ?>
                 </div>
             </li>
             <li class="item"><a href="http://localhost/csc450Capstone/profileView/profiles.php">Profile</a></li>
@@ -128,7 +152,7 @@ function navGetProfilePicture()
             <li class="item button"><a href="http://localhost/csc450Capstone/LoginPage/logOut.php">Sign Out</a></li>
 
             <li class="toggle"><span class="bars"></span></li>
-        </ul>
+        </ul> -->
     </nav>
     <!-- End of Nav Script -->
     <?php displayCourses(); ?>

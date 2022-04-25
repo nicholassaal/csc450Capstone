@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,25 +8,32 @@
     <link rel="stylesheet" href="adminHome.css">
     <title>Admin Page</title>
 </head>
+
 <body>
-  <nav id="navbar">
-    <ul>
-        <li><a class="adminHome" href="http://localhost/csc450Capstone/AdminPages/adminHome.php">Admin Home</a></li>
+    <nav id="navbar">
+        <ul>
+            <li><a class="adminHome" href="https://thewoodlandwickcandleco.com/csc450Capstone/AdminPages/adminHome.php">Admin Home</a></li>
+            <li><a href="https://thewoodlandwickcandleco.com/csc450Capstone/LoginPage/logOut.php">Sign Out</a></li>
+            <li><a href="https://thewoodlandwickcandleco.com/csc450Capstone/MajorPage/CSCMajorPage.php">Majors</a></li>
+            <li><a href="https://thewoodlandwickcandleco.com/csc450Capstone/LandingPage/LandingPage.php">Users Home</a></li>
+
+            <!-- <li><a class="adminHome" href="http://localhost/csc450Capstone/AdminPages/adminHome.php">Admin Home</a></li>
         <li><a href="http://localhost/csc450Capstone/LoginPage/logOut.php">Sign Out</a></li>
         <li><a href="http://localhost/csc450Capstone/MajorPage/CSCMajorPage.php">Majors</a></li>
-        <li><a href="http://localhost/csc450Capstone/LandingPage/LandingPage.php">Users Home</a></li>
-    </ul> 
-  </nav>
-      
-      <div class="flex-container">
+        <li><a href="http://localhost/csc450Capstone/LandingPage/LandingPage.php">Users Home</a></li> -->
+        </ul>
+    </nav>
+
+    <div class="flex-container">
         <a href="addUpdateDelete.php">Add/Update/Delete Student</a>
         <a href="addUpdateDeleteStaff.php">Add/Update Staff</a>
         <a href="courseUpdate.php">Update/Add/Delete Course</a>
         <a href="ticketRequest.php">Ticket Requests</a>
-      </div>
-     
-    
+    </div>
+
+
 </body>
+
 </html>
 
 <script>
