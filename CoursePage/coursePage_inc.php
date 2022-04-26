@@ -52,7 +52,7 @@
             *****************************************/
     
             //Retrieve the student id and full name using CONCAT()
-            $sqlStudentInfo = "SELECT CONCAT(student_fname,' ',student_lname) AS 'fullName' FROM studentInfo
+            $sqlStudentInfo = "SELECT CONCAT(student_fname,' ',student_lname) AS 'fullName' FROM studentinfo
                 WHERE student_id = $studentID";
     
             //Run query 
@@ -188,7 +188,7 @@
         $queryRetireveReplies = mysqli_query($connectToDB, $sqlRetrieveReplies);
         $numberOfReplies = mysqli_num_rows($queryRetireveReplies);
 
-        $sqlRetrieveReviewID = "SELECT studentCourseReview_id FROM studentCourse WHERE student_id = $studentID";
+        $sqlRetrieveReviewID = "SELECT studentCourseReview_id FROM studentcourse WHERE student_id = $studentID";
         $queryReviewID = mysqli_query($connectToDB, $sqlRetrieveReviewID);
         echo "<details>";//Details for viewing the replies
             echo"<summary>View Replies (".$numberOfReplies.")</summary>";
@@ -270,7 +270,7 @@
     function studentName($studentID){
         global $connectToDB;
         //Retrieve the student's full name using CONCAT() that wrote the reply
-        $sqlStudentInfo = "SELECT CONCAT(student_fname,' ',student_lname) AS 'fullName' FROM studentInfo WHERE student_id = $studentID";
+        $sqlStudentInfo = "SELECT CONCAT(student_fname,' ',student_lname) AS 'fullName' FROM studentinfo WHERE student_id = $studentID";
         $sqlStudentTable = mysqli_query($connectToDB, $sqlStudentInfo);
         $retrieveStudentName = mysqli_fetch_assoc($sqlStudentTable);
         $studentName = $retrieveStudentName['fullName'];//Assign the fullname to a variable once retrieved above 

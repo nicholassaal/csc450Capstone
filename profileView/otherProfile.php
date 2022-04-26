@@ -23,7 +23,7 @@ function displayReviewCourse()
 {
     global $connectToDB;
 
-    $sqlStudentCourse = "SELECT * FROM studentCourse"; //selecting a specific table from the already connected to database
+    $sqlStudentCourse = "SELECT * FROM studentcourse"; //selecting a specific table from the already connected to database
     $i = 0; //variable outside of loop to access the array
     $clickedUserId = $_GET["uid"];
 
@@ -72,7 +72,7 @@ function displayStudentInfo()
     //echo "$clickedUserId";
     //TESTING TESTING TESTING TESTING TESTING TESTING TESTING TESTING
 
-    $sqlStudentInfo = "SELECT student_id, CONCAT(student_fname,' ',student_lname) AS 'fullName' FROM studentInfo WHERE $clickedUserId = student_id"; //selecting a specific table from the already connected to database
+    $sqlStudentInfo = "SELECT student_id, CONCAT(student_fname,' ',student_lname) AS 'fullName' FROM studentinfo WHERE $clickedUserId = student_id"; //selecting a specific table from the already connected to database
 
     //Run and assign query 
     $data = mysqli_query($connectToDB, $sqlStudentInfo);
@@ -92,7 +92,7 @@ function displayStudentInfo()
         if ($studentId == $clickedUserId) { //checks to see if the $studentId found in DB matches the sent over uid to populate the reviews
             $studentinfoId = $rows['student_id'];
             //Retrieve data from studentMajor table 
-            $sqlStudentMajor = "SELECT * FROM studentMajor WHERE student_id = $studentinfoId";
+            $sqlStudentMajor = "SELECT * FROM studentmajor WHERE student_id = $studentinfoId";
             //Run query 
             $sqlStudentMajorData = mysqli_query($connectToDB, $sqlStudentMajor);
             $studentMajorRows = mysqli_fetch_array($sqlStudentMajorData);
@@ -126,7 +126,7 @@ function displayAboutStudent()
 {
     global $connectToDB;
     $clickedUserId = $_GET["uid"];
-    $sqlStudentInfo = "SELECT * FROM studentInfo";
+    $sqlStudentInfo = "SELECT * FROM studentinfo";
 
     //Run and assign query 
     $data = mysqli_query($connectToDB, $sqlStudentInfo);
@@ -181,7 +181,7 @@ function displayAboutStudent()
 function getOtherProfilePicture()
 {
     global $connectToDB;
-    $sqlStudentInfo = "SELECT * FROM studentInfo";
+    $sqlStudentInfo = "SELECT * FROM studentinfo";
     $clickedUserId = $_GET["uid"];
     //Run and assign query 
     $data = mysqli_query($connectToDB, $sqlStudentInfo);
@@ -198,7 +198,7 @@ function getOtherProfilePicture()
 function navGetProfilePicture()
 {
     global $connectToDB;
-    $sqlStudentInfo = "SELECT * FROM studentInfo";
+    $sqlStudentInfo = "SELECT * FROM studentinfo";
 
     //Run and assign query 
     $data = mysqli_query($connectToDB, $sqlStudentInfo);
@@ -216,7 +216,7 @@ function getClickedUserName()
     global $connectToDB;
     $clickedUserId = $_GET["uid"];
 
-    $sqlGetName = "SELECT student_fname FROM studentInfo WHERE $clickedUserId = student_id";
+    $sqlGetName = "SELECT student_fname FROM studentinfo WHERE $clickedUserId = student_id";
 
     $queryGetName = mysqli_query($connectToDB, $sqlGetName);
     $fetchNameField = mysqli_fetch_assoc($queryGetName);

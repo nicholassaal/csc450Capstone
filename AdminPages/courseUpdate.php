@@ -114,7 +114,7 @@ function courseUpdate()
 
 
     if ($queryUpdateCourse) { //check if successfull or not
-        echo "Successfull UPDATED course '.$courseId.'";
+        
     } else {
         print_r($queryUpdateCourse);
     }

@@ -68,7 +68,7 @@ function displayTicketTable()
 {
     global $connectToDB;
 
-    $sqlTicketTable = "SELECT * FROM ticketRequest";
+    $sqlTicketTable = "SELECT * FROM ticketrequest";
     $ticketQuery = mysqli_query($connectToDB, $sqlTicketTable);
 
     if ($ticketQuery) {
@@ -122,7 +122,7 @@ function displayOriginalStudentInfo()
         $studentInfoID = $_POST['studentSelect'];
 
         if ($studentInfoID > 0) { //this is to check if the value being sent over form the DDL is someone selected, if the default value is selected ('Please select a student') it will populate nothing since its value is -1
-            $sqlStudentMajor = "SELECT * FROM studentMajor WHERE student_id = $studentInfoID"; //connecting and querying data from studentMajor only when $studentInfoID being passed form DDL matches with someone in the DB
+            $sqlStudentMajor = "SELECT * FROM studentmajor WHERE student_id = $studentInfoID"; //connecting and querying data from studentMajor only when $studentInfoID being passed form DDL matches with someone in the DB
             $studentMajorQuery = mysqli_query($connectToDB, $sqlStudentMajor);
 
             while ($studentMajorRows = mysqli_fetch_assoc($studentMajorQuery)) { //loop to fetch_associated for majorID and studentEnrollment

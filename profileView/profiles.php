@@ -22,7 +22,7 @@ function displayReviewCourse()
 {
     global $connectToDB;
 
-    $sqlStudentCourse = "SELECT * FROM studentCourse"; //selecting a specific table from the already connected to database
+    $sqlStudentCourse = "SELECT * FROM studentcourse"; //selecting a specific table from the already connected to database
     $i = 0; //variable outside of loop to access the array
 
     //Run and assign query 
@@ -66,7 +66,7 @@ function displayReviewCourse()
 function displayStudentInfo()
 {
     global $connectToDB;
-    $sqlStudentInfo = "SELECT student_id, CONCAT(student_fname,' ',student_lname) AS 'fullName' FROM studentInfo "; //selecting a specific table from the already connected to database
+    $sqlStudentInfo = "SELECT student_id, CONCAT(student_fname,' ',student_lname) AS 'fullName' FROM studentinfo "; //selecting a specific table from the already connected to database
 
     //Run and assign query 
     $data = mysqli_query($connectToDB, $sqlStudentInfo);
@@ -81,7 +81,7 @@ function displayStudentInfo()
         if ($studentId == $_SESSION["currentUserLoginId"]) {
             $studentinfoId = $rows['student_id'];
             //Retrieve data from studentMajor table 
-            $sqlStudentMajor = "SELECT * FROM studentMajor WHERE student_id = $studentinfoId";
+            $sqlStudentMajor = "SELECT * FROM studentmajor WHERE student_id = $studentinfoId";
             //Run query 
             $sqlStudentMajorData = mysqli_query($connectToDB, $sqlStudentMajor);
             $studentMajorRows = mysqli_fetch_array($sqlStudentMajorData);
@@ -114,7 +114,7 @@ function displayStudentInfo()
 function getProfilePicture()
 {
     global $connectToDB;
-    $sqlStudentInfo = "SELECT * FROM studentInfo";
+    $sqlStudentInfo = "SELECT * FROM studentinfo";
 
     //Run and assign query 
     $data = mysqli_query($connectToDB, $sqlStudentInfo);
@@ -148,7 +148,7 @@ function navGetProfilePicture()
 function displayAboutStudent()
 {
     global $connectToDB;
-    $sqlStudentInfo = "SELECT * FROM studentInfo";
+    $sqlStudentInfo = "SELECT * FROM studentinfo";
 
     //Run and assign query 
     $data = mysqli_query($connectToDB, $sqlStudentInfo);
@@ -167,30 +167,30 @@ function displayAboutStudent()
             $student_year = $rows['student_year'];
             $about_student = $rows['about_student'];
 
-            echo"<div class=mostOutterAboutMeDiv>";
-                echo"<div class = outterAboutMeDiv>";
-                    echo"<div class = additionalInfoDiv>";
-                        echo "<h3>Socials: </h3>";
-                        echo "<p>" . $student_social . "</p>";
-                    echo"</div>";
-                    echo"<div class = additionalInfoDiv>";
-                        echo "<h3>Birthday: </h3>";
-                        echo "<p>" . $student_birthday . "</p>";
-                    echo"</div>";
-                    echo"<div class = additionalInfoDiv>";
-                        echo "<h3>Phone Number: </h3>";
-                        echo "<p>" . $student_phoneNumber . "</p>";
-                    echo"</div>";
-                    echo"<div class = additionalInfoDiv>";
-                        echo "<h3>Year of study: </h3>";
-                        echo "<p>" . $student_year . "</p>";
-                    echo"</div>";
-                echo"</div>";
-                echo"<div class = aboutStudentDiv>";
-                    echo "<h3>About me: </h3>";
-                    echo "<p>" . $about_student . "</p>";
-                echo"</div>";
-            echo"</div>";
+            echo "<div class=mostOutterAboutMeDiv>";
+            echo "<div class = outterAboutMeDiv>";
+            echo "<div class = additionalInfoDiv>";
+            echo "<h3>Socials: </h3>";
+            echo "<p>" . $student_social . "</p>";
+            echo "</div>";
+            echo "<div class = additionalInfoDiv>";
+            echo "<h3>Birthday: </h3>";
+            echo "<p>" . $student_birthday . "</p>";
+            echo "</div>";
+            echo "<div class = additionalInfoDiv>";
+            echo "<h3>Phone Number: </h3>";
+            echo "<p>" . $student_phoneNumber . "</p>";
+            echo "</div>";
+            echo "<div class = additionalInfoDiv>";
+            echo "<h3>Year of study: </h3>";
+            echo "<p>" . $student_year . "</p>";
+            echo "</div>";
+            echo "</div>";
+            echo "<div class = aboutStudentDiv>";
+            echo "<h3>About me: </h3>";
+            echo "<p>" . $about_student . "</p>";
+            echo "</div>";
+            echo "</div>";
         }
     }
     echo "</fieldset>";
@@ -206,7 +206,7 @@ function checkOldPassword()
     //Current student id using Sessions
     $studentId = $_SESSION["currentUserLoginId"];
 
-    $sqlStudentInfo = "SELECT user_password FROM userLoginInfo WHERE student_id = '$studentId'";
+    $sqlStudentInfo = "SELECT user_password FROM userlogininfo WHERE student_id = '$studentId'";
 
     $queryPassword = mysqli_query($connectToDB, $sqlStudentInfo);
     $fetchStudentPassword = mysqli_fetch_assoc($queryPassword); //fetching associated record in the database 
@@ -240,7 +240,7 @@ function updateOldPassword()
     $inputtedOldPassword = $_POST['newPassword'];
     $studentId = $_SESSION["currentUserLoginId"];
 
-    $sqlUpdatePassword = "UPDATE userLoginInfo SET user_password = '$inputtedOldPassword' WHERE student_id = '$studentId'";
+    $sqlUpdatePassword = "UPDATE userlogininfo SET user_password = '$inputtedOldPassword' WHERE student_id = '$studentId'";
     $queryPasswordUpdate = mysqli_query($connectToDB, $sqlUpdatePassword);
 } //end of updateOldPassword()
 
@@ -376,7 +376,8 @@ if (isset($_POST['submitButton'])) {
             <li class="item">
 
                 <div id="navImage">
-                    <?php //navGetProfilePicture() ?>
+                    <?php //navGetProfilePicture() 
+                    ?>
                 </div>
 
             </li>
@@ -388,7 +389,7 @@ if (isset($_POST['submitButton'])) {
         </ul> -->
     </nav>
     <!-- End of Nav Script --
-    <!-- code for updating profile picture -->
+    code for updating profile picture -->
     <form id="editProfilePictureform" method="POST" action="" enctype="multipart/form-data">
         <button id="closeButton" type="button" onclick="toggleEditProfilePicture()">X</button>
         <input type="file" id="uploadfile" name="uploadfile" value="Change" />
@@ -413,7 +414,7 @@ if (isset($_POST['submitButton'])) {
         // Get all the submitted data from the form
 
         global $connectToDB;
-        $sqlStudentInfo = "SELECT * FROM studentInfo";
+        $sqlStudentInfo = "SELECT * FROM studentinfo";
         $data = mysqli_query($connectToDB, $sqlStudentInfo);
         $users = mysqli_fetch_all($data, MYSQLI_ASSOC);
 

@@ -10,8 +10,8 @@ $SERVER_NAME    = "localhost:3306";   //Server name
 $DBF_USER       = "thewooz7_admin";        //UserName for the localhost database
 $DBF_PASSWORD   = "password";       //Password for the localhost database/ When using XAMPPS, make this value emtpy. Use: $DBF_PASSWORD   = "";
 $DBF_NAME       = "thewooz7_cspcoursereview";    //DB name for the localhost database
-//$connect = mysqli_connect($SERVER_NAME, $DBF_USER, $DBF_PASSWORD);
-$connectToDB = mysqli_connect($SERVER_NAME, $DBF_USER, $DBF_PASSWORD, $DBF_NAME);
+$connect = mysqli_connect($SERVER_NAME, $DBF_USER, $DBF_PASSWORD);
+// $connect = mysqli_connect($SERVER_NAME, $DBF_USER, $DBF_PASSWORD, $DBF_NAME);
 
 
 //  $SERVER_NAME    = "localhost";   //Server name 
@@ -56,7 +56,7 @@ $connectTable = mysqli_connect("$SERVER_NAME", "$DBF_USER", "$DBF_PASSWORD", "$D
 /*************************************
         Creation of DB tables
 *************************************/
-$sqlUserLoginInfo = "CREATE TABLE IF NOT EXISTS userLoginInfo(
+$sqlUserLoginInfo = "CREATE TABLE IF NOT EXISTS userlogininfo(
     user_id INT AUTO_INCREMENT PRIMARY KEY, 
     user_name VARCHAR(25) NOT NULL,
     user_password VARCHAR(20) NOT NULL,
@@ -64,7 +64,7 @@ $sqlUserLoginInfo = "CREATE TABLE IF NOT EXISTS userLoginInfo(
     student_id INT
     )";
 
-$sqlStudentInfo = "CREATE TABLE IF NOT EXISTS studentInfo(
+$sqlStudentInfo = "CREATE TABLE IF NOT EXISTS studentinfo(
     student_id INT AUTO_INCREMENT PRIMARY KEY, 
     student_fName VARCHAR(20) NOT NULL,
     student_lName VARCHAR(20) NOT NULL,
@@ -77,7 +77,7 @@ $sqlStudentInfo = "CREATE TABLE IF NOT EXISTS studentInfo(
     user_image VARCHAR(1000)
     )";
 
-$ticketRequestTable = "CREATE TABLE IF NOT EXISTS ticketRequest(
+$ticketRequestTable = "CREATE TABLE IF NOT EXISTS ticketrequest(
     ticket_id INT AUTO_INCREMENT PRIMARY KEY,
     ticket_fName_change VARCHAR(20) NOT NULL,
     ticket_lName_change VARCHAR(20) NOT NULL,
@@ -87,7 +87,7 @@ $ticketRequestTable = "CREATE TABLE IF NOT EXISTS ticketRequest(
     student_id INT
     )";
 
-$ticketRequestCompletionTable = "CREATE TABLE IF NOT EXISTS ticketRequestCompletion(
+$ticketRequestCompletionTable = "CREATE TABLE IF NOT EXISTS ticketrequestcompletion(
     ticketComplete_id INT AUTO_INCREMENT PRIMARY KEY,
     ticketComplete_check BOOLEAN,
     ticket_fName_check BOOLEAN,
@@ -104,7 +104,7 @@ $ticketRequestCompletionTable = "CREATE TABLE IF NOT EXISTS ticketRequestComplet
     student_id INT
 )";
 
-$sqlStudentCourse = "CREATE TABLE IF NOT EXISTS studentCourse( 
+$sqlStudentCourse = "CREATE TABLE IF NOT EXISTS studentcourse( 
    studentCourseReview_id INT AUTO_INCREMENT PRIMARY KEY,
    student_id INT NOT NULL,
    course_code INT NOT NULL,
@@ -124,10 +124,10 @@ $sqlReview_message_replies = "CREATE TABLE IF NOT EXISTS replies(
     date_written DATE, 
     studentCourseReview_id INT,
     replyToReply_id INT, 
-    CONSTRAINT fk_studentCourseReview_id FOREIGN KEY (studentCourseReview_id) REFERENCES studentCourse(studentCourseReview_id) ON DELETE RESTRICT ON UPDATE RESTRICT
+    CONSTRAINT fk_studentCourseReview_id FOREIGN KEY (studentCourseReview_id) REFERENCES studentcourse(studentCourseReview_id) ON DELETE RESTRICT ON UPDATE RESTRICT
 )";
 
-$sqlStudentMajor = "CREATE TABLE IF NOT EXISTS studentMajor(
+$sqlStudentMajor = "CREATE TABLE IF NOT EXISTS studentmajor(
    student_id INT NOT NULL,
    major_id INT NOT NULL,
    enrollment_status BOOLEAN
@@ -146,7 +146,7 @@ $sqlCourse = "CREATE TABLE IF NOT EXISTS course(
    major_id INT
 )";
 
-$sqlProfessorCourse = "CREATE TABLE IF NOT EXISTS professorCourse(
+$sqlProfessorCourse = "CREATE TABLE IF NOT EXISTS professorcourse(
    prof_id INT NOT NULL,
    course_code INT NOT NULL,
    year_taught VARCHAR(20) NOT NULL
@@ -184,7 +184,7 @@ if ($tableCreate) {
     Insert Sample Data into Tables
 *************************************/
 //Insert into userLoginInfo table
-$insertUserLogin = "INSERT INTO userLoginInfo (user_name, user_password, is_admin, student_id)
+$insertUserLogin = "INSERT INTO userlogininfo (user_name, user_password, is_admin, student_id)
     VALUES  ('MillerJ26', 'passwordEx', '0', '1'),
             ('PaulS19', 'password', '0', '2'),
             ('GrantM65', 'exPassword', '0', '3'),
@@ -192,13 +192,13 @@ $insertUserLogin = "INSERT INTO userLoginInfo (user_name, user_password, is_admi
             ('SampleAdmin14', 'adminPassword', '1', NULL)";
 
 //Insert into studentInfo table
-$insertStudentInfo = "INSERT INTO studentInfo (student_fName, student_lName, student_social, student_birthday, student_phoneNumber, student_year, about_student, student_on_campus)
+$insertStudentInfo = "INSERT INTO studentinfo (student_fName, student_lName, student_social, student_birthday, student_phoneNumber, student_year, about_student, student_on_campus)
     VALUES  ('Jake', 'Miller', 'jakeMiller@csp.edu', '2001-01-01', '6516516511', 'Senior', 'Enjoys programming and working on side projects. Some hobbies are fishing and hunting.', '1'),
             ('Steve', 'Paul', '', '2002-02-02' , '1223123123' , '' , 'Hobbies are playing guitar, running, and build computers.', '1' ),
             ('Mark', 'Grant', '', '2003-03-03' , '1111111111' , '' , 'Loves fishing.', '1'),
             ('Matthew', 'Smith', '', '2002-05-5' , '5555555555' , '' , 'Some of my hobbies are playing piano, swimming, and gaming.', '0')";
 
-$insertTicketRequest = "INSERT INTO ticketRequest (ticket_fName_change, ticket_lName_change, ticket_major_change, ticket_enrollment_change, ticket_OnCampus_change, student_id)
+$insertTicketRequest = "INSERT INTO ticketrequest (ticket_fName_change, ticket_lName_change, ticket_major_change, ticket_enrollment_change, ticket_OnCampus_change, student_id)
     VALUE ('Jackie', 'Brown', 'Communications', '1', '0', '1')";
 
 $insertTicketRequestCompletion = "INSERT INTO ticketrequestcompletion (ticketComplete_check, ticket_fName_check, ticket_fName_change, ticket_lName_check, ticket_lName_change, ticket_major_check, ticket_major_change, ticket_enrollment_check, ticket_enrollment_change, ticket_onCampus_check, ticket_OnCampus_change, ticketComplete_Message, student_id)
@@ -206,7 +206,7 @@ $insertTicketRequestCompletion = "INSERT INTO ticketrequestcompletion (ticketCom
 
 
 //Insert into student course composite/join table
-$insertStudentCourse = "INSERT INTO studentCourse (student_id, course_code, review_message, overall_review_rating, q1Answer, q2Answer ,q3Answer, review_date_written)
+$insertStudentCourse = "INSERT INTO studentcourse (student_id, course_code, review_message, overall_review_rating, q1Answer, q2Answer ,q3Answer, review_date_written)
     VALUES  ('1', '1', 'Great course, highly recommended if you are interesting in web designed.', '15', 'I was able to learn JavaScript.', 'Learned PHP', 'Database work was challenging for me.', '2020-06-5'),
             ('2', '1', 'I see this course as an internship kind of. I was able to work with a team and learn new skills in HTML, CSS, PHP, and JavaScript.', '18', 'I learned PHP.', 'Make sure the understand normalization.', 'Database normalization.', '2021-08-8'),
             ('3', '1', 'I thought the course was great. Loved working with the team I was assigned to.', '7', 'I was able to relearn HTML and CSS.', 'Practice using flex boxes.', 'Malnipluating data in a database using PHP.', '2019-01-6'),
@@ -221,7 +221,7 @@ $insertReviewMessageReplies = "INSERT INTO replies (student_id, course_code, rep
            ('3', '1', 'Very helpful review!', '2002-02-03', '1', '0')";
 
 //Insert into student major composite/join table
-$insertStudentMajor = "INSERT INTO studentMajor (student_id, major_id, enrollment_status)
+$insertStudentMajor = "INSERT INTO studentmajor (student_id, major_id, enrollment_status)
     VALUES  ('1', '1', '1'),
             ('2', '1', '1'),
             ('3', '1', '1'),
@@ -240,7 +240,7 @@ $insertMajor = "INSERT INTO major (major_name, major_description)
             ('Communications', 'Learn about effective communication skills and using the different skills in real life.')";
 
 //Insert into professorCourse composite/join table
-$insertProfessorCourse = "INSERT INTO professorCourse (prof_id, course_code, year_taught)
+$insertProfessorCourse = "INSERT INTO professorcourse (prof_id, course_code, year_taught)
     VALUES  ('1', '1', '2019'),
             ('1', '2', '2020')";
 
@@ -272,24 +272,24 @@ if ($insert) {
 /*************************************
     Creating Foreign Keys, Composite Keys. 
 *************************************/
-$sqlAlterUserLoginInfo = "ALTER TABLE `userlogininfo` ADD CONSTRAINT `fk_student_id` FOREIGN KEY (`student_id`) REFERENCES `studentInfo`(`student_id`) ON DELETE RESTRICT ON UPDATE RESTRICT";
+$sqlAlterUserLoginInfo = "ALTER TABLE `userlogininfo` ADD CONSTRAINT `fk_student_id` FOREIGN KEY (`student_id`) REFERENCES `studentinfo`(`student_id`) ON DELETE RESTRICT ON UPDATE RESTRICT";
 
-$sqlAlterTicketRequest = "ALTER TABLE `ticketRequest` ADD CONSTRAINT `fk_students_id` FOREIGN KEY (`student_id`) REFERENCES `studentInfo`(`student_id`) ON DELETE RESTRICT ON UPDATE RESTRICT";
+$sqlAlterTicketRequest = "ALTER TABLE `ticketrequest` ADD CONSTRAINT `fk_students_id` FOREIGN KEY (`student_id`) REFERENCES `studentinfo`(`student_id`) ON DELETE RESTRICT ON UPDATE RESTRICT";
 
-$sqlAlterTicketRequestCompletion = "ALTER TABLE `ticketrequestcompletion` ADD CONSTRAINT `fk_studentId` FOREIGN KEY (`student_id`) REFERENCES `studentInfo`(`student_id`) ON DELETE RESTRICT ON UPDATE RESTRICT";
+$sqlAlterTicketRequestCompletion = "ALTER TABLE `ticketrequestcompletion` ADD CONSTRAINT `fk_studentId` FOREIGN KEY (`student_id`) REFERENCES `studentinfo`(`student_id`) ON DELETE RESTRICT ON UPDATE RESTRICT";
 
 $sqlAlterCourseTable = "ALTER TABLE `course` ADD CONSTRAINT `fk_Major_id` FOREIGN KEY (`major_id`) REFERENCES `major`(`major_id`) ON DELETE RESTRICT ON UPDATE RESTRICT";
 
-$sqlAlterStudentCourse1 = "ALTER TABLE `studentCourse` ADD CONSTRAINT `uk_student_id` FOREIGN KEY (`student_id`) REFERENCES `studentinfo`(`student_id`) ON DELETE RESTRICT ON UPDATE RESTRICT";
-$sqlAlterStudentCourse2 = "ALTER TABLE `studentCourse` ADD CONSTRAINT `uk_course_code` FOREIGN KEY (`course_code`) REFERENCES `course`(`course_code`) ON DELETE RESTRICT ON UPDATE RESTRICT";
+$sqlAlterStudentCourse1 = "ALTER TABLE `studentcourse` ADD CONSTRAINT `uk_student_id` FOREIGN KEY (`student_id`) REFERENCES `studentinfo`(`student_id`) ON DELETE RESTRICT ON UPDATE RESTRICT";
+$sqlAlterStudentCourse2 = "ALTER TABLE `studentcourse` ADD CONSTRAINT `uk_course_code` FOREIGN KEY (`course_code`) REFERENCES `course`(`course_code`) ON DELETE RESTRICT ON UPDATE RESTRICT";
 
-$sqlAlterStudentMajor1 = "ALTER TABLE `studentMajor` ADD CONSTRAINT `uk_studentMajor_id` FOREIGN KEY (`student_id`) REFERENCES `studentinfo`(`student_id`) ON DELETE RESTRICT ON UPDATE RESTRICT";
-$sqlAlterStudentMajor2 = "ALTER TABLE `studentMajor` ADD CONSTRAINT `uk_major_id` FOREIGN KEY (`major_id`) REFERENCES `major`(`major_id`) ON DELETE RESTRICT ON UPDATE RESTRICT";
+$sqlAlterStudentMajor1 = "ALTER TABLE `studentmajor` ADD CONSTRAINT `uk_studentMajor_id` FOREIGN KEY (`student_id`) REFERENCES `studentinfo`(`student_id`) ON DELETE RESTRICT ON UPDATE RESTRICT";
+$sqlAlterStudentMajor2 = "ALTER TABLE `studentmajor` ADD CONSTRAINT `uk_major_id` FOREIGN KEY (`major_id`) REFERENCES `major`(`major_id`) ON DELETE RESTRICT ON UPDATE RESTRICT";
 
-$sqlAlterProfCourse1 = "ALTER TABLE `professorCourse` ADD CONSTRAINT `uk_prof_id` FOREIGN KEY (`prof_id`) REFERENCES `professor`(`prof_id`) ON DELETE RESTRICT ON UPDATE RESTRICT";
-$sqlAlterProfCourse2 = "ALTER TABLE `professorCourse` ADD CONSTRAINT `uk_profCourse_code` FOREIGN KEY (`course_code`) REFERENCES `course`(`course_code`) ON DELETE RESTRICT ON UPDATE RESTRICT";
+$sqlAlterProfCourse1 = "ALTER TABLE `professorcourse` ADD CONSTRAINT `uk_prof_id` FOREIGN KEY (`prof_id`) REFERENCES `professor`(`prof_id`) ON DELETE RESTRICT ON UPDATE RESTRICT";
+$sqlAlterProfCourse2 = "ALTER TABLE `professorcourse` ADD CONSTRAINT `uk_profCourse_code` FOREIGN KEY (`course_code`) REFERENCES `course`(`course_code`) ON DELETE RESTRICT ON UPDATE RESTRICT";
 
-$sqlAlterReplyTable = "ALTER TABLE `replies` ADD CONSTRAINT `pkfk_student_id` FOREIGN KEY (`student_id`) REFERENCES `studentInfo`(`student_id`) ON DELETE RESTRICT ON UPDATE RESTRICT";
+$sqlAlterReplyTable = "ALTER TABLE `replies` ADD CONSTRAINT `pkfk_student_id` FOREIGN KEY (`student_id`) REFERENCES `studentinfo`(`student_id`) ON DELETE RESTRICT ON UPDATE RESTRICT";
 $sqlAlterReplyTable2 = "ALTER TABLE `replies` ADD CONSTRAINT `pkfk_course_code` FOREIGN KEY (`course_code`) REFERENCES `course`(`course_code`) ON DELETE RESTRICT ON UPDATE RESTRICT";
 
 //Running the queries, assigning runs to a variable to check if successful or not. 

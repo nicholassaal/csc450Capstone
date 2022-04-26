@@ -72,7 +72,7 @@
         //SQL query for updating the student's name base on the student_id that was entered.
         $sqlUpdateStudentName = "UPDATE studentinfo SET student_fName = '$studentNewFName', student_lName = '$studentNewLName' WHERE student_id = '$studentId'"; 
 
-        $sqlUpdateUsername = "UPDATE userLoginInfo SET user_name = '$studentUsername' WHERE student_id = '$studentId'"; 
+        $sqlUpdateUsername = "UPDATE userlogininfo SET user_name = '$studentUsername' WHERE student_id = '$studentId'"; 
 
         $queryUpdateStudent = mysqli_query($connectToDB, $sqlUpdateStudentName); //Run the SQL query 
 
@@ -91,12 +91,12 @@
         $StudentUserId      = $_POST['StudentUserId'];
         $StudentUsername    = $_POST['StudentUsername'];
 
-        $sqlDeleteUser = "DELETE FROM userlogininfo WHERE user_id = '$StudentUserId' AND user_name = '$StudentUsername'";
+        $sqlDeleteUser = "DELETE FROM userlogininfo WHERE student_id = '$StudentUserId' AND user_name = '$StudentUsername'";
 
         $queryDeleteUser = mysqli_query($connectToDB, $sqlDeleteUser);
 
         if ($queryDeleteUser) {
-
+            echo "IT WORKED";
         } else {
             print_r($queryDeleteUser);
         }
@@ -127,7 +127,7 @@
                         echo "<td class = studentRows>".$studentFName."</td>"; 
                         echo "<td class = studentRows>".$studentLName."</td>";
 
-                    $sqlUserInfo = "SELECT * FROM userLoginInfo WHERE student_id = $studentID";
+                    $sqlUserInfo = "SELECT * FROM userlogininfo WHERE student_id = $studentID";
                     $queryUserInfo = mysqli_query($connectToDB, $sqlUserInfo);
 
                     while ($userLoginRows = mysqli_fetch_array($queryUserInfo)){

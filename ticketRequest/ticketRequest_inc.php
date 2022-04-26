@@ -63,7 +63,7 @@ function populateTicketForm()
                 VALUES ('$firstNameChange','$lastNameChange','$majorChange','$enrolledRadioBtn','$onCampusRadioBtn', '$studentId')";
         $ticketRequestQuery = mysqli_query($connectToDB, $sqlInsertTicketRequest);
 
-        $sqlInsertTicketRequestCompletion = "INSERT INTO ticketrequestCompletion (ticketComplete_check, ticket_fName_change, ticket_lName_change, ticket_major_change, ticket_enrollment_change, ticket_OnCampus_change, student_id)
+        $sqlInsertTicketRequestCompletion = "INSERT INTO ticketrequestcompletion (ticketComplete_check, ticket_fName_change, ticket_lName_change, ticket_major_change, ticket_enrollment_change, ticket_OnCampus_change, student_id)
                 VALUES ('0', '$firstNameChange', '$lastNameChange', '$majorChange', '$enrolledRadioBtn', '$onCampusRadioBtn', '$studentId')";
         $insertTicketRequestCompletionQuery = mysqli_query($connectToDB, $sqlInsertTicketRequestCompletion);
 

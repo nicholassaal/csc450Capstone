@@ -46,7 +46,7 @@
         $reviewMessage = $_POST['reviewMessage'];
         $dateWritten = $_POST['dateWritten'];
 
-        $sqlInsertReview = "INSERT INTO studentCourse (student_id, course_code, review_message, overall_review_rating, q1Answer, q2Answer ,q3Answer, review_date_written)
+        $sqlInsertReview = "INSERT INTO studentcourse (student_id, course_code, review_message, overall_review_rating, q1Answer, q2Answer ,q3Answer, review_date_written)
         VALUES ('$currentLoggedStudent', '$courseCode', '$reviewMessage', 0, '$q1Answer', '$q2Answer', '$q3Answer', '$dateWritten')";
 
         //Query sql statement above

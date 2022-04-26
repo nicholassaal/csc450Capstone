@@ -80,7 +80,7 @@ function featuredCourseReviews()
             $topReviews = $studentCourseTableRow['review_message'];
             $topStudentId = $studentCourseTableRow['student_id'];
 
-            $sqlSelectingFeatured = "SELECT CONCAT(student_fname,' ',student_lname) AS 'fullName' FROM studentInfo WHERE student_id = $topStudentId";
+            $sqlSelectingFeatured = "SELECT CONCAT(student_fname,' ',student_lname) AS 'fullName' FROM studentinfo WHERE student_id = $topStudentId";
             $topStudentQuery = mysqli_query($connectToDB, $sqlSelectingFeatured);
             $studentTableRow = mysqli_fetch_array($topStudentQuery);
 
