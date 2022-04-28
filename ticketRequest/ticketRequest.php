@@ -1,7 +1,24 @@
 <?php
-session_start();
 include("ticketRequest_inc.php");
 
+//creating function to get users profile pictures for the Nav bar
+
+function navGetProfilePicture()
+{
+    global $connectToDB;
+    $sqlStudentInfo = "SELECT * FROM studentinfo";
+
+    //Run and assign query 
+    $data = mysqli_query($connectToDB, $sqlStudentInfo);
+    //While loop to retrieve data from studentInfo table. 
+    while ($rows = mysqli_fetch_array($data)) {
+        $studentId = $rows['student_id'];
+        if ($studentId == $_SESSION["currentUserLoginId"]) {
+            $picture = $rows['user_image'];
+            echo  "<img  src='/csc450Capstone/profileView/upload/" . $picture . "' alt='img' id ='navImage'>";
+        }
+    }
+} //end of navGetProfilePicture()
 ?>
 
 <!DOCTYPE html>
@@ -11,8 +28,8 @@ include("ticketRequest_inc.php");
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="ticketRequest.css">
     <link rel="stylesheet" type="text/css" href="../globalStyle/navBarStyling.css">
+    <link rel="stylesheet" href="ticketRequest.css">
     <title>Ticket Request</title>
 </head>
 
@@ -45,14 +62,11 @@ include("ticketRequest_inc.php");
         <!-- ************************************************** URL's FOR NAV BAR *************************************************** -->
         <ul class="menu">
             <li class="logo" id="logo">CSP Ticket Request Page</li>
-            <li class="item"><a href="https://thewoodlandwickcandleco.com/csc450Capstone/ticketRequest/ticketRequest.php">Ticket Request</a></li>
             <li class="item"><a href="https://thewoodlandwickcandleco.com/csc450Capstone/LandingPage/LandingPage.php">Home</a></li>
             <li class="item">
                 <div id="navImage">
                     <?php navGetProfilePicture() ?>
                 </div>
-
-
             </li>
             <li class="item"><a href="https://thewoodlandwickcandleco.com/csc450Capstone/profileView/profiles.php">Profile</a></li>
             <li class="item"><a href="https://thewoodlandwickcandleco.com/csc450Capstone/MajorPage/CSCMajorPage.php">Majors</a></li>
@@ -146,7 +160,7 @@ include("ticketRequest_inc.php");
 
     </fieldset>
 
-    <footer>
+    <footer class="ticketFooter">
         <a href="">Group 1 CSC 450 Capstone Neng Yang | Josiah Skorseth | Mitchell Williamson | Nicholas Saal</a>
     </footer>
 

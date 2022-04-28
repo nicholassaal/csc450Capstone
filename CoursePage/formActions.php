@@ -52,7 +52,7 @@
         //Query sql statement above
         $queryInsertReview = mysqli_query($connectToDB, $sqlInsertReview);
         if($queryInsertReview){
-            header("Location: http://localhost/csc450Capstone/CoursePage/CoursePage.php?id=$courseCode");//Send user back to coursePage
+            header("Location: http://thewoodlandwickcandleco.com/csc450Capstone/CoursePage/CoursePage.php?id=$courseCode");//Send user back to coursePage
         }
         else{
             print_r('Failed to write review!');
@@ -85,7 +85,7 @@
         //Query sql statement above
         $queryUpdateReview = mysqli_query($connectToDB, $sqlUpdateReview);
         if($queryUpdateReview){
-            //header("Location: http://localhost/csc450Capstone/CoursePage/CoursePage.php?id=$courseCode");//Send user back to coursePage
+            header("Location: http://thewoodlandwickcandleco.com/csc450Capstone/CoursePage/CoursePage.php?id=$courseCode");//Send user back to coursePage
         }
         else{
             print_r('Failed to update/edit review!');
@@ -115,7 +115,7 @@
 
             if($queryInsertReply){
                 //echo"SUCCESS for all queries !!!!";
-                header("Location: http://localhost/csc450Capstone/CoursePage/CoursePage.php?id=$courseCode#$studentReviewID");//Send user back to coursePage
+                header("Location: http://thewoodlandwickcandleco.com/csc450Capstone/CoursePage/CoursePage.php?id=$courseCode#$studentReviewID");//Send user back to coursePage
             }
             else{
                 print_r('Failed to save reply!');
@@ -143,7 +143,7 @@
             $queryInsert = mysqli_query($connectToDB, $sqlInsertReplyToReply);
 
             if($queryInsert){
-                header("Location: http://localhost/csc450Capstone/CoursePage/CoursePage.php?id=$courseCode#$studentReviewID");//Send user back to coursePage
+                header("Location: http://thewoodlandwickcandleco.com/csc450Capstone/CoursePage/CoursePage.php?id=$courseCode#$studentReviewID");//Send user back to coursePage
             }
             else{
                 echo"FAIL TO INSERT REPLY TO REPLY";
@@ -188,13 +188,13 @@
         $sqlUpdateReviewRating = "UPDATE studentcourse SET overall_review_rating = $overallReviewRatings+1 WHERE studentCourseReview_id = $reviewID AND student_id = $studentReviewID AND course_code = $courseCode";
         $sqlUpdateReviewQuery = mysqli_query($connectToDB, $sqlUpdateReviewRating);
         if ($sqlUpdateReviewQuery) {
-            header("Location: http://localhost/csc450Capstone/CoursePage/CoursePage.php?id=$courseCode#$studentReviewID");
+            header("Location: http://thewoodlandwickcandleco.com/csc450Capstone/CoursePage/CoursePage.php?id=$courseCode#$studentReviewID");
         } else {
             print_r($sqlUpdateReviewQuery);
         }
     } 
     else{//Just send the user back to the course page if they like their own review post. 
-        header("Location: http://localhost/csc450Capstone/CoursePage/CoursePage.php?id=$courseCode#$studentReviewID");
+        header("Location: http://thewoodlandwickcandleco.com/csc450Capstone/CoursePage/CoursePage.php?id=$courseCode#$studentReviewID");
     }
 
     ?>

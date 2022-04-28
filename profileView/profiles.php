@@ -49,7 +49,7 @@ function displayReviewCourse()
             while ($courseRows = mysqli_fetch_array($courseData)) {
                 //Retrieve that particular row and display on screen using echo
                 $studentReview = $courseRows['course_name'];
-                echo "<a href = http://localhost/csc450Capstone/CoursePage/CoursePage.php?id=$courseCodeArray[$i]#$studentId class = reviewBox>";
+                echo "<a href = http://thewoodlandwickcandleco.com/csc450Capstone/CoursePage/CoursePage.php?id=$courseCodeArray[$i]#$studentId class = reviewBox>";
                 echo "<p>" . $studentReview . "</p>";
                 echo "</a>";
                 $i++; //adds 1 to $i
@@ -241,7 +241,7 @@ function updateOldPassword()
     $studentId = $_SESSION["currentUserLoginId"];
 
     $sqlUpdatePassword = "UPDATE userlogininfo SET user_password = '$inputtedOldPassword' WHERE student_id = '$studentId'";
-    $queryPasswordUpdate = mysqli_query($connectToDB, $sqlUpdatePassword);
+    mysqli_query($connectToDB, $sqlUpdatePassword);
 } //end of updateOldPassword()
 
 function updateAboutMe()
@@ -287,7 +287,7 @@ function showMessage($message)
 {
     echo "<script>";
     echo "alert('$message');";
-    echo "window.location.href = 'http://localhost/csc450Capstone/ProfileView/profiles.php';";
+    echo "window.location.href = 'http://thewoodlandwickcandleco.com/csc450Capstone/profileView/profiles.php';";
     echo "</script>";
 }
 
@@ -306,6 +306,7 @@ if (isset($_POST['submitButton'])) {
             showMessage("Your confirmation for the new password was incorrect. Please try again.");
         }
         if (checkOldPassword() && confirmNewPassword()) {
+            updateOldPassword();
             showMessage("Password has successfully been updated!");
         }
     }
@@ -355,14 +356,11 @@ if (isset($_POST['submitButton'])) {
         </script>
         <ul class="menu">
             <li class="logo" id="logo">CSP Profile</li>
-            <li class="item"><a href="https://thewoodlandwickcandleco.com/csc450Capstone/ticketRequest/ticketRequest.php">Ticket Request</a></li>
             <li class="item"><a href="https://thewoodlandwickcandleco.com/csc450Capstone/LandingPage/LandingPage.php">Home</a></li>
             <li class="item">
                 <div id="navImage">
                     <?php navGetProfilePicture() ?>
                 </div>
-
-
             </li>
             <li class="item"><a href="https://thewoodlandwickcandleco.com/csc450Capstone/profileView/profiles.php">Profile</a></li>
             <li class="item"><a href="https://thewoodlandwickcandleco.com/csc450Capstone/MajorPage/CSCMajorPage.php">Majors</a></li>
@@ -503,7 +501,10 @@ if (isset($_POST['submitButton'])) {
             </div>
 
             <!-- button for editing accound information -->
-            <button type="button" id="editProfileButton" onclick="toggleEditProfile()">Edit Account</button>
+            <div class="profileButtons">
+                <button type="button" id="ticketButton"><a href="https://thewoodlandwickcandleco.com/csc450Capstone/ticketRequest/ticketRequest.php">Ticket Request</a></button>
+                <button type="button" id="editProfileButton" onclick="toggleEditProfile()">Edit Account</button>
+            </div>
 
         </div>
 

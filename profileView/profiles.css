@@ -2,228 +2,259 @@
  *******************         Profile Page         **********************
 ************************************************************************/
 body {
-    background-attachment: fixed;
-    font-family: sans-serif;
-    background-image: url("graphic/LandingPageBackgroundIMG.jpg");
-    padding-top: 25px;
-    padding-bottom: 100px;
-    color:rgba(34, 34, 34, 34); 
-  }
-  /* hide scrollbar but allow scrolling */
+  background-attachment: fixed;
+  font-family: sans-serif;
+  background-image: url("graphic/LandingPageBackgroundIMG.jpg");
+  padding-top: 25px;
+  padding-bottom: 100px;
+  color: rgba(34, 34, 34, 34);
+}
+/* hide scrollbar but allow scrolling */
 body {
-    -ms-overflow-style: none; /* for Internet Explorer, Edge */
-    scrollbar-width: none; /* for Firefox */
-    overflow-y: scroll; 
-  }
-  
-  body::-webkit-scrollbar {
-    display: none; /* for Chrome, Safari, and Opera */
-  }
-.wrapButton a {
-    color: white;
-    text-decoration: none;
+  -ms-overflow-style: none; /* for Internet Explorer, Edge */
+  scrollbar-width: none; /* for Firefox */
+  overflow-y: scroll;
 }
 
-#loginBtn, #profileBtn, #landingBtn , #perMajorBtn {
-    text-align: center;
-    color: white;
-    width: 150px;
-    height: 50px;
-    margin-top: 10px;
-    display: inline-block;
+body::-webkit-scrollbar {
+  display: none; /* for Chrome, Safari, and Opera */
+}
+.wrapButton a {
+  color: white;
+  text-decoration: none;
+}
+
+#loginBtn,
+#profileBtn,
+#landingBtn,
+#perMajorBtn {
+  text-align: center;
+  color: white;
+  width: 150px;
+  height: 50px;
+  margin-top: 10px;
+  display: inline-block;
 }
 .wrapButton {
-    position: absolute;
-    right:10px;
-    top: 3px;
+  position: absolute;
+  right: 10px;
+  top: 3px;
 }
 a:hover {
-    color: rgb(200,200,200);
-    text-decoration: underline;
+  color: rgb(200, 200, 200);
+  text-decoration: underline;
 }
 .studentInfo {
-    margin-left: 17%;
-    margin-right: 17%;
-    margin-bottom: 30px;
-    
+  margin-left: 17%;
+  margin-right: 17%;
+  margin-bottom: 30px;
 }
 .infoLegend {
-    font-size: 21px;
-    font-family: Georgia, 'Times New Roman', Times, serif; 
-    color:white;
-    background-color: rgba(34, 34, 34, 0.9);
-    border-bottom: 2px groove rgb(50, 50, 51);
-    border-top: 2px groove rgb(50, 50, 51);
-    border-left: 2px groove rgb(71, 163, 182);
-    border-right: 2px groove rgb(71, 163, 182);
-    border-radius: 7px;
-    padding-left: 5px;
-    padding-right: 5px;
-    
+  font-size: 21px;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  color: white;
+  background-color: rgba(34, 34, 34, 0.9);
+  border-bottom: 2px groove rgb(50, 50, 51);
+  border-top: 2px groove rgb(50, 50, 51);
+  border-left: 2px groove rgb(71, 163, 182);
+  border-right: 2px groove rgb(71, 163, 182);
+  border-radius: 7px;
+  padding-left: 5px;
+  padding-right: 5px;
 }
 .reviewLegend {
-    font-size: 21px;
-    background-color: rgba(34, 34, 34, 0.9);
-    font-family: Georgia, 'Times New Roman', Times, serif; 
-    color:white;
-    border-bottom: 2px groove rgb(50, 50, 51);
-    border-top: 2px groove rgb(50, 50, 51);
-    border-left: 2px groove rgb(71, 163, 182);
-    border-right: 2px groove rgb(71, 163, 182);
-    border-radius: 7px;
-    padding-left: 5px;
-    padding-right: 5px;
+  font-size: 21px;
+  background-color: rgba(34, 34, 34, 0.9);
+  font-family: Georgia, "Times New Roman", Times, serif;
+  color: white;
+  border-bottom: 2px groove rgb(50, 50, 51);
+  border-top: 2px groove rgb(50, 50, 51);
+  border-left: 2px groove rgb(71, 163, 182);
+  border-right: 2px groove rgb(71, 163, 182);
+  border-radius: 7px;
+  padding-left: 5px;
+  padding-right: 5px;
 }
 .otherInfoLegend {
-    font-size: 21px;
-    background-color: rgba(34, 34, 34, 0.9);
-    font-family: Georgia, 'Times New Roman', Times, serif; 
-    color:white;
-    border-bottom: 2px groove rgb(50, 50, 51);
-    border-top: 2px groove rgb(50, 50, 51);
-    border-left: 2px groove rgb(71, 163, 182);
-    border-right: 2px groove rgb(71, 163, 182);
-    border-radius: 7px;
-    padding-left: 5px;
-    padding-right: 5px;
+  font-size: 21px;
+  background-color: rgba(34, 34, 34, 0.9);
+  font-family: Georgia, "Times New Roman", Times, serif;
+  color: white;
+  border-bottom: 2px groove rgb(50, 50, 51);
+  border-top: 2px groove rgb(50, 50, 51);
+  border-left: 2px groove rgb(71, 163, 182);
+  border-right: 2px groove rgb(71, 163, 182);
+  border-radius: 7px;
+  padding-left: 5px;
+  padding-right: 5px;
 }
 .studentDescript1 {
-    float: left;
-    margin-left: 30px;
-    margin-right: 30px;
-    text-align: center;
+  float: left;
+  margin-left: 30px;
+  margin-right: 30px;
+  text-align: center;
 }
 .studentField {
-    border: 2px groove rgb(71, 163, 182);
-    background-color: rgba(34, 34, 34, 0.9);
-    color: white;
+  border: 2px groove rgb(71, 163, 182);
+  background-color: rgba(34, 34, 34, 0.9);
+  color: white;
 }
 /* sytling for the users profile picture when they are logged-in  */
-#profilePictureImage{
-    border: 2px groove rgb(50, 50, 51);
-    border-radius: 90px;
-     margin-top: -15px; 
-    margin-right: 15px;
-    width: 150px;
-    height: 180px;
+#profilePictureImage {
+  border: 2px groove rgb(50, 50, 51);
+  border-radius: 90px;
+  margin-top: -15px;
+  margin-right: 15px;
+  width: 150px;
+  height: 180px;
 }
 /* styling for the profile picture for when you view another users profile */
-#otherProfilePictureImage{
-    border: 2px groove rgb(50, 50, 51);
-    border-radius: 90px;
-     margin-top: -15px; 
-    margin-right: 5px;
-    width: 200px;
-    height: 230px;
+#otherProfilePictureImage {
+  border: 2px groove rgb(50, 50, 51);
+  border-radius: 90px;
+  margin-top: -15px;
+  margin-right: 5px;
+  width: 200px;
+  height: 230px;
 }
 
 .reviewBox {
-    float: left;
-    background-color: rgba(34, 34, 34, 0.9);
-    border: 2px groove rgb(71, 163, 182);
-    color: white;
-    text-align: center;
-    font-weight: bold;
-    margin: 10px;
-    width: 12%;
-    height: 20%;
-    text-decoration: none;
+  float: left;
+  background-color: rgba(34, 34, 34, 0.9);
+  border: 2px groove rgb(71, 163, 182);
+  color: white;
+  text-align: center;
+  font-weight: bold;
+  margin: 10px;
+  width: 12%;
+  height: 20%;
+  text-decoration: none;
 }
-.reviewBox:hover{
-    background-color: aliceblue;
-    color:rgb(50, 50, 51);
-    font-weight: bold;
-    text-decoration: none;
+.reviewBox:hover {
+  background-color: aliceblue;
+  color: rgb(50, 50, 51);
+  font-weight: bold;
+  text-decoration: none;
 }
-.reviewField, .otherInfoField {
-    margin-top: 30px;
-    margin-left: 17%;
-    margin-right: 17%;
-    background-color: rgba(34, 34, 34, 0.9);
-    color: white;
-    border: 2px groove rgb(71, 163, 182);
+.reviewField,
+.otherInfoField {
+  margin-top: 30px;
+  margin-left: 17%;
+  margin-right: 17%;
+  background-color: rgba(34, 34, 34, 0.9);
+  color: white;
+  border: 2px groove rgb(71, 163, 182);
 }
 /*
 ----------------------------------------------------------------
 CSS STYLING FOR THE OVERLAY EDIT PROFILE FORM
 ----------------------------------------------------------------
 */
-/*Styling the edit Profile button under the Profile picture */
-#editProfileButton{
-    display: block; /*Put the button under the image, NOTE: same container*/
-    margin-top: 5%;
-    margin-left: 10%;
-    margin-bottom: 2%;
-    border-radius: 10px;/*Curve the corners of the buttons*/   
-    font-size:large;
-    padding:4px;
-    background-color:rgb(233, 225, 225);
-    float: right;
+
+.profileButtons {
+  display: flex;
+  flex-direction: row;
+  margin-top: 5%;
+  margin-left: -20%;
+  margin-bottom: 2%;
+  width: 120%;
 }
-#editProfilePictureButton{
-    background: none;
-    border: none;
-    color: white;
-    font-size:30px;
-    float: right;
-    
-    
+
+#ticketButton,
+#editProfileButton {
+  /* display: block; */
+  margin: 0;
+  width: 49%;
+  height: 30px;
+  text-decoration: none;
+  color: black;
+  border-radius: 10px; /*Curve the corners of the buttons*/
+  font-size: large;
+  padding: 4px;
+  background-color: rgb(233, 225, 225);
+}
+
+#ticketButton > a {
+  color: black;
+}
+#ticketButton > a:hover {
+  text-decoration: none;
+}
+
+#editProfileButton:hover {
+  cursor: pointer;
+}
+
+#editProfilePictureButton {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 30px;
+  float: right;
 }
 /* Styling the overlay edit Profile form \*/
-.editProfileForm, #editProfilePictureForm{
-    display: none; /* using display none so that the form wont display when the page is loaded */
-    float:left; /*Move form to the left*/
-    padding: 20px;
-    background-color:rgba(34, 34, 34, 0.9);
-    color: white;
-    position: absolute; /*Keep form on the page for user to see if they scroll*/
-    width:13%;
-    height:115%;
-    
-block-size: fit-content;
-    z-index: 0;
-    border: 2px groove rgb(71, 163, 182);
+.editProfileForm,
+#editProfilePictureForm {
+  display: none; /* using display none so that the form wont display when the page is loaded */
+  float: left; /*Move form to the left*/
+  padding: 20px;
+  background-color: rgba(34, 34, 34, 0.9);
+  color: white;
+  position: absolute; /*Keep form on the page for user to see if they scroll*/
+  width: 13%;
+  height: 115%;
+
+  block-size: fit-content;
+  z-index: 0;
+  border: 2px groove rgb(71, 163, 182);
 }
 
 /* Styling the inputs and buttons inside the editing profile form */
-input, button{
-    display: block; /*Put elements on top of each other*/
+input,
+button {
+  display: block; /*Put elements on top of each other*/
 }
 
-input[type="checkbox"]{
-    display:inline; /*Put the name of the check box next to the actual check box*/
+input[type="checkbox"] {
+  display: inline; /*Put the name of the check box next to the actual check box*/
 }
 
-.editProfileForm > div > input { /* Edits the password, social, phone, etc. inputs.  */
-    width: 70%;
-    margin-bottom: 20px;
+.editProfileForm > div > input {
+  /* Edits the password, social, phone, etc. inputs.  */
+  width: 70%;
+  margin-bottom: 20px;
 }
 
-.editProfileForm > div > label { /* Edits all labels in the edit pop up */
-    font-size: 20px;
-    margin-bottom: 5px;
+.editProfileForm > div > label {
+  /* Edits all labels in the edit pop up */
+  font-size: 20px;
+  margin-bottom: 5px;
 }
 
-.editProfileForm > h1 { /* Edits the heading of the pop up */
-    margin-top: 0;
+.editProfileForm > h1 {
+  /* Edits the heading of the pop up */
+  margin-top: 0;
 }
 
-.editProfileForm > h3 { /* Edits the headings of the edit sections (Change Password / Edit About Me Section) */
-    margin-top: 40px;
-    margin-bottom: 5px;
-    font-size: 25px;
-    text-decoration: underline;
+.editProfileForm > h3 {
+  /* Edits the headings of the edit sections (Change Password / Edit About Me Section) */
+  margin-top: 40px;
+  margin-bottom: 5px;
+  font-size: 25px;
+  text-decoration: underline;
 }
 
-.editProfileForm > div > button { /* Edits the submit and cancel buttons at the bottom of the pop up */
-    margin-top: 5px;
-    display: inline;
-    padding-left: 20px;
-    padding-right: 20px;
+.editProfileForm > div > button {
+  /* Edits the submit and cancel buttons at the bottom of the pop up */
+  margin-top: 5px;
+  display: inline;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
-.editProfileForm > div > textarea { /* Setting the additional information textarea to be the full size of the pop up for ascetics */
-    width: 100%;
+.editProfileForm > div > textarea {
+  /* Setting the additional information textarea to be the full size of the pop up for ascetics */
+  width: 100%;
 }
 
 /*
@@ -231,38 +262,38 @@ input[type="checkbox"]{
 CSS STYLING FOR ADDITIONAL INFORMATION SECTION
 ----------------------------------------------------------------
 */
-.mostOutterAboutMeDiv{
-    display:flex;
-    flex-direction:row;
+.mostOutterAboutMeDiv {
+  display: flex;
+  flex-direction: row;
 }
 
-.outterAboutMeDiv{
-    display:flex;
-    flex-direction:column;
-    width:30%;
+.outterAboutMeDiv {
+  display: flex;
+  flex-direction: column;
+  width: 30%;
 }
 
-.additionalInfoDiv{
-    margin-top:10px;
-    margin-left:10px;
+.additionalInfoDiv {
+  margin-top: 10px;
+  margin-left: 10px;
 }
 
-.aboutStudentDiv{
-    padding-left:25px;
-    width:100%;
+.aboutStudentDiv {
+  padding-left: 25px;
+  width: 100%;
 }
 
-.aboutStudentDiv > p{
-    margin-left:10px;
-    margin-right:10px;
-    background-color: white;
-    border-radius:10px;
-    height:50%;
-    color:black;
-    padding:5px;
-    font-size:18px;
+.aboutStudentDiv > p {
+  margin-left: 10px;
+  margin-right: 10px;
+  background-color: white;
+  border-radius: 10px;
+  height: 50%;
+  color: black;
+  padding: 5px;
+  font-size: 18px;
 }
 
-.aboutStudentDiv > h3{
-    font-size:x-large;
+.aboutStudentDiv > h3 {
+  font-size: x-large;
 }

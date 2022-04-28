@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 // Hosted server connection
 $SERVER_NAME    = "localhost:3306";   //Server name 
 $DBF_USER       = "thewooz7_admin";        //UserName for the localhost database
@@ -18,6 +18,8 @@ $connectToDB = mysqli_connect($SERVER_NAME, $DBF_USER, $DBF_PASSWORD, $DBF_NAME)
 
 $studentId = $_SESSION["currentUserLoginId"]; //the user logged in currently
 
+
+
 function populateTicketForm()
 {
     global $connectToDB;
@@ -29,7 +31,7 @@ function populateTicketForm()
     $enrolledRadioBtn   = $_POST['enrolled'];
     $onCampusRadioBtn   = $_POST['onCampus'];
 
-    $sqlReplaceIfExistsId = "SELECT student_id FROM ticketrequest WHERE student_id = $studentId";
+    $sqlReplaceIfExistsId = "SELECT student_id FROM ticketrequestcompletion WHERE student_id = $studentId";
     $replaceIfExistsIdQuery = mysqli_query($connectToDB, $sqlReplaceIfExistsId);
     $ifExistsStudentId = mysqli_fetch_assoc($replaceIfExistsIdQuery);
 
@@ -45,7 +47,13 @@ function populateTicketForm()
                                                         WHERE   student_id = '$ifExistsStudentId[student_id]'";
         $ticketRequestUpdateQuery = mysqli_query($connectToDB, $sqlUpdateTicketRequest);
 
-        $sqlUpdateTicketRequestCompletion = "UPDATE ticketrequestcompletion SET ticket_fName_change = '$firstNameChange', 
+        $sqlUpdateTicketRequestCompletion = "UPDATE ticketrequestcompletion SET ticketComplete_check = 0,
+                                                                          ticket_fName_check = NULL,
+                                                                          ticket_lName_check = NULL,
+                                                                          ticket_major_check = NULL,
+                                                                          ticket_enrollment_check = NULL,
+                                                                          ticket_onCampus_check = NULL,
+                                                                          ticket_fName_change = '$firstNameChange', 
                                                                           ticket_lName_change = '$lastNameChange', 
                                                                           ticket_major_change = '$majorChange', 
                                                                           ticket_enrollment_change = '$enrolledRadioBtn', 
@@ -54,7 +62,6 @@ function populateTicketForm()
         $updateTicketRequestCompletionQuery = mysqli_query($connectToDB, $sqlUpdateTicketRequestCompletion);
 
         if ($ticketRequestUpdateQuery && $updateTicketRequestCompletionQuery) {
-            echo "You Updated your currently registered Ticket Request!";
         } else {
             print_r($ticketRequestUpdateQuery);
         }
@@ -68,7 +75,6 @@ function populateTicketForm()
         $insertTicketRequestCompletionQuery = mysqli_query($connectToDB, $sqlInsertTicketRequestCompletion);
 
         if ($ticketRequestQuery && $insertTicketRequestCompletionQuery) {
-            echo "TICKET WAS SENT SUCCESSFULLY!";
         } else {
             print_r($ticketRequestQuery);
         }
@@ -95,6 +101,7 @@ if (isset($_POST['sendTicket'])) {
     populateTicketForm();
     header("Refresh:0");
 }
+
 
 
 function sqlStatementsForTicketRequestTable()
@@ -140,22 +147,21 @@ function sqlStatementsForTicketRequestTable()
         }
         echo "</table>";
 
-        echo "<script>";
-        echo "function pendingTicket() {";
-        echo "var outSideContainer = document.querySelector('.containerForTRMessage');";
-        echo "outSideContainer.classList.remove('shortenContainer');";
-        echo "}";
-        echo "pendingTicket()";
-        echo "</script>";
+        // echo "<script>";
+        // echo "function pendingTicket() {";
+        // echo "var outSideContainer = document.querySelector('.containerForTRMessage');";
+        // echo "outSideContainer.classList.remove('shortenContainer');";
+        // echo "}";
+        // echo "pendingTicket()";
+        // echo "</script>";
     } else {
-        echo "<script>";
-        echo "function noPendingTicket() {";
-        echo "var outSideContainer = document.querySelector('.containerForTRMessage');";
-        echo "outSideContainer.classList.add('shortenContainer');";
-        echo "}";
-        echo "noPendingTicket()";
-        echo "</script>";
-
+        // echo "<script>";
+        // echo "function noPendingTicket() {";
+        // echo "var outSideContainer = document.querySelector('.containerForTRMessage');";
+        // echo "outSideContainer.classList.add('shortenContainer');";
+        // echo "}";
+        // echo "noPendingTicket()";
+        // echo "</script>";
         echo "You have no pending Ticket Request!";
     }
 } // end of sqlStatementsForTicketRequestTable()
@@ -241,19 +247,3 @@ function pendingTicketRequestTable($studentId, $pendingOrComplete, $firstNameReq
     echo "<td class = 'childRowsTR'>$onCampusRequestChange</td>";
     echo "</tr>";
 }
-function navGetProfilePicture()
-{
-    global $connectToDB;
-    $sqlStudentInfo = "SELECT * FROM studentinfo";
-
-    //Run and assign query 
-    $data = mysqli_query($connectToDB, $sqlStudentInfo);
-    //While loop to retrieve data from studentInfo table. 
-    while ($rows = mysqli_fetch_array($data)) {
-        $studentId = $rows['student_id'];
-        if ($studentId == $_SESSION["currentUserLoginId"]) {
-            $picture = $rows['user_image'];
-            echo  "<img  src='upload/" . $picture . "' alt='img' id ='navImage'>";
-        }
-    }
-} //end of navGetProfilePicture()

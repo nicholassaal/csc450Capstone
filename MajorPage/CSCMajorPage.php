@@ -124,7 +124,6 @@ function navGetProfilePicture()
 
         <ul class="menu">
             <li class="logo" id="logo">CSP Major Page</li>
-            <li class="item"><a href="https://thewoodlandwickcandleco.com/csc450Capstone/ticketRequest/ticketRequest.php">Ticket Request</a></li>
             <li class="item"><a href="https://thewoodlandwickcandleco.com/csc450Capstone/LandingPage/LandingPage.php">Home</a></li>
             <li class="item">
                 <div id="navImage">

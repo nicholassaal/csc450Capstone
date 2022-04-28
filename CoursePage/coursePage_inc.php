@@ -77,7 +77,7 @@
 
                     echo "<h2>" . $studentName . "</h2>";
                     echo "<button type = button name = submit class = btn id = btn>  
-                                    <a href = http://localhost/csc450Capstone/profileView/otherProfile.php?uid=$studentIdArray[$arrayIndex]>View Profile</a> 
+                                    <a href = http://thewoodlandwickcandleco.com/csc450Capstone/profileView/otherProfile.php?uid=$studentIdArray[$arrayIndex]>View Profile</a> 
                                 </button>";
                     //QUESTION 1 CONTAINER
                     echo"<div class=questionsDivContainer>";
