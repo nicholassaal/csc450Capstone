@@ -189,14 +189,16 @@ $insertUserLogin = "INSERT INTO userlogininfo (user_name, user_password, is_admi
             ('PaulS19', 'password', '0', '2'),
             ('GrantM65', 'exPassword', '0', '3'),
             ('SmithM29', 'aPassword', '0', '4'),
+            ('USSEnterprise', 'trekFan1', '0', '5'),
             ('SampleAdmin14', 'adminPassword', '1', NULL)";
 
 //Insert into studentInfo table
 $insertStudentInfo = "INSERT INTO studentinfo (student_fName, student_lName, student_social, student_birthday, student_phoneNumber, student_year, about_student, student_on_campus)
     VALUES  ('Jake', 'Miller', 'jakeMiller@csp.edu', '2001-01-01', '6516516511', 'Senior', 'Enjoys programming and working on side projects. Some hobbies are fishing and hunting.', '1'),
-            ('Steve', 'Paul', '', '2002-02-02' , '1223123123' , '' , 'Hobbies are playing guitar, running, and build computers.', '1' ),
-            ('Mark', 'Grant', '', '2003-03-03' , '1111111111' , '' , 'Loves fishing.', '1'),
-            ('Matthew', 'Smith', '', '2002-05-5' , '5555555555' , '' , 'Some of my hobbies are playing piano, swimming, and gaming.', '0')";
+            ('Steve', 'Paul', '', '2002-02-02' , '1223123123' , 'Freshman' , 'Hobbies are playing guitar, running, and build computers.', '1' ),
+            ('Mark', 'Grant', '', '2003-03-03' , '1111111111' , 'Sophomore' , 'Loves fishing.', '1'),
+            ('Matthew', 'Smith', '', '2002-05-5' , '5555555555' , 'Freshman' , 'Some of my hobbies are playing piano, swimming, and gaming.', '0'),
+            ('Jean-Luc', 'Picard', '', '2305-07-13' , '9702238212' , 'Senior-Citizen' , 'I love aliens and stuff.', '1')";
 
 $insertTicketRequest = "INSERT INTO ticketrequest (ticket_fName_change, ticket_lName_change, ticket_major_change, ticket_enrollment_change, ticket_OnCampus_change, student_id)
     VALUE ('Jackie', 'Brown', 'Communications', '1', '0', '1')";
@@ -209,11 +211,14 @@ $insertTicketRequestCompletion = "INSERT INTO ticketrequestcompletion (ticketCom
 $insertStudentCourse = "INSERT INTO studentcourse (student_id, course_code, review_message, overall_review_rating, q1Answer, q2Answer ,q3Answer, review_date_written)
     VALUES  ('1', '1', 'Great course, highly recommended if you are interesting in web designed.', '15', 'I was able to learn JavaScript.', 'Learned PHP', 'Database work was challenging for me.', '2020-06-5'),
             ('2', '1', 'I see this course as an internship kind of. I was able to work with a team and learn new skills in HTML, CSS, PHP, and JavaScript.', '18', 'I learned PHP.', 'Make sure the understand normalization.', 'Database normalization.', '2021-08-8'),
-            ('3', '1', 'I thought the course was great. Loved working with the team I was assigned to.', '7', 'I was able to relearn HTML and CSS.', 'Practice using flex boxes.', 'Malnipluating data in a database using PHP.', '2019-01-6'),
+            ('3', '1', 'I thought the course was great. Loved working with the team I was assigned to.', '7', 'I was able to relearn HTML and CSS.', 'Practice using flex boxes.', 'Manipulating data in a database using PHP.', '2019-01-6'),
             ('4', '1', 'Overall great course to gain experience of working with a team.', '9', 'I was able to learn how to use GitHub Desktop.', 'Watch videos on using GitHub to collaborate well with a team.', 'Learning how to use new tools.', '2020-02-6'),
-            ('2', '2', 'Greate course to start learning about the software development process. Also, really enjoyed working with the team.', '12', 'I learned how to use UML diagrams.', 'Make sure you test GitHub with your own projects to make sure everything works.', 'Learning how to apply different UML diagrams to different problems.', '2022-05-3'),
+            ('2', '2', 'Great course to start learning about the software development process. Also, really enjoyed working with the team.', '12', 'I learned how to use UML diagrams.', 'Make sure you test GitHub with your own projects to make sure everything works.', 'Learning how to apply different UML diagrams to different problems.', '2022-05-3'),
+            ('3', '2', 'Very good course. It was challenging but I learned a lot.', '1', 'More about Java.', 'Brush up on Java.', 'It was so much Java.', '1996-01-23'),
             ('3', '3', 'Super interesting course. Loved learning how the code we write actually works.', '7', 'I was able to learn different programming paradigms, like imperative programming.', 'Research on your own time on how to implement lexer and parser for a language.', 'Generating a EBNF for programming.', '2019-08-14'),
-            ('3', '4', 'Challenging course, but at the same time enjoyable to learn.', '1', 'I learned how to use different data structures like LinkLists, Stacks, and Queues.', 'Research different ways on how to traverse through a tree.', 'Learning how different many different algorithms.', '2020-12-26')"; //added additional reviews for one person to test my idea in profiles.php
+            ('4', '3', 'Hard course, but very rewarding.', '3', 'Many algorithms.', 'Really put the time in. You do not want to get behind.', 'Inverting a minimum spanning tree.', '2021-09-18'),
+            ('3', '4', 'Challenging course, but at the same time enjoyable to learn.', '1', 'I learned how to use different data structures like LinkLists, Stacks, and Queues.', 'Research different ways on how to traverse through a tree.', 'Learning how different many different algorithms.', '2020-12-26'),
+            ('1', '4', 'Great class, but was very difficult.', '8', 'I became more comfortable using data structures such as ArrayList and LinkedList.', 'Make sure you understand trees.', 'Memorization of trees.', '2021-10-21')"; //added additional reviews for one person to test my idea in profiles.php
 
 //Insert into reviewMessageReplies
 $insertReviewMessageReplies = "INSERT INTO replies (student_id, course_code, reply_message, date_written, studentCourseReview_id, replyToReply_id)
@@ -225,7 +230,8 @@ $insertStudentMajor = "INSERT INTO studentmajor (student_id, major_id, enrollmen
     VALUES  ('1', '1', '1'),
             ('2', '1', '1'),
             ('3', '1', '1'),
-            ('4', '1', '1')";
+            ('4', '1', '1'),
+            ('5', '1', '1')";
 
 //Insert into course table
 $insertCourse = "INSERT INTO course (course_name, course_description, major_id)
