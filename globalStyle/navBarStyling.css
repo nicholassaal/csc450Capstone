@@ -197,11 +197,11 @@ padding-bottom: 15px;
 footer {
     background: rgba(34, 34, 34, 0.7);
     padding: 20px;
-    position:relative;
+    position:absolute;
     left:0;
     right:0;
-    margin-bottom: 0%;
     margin-top:5%;
+    max-width: 100%;
     align-items: center;
     text-align: center;
     color: white;

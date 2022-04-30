@@ -116,54 +116,48 @@ function navGetProfilePicture()
 
     <div class="welcomeText">
 
-        <h1 id="firstboxh">Welcome To The CSP Review</h1>
-        <p id="firstboxp"> CSP Review is your one stop shop for the connections and Information guaranteed to put you ahead of those who have come before you </p>
+        <h1 id="firstboxh">Welcome to the CSP Review</h1>
+        <p id="firstboxp"> CSP Review is your one stop shop for the connections and information guaranteed to put you ahead of those who have come before you.</p>
     </div>
 
     <div class="welcomeText2">
         <h1 id="box2h">What is CSP Review</h1>
         <ul class="box2p">
-            <li>This application allows students to review corses they have finish and actually see responces from fellow class mates</li></br>
-            <li>The review tool allows you to have better knowlege on what you will learn in a corse along with allowing you to create connections and network with those who have taken the corse before you</li></br>
-            <li></li></br>
+            <li>This application allows students to review courses they have finish and see responses from fellow class mates.</li></br>
+            <li>The review tool allows you to have better knowledge on what you will learn in a course along with allowing you to create connections and network with those who have taken the course before you.</li>
         </ul>
     </div>
 
     <div class="welcomeText">
-        <h1 id="firstboxh">Who Can Review?</h1>
-        <p id="firstboxp"> Anyone is allowed to view reviews, but only those who have completed a corse are allow to review </p>
+        <h1 id="firstboxh">Who can write review?</h1>
+        <p id="firstboxp">Any CSP student in the major can write, view, and reply to reviews.</p>
     </div>
 
     <div class="welcomeText2">
-        <h1 id="box2h">What Data Is Being Found</h1>
+        <h1 id="box2h">What do these reviews provide?</h1>
         <ul class="box2p">
-            <li>All sensitive data such as grades,GPA of each user will not be shown</li></br>
-            <li>Data collected will include</li></br>
-            <li>Final grade of completed corse</li></br>
-            <li>Rating for professors</li></br>
-            <li>Ratings for how prepared you felt going into the class</li></br>
-            <li>Reviews on what you learned in the class</li></br>
-            <li>What you could like to change in the corse</li></br>
-            <li>Much more</li></br>
+            <li>All sensitive data such as grades and GPA of each user will not be shown.</li></br>
+            <li>Data collected will include:</li>
+            <li>- Reviews on what you learned in the course.</li>
+            <li>- Suggestions for how to prepare for courses.</li>
+            <li>- What was most challenging about the course.</li>
+            <li>- Anything else the student would like to include.</li>
         </ul>
     </div>
 
     <div class="welcomeText">
-        <h1 id="firstboxh">How it helps the University</h1>
+        <h1 id="firstboxh">How it helps the CSP:</h1>
         <ul class="box2p">
-            <li>Data help the university know whats working and what is not</li></br>
-            <li>Information will help universitys adapt to the future</li></br>
-            <li>Helps the university staff and students better connect with eachother</li></br>
+            <li>The data provided will help CSP know what aspects of courses are working and what are not.</li></br>
+            <li>Information will help CSP adapt to the future.</li></br>
+            <li>Helps CSP staff and students better connect with each other.</li>
         </ul>
     </div>
 
     <div class="welcomeText2">
-        <h1 id="box2h">This Is The Future</h1>
+        <h1 id="box2h">This is the future.</h1>
         <ul class="box2p">
-            <li>Data can be collected from the users attending universitys all around the country </li></br>
-            <li>That data can be used to provide whats great or outdated about a major at that university </li></br>
-            <li>Industry leaders can give input on new corses that need to be implemented for the ever changing future</li></br>
-            <li>This allows university students to be more prepared for there desided career after graduation</li></br>
+            <li>Join us in helping CSP students learn about their courses and better prepare for achieving excellence.</li>
         </ul>
     </div>
 

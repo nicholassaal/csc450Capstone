@@ -135,7 +135,7 @@ h1 {
 
 .overallRatingsP{
   position: relative;
-  left:-62px;
+  left:-68px;
   font-size:larger;
   top:90px;
   width:5%;
@@ -156,6 +156,7 @@ h1 {
 
 #likeReviewBtn:hover{
   cursor:pointer;
+  border: solid green;
 }
 
 .carret {

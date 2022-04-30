@@ -143,6 +143,22 @@ function navGetProfilePicture()
         }
     }
 } //end of navGetProfilePicture()
+
+function getCourseName()
+{
+    global $connectToDB;
+    global $courseCode;
+
+    $sqlCourseName = "SELECT course_name FROM course WHERE $courseCode = course_code";
+
+    $queryGetCourseName = mysqli_query($connectToDB, $sqlCourseName);
+    $fetchNameField = mysqli_fetch_assoc($queryGetCourseName);
+
+    $course_name = $fetchNameField['course_name'];
+
+    echo $course_name . " Page";
+} //end of getClickUserName()
+
 ?>
 
 <!DOCTYPE html>
@@ -178,7 +194,7 @@ function navGetProfilePicture()
             });
         </script>
         <ul class="menu">
-            <li class="logo" id="logo">CSP Course Page</li>
+            <li class="logo" id="logo"> <?php getCourseName() ?></li>
             <li class="item"><a href="http://thewoodlandwickcandleco.com/csc450Capstone/LandingPage/LandingPage.php">Home</a></li>
             <li class="item">
                 <div id="navImage">

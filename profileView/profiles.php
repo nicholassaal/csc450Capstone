@@ -457,7 +457,7 @@ if (isset($_POST['submitButton'])) {
         <input type="checkbox" onclick="showPassword()"> Show password
         <!--Reveal the passwords if user wants to using JavaScript-->
 
-        <h3 id="changeAboutMe">Edit About Me Section</h3>
+        <h3 id="changeAboutMe">Add/Update Additional Information</h3>
         <div>
             <!-- Allow users to update their ABOUT ME section on the their profile pages. -->
             <label for="social">Socials</label> <!-- type=text for socials -->
@@ -479,7 +479,7 @@ if (isset($_POST['submitButton'])) {
             </select>
             <br>
             <br>
-            <label for="additionalInfo">Add any additional information.</label>
+            <label for="additionalInfo">About Me Section</label>
             <textarea name="additionalInfo" id="additionalInfo" cols="25" rows="5"></textarea> <!-- textarea for any additional Info-->
 
 

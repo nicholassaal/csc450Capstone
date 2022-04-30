@@ -214,16 +214,16 @@ $insertStudentCourse = "INSERT INTO studentcourse (student_id, course_code, revi
             ('3', '1', 'I thought the course was great. Loved working with the team I was assigned to.', '7', 'I was able to relearn HTML and CSS.', 'Practice using flex boxes.', 'Manipulating data in a database using PHP.', '2019-01-6'),
             ('4', '1', 'Overall great course to gain experience of working with a team.', '9', 'I was able to learn how to use GitHub Desktop.', 'Watch videos on using GitHub to collaborate well with a team.', 'Learning how to use new tools.', '2020-02-6'),
             ('2', '2', 'Great course to start learning about the software development process. Also, really enjoyed working with the team.', '12', 'I learned how to use UML diagrams.', 'Make sure you test GitHub with your own projects to make sure everything works.', 'Learning how to apply different UML diagrams to different problems.', '2022-05-3'),
-            ('3', '2', 'Very good course. It was challenging but I learned a lot.', '1', 'More about Java.', 'Brush up on Java.', 'It was so much Java.', '1996-01-23'),
+            ('3', '2', 'Very good course. It was challenging, but I learned a lot of Java with my team.', '1', 'More about Java.', 'Brush up on Java.', 'It was so much Java.', '1996-01-23'),
             ('3', '3', 'Super interesting course. Loved learning how the code we write actually works.', '7', 'I was able to learn different programming paradigms, like imperative programming.', 'Research on your own time on how to implement lexer and parser for a language.', 'Generating a EBNF for programming.', '2019-08-14'),
-            ('4', '3', 'Hard course, but very rewarding.', '3', 'Many algorithms.', 'Really put the time in. You do not want to get behind.', 'Inverting a minimum spanning tree.', '2021-09-18'),
+            ('4', '3', 'Hard course, but very rewarding.', '3', 'How to create a lexer and parser.', 'Really put the time in. You do not want to get behind.', 'Nothing was particularly challenging. Just stay on top of the work and you will be fine.', '2021-09-18'),
             ('3', '4', 'Challenging course, but at the same time enjoyable to learn.', '1', 'I learned how to use different data structures like LinkLists, Stacks, and Queues.', 'Research different ways on how to traverse through a tree.', 'Learning how different many different algorithms.', '2020-12-26'),
             ('1', '4', 'Great class, but was very difficult.', '8', 'I became more comfortable using data structures such as ArrayList and LinkedList.', 'Make sure you understand trees.', 'Memorization of trees.', '2021-10-21')"; //added additional reviews for one person to test my idea in profiles.php
 
 //Insert into reviewMessageReplies
 $insertReviewMessageReplies = "INSERT INTO replies (student_id, course_code, reply_message, date_written, studentCourseReview_id, replyToReply_id)
-    VALUES ('2', '1', 'Great review for capstone', '2002-02-02', '1', '0'),
-           ('3', '1', 'Very helpful review!', '2002-02-03', '1', '0')";
+    VALUES ('2', '1', 'Great review for capstone', '2021-02-08', '1', '0'),
+           ('3', '1', 'Very helpful review!', '2021-02-03', '1', '0')";
 
 //Insert into student major composite/join table
 $insertStudentMajor = "INSERT INTO studentmajor (student_id, major_id, enrollment_status)
@@ -237,7 +237,7 @@ $insertStudentMajor = "INSERT INTO studentmajor (student_id, major_id, enrollmen
 $insertCourse = "INSERT INTO course (course_name, course_description, major_id)
     VALUES  ('CSC 450 Capstone', 'Provide students realistic hands-on software development experience. Students will work in teams to build a realistic hands-on software development experience.', '1'),
             ('CSC 422 Software Engineering', 'Introduces students to concepts and tools in software engineering. The topics include software life-cycle, the phases of software development, design pattern, software architecture, and Agile software development.', '1'),
-            ('CSC 422 Language Design and Implementation', 'Course provides a comparative survey of programming language paradigms. It include an overview of the properties, applications, syntax, and semantics of selected object-oriented.', '1'),
+            ('CSC 330 Language Design and Implementation', 'Course provides a comparative survey of programming language paradigms. It include an overview of the properties, applications, syntax, and semantics of selected object-oriented.', '1'),
             ('CSC 420 Data Structures And Algorithms', 'Covers both theory and application of data structures such as lists, stacks, queues, sets, maps, binary search trees, and graphs.', '1')";
 
 //Insert into major table 

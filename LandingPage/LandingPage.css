@@ -49,12 +49,12 @@ body {
   }
   
     .welcomeText{
-      background: rgba(34, 34, 34, 0.7);
+    background: rgba(34, 34, 34, 0.7);
     border-radius: 25px;
     margin-top: 5%;
     margin-left: 5%;
     margin-right: 45%;
-    padding-bottom: 10%;
+    padding: 2px 2% 2% 2%;
     }
     .welcomeText2{
       background: rgba(34, 34, 34, 0.7);
@@ -62,10 +62,10 @@ body {
     margin-top: 5%;
     margin-left: 45%;
     margin-right: 5%;
-    padding-bottom: 10%;
+    padding: 2px 2% 2% 2%;
     }
 
-    footer {
+    /* footer {
       background: rgba(34, 34, 34, 0.7);
       padding: 20px;
       position:absolute;
@@ -76,5 +76,20 @@ body {
       align-items: center;
       text-align: center;
       color: white;
-    }
+    } */
 
+/* 
+    footer {
+      background: rgba(34, 34, 34, 0.7);
+      padding: 20px;
+      position:relative;
+      /* left:0;
+      right:0; */
+      /* margin: 5% 0 -15% 0; */
+      /* margin-right: 0;
+      margin-bottom: -10%; */
+      /* margin-top:5%; */
+      /* align-items: center;
+      text-align: center;
+      color: white;
+    } */ 

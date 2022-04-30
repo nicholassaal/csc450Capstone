@@ -75,16 +75,12 @@ function loginFunction()
                     // header("Location: http://localhost/csc450Capstone/AdminPages/adminHome.php");
 
                     header("Location: https://thewoodlandwickcandleco.com/csc450Capstone/AdminPages/adminHome.php");
-                    exit;
-
                 } else {
                     //Go to the landing page if the login was successful (if their account is of student status)
 
                     // header("Location: http://localhost/csc450Capstone/LandingPage/LandingPage.php");
 
                     header("Location: https://thewoodlandwickcandleco.com/csc450Capstone/LandingPage/LandingPage.php");
-                    exit;
-
                 }
             }
             //if login query does not return an existing record...........
@@ -96,10 +92,7 @@ function loginFunction()
     echo "</div>";
 } //end of loginFunction()
 
-//  Called php loginFunction() for login functionalities
-if (isset($_POST['btnSubmit'])) {
-    loginFunction();
-}
+
 
 ?>
 
@@ -142,7 +135,12 @@ if (isset($_POST['btnSubmit'])) {
 
                 <!--Submit button-->
                 <input type="submit" name="btnSubmit" value="Login" />
-
+                <?php
+                //  Called php loginFunction() for login functionalities
+                if (isset($_POST['btnSubmit'])) {
+                    loginFunction();
+                }
+                ?>
 
             </form>
 
