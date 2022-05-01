@@ -121,9 +121,14 @@ function getProfilePicture()
     //While loop to retrieve data from studentInfo table. 
     while ($rows = mysqli_fetch_array($data)) {
         $studentId = $rows['student_id'];
+        $image = $rows['user_image'];
         if ($studentId == $_SESSION["currentUserLoginId"]) {
-            $picture = $rows['user_image'];
-            echo  "<img  src='upload/" . $picture . "' alt='img' id ='profilePictureImage'>";
+            if($image === null){
+                echo  "<img  src='upload/defaultProfile.jpg' alt='img' id ='profilePictureImage'>";
+            }
+            else {
+                echo  "<img  src='upload/" . $image . "' alt='img' id ='profilePictureImage'>";
+            }
         }
     }
 }
@@ -138,9 +143,14 @@ function navGetProfilePicture()
     //While loop to retrieve data from studentInfo table. 
     while ($rows = mysqli_fetch_array($data)) {
         $studentId = $rows['student_id'];
+        $image = $rows['user_image'];
         if ($studentId == $_SESSION["currentUserLoginId"]) {
-            $picture = $rows['user_image'];
-            echo  "<img  src='upload/" . $picture . "' alt='img' id ='navImage'>";
+            if($image === null){
+                echo  "<img  src='upload/defaultProfile.jpg' alt='img' id ='profilePictureImage'>";
+            }
+            else {
+                echo  "<img  src='upload/" . $image . "' alt='img' id ='profilePictureImage'>";
+            }
         }
     }
 } //end of navGetProfilePicture()
