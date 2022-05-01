@@ -146,22 +146,7 @@ function sqlStatementsForTicketRequestTable()
             pendingTicketRequestTable($studentId, $pendingOrComplete, $firstNameRequest, $lastNameRequest, $majorRequestChange, $enrollmentRequestChange, $onCampusRequestChange);
         }
         echo "</table>";
-
-        // echo "<script>";
-        // echo "function pendingTicket() {";
-        // echo "var outSideContainer = document.querySelector('.containerForTRMessage');";
-        // echo "outSideContainer.classList.remove('shortenContainer');";
-        // echo "}";
-        // echo "pendingTicket()";
-        // echo "</script>";
     } else {
-        // echo "<script>";
-        // echo "function noPendingTicket() {";
-        // echo "var outSideContainer = document.querySelector('.containerForTRMessage');";
-        // echo "outSideContainer.classList.add('shortenContainer');";
-        // echo "}";
-        // echo "noPendingTicket()";
-        // echo "</script>";
         echo "You have no pending Ticket Request!";
     }
 } // end of sqlStatementsForTicketRequestTable()

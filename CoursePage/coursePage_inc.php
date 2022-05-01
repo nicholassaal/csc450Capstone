@@ -48,7 +48,7 @@
             echo "</form>";
 
             /*****************************************
-            ***         Dispaly Reviews            ***
+            ***         Display Reviews            ***
             *****************************************/
     
             //Retrieve the student id and full name using CONCAT()
